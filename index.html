@@ -55,7 +55,7 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   line-height: 1.45;
-  padding: 16px 12px 40px;
+  padding: 14px 10px 40px;
   min-height: 100vh;
   transition: background 0.25s ease, color 0.25s ease;
   background-image: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
@@ -67,7 +67,7 @@ body {
 /* Header */
 .top-header {
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 14px; flex-wrap: wrap; gap: 8px;
   background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -106,7 +106,7 @@ body {
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 .btn.blue:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45); }
-.btn.sm { padding: 5px 10px; font-size: 0.78rem; border-radius: 8px; }
+.btn.sm { padding: 6px 12px; font-size: 0.82rem; border-radius: 8px; }
 .btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
 .btn.ghost:hover { background: rgba(255,255,255,0.05); }
 .btn.nav-active {
@@ -116,7 +116,6 @@ body {
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
-/* Streak badge u headeru */
 .streak-pill {
   display: inline-flex; align-items: center; gap: 4px;
   background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3);
@@ -149,9 +148,7 @@ body {
   display: inline-flex; align-items: center; gap: 5px;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
 }
-.user-badge::before {
-  content: "●"; font-size: 0.5rem; line-height: 0; color: #0b1329;
-}
+.user-badge::before { content: "●"; font-size: 0.5rem; line-height: 0; color: #0b1329; }
 
 .dash-grid {
   display: grid;
@@ -169,7 +166,7 @@ body {
 .stat-box b { font-size: 1.25rem; font-weight: 800; color: var(--ink); margin-top: 2px; }
 .stat-box .stat-icon { position: absolute; right: 10px; top: 10px; font-size: 1.1rem; opacity: 0.7; }
 
-/* Progress bars po lekcijama */
+/* Progress bars */
 .topic-progress-list { display: grid; gap: 8px; margin-top: 12px; }
 .tp-item { background: var(--surface-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
 .tp-info { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; }
@@ -183,16 +180,11 @@ body {
   margin-bottom: 20px; box-shadow: var(--shadow-lg);
   position: relative; overflow: hidden;
 }
-.hero-card::before {
-  content: ""; position: absolute; top: -50px; right: -50px; width: 160px; height: 160px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
-}
 .eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 4px; }
 .hero-card h2 { font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 800; margin-bottom: 6px; line-height: 1.2; letter-spacing: -0.02em; }
 .hero-card p { color: var(--muted); max-width: 56ch; font-size: 0.88rem; }
 
-/* Main Hub Subjects List */
+/* Hub Grid */
 .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
 .subject-card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
@@ -200,11 +192,7 @@ body {
   box-shadow: var(--shadow-sm); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
-.subject-card:hover { 
-  border-color: var(--accent-light); 
-  transform: translateY(-2px); 
-  box-shadow: var(--shadow-lg);
-}
+.subject-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 .sc-top { display: flex; justify-content: space-between; align-items: center; }
 .chip-tag { 
   padding: 3px 10px; border-radius: 14px; 
@@ -225,11 +213,11 @@ body {
 .detail-panel h3 { font-size: 1.08rem; font-weight: 800; margin-bottom: 2px; }
 .detail-panel > p { color: var(--muted); font-size: 0.82rem; margin-bottom: 14px; }
 
-/* Focus Chips */
-.focus-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+/* Focus Chips - VERTIKALNI RASPRED (JEDNO ISPOD DRUGOG) */
+.focus-chips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
 .f-chip {
-  padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-card);
-  font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--ink);
+  padding: 11px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-card);
+  font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--ink); text-align: left; width: 100%;
 }
 .f-chip:hover { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.1); }
 .f-chip.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
@@ -297,51 +285,49 @@ input:checked + .slider:before { transform: translateX(18px); }
 .anim-correct { animation: pulseCorrect 0.35s ease; }
 .anim-wrong { animation: shakeWrong 0.35s ease; }
 
+/* POVEĆAN PROZOR ZA PITANJA I ODGOVORE */
 .q-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
-  padding: 20px; box-shadow: var(--shadow-lg); margin-top: 10px; position: relative;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+  padding: 24px 22px; box-shadow: var(--shadow-lg); margin-top: 12px; position: relative;
 }
-.q-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.star-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s; color: var(--ink); opacity: 0.8; }
+.q-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.star-btn { background: transparent; border: none; font-size: 1.3rem; cursor: pointer; transition: transform 0.2s; color: var(--ink); opacity: 0.8; }
 .star-btn:hover { transform: scale(1.15); opacity: 1; }
 .star-btn.saved { color: #f59e0b; opacity: 1; }
 
-.q-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; line-height: 1.35; }
-.opts-list { display: grid; gap: 8px; }
+.q-text { font-size: 1.18rem; font-weight: 700; margin-bottom: 18px; line-height: 1.4; }
+.opts-list { display: grid; gap: 10px; }
 
-/* DUGMAD ODGOVORA SA RADIO / CHECKBOX INDIKATORIMA */
+/* DUGMAD ODGOVORA SA RADIO / CHECKBOX INDIKATORIMA (VEĆI RAZMAK I PADING) */
 .opt-item {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 14px;
   border: 1px solid var(--border); background: var(--surface-card); cursor: pointer;
-  font-size: 0.88rem; font-weight: 600; transition: all 0.2s; color: var(--ink); width: 100%; text-align: left;
+  font-size: 0.95rem; font-weight: 600; transition: all 0.2s; color: var(--ink); width: 100%; text-align: left;
 }
 .opt-item:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.08); }
 .opt-item.selected { border-color: var(--accent); background: rgba(59, 130, 246, 0.18); box-shadow: 0 0 0 1px var(--accent); }
 .opt-item.correct { border-color: var(--good); background: rgba(16, 185, 129, 0.15); }
 .opt-item.wrong { border-color: var(--bad); background: rgba(239, 68, 68, 0.15); }
 
-/* Indikatori (krug ili kvadrat umjesto A B C D) */
+/* Indikatori */
 .opt-indicator {
-  width: 18px; height: 18px; flex-shrink: 0; display: grid; place-items: center;
+  width: 20px; height: 20px; flex-shrink: 0; display: grid; place-items: center;
   border: 2px solid var(--muted); transition: all 0.2s; background: transparent;
 }
-/* Radio stil (jedan tačan odgovor) */
 .opt-indicator.type-radio { border-radius: 50%; }
 .opt-indicator.type-radio::after {
-  content: ""; width: 8px; height: 8px; border-radius: 50%; background: transparent; transition: background 0.2s;
+  content: ""; width: 9px; height: 9px; border-radius: 50%; background: transparent; transition: background 0.2s;
 }
 .opt-item.selected .opt-indicator.type-radio { border-color: var(--accent-light); }
 .opt-item.selected .opt-indicator.type-radio::after { background: var(--accent-light); }
 
-/* Checkbox stil (više tačnih odgovora) */
-.opt-indicator.type-checkbox { border-radius: 5px; }
+.opt-indicator.type-checkbox { border-radius: 6px; }
 .opt-indicator.type-checkbox::after {
-  content: "✓"; font-size: 11px; font-weight: 800; color: transparent; transition: color 0.2s; line-height: 1;
+  content: "✓"; font-size: 12px; font-weight: 800; color: transparent; transition: color 0.2s; line-height: 1;
 }
 .opt-item.selected .opt-indicator.type-checkbox { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.2); }
 .opt-item.selected .opt-indicator.type-checkbox::after { color: var(--accent-light); }
 
-/* Korektne / Netačne indikacije */
 .opt-item.correct .opt-indicator { border-color: var(--good) !important; background: rgba(16, 185, 129, 0.2) !important; }
 .opt-item.correct .opt-indicator.type-radio::after { background: var(--good) !important; }
 .opt-item.correct .opt-indicator.type-checkbox::after { color: var(--good) !important; }
@@ -392,9 +378,9 @@ input:checked + .slider:before { transform: translateX(18px); }
 /* Footer */
 footer { margin-top: 32px; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px; font-weight: 500; }
 
-/* DODATNA STRUKTURNA OPTIMIZACIJA ZA MOBILNE EKRANE (BEZ SKROLOVANJA) */
+/* MOBILNA RESPONSIVNOST I POVEĆANO DUGME IZLAZ */
 @media (max-width: 768px) {
-  body { padding: 6px 8px 20px; }
+  body { padding: 4px 6px 20px; }
   .top-header { padding: 6px 10px; margin-bottom: 8px; border-radius: 10px; }
   .brand-sub { display: none; }
   .brand h1 { font-size: 1rem; }
@@ -403,15 +389,22 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
   .btn.sm { padding: 3px 6px; font-size: 0.72rem; border-radius: 6px; }
   .streak-pill { padding: 2px 6px; font-size: 0.7rem; }
   
-  .q-card { padding: 12px 14px; margin-top: 6px; border-radius: 14px; }
-  .q-text { font-size: 0.98rem; margin-bottom: 10px; line-height: 1.3; }
-  .opts-list { gap: 6px; }
-  .opt-item { padding: 9px 12px; font-size: 0.84rem; border-radius: 8px; }
-  .sticky-bottom-bar { margin-top: 10px !important; }
+  /* POVEĆANO DUGME IZLAZ I ZAGLAVLJE U KVIZU */
+  .btn-izlaz {
+    padding: 8px 16px !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+  }
+  
+  .q-card { padding: 18px 14px; margin-top: 6px; border-radius: 16px; }
+  .q-text { font-size: 1.05rem; margin-bottom: 14px; line-height: 1.35; }
+  .opts-list { gap: 8px; }
+  .opt-item { padding: 12px 14px; font-size: 0.88rem; border-radius: 10px; }
+  .sticky-bottom-bar { margin-top: 12px !important; }
   .action-btn-mobile {
     width: 100%;
-    padding: 10px !important;
-    font-size: 0.9rem !important;
+    padding: 12px !important;
+    font-size: 0.95rem !important;
   }
 }
 </style>
@@ -423,13 +416,12 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
 <script>
 (function(){
 'use strict';
-const STORAGE_KEY_WRONG = 'qhub_mpp_wrong_q_v13';
-const STORAGE_KEY_STATS = 'qhub_mpp_stats_v13';
-const STORAGE_KEY_SETTINGS = 'qhub_mpp_settings_v13';
-const STORAGE_KEY_SAVED = 'qhub_mpp_saved_q_v13';
-const STORAGE_KEY_SESSION = 'qhub_mpp_active_session_v13';
+const STORAGE_KEY_WRONG = 'qhub_mpp_wrong_q_v14';
+const STORAGE_KEY_STATS = 'qhub_mpp_stats_v14';
+const STORAGE_KEY_SETTINGS = 'qhub_mpp_settings_v14';
+const STORAGE_KEY_SAVED = 'qhub_mpp_saved_q_v14';
+const STORAGE_KEY_SESSION = 'qhub_mpp_active_session_v14';
 
-// Web Audio API sintesajzer zvučnih efekata
 const SoundFX = {
   ctx: null,
   enabled: true,
@@ -515,7 +507,6 @@ const SoundFX = {
   }
 };
 
-// Funkcija za čišćenje zagrada iz pitanja
 function cleanQuestionText(text) {
   if (!text) return '';
   return text.replace(/\s*\((Više tačnih odgovora|Više tačnih)\)/gi, '').trim();
@@ -641,7 +632,7 @@ const QUESTIONS_DB = {
     {
       id: 'q13',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'U koje uloge vas može dovesti rastuća uloga IS-a u poslovanju? (Više tačnih)',
+      q: 'U koje uloge vas može dovesti rastuća uloga IS-a u poslovanju?',
       opts: ['Korisnik', 'Dio razvojnog tima', 'Evaluator', 'Administrativna i tehnička podrška', 'Isključivo vlasnik kapitala'],
       correct: [0, 1, 2, 3],
       expl: 'Možete biti korisnik, dio razvojnog tima, evaluator ili tehnička podrška.'
@@ -649,7 +640,7 @@ const QUESTIONS_DB = {
     {
       id: 'q14',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Koje su osnovne komponente svakog sistema? (Više tačnih)',
+      q: 'Koje su osnovne komponente svakog sistema?',
       opts: ['Fizički dijelovi sistema (računar, server, mrežna infrastruktura itd.)', 'Ulazni i izlazni objekti sistema', 'Upravljačke metode koje uključuju planiranje i organizaciju', 'Procesi pretvorbe ulaznih objekata u izlazne objekte (procesi)'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedeno čini osnovne komponente sistema.'
@@ -657,7 +648,7 @@ const QUESTIONS_DB = {
     {
       id: 'q15',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Koje su komponente računarski zasnovanih informacijskih sistema? (Više tačnih)',
+      q: 'Koje su komponente računarski zasnovanih informacijskih sistema?',
       opts: ['Ljudi (People)', 'Procesi i pravila (Procedures)', 'Skladišta podataka (Database)', 'IT komponente: Hardware + Software + telekomunikacijska mreža (Network)'],
       correct: [0, 1, 2, 3],
       expl: 'Ljudi, procesi, baza podataka i IT komponente.'
@@ -665,7 +656,7 @@ const QUESTIONS_DB = {
     {
       id: 'q16',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Šta od navedenog spada u osnovnu taksonomiju informacionih sistema? (Više tačnih)',
+      q: 'Šta od navedenog spada u osnovnu taksonomiju informacionih sistema?',
       opts: ['Transaction Processing System (TPS) i Management Information System (MIS)', 'Decision Support System (DSS)', 'Ekspertni sistem', 'Komunikacioni i kolaboracioni sistem', 'Sistem za automatizaciju uredskog poslovanja'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene vrste spadaju u taksonomiju IS-a.'
@@ -673,7 +664,7 @@ const QUESTIONS_DB = {
     {
       id: 'q17',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Šta je potrebno "Sagledati, analizirati" u procesu planiranja razvoja IS-a? (Više tačnih)',
+      q: 'Šta je potrebno "Sagledati, analizirati" u procesu planiranja razvoja IS-a?',
       opts: ['Misiju organizacije', 'Procjenu posla', 'Strateški plan organizacije', 'Aktuelnu arhitekturu IT', 'Operacioni plan IS'],
       correct: [0, 1, 2, 3],
       expl: 'Analiziraju se misija, procjena posla, strateški plan i aktuelna IT arhitektura.'
@@ -681,7 +672,7 @@ const QUESTIONS_DB = {
     {
       id: 'q18',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Šta je potrebno "Kreirati" u procesu planiranja razvoja IS-a? (Više tačnih)',
+      q: 'Šta je potrebno "Kreirati" u procesu planiranja razvoja IS-a?',
       opts: ['Strateški plan IS', 'Novu arhitekturu IT', 'Operacioni plan IS', 'Razvoj projekta IS', 'Misiju organizacije'],
       correct: [0, 1, 2, 3],
       expl: 'Kreiraju se strateški plan IS, nova arhitektura IT, operacioni plan i razvoj projekta.'
@@ -689,7 +680,7 @@ const QUESTIONS_DB = {
     {
       id: 'q19',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Koji koraci pripadaju SDLC modelu vodopada (Waterfall)? (Više tačnih)',
+      q: 'Koji koraci pripadaju SDLC modelu vodopada (Waterfall)?',
       opts: ['Specifikacija sistema i Analiza sistema', 'Dizajn sistema i Programiranje (kodifikacija)', 'Testiranje i Implantacija', 'Operacija i Održavanje', 'Brzi dizajn prototipa'],
       correct: [0, 1, 2, 3],
       expl: 'Model vodopada obuhvata specifikaciju/analizu, dizajn/kodiranje, testiranje/implantaciju te operaciju i održavanje.'
@@ -697,7 +688,7 @@ const QUESTIONS_DB = {
     {
       id: 'q20',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Koje su prednosti Agile razvoja informacionog sistema? (Više tačnih)',
+      q: 'Koje su prednosti Agile razvoja informacionog sistema?',
       opts: ['Kontinuirana isporuka funkcionalnih inkremenata krajnjim korisnicima', 'Ciklusi razvoja su kratki', 'Kontinuirana saradnja krajnjih korisnika i narucioca proizvoda sa razvojnim timom', 'U toku razvoja korisnici mogu dodavati specifične funkcionalnosti ili mijenjati zahtjeve'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedeno su ključne prednosti agilnog razvoja.'
@@ -705,7 +696,7 @@ const QUESTIONS_DB = {
     {
       id: 'q21',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Koje četiri opcije postoje kod odluke "Kupiti ili napraviti po mjeri IS"? (Više tačnih)',
+      q: 'Koje četiri opcije postoje kod odluke "Kupiti ili napraviti po mjeri IS"?',
       opts: ['Kupiti gotov proizvod', 'Naručiti proizvod po mjeri', 'Kupiti gotov proizvod i prilagoditi ga konkretnoj organizaciji', 'Koristiti open source rješenje', 'Potpuno ukinuti informacioni sistem'],
       correct: [0, 1, 2, 3],
       expl: 'Opcije su kupovina gotovog, izrada po mjeri, kupovina i prilagođavanje, te open source.'
@@ -713,7 +704,7 @@ const QUESTIONS_DB = {
     {
       id: 'q22',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Koje su prednosti kupovine gotovog proizvoda? (Više tačnih)',
+      q: 'Koje su prednosti kupovine gotovog proizvoda?',
       opts: ['Cijena (podjela troškova)', 'Vrijeme isporuke', 'Održavanje (već isprobano)', 'Dostupna iskustva (rizici su minimizirani)'],
       correct: [0, 1, 2, 3],
       expl: 'Cijena, brzina isporuke, pouzdano održavanje i minimalni rizici.'
@@ -721,7 +712,7 @@ const QUESTIONS_DB = {
     {
       id: 'q23',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Šta karakterizira Open source rješenja? (Više tačnih)',
+      q: 'Šta karakterizira Open source rješenja?',
       opts: ['Brojan razvojni tim koji je geografski razuđen', 'Može biti modificiran i prilagođen specifičnim potrebama korisnika', 'Uvijek je potpuno zabranjeno mijenjati izvorni kod'],
       correct: [0, 1],
       expl: 'Open source ima geografski razuđen tim i dozvoljava modifikaciju koda.'
@@ -729,7 +720,7 @@ const QUESTIONS_DB = {
     {
       id: 'q24',
       topic: 'Uvod u poslovne informacione sisteme',
-      q: 'Šta uključuje grupa internih korisnika sistema (System users)? (Više tačnih)',
+      q: 'Šta uključuje grupa internih korisnika sistema (System users)?',
       opts: ['Službenike i tehničko/profesionalno osoblje', 'Supervizore, menadžere i izvršne menadžere', 'Udaljene i mobilne korisnike', 'Isključivo kupce koji posjećuju web stranicu'],
       correct: [0, 1, 2],
       expl: 'Interni korisnici uključuju službenike, supervizore/menadžere i udaljene/mobilne radnike.'
@@ -923,7 +914,7 @@ const QUESTIONS_DB = {
     {
       id: 'q48',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Ko spada u internu skupinu zainteresiranih strana (razvojni tim)? (Više tačnih)',
+      q: 'Ko spada u internu skupinu zainteresiranih strana (razvojni tim)?',
       opts: ['Analitičari', 'Softver developeri', 'Testeri', 'Tehnički pisci', 'Naručioci i kupci'],
       correct: [0, 1, 2, 3],
       expl: 'Analitičari, developeri, testeri i tehnički pisci čine interni tim.'
@@ -931,7 +922,7 @@ const QUESTIONS_DB = {
     {
       id: 'q49',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Kako glasi osnovna klasifikacija zahtjeva? (Više tačnih)',
+      q: 'Kako glasi osnovna klasifikacija zahtjeva?',
       opts: ['Poslovni zahtjevi', 'Korisnički zahtjevi', 'Sistemski zahtjevi', 'Finansijski zahtjevi'],
       correct: [0, 1, 2],
       expl: 'Poslovni, korisnički i sistemski zahtjevi.'
@@ -939,7 +930,7 @@ const QUESTIONS_DB = {
     {
       id: 'q50',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Šta spada u nefunkcionalne zahtjeve (KAKO)? (Više tačnih)',
+      q: 'Šta spada u nefunkcionalne zahtjeve (KAKO)?',
       opts: ['Osnovne karakteristike, ograničenja ili atributi IS-a (atributi kvalitete)', 'Vremenska ograničenja', 'Ograničenja u razvojnom procesu i standardi', 'Prikaz funkcionalnosti koje sistem treba izvršiti'],
       correct: [0, 1, 2],
       expl: 'Nefunkcionalni zahtjevi obuhvataju atribute kvalitete, vremenska ograničenja i standarde.'
@@ -947,7 +938,7 @@ const QUESTIONS_DB = {
     {
       id: 'q51',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Od kojih dijelova se sastoji SRS (Software Requirement Specification) dokument? (Više tačnih)',
+      q: 'Od kojih dijelova se sastoji SRS (Software Requirement Specification) dokument?',
       opts: ['Prijedlog (definicije, system overview, background)', 'Cjelokupni opis (pretpostavke, ograničenja, poslovna pravila, vizija proizvoda)', 'Specifični zahtjevi (atributi sistema, funkcionalni zahtjevi, zahtjevi sloja podataka)', 'Zapisnik sa Dnevnog Scruma'],
       correct: [0, 1, 2],
       expl: 'Prijedlog, cjelokupni opis i specifični zahtjevi.'
@@ -955,7 +946,7 @@ const QUESTIONS_DB = {
     {
       id: 'q52',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Koji su kriteriji modela kvalitete korisničkih priča INVEST? (Više tačnih)',
+      q: 'Koji su kriteriji modela kvalitete korisničkih priča INVEST?',
       opts: ['Independent i Negotiable', 'Valuable i Estimable', 'Small i Testable', 'Expensive i Static'],
       correct: [0, 1, 2],
       expl: 'Independent, Negotiable, Valuable, Estimable, Small, Testable.'
@@ -963,7 +954,7 @@ const QUESTIONS_DB = {
     {
       id: 'q53',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Šta su karakteristike Agile modela u poređenju s Waterfall modelom? (Više tačnih)',
+      q: 'Šta su karakteristike Agile modela u poređenju s Waterfall modelom?',
       opts: ['Fleksibilan na promjene (+)', 'Korisnički feedback (+)', 'Upravljan vrijednostima', 'Fiksiran opseg projekta (+)'],
       correct: [0, 1, 2],
       expl: 'Agile je fleksibilan, baziran na feedbacku i upravljan vrijednostima.'
@@ -971,7 +962,7 @@ const QUESTIONS_DB = {
     {
       id: 'q54',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Koji elementi se ističu kod produktivne upotrebe zabavnih informacionih sistema (Gamification)? (Više tačnih)',
+      q: 'Koji elementi se ističu kod produktivne upotrebe zabavnih informacionih sistema (Gamification)?',
       opts: ['„Majstorstvo“ i kompetentnost', 'Uživanje', 'Sljeđenje', 'Motiviranost'],
       correct: [0, 1, 3],
       expl: 'Majstorstvo, uživanje i motiviranost.'
@@ -979,7 +970,7 @@ const QUESTIONS_DB = {
     {
       id: 'q55',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Šta čini globalizaciju softverskog proizvoda? (Više tačnih)',
+      q: 'Šta čini globalizaciju softverskog proizvoda?',
       opts: ['Internacionalizacija (datum, brojevi, valuta, kontakt)', 'Lokalizacija (jezička i kulturološka prilagodba, CSS za svako pismo, DBCS)', 'Isključivo prevođenje teksta'],
       correct: [0, 1],
       expl: 'Internacionalizacija i lokalizacija.'
@@ -987,7 +978,7 @@ const QUESTIONS_DB = {
     {
       id: 'q56',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Koje su tri karakteristike Big Data koncepta prikazane na dijagramu? (Više tačnih)',
+      q: 'Koje su tri karakteristike Big Data koncepta prikazane na dijagramu?',
       opts: ['Volume', 'Variety', 'Velocity', 'Value'],
       correct: [0, 1, 2],
       expl: 'Volume, Variety i Velocity.'
@@ -995,7 +986,7 @@ const QUESTIONS_DB = {
     {
       id: 'q57',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Koje četiri faze obuhvata inženjering zahtjeva? (Više tačnih)',
+      q: 'Koje četiri faze obuhvata inženjering zahtjeva?',
       opts: ['Otkrivanje zahtjeva', 'Analiza zahtjeva', 'Validacija zahtjeva', 'Upravljanje zahtjevima', 'Brisanje zahtjeva'],
       correct: [0, 1, 2, 3],
       expl: 'Otkrivanje, analiza, validacija i upravljanje zahtjevima.'
@@ -1003,7 +994,7 @@ const QUESTIONS_DB = {
     {
       id: 'q58',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Koje su poteškoće pri iskazivanju zahtjeva? (Više tačnih)',
+      q: 'Koje su poteškoće pri iskazivanju zahtjeva?',
       opts: ['Kupci teško „prevode“ svoje ciljeve u zahtjeve', 'Kvantitativna verifikacija nefunkcionalnih zahtjeva je skupa', 'Nefunkcionalni zahtjevi su često u konfliktu s funkcionalnim zahtjevima', 'Funkcionalni i nefunkcionalni zahtjevi se evidentiraju odvojeno pa ih je teško povezati'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedeno predstavlja poteškoće.'
@@ -1011,7 +1002,7 @@ const QUESTIONS_DB = {
     {
       id: 'q59',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Koji su oblici modela zahtjeva? (Više tačnih)',
+      q: 'Koji su oblici modela zahtjeva?',
       opts: ['Dokument zahtjeva', 'Use case model', 'Matrica (zahtjev-objekt)', 'Alokacijska matrica (zahtjev-objekt-korisnik)'],
       correct: [0, 1, 2, 3],
       expl: 'Svi navedeni oblici modela zahtjeva.'
@@ -1067,7 +1058,7 @@ const QUESTIONS_DB = {
     {
       id: 'q66',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Scrum ulazi u konkretne inžinjerske detalje izgradnje softvera, pa se nikada ne kombinira s disciplinama poput XP ili RUP.',
+      q: 'Scrum ulazi u konkretne inžinjerske detalje izgradnje softvera, pa se nikada ne kombinuje s disciplinama poput XP ili RUP.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
       expl: 'Netačno – Scrum ne ulazi u inženjerske detalje, pa se često kombinuje sa XP ili RUP.'
@@ -1213,7 +1204,7 @@ const QUESTIONS_DB = {
     {
       id: 'q84',
       topic: 'SCRUM',
-      q: 'Od čega se sastoji Scrum programski okvir? (Više tačnih)',
+      q: 'Od čega se sastoji Scrum programski okvir?',
       opts: ['Od Scrum timova i njihovih pridruženih uloga', 'Od događaja', 'Od artefakata', 'Od pravila', 'Od fiksnih godišnjih budžeta'],
       correct: [0, 1, 2, 3],
       expl: 'Timovi/uloge, događaji, artefakti i pravila.'
@@ -1221,7 +1212,7 @@ const QUESTIONS_DB = {
     {
       id: 'q85',
       topic: 'SCRUM',
-      q: 'Koja su tri stupa Scruma? (Više tačnih)',
+      q: 'Koja su tri stupa Scruma?',
       opts: ['Transparentnost (Transparency)', 'Efikasnost (Efficiency)', 'Inspekcija (Inspection)', 'Prilagodba (Adaptation)', 'Brzina (Velocity)'],
       correct: [0, 2, 3],
       expl: 'Transparentnost, inspekcija i prilagodba.'
@@ -1229,7 +1220,7 @@ const QUESTIONS_DB = {
     {
       id: 'q86',
       topic: 'SCRUM',
-      q: 'Što od navedenog spada u pet ključnih vrijednosti Scruma? (Više tačnih)',
+      q: 'Što od navedenog spada u pet ključnih vrijednosti Scruma?',
       opts: ['Hrabrost (Courage)', 'Fokus (Focus)', 'Predanost (Commitment)', 'Poštovanje (Respect)', 'Otvorenost (Openness)', 'Fleksibilnost (Flexibility)'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Hrabrost, fokus, predanost, poštovanje i otvorenost.'
@@ -1237,7 +1228,7 @@ const QUESTIONS_DB = {
     {
       id: 'q87',
       topic: 'SCRUM',
-      q: 'Od kojih se uloga sastoji Scrum tim? (Više tačnih)',
+      q: 'Od kojih se uloga sastoji Scrum tim?',
       opts: ['Product Owner (vlasnik proizvoda)', 'Scrum Master', 'Developeri (razvojni tim)', 'Project Manager'],
       correct: [0, 1, 2],
       expl: 'Product Owner, Scrum Master i Developeri.'
@@ -1245,7 +1236,7 @@ const QUESTIONS_DB = {
     {
       id: 'q88',
       topic: 'SCRUM',
-      q: 'Za koje je sve aktivnosti odgovoran Scrum tim? (Više tačnih)',
+      q: 'Za koje je sve aktivnosti odgovoran Scrum tim?',
       opts: ['Verifikaciju i održavanje', 'Rad i testiranje', 'Istraživanje i razvoj', 'Zapošljavanje novih direktora'],
       correct: [0, 1, 2],
       expl: 'Verifikacija, rad, testiranje, istraživanje i razvoj.'
@@ -1253,7 +1244,7 @@ const QUESTIONS_DB = {
     {
       id: 'q89',
       topic: 'SCRUM',
-      q: 'Kome sve pomaže/koga podržava Scrum Master? (Više tačnih)',
+      q: 'Kome sve pomaže/koga podržava Scrum Master?',
       opts: ['Pomaže Scrum timu', 'Pomaže Product Owneru', 'Podržava organizaciju', 'Pomaže isključivo vanjskim dobavljačima'],
       correct: [0, 1, 2],
       expl: 'Pomaže timu, Product Owneru i organizaciji.'
@@ -1261,7 +1252,7 @@ const QUESTIONS_DB = {
     {
       id: 'q90',
       topic: 'SCRUM',
-      q: 'Koje uloge/stavovi (stances) pripadaju Scrum Masteru? (Više tačnih)',
+      q: 'Koje uloge/stavovi (stances) pripadaju Scrum Masteru?',
       opts: ['Servant Leader i Facilitator', 'Coach i Manager', 'Mentor i Teacher', 'Impediment Remover i Change Agent', 'Customer Representative'],
       correct: [0, 1, 2, 3],
       expl: 'Servant Leader, Facilitator, Coach, Mentor, Teacher, Impediment Remover, Change Agent.'
@@ -1269,7 +1260,7 @@ const QUESTIONS_DB = {
     {
       id: 'q91',
       topic: 'SCRUM',
-      q: 'Koje uloge/stavovi (stances) pripadaju Product Owneru? (Više tačnih)',
+      q: 'Koje uloge/stavovi (stances) pripadaju Product Owneru?',
       opts: ['Visionary i Collaborator', 'Decision Maker i Customer Representative', 'Influencer i Experimenter', 'Impediment Remover'],
       correct: [0, 1, 2],
       expl: 'Visionary, Collaborator, Decision Maker, Customer Representative, Influencer, Experimenter.'
@@ -1277,7 +1268,7 @@ const QUESTIONS_DB = {
     {
       id: 'q92',
       topic: 'SCRUM',
-      q: 'Za što je zadužen Product Owner vezano uz Product Backlog? (Više tačnih)',
+      q: 'Za što je zadužen Product Owner vezano uz Product Backlog?',
       opts: ['Razvijanje i eksplicitno komuniciranje cilja proizvoda', 'Stvaranje i jasno komuniciranje Product Backlog stavki', 'Definiranje Product Backloga', 'Osiguravanje da je Product Backlog transparentan, vidljiv i razumljiv', 'Pisanje koda za najvažnije stavke Backloga'],
       correct: [0, 1, 2, 3],
       expl: 'PO upravlja, kreira i transparentno komunicira Product Backlog i cilj.'
@@ -1285,7 +1276,7 @@ const QUESTIONS_DB = {
     {
       id: 'q93',
       topic: 'SCRUM',
-      q: 'Za što su Developeri uvijek odgovorni? (Više tačnih)',
+      q: 'Za što su Developeri uvijek odgovorni?',
       opts: ['Izrada plana za Sprint (Sprint Backlog)', 'Usađivanje kvalitete i procjena je li nešto završeno', 'Svakodnevno prilagođavanje plana prema cilju sprinta', 'Odgovornost i profesionalizam'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedeno je odgovornost developera.'
@@ -1293,7 +1284,7 @@ const QUESTIONS_DB = {
     {
       id: 'q94',
       topic: 'SCRUM',
-      q: 'Koja pravila vrijede tijekom trajanja samog Sprinta? (Više tačnih)',
+      q: 'Koja pravila vrijede tijekom trajanja samog Sprinta?',
       opts: ['Ne rade se nikakve promjene koje bi ugrozile cilj sprinta', 'Kvaliteta se ne smanjuje', 'Product Backlog se pročišćava prema potrebi', 'Opseg se može razjasniti i ponovno pregovarati s vlasnikom proizvoda', 'Cilj sprinta se mijenja svaki dan'],
       correct: [0, 1, 2, 3],
       expl: 'Cilj je stabilan, kvalitet se ne smanjuje, backlog se pročišćava, opseg se može pregovarati.'
@@ -1301,7 +1292,7 @@ const QUESTIONS_DB = {
     {
       id: 'q95',
       topic: 'SCRUM',
-      q: 'Na koja tri pitanja odgovara Planiranje sprinta (Sprint Planning)? (Više tačnih)',
+      q: 'Na koja tri pitanja odgovara Planiranje sprinta (Sprint Planning)?',
       opts: ['Zašto je ovaj Sprint vrijedan?', 'Što se može učiniti ovim sprintom?', 'Kako će odabrani posao biti obavljen?', 'Koji me problemi blokiraju?'],
       correct: [0, 1, 2],
       expl: 'Zašto, šta i kako.'
@@ -1309,7 +1300,7 @@ const QUESTIONS_DB = {
     {
       id: 'q96',
       topic: 'SCRUM',
-      q: 'Na koja tri pitanja sudionici odgovaraju na Dnevnom stand-upu (Daily Scrum)? (Više tačnih)',
+      q: 'Na koja tri pitanja sudionici odgovaraju na Dnevnom stand-upu (Daily Scrum)?',
       opts: ['Na čemu sam radio jučer?', 'Na čemu danas radim?', 'Koji me problemi blokiraju?', 'Zašto je ovaj Sprint vrijedan?'],
       correct: [0, 1, 2],
       expl: 'Jučer, danas, blokade.'
@@ -1317,7 +1308,7 @@ const QUESTIONS_DB = {
     {
       id: 'q97',
       topic: 'SCRUM',
-      q: 'O čemu tim raspravlja tijekom Retrospektive sprinta? (Više tačnih)',
+      q: 'O čemu tim raspravlja tijekom Retrospektive sprinta?',
       opts: ['Ono što je dobro prošlo u sprintu', 'Što bi se moglo poboljšati', 'Što ćemo se obvezati poboljšati u sljedećem sprintu', 'Koliki će biti budžet za sljedeću godinu'],
       correct: [0, 1, 2],
       expl: 'Šta je bilo dobro, šta poboljšati i obaveze za sljedeći sprint.'
@@ -1357,7 +1348,7 @@ const QUESTIONS_DB = {
     {
       id: 'q102',
       topic: 'SCRUM',
-      q: 'U Scrumu se pojam "Developer" ne odnosi nužno samo na programere softvera, već može uključivati i QA, Business Analyste, Arhitekte te rad na dizajnu, testiranju ili isporuci. ',
+      q: 'U Scrumu se pojam "Developer" ne odnosi nužno samo na programere softvera, već može uključivati i QA, Business Analyste, Arhitekte te rad na dizajnu, testiranju ili isporuci.',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
@@ -1365,7 +1356,7 @@ const QUESTIONS_DB = {
     {
       id: 'q103',
       topic: 'SCRUM',
-      q: 'Razvojni tim (Developeri) u Scrumu samoorganizira svoj rad (Manages itself) i stvara gotove inkremente (Create Done Increments). ',
+      q: 'Razvojni tim (Developeri) u Scrumu samoorganizira svoj rad (Manages itself) i stvara gotove inkremente (Create Done Increments).',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
@@ -1503,7 +1494,7 @@ const QUESTIONS_DB = {
     {
       id: 'q120',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Koje su pet glavnih tehnika pronalaženja činjenica? (Više tačnih)',
+      q: 'Koje su pet glavnih tehnika pronalaženja činjenica?',
       opts: ['Pregled postojeće dokumentacije', 'Observacija', 'Upitnici', 'Intervju', 'JRP (Joint Requirements Planning)', 'Programiranje prototipa'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Dokumentacija, observacija, upitnici, intervju i JRP.'
@@ -1511,7 +1502,7 @@ const QUESTIONS_DB = {
     {
       id: 'q121',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Šta se pregleda u PRVOM prolazu pregleda dokumentacije? (Više tačnih)',
+      q: 'Šta se pregleda u PRVOM prolazu pregleda dokumentacije?',
       opts: ['Organizacijska šema (ili normativni akt)', 'Istorija projekta (problemi, dopisi, studije, zadatak)', 'Dnevni i sedmični izvještaji', 'Fakture i narudžbe'],
       correct: [0, 1],
       expl: 'Org. šema i istorija projekta.'
@@ -1519,7 +1510,7 @@ const QUESTIONS_DB = {
     {
       id: 'q122',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Šta se pregleda u DRUGOM prolazu pregleda dokumentacije? (Više tačnih)',
+      q: 'Šta se pregleda u DRUGOM prolazu pregleda dokumentacije?',
       opts: ['Organizacijska misija i strategijski planovi', 'Formalni ciljevi organizacije', 'Uputstva i pravila poslovne politike', 'Opisi procedura rada i sistematizacija', 'Korisnička uputstva za softver'],
       correct: [0, 1, 2, 3],
       expl: 'Misija, ciljevi, poslovna politika i opisi procedura.'
@@ -1527,7 +1518,7 @@ const QUESTIONS_DB = {
     {
       id: 'q123',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Šta se pregleda u TREĆEM prolazu pregleda dokumentacije? (Više tačnih)',
+      q: 'Šta se pregleda u TREĆEM prolazu pregleda dokumentacije?',
       opts: ['Transakcijski dokumenti (fakture, narudžbe, rješenja)', 'Manuelni i kompjuterizirani registri', 'Izvještaji (dnevni, sedmični, mjesečni, godišnji)', 'Organizacijska šema'],
       correct: [0, 1, 2],
       expl: 'Transakcijski dokumenti, registri i izvještaji.'
@@ -1535,7 +1526,7 @@ const QUESTIONS_DB = {
     {
       id: 'q124',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Koje su prednosti observacije? (Više tačnih)',
+      q: 'Koje su prednosti observacije?',
       opts: ['Daje vrlo pouzdane podatke', 'Omogućava analitičaru da vidi šta se dešava', 'Omogućava uočavanje činjenica koje korisnici nisu smatrali važnim', 'Relativno je jeftina tehnika'],
       correct: [0, 1, 2, 3],
       expl: 'Pouzdanost, uvid u realnost, uočavanje propuštenog i niska cijena.'
@@ -1543,7 +1534,7 @@ const QUESTIONS_DB = {
     {
       id: 'q125',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Koji su nedostaci observacije? (Više tačnih)',
+      q: 'Koji su nedostaci observacije?',
       opts: ['Mijenjaš ono što observiraš (ljudi se osjećaju nekomforno)', 'Mali uzorak (situacija možda nije tipična)', 'Moguće nezgodno mjesto i vrijeme', 'Nezgodna reakcija posmatranih'],
       correct: [0, 1, 2, 3],
       expl: 'Svi navedeni nedostaci.'
@@ -1551,7 +1542,7 @@ const QUESTIONS_DB = {
     {
       id: 'q126',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'U kojim periodima treba vršiti observaciju? (Više tačnih)',
+      q: 'U kojim periodima treba vršiti observaciju?',
       opts: ['Prvo u periodima normalnog odvijanja aktivnosti', 'Kasnije u kritičnim periodima ("špicama")', 'Eventualno i u relaksirajućim periodima', 'Isključivo vikendom'],
       correct: [0, 1, 2],
       expl: 'Normalni periodi, špice i relaksirajući periodi.'
@@ -1559,7 +1550,7 @@ const QUESTIONS_DB = {
     {
       id: 'q127',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Koje su prednosti intervjua kao tehnike prikupljanja činjenica? (Više tačnih)',
+      q: 'Koje su prednosti intervjua kao tehnike prikupljanja činjenica?',
       opts: ['Motivacija sugovornika (daje više informacija)', 'Osjećaj punog učešća u projektu', 'Praćenje neverbalnih reakcija', 'Najjeftinija je tehnika'],
       correct: [0, 1, 2],
       expl: 'Motivacija, učešće i praćenje neverbalnih reakcija.'
@@ -1567,7 +1558,7 @@ const QUESTIONS_DB = {
     {
       id: 'q128',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Koga je važno intervjuisati? (Više tačnih)',
+      q: 'Koga je važno intervjuisati?',
       opts: ['One koji imaju moć', 'One koji mogu davati prijedloge', 'One koji imaju veliko znanje', 'One koji su u početku ukazali na probleme'],
       correct: [0, 1, 2, 3],
       expl: 'Moć, prijedlozi, znanje i inicijatori problema.'
@@ -1575,7 +1566,7 @@ const QUESTIONS_DB = {
     {
       id: 'q129',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Koji su tipovi pitanja čija mješavina čini intervju? (Više tačnih)',
+      q: 'Koji su tipovi pitanja čija mješavina čini intervju?',
       opts: ['Predefinisana pitanja', 'Situaciona pitanja', 'Test pitanja', 'Trik pitanja'],
       correct: [0, 1, 2],
       expl: 'Predefinisana, situaciona i test pitanja.'
@@ -1583,7 +1574,7 @@ const QUESTIONS_DB = {
     {
       id: 'q130',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Šta spada u nepoželjna pitanja tokom intervjua? (Više tačnih)',
+      q: 'Šta spada u nepoželjna pitanja tokom intervjua?',
       opts: ['Prejako ili nedovoljno vođenje korisnika', 'Sugerisanje i isuviše detalja', 'Nejasno izražavanje i višestruka negacija', 'Podcjenjivanje sugovornika i preduga pitanja'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedeno spada u nepoželjna pitanja.'
@@ -1591,7 +1582,7 @@ const QUESTIONS_DB = {
     {
       id: 'q131',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Šta treba sadržavati zapisnik intervjua? (Više tačnih)',
+      q: 'Šta treba sadržavati zapisnik intervjua?',
       opts: ['Imena, datum i vrijeme', 'Organizacijsku poziciju osobe i profil', 'Korištena predefinisana pitanja', 'Zapisnik razgovora i analizu otkrivenih činjenica'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedene stavke.'
@@ -1785,7 +1776,7 @@ const QUESTIONS_DB = {
     {
       id: 'q155',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje varijante životnog ciklusa razvoja softvera (SDLC) su navedene? (Više tačnih)',
+      q: 'Koje varijante životnog ciklusa razvoja softvera (SDLC) su navedene?',
       opts: ['Tradicionalni linearni „vodopadni“ (waterfall)', 'Paralelni model', 'Iterativni ili evolucijski model', 'Spiralni model', 'Agilne metode'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene varijante.'
@@ -1793,7 +1784,7 @@ const QUESTIONS_DB = {
     {
       id: 'q156',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koji faktori pogoduju korištenju vodopadnog modela? (Više tačnih)',
+      q: 'Koji faktori pogoduju korištenju vodopadnog modela?',
       opts: ['Zahtjevi su jasni i fiksni bez dvosmislenosti', 'Stabilnost definicije proizvoda i projekat nije dinamičan', 'Na raspolaganju su veliki resursi s odgovarajućom stručnošću', 'Projekt kratke duljine i dobar dokument'],
       correct: [0, 1, 2, 3],
       expl: 'Fiksni zahtjevi, stabilnost, resursi i kratka duljina.'
@@ -1801,7 +1792,7 @@ const QUESTIONS_DB = {
     {
       id: 'q157',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje su prednosti, a koji nedostaci paralelnog pristupa? (Više tačnih)',
+      q: 'Koje su prednosti, a koji nedostaci paralelnog pristupa?',
       opts: ['Prednost: znatno se smanjuje vrijeme razvoja', 'Prednost: manje su šanse za prepravke', 'Nedostatak: potrebno je više resursa', 'Nedostatak: ponekad je teško integrirati podprojekte'],
       correct: [0, 2, 3],
       expl: 'Manje vremena, više resursa i teža integracija.'
@@ -1809,7 +1800,7 @@ const QUESTIONS_DB = {
     {
       id: 'q158',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje su prednosti iterativnog (evolucijskog) pristupa? (Više tačnih)',
+      q: 'Koje su prednosti iterativnog (evolucijskog) pristupa?',
       opts: ['Softver se proizvodi u ranim fazama životnog ciklusa', 'Korisnici u ranim fazama probaju rezultate', 'Pojednostavljeno testiranje', 'Nema nikakvih izmjena zahtjeva'],
       correct: [0, 1, 2],
       expl: 'Rana proizvodnja softvera, rani feedback i pojednostavljeno testiranje.'
@@ -1817,7 +1808,7 @@ const QUESTIONS_DB = {
     {
       id: 'q159',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje faze pripadaju spiralnom modelu? (Više tačnih)',
+      q: 'Koje faze pripadaju spiralnom modelu?',
       opts: ['Pregled – određivanje ciljeva, alternativa i ograničenja', 'Analiza rizika i procjena alternativa', 'Razvoj i verifikacija sljedećeg „proizvoda“', 'Planiranje sljedeće faze'],
       correct: [0, 1, 2, 3],
       expl: 'Sve četiri navedene faze spiralnog modela.'
@@ -1825,7 +1816,7 @@ const QUESTIONS_DB = {
     {
       id: 'q160',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koji su nedostaci spiralnog modela? (Više tačnih)',
+      q: 'Koje su nedostaci spiralnog modela?',
       opts: ['Može biti veoma skup model', 'Zahtijeva visok stepen ekspertize u analizi rizika', 'Nije dobar za male projekte', 'Softver se proizvodi tek na kraju'],
       correct: [0, 1, 2],
       expl: 'Skup, traži ekspertizu, loš za male projekte.'
@@ -1833,7 +1824,7 @@ const QUESTIONS_DB = {
     {
       id: 'q161',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje metode spadaju u agilne metode? (Više tačnih)',
+      q: 'Koje metode spadaju u agilne metode?',
       opts: ['Scrum', 'Kanban', 'Extreme Programming (XP)', 'Lean Development', 'Crystal'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene su agilne metode.'
@@ -1841,7 +1832,7 @@ const QUESTIONS_DB = {
     {
       id: 'q162',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje su prednosti Scrum metode? (Više tačnih)',
+      q: 'Koje su prednosti Scrum metode?',
       opts: ['Motivacija tima', 'Transparentnost', 'Definicija gotovog', 'Fokus na kvalitetu s manje pogrešaka', 'Dobro planiranje sprinta'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene prednosti Scruma.'
@@ -1849,7 +1840,7 @@ const QUESTIONS_DB = {
     {
       id: 'q163',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje su prednosti Kanban metode? (Više tačnih)',
+      q: 'Koje su prednosti Kanban metode?',
       opts: ['Mogućnost pregleda svih zadataka', 'Moguće je ograničiti broj pokrenutih zadataka', 'Fokusira se na trajanje ciklusa i kontinuirane isporuke', 'Jednostavna za implementaciju izvan IT svijeta'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedene prednosti Kanbana.'
@@ -1857,7 +1848,7 @@ const QUESTIONS_DB = {
     {
       id: 'q164',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje vrijednosti naglašava Ekstremno programiranje (XP)? (Više tačnih)',
+      q: 'Koje vrijednosti naglašava Ekstremno programiranje (XP)?',
       opts: ['Komunikacija i jednostavnost', 'Povratne informacije', 'Hrabrost i poštovanje', 'Zadovoljstvo korisnika'],
       correct: [0, 1, 2, 3],
       expl: 'Komunikacija, jednostavnost, povratne informacije, hrabrost, poštovanje i zadovoljstvo.'
@@ -1865,7 +1856,7 @@ const QUESTIONS_DB = {
     {
       id: 'q165',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koji su nedostaci Ekstremnog programiranja (XP)? (Više tačnih)',
+      q: 'Koji su nedostaci Ekstremnog programiranja (XP)?',
       opts: ['Ekstremna usredotočenost na kod može zanemariti dizajn', 'Geografska razuđenost tima može ometati okvir', 'Registar grešaka se ne održava uvijek', 'Softver se uopće ne testira'],
       correct: [0, 1, 2],
       expl: 'Fokus na kod nauštrb dizajna, razuđenost i ne održavanje registra grešaka.'
@@ -1873,7 +1864,7 @@ const QUESTIONS_DB = {
     {
       id: 'q166',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koja načela spadaju u sedam osnovnih načela Lean metode? (Više tačnih)',
+      q: 'Koja načela spadaju u sedam osnovnih načela Lean metode?',
       opts: ['Brisanje stvari koje nisu bitne (Eliminate Waste)', 'Razvoj kvalitete i stvaranje znanja', 'Brza isporuka i poštivanje tima', 'Optimizirati cjelinu i odgađanje odluka'],
       correct: [0, 1, 2, 3],
       expl: 'Sih sedam načela lean-a obuhvata ove aspekte.'
@@ -2067,7 +2058,7 @@ const QUESTIONS_DB = {
     {
       id: 'q190',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Šta sve utječe na informacijski sistem s aspekta potreba poslovanja? (Više tačnih)',
+      q: 'Šta sve utječe na informacijski sistem s aspekta potreba poslovanja?',
       opts: ['Globalizacija', 'Digitalna ekonomija', 'Složenost poslovanja', 'Kvaliteta', 'Poslovni procesi'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Svi navedeni faktori utiču na IS.'
@@ -2075,7 +2066,7 @@ const QUESTIONS_DB = {
     {
       id: 'q191',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Šta sve utječe na informacijski sistem s aspekta tehnološkog razvoja? (Više tačnih)',
+      q: 'Šta sve utječe na informacijski sistem s aspekta tehnološkog razvoja?',
       opts: ['Mrežne tehnologije – Internet', 'Servisi', 'Mobilne aplikacije', 'Kolaborativne tehnologije', 'Integrirani sustavi'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene tehnologije utiču na razvoj IS.'
@@ -2083,7 +2074,7 @@ const QUESTIONS_DB = {
     {
       id: 'q192',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Šta spada u značaj modeliranja informacionih sistema? (Više tačnih)',
+      q: 'Šta spada u značaj modeliranja informacionih sistema?',
       opts: ['Bolje razumijevanje poslovnih procesa i jasna komunikacija tima', 'Planiranje i dizajn sistema', 'Smanjenje rizika', 'Podrška za implementaciju', 'Praćenje i evaluacija'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Svi navedeni dijelići predstavljaju značaj modeliranja.'
@@ -2091,7 +2082,7 @@ const QUESTIONS_DB = {
     {
       id: 'q193',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Šta je potrebno modelirati tokom modeliranja IS-a? (Više tačnih)',
+      q: 'Šta je potrebno modelirati tokom modeliranja IS-a?',
       opts: ['Sloj podataka', 'Poslovne procese koji za ulaz/izlaz imaju podatke', 'Korisničko sučelje (UX)', 'Isključivo cijenu električne energije'],
       correct: [0, 1, 2],
       expl: 'Sloj podataka, poslovne procese sa podacima i korisničko sučelje.'
@@ -2099,7 +2090,7 @@ const QUESTIONS_DB = {
     {
       id: 'q194',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Koje su osobine Dijagrama toka podataka (DFD)? (Više tačnih)',
+      q: 'Koje su osobine Dijagrama toka podataka (DFD)?',
       opts: ['Koristi se za analizu zahtjeva i dizajn IS-a', 'Prikazuje vezu između IS i okruženja', 'Prikazuje vezu između procesa IS-a', 'Omogućava prikaz paralelnih i asinkronih procesa', 'Postepeno unapređuje model IS-a'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene osobine karakterišu DFD.'
@@ -2107,7 +2098,7 @@ const QUESTIONS_DB = {
     {
       id: 'q195',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Koje su četiri osnovne komponente DFD-a? (Više tačnih)',
+      q: 'Koje su četiri osnovne komponente DFD-a?',
       opts: ['Proces', 'Eksterni entitet', 'Tok podataka', 'Skladište podataka', 'Klasa i objekt'],
       correct: [0, 1, 2, 3],
       expl: 'Proces, eksterni entitet, tok podataka i skladište podataka.'
@@ -2115,7 +2106,7 @@ const QUESTIONS_DB = {
     {
       id: 'q196',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Koje notacije se mogu koristiti za izradu DFD-a? (Više tačnih)',
+      q: 'Koje notacije se mogu koristiti za izradu DFD-a?',
       opts: ['Yourdon i/ili De Marco', 'Gane & Sarson', 'SSADM', 'Unified Modeling Language (UML)'],
       correct: [0, 1, 2, 3],
       expl: 'Sve četiri navedene notacije.'
@@ -2123,7 +2114,7 @@ const QUESTIONS_DB = {
     {
       id: 'q197',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'S kojim ciljem se radi funkcionalna dekompozicija? (Više tačnih)',
+      q: 'S kojim ciljem se radi funkcionalna dekompozicija?',
       opts: ['Jasnije razumijevanje kompleksnog sistema', 'Hijerarhijska struktura (od općeg ka detaljnim procesima)', 'Lakše otkrivanje grešaka i nedostataka', 'Podrška za modularni dizajn', 'Bolja dokumentacija'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Svi navedeni ciljevi funkcionalne dekompozicije.'
@@ -2131,7 +2122,7 @@ const QUESTIONS_DB = {
     {
       id: 'q198',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Koji su eksterni entiteti navedeni u zadatku kreiranja dijagrama konteksta za on-line trgovinu? (Više tačnih)',
+      q: 'Koji su eksterni entiteti navedeni u zadatku kreiranja dijagrama konteksta za on-line trgovinu?',
       opts: ['Kupac', 'Prodavač', 'Sistem za naplatu', 'Skladište', 'Dostavljačka služba'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Svi navedeni eksterni entiteti.'
@@ -2139,7 +2130,7 @@ const QUESTIONS_DB = {
     {
       id: 'q199',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Koji su glavni procesi identificirani u zadatku za on-line trgovinu? (Više tačnih)',
+      q: 'Koji su glavni procesi identificirani u zadatku za on-line trgovinu?',
       opts: ['Upravljanje korisnicima (registracija i prijava)', 'Pretraga proizvoda (recenzije, lista želja)', 'Korisnička služba (reklamacije, povrat)', 'Prodaja (korpa, kreiranje i plaćanje narudžbe) i Isporuka'],
       correct: [0, 1, 2, 3],
       expl: 'Svi navedeni glavni procesi.'
@@ -2147,7 +2138,7 @@ const QUESTIONS_DB = {
     {
       id: 'q200',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Kako se u DFD notacijama prikazuje "Skladište podataka" (Store)? (Više tačnih)',
+      q: 'Kako se u DFD notacijama prikazuje "Skladište podataka" (Store)?',
       opts: ['Dvije paralelne horizontalne linije (Yourdon + De Marco)', 'Pravougaonik otvoren s desne strane (Gane & Sarson i SSADM)', 'Pravougaonik s oznakom <<entity>> (Unified)', 'Krug'],
       correct: [0, 1, 2],
       expl: 'Paralelne linije, pravougaonik otvoren s desne strane i pravougaonik sa entity oznakom.'
@@ -2155,7 +2146,7 @@ const QUESTIONS_DB = {
     {
       id: 'q201',
       topic: 'Modeliranje Informacionog sistema',
-      q: 'Šta modeliranje omogućava u okviru "Praćenja i evaluacije"? (Više tačnih)',
+      q: 'Šta modeliranje omogućava u okviru "Praćenja i evaluacije"?',
       opts: ['Praćenje performansi sistema', 'Evaluaciju uticaja sistema na poslovanje', 'Donošenje strateških odluka o daljem razvoju', 'Potpuno ukidanje testiranja'],
       correct: [0, 1, 2],
       expl: 'Performanse, uticaj na poslovanje i strateške odluke.'
@@ -2602,7 +2593,7 @@ function renderSubjectDetail() {
     </div>
 
     <div class="subject-detail-container">
-      <!-- Odaberi lekciju -->
+      <!-- Odaberi lekciju (VERTRIKALNI RASPRED JEDNO ISPOD DRUGOG) -->
       <div class="detail-panel">
         <h3>Odaberi lekciju</h3>
         <p>Odaberite lekciju koju želite da vježbate</p>
@@ -2683,22 +2674,22 @@ function renderQuiz() {
 
   return `
     ${renderHeader()}
-    <div style="margin-bottom: 10px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <button class="btn sm" onclick="goSubjectDetail()">Izlaz</button>
+    <div style="margin-bottom: 12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <button class="btn btn-izlaz" onclick="goSubjectDetail()">← Izlaz</button>
         <div style="display:flex; gap:12px; align-items:center;">
-          ${state.timerEnabled ? `<div style="font-weight:800; font-family:var(--font-mono); font-size:0.85rem; color:var(--warn);">⏱️ <span id="quiz-timer-display">--:--</span></div>` : ''}
-          <div style="font-weight:700; font-size:0.85rem; color:var(--accent-light);">Pitanje ${quizSession.idx + 1} od ${quizSession.questions.length}</div>
+          ${state.timerEnabled ? `<div style="font-weight:800; font-family:var(--font-mono); font-size:0.9rem; color:var(--warn);">⏱️ <span id="quiz-timer-display">--:--</span></div>` : ''}
+          <div style="font-weight:700; font-size:0.9rem; color:var(--accent-light);">Pitanje ${quizSession.idx + 1} od ${quizSession.questions.length}</div>
         </div>
       </div>
-      <div style="width:100%; height:4px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
+      <div style="width:100%; height:5px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
         <div style="width:${progressPct}%; height:100%; background:var(--blue-gradient); transition:width 0.3s ease;"></div>
       </div>
     </div>
 
     <div class="q-card animate-fade" id="current-q-card">
       <div class="q-header-row">
-        <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:var(--accent-light);">${q.topic}</span>
+        <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--accent-light);">${q.topic}</span>
         <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveQuestion('${q.id}')" title="Sačuvaj pitanje">${isSaved ? '★' : '☆'}</button>
       </div>
 
@@ -2727,18 +2718,18 @@ function renderQuiz() {
       </div>
 
       ${quizSession.checked && q.expl ? `
-        <div id="expl-box-el" style="margin-top:14px; padding:12px 14px; background:rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius:12px; font-size:0.85rem; line-height:1.4;">
+        <div id="expl-box-el" style="margin-top:16px; padding:14px 16px; background:rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius:12px; font-size:0.9rem; line-height:1.45;">
           💡 <b style="color:var(--accent-light);">Objašnjenje:</b> ${q.expl}
         </div>
       ` : ''}
     </div>
 
-    <div style="margin-top: 12px; display:flex; justify-content: flex-end;" class="sticky-bottom-bar" id="action-bar-el">
+    <div style="margin-top: 14px; display:flex; justify-content: flex-end;" class="sticky-bottom-bar" id="action-bar-el">
       ${isMulti && !quizSession.checked ? `
-        <button class="btn primary action-btn-mobile" style="padding:10px 24px; font-weight:700;" onclick="checkAnswer()">Potvrdi odgovor</button>
+        <button class="btn primary action-btn-mobile" style="padding:12px 28px; font-weight:700; font-size:0.95rem;" onclick="checkAnswer()">Potvrdi odgovor</button>
       ` : ''}
       ${quizSession.checked ? `
-        <button class="btn blue action-btn-mobile" style="padding:10px 24px; font-weight:700;" onclick="nextQuestion()">${isLast ? 'Završi i prikaži rezultate' : 'Sljedeće pitanje →'}</button>
+        <button class="btn blue action-btn-mobile" style="padding:12px 28px; font-weight:700; font-size:0.95rem;" onclick="nextQuestion()">${isLast ? 'Završi i prikaži rezultate' : 'Sljedeće pitanje →'}</button>
       ` : ''}
     </div>
   `;
