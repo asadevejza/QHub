@@ -54,13 +54,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
-<<<<<<< HEAD
   line-height: 1.45;
   padding: 16px 12px 40px;
-=======
-  line-height: 1.6;
-  padding: 24px 16px 60px;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   min-height: 100vh;
   transition: background 0.25s ease, color 0.25s ease;
   background-image: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
@@ -72,16 +67,11 @@ body {
 /* Header */
 .top-header {
   display: flex; justify-content: space-between; align-items: center;
-<<<<<<< HEAD
   margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
-=======
-  margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-<<<<<<< HEAD
   padding: 10px 16px;
   border-radius: 16px;
   box-shadow: var(--shadow-sm);
@@ -102,37 +92,11 @@ body {
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 0.82rem;
-=======
-  padding: 14px 22px;
-  border-radius: 20px;
-  box-shadow: var(--shadow-sm);
-}
-.brand { display: flex; align-items: center; gap: 14px; cursor: pointer; }
-.logo-box {
-  width: 42px; height: 42px; 
-  background: linear-gradient(135deg, #1d4ed8, #3b82f6); 
-  border-radius: 12px;
-  display: grid; place-items: center; color: #fff;
-  font-weight: 800; font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-}
-.brand-sub { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
-.brand h1 { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; }
-
-.nav-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 10px 20px; border-radius: 12px; font-weight: 600; font-size: 0.88rem;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   border: 1px solid var(--border); background: var(--surface); color: var(--ink);
   cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none; box-shadow: var(--shadow-sm);
 }
-<<<<<<< HEAD
 .btn:hover { border-color: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-=======
-.btn:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 .btn:active { transform: translateY(0); }
 .btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
 .btn.primary:hover { background: #1d4ed8; }
@@ -141,13 +105,8 @@ body {
   color: white; border-color: transparent; 
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
-<<<<<<< HEAD
 .btn.blue:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45); }
 .btn.sm { padding: 5px 10px; font-size: 0.78rem; border-radius: 8px; }
-=======
-.btn.blue:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45); }
-.btn.sm { padding: 8px 14px; font-size: 0.82rem; border-radius: 10px; }
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 .btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
 .btn.ghost:hover { background: rgba(255,255,255,0.05); }
 .btn.nav-active {
@@ -157,25 +116,16 @@ body {
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
 
-<<<<<<< HEAD
 /* Streak badge u headeru */
 .streak-pill {
   display: inline-flex; align-items: center; gap: 4px;
   background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3);
   padding: 4px 8px; border-radius: 14px; font-size: 0.75rem; font-weight: 700; color: var(--warn);
-=======
-/* Streak badge in header */
-.streak-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3);
-  padding: 6px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; color: var(--warn);
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 }
 
 /* User Profile Dashboard Card */
 .profile-dash-card {
   background: linear-gradient(135deg, var(--surface) 0%, var(--surface-card) 100%);
-<<<<<<< HEAD
   border: 1px solid var(--border); border-radius: 20px; padding: 20px;
   margin-bottom: 24px; box-shadow: var(--shadow-lg);
   display: flex; flex-direction: column; gap: 16px;
@@ -201,38 +151,10 @@ body {
 }
 .user-badge::before {
   content: "●"; font-size: 0.5rem; line-height: 0; color: #0b1329;
-=======
-  border: 1px solid var(--border); border-radius: 24px; padding: 28px;
-  margin-bottom: 32px; box-shadow: var(--shadow-lg);
-  display: flex; flex-direction: column; gap: 24px;
-}
-.profile-top {
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 20px;
-}
-.profile-user-info { display: flex; align-items: center; gap: 16px; }
-.avatar-box {
-  width: 54px; height: 54px; border-radius: 16px;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  display: grid; place-items: center; font-size: 1.5rem; color: #fff; font-weight: 800;
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
-}
-.user-title h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; }
-.user-title p { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
-.user-badge {
-  padding: 6px 16px; border-radius: 20px; background: #10b981;
-  color: #0b1329; font-size: 0.82rem; font-weight: 800; border: none;
-  display: inline-flex; align-items: center; gap: 6px;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
-}
-.user-badge::before {
-  content: "●"; font-size: 0.6rem; line-height: 0; color: #0b1329;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 }
 
 .dash-grid {
   display: grid;
-<<<<<<< HEAD
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
 }
@@ -252,33 +174,11 @@ body {
 .tp-item { background: var(--surface-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
 .tp-info { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; }
 .tp-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
-=======
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-}
-.stat-box {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-  padding: 18px 20px; box-shadow: var(--shadow-sm);
-  display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
-  transition: transform 0.2s;
-}
-.stat-box:hover { transform: translateY(-3px); border-color: var(--accent-light); }
-.stat-box small { display: block; color: var(--muted); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-.stat-box b { font-size: 1.5rem; font-weight: 800; color: var(--ink); margin-top: 4px; }
-.stat-box .stat-icon { position: absolute; right: 16px; top: 16px; font-size: 1.4rem; opacity: 0.7; }
-
-/* Progress bars po lekcijama */
-.topic-progress-list { display: grid; gap: 14px; margin-top: 20px; }
-.tp-item { background: var(--surface-card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; }
-.tp-info { display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
-.tp-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 .tp-bar-fill { height: 100%; background: var(--blue-gradient); border-radius: 4px; transition: width 0.4s ease; }
 
 /* Hero Banner */
 .hero-card {
   background: linear-gradient(135deg, var(--surface) 0%, var(--surface-card) 100%);
-<<<<<<< HEAD
   border: 1px solid var(--border); border-radius: 18px; padding: 24px;
   margin-bottom: 20px; box-shadow: var(--shadow-lg);
   position: relative; overflow: hidden;
@@ -297,41 +197,16 @@ body {
 .subject-card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
   padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
-=======
-  border: 1px solid var(--border); border-radius: 24px; padding: 36px;
-  margin-bottom: 32px; box-shadow: var(--shadow-lg);
-  position: relative; overflow: hidden;
-}
-.hero-card::before {
-  content: ""; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
-}
-.eyebrow { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
-.hero-card h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 10px; line-height: 1.2; letter-spacing: -0.02em; }
-.hero-card p { color: var(--muted); max-width: 56ch; font-size: 0.98rem; }
-
-/* Main Hub Subjects List */
-.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px; }
-.subject-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
-  padding: 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   box-shadow: var(--shadow-sm); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 .subject-card:hover { 
   border-color: var(--accent-light); 
-<<<<<<< HEAD
   transform: translateY(-2px); 
-=======
-  transform: translateY(-4px); 
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   box-shadow: var(--shadow-lg);
 }
 .sc-top { display: flex; justify-content: space-between; align-items: center; }
 .chip-tag { 
-<<<<<<< HEAD
   padding: 3px 10px; border-radius: 14px; 
   background: rgba(59, 130, 246, 0.12); color: var(--accent-light); 
   font-size: 0.72rem; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.2);
@@ -355,37 +230,11 @@ body {
 .f-chip {
   padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-card);
   font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--ink);
-=======
-  padding: 6px 14px; border-radius: 20px; 
-  background: rgba(59, 130, 246, 0.12); color: var(--accent-light); 
-  font-size: 0.78rem; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.2);
-}
-.subject-card h3 { font-size: 1.45rem; font-weight: 800; margin: 10px 0 6px; letter-spacing: -0.01em; }
-.subject-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
-
-/* Subject Detail Screen */
-.subject-detail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-@media (max-width: 768px) { .subject-detail-container { grid-template-columns: 1fr; } }
-
-.detail-panel {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
-  padding: 28px; box-shadow: var(--shadow-sm);
-}
-.detail-panel h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; }
-.detail-panel > p { color: var(--muted); font-size: 0.88rem; margin-bottom: 22px; }
-
-/* Focus Chips */
-.focus-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
-.f-chip {
-  padding: 8px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-card);
-  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--ink);
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 }
 .f-chip:hover { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.1); }
 .f-chip.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
 
 /* Form Controls */
-<<<<<<< HEAD
 .field-group { margin-bottom: 14px; }
 .field-group label { display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; }
 .range-wrap { display: flex; align-items: center; gap: 12px; }
@@ -402,24 +251,6 @@ body {
 
 .toggle-switch {
   position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0;
-=======
-.field-group { margin-bottom: 22px; }
-.field-group label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 10px; }
-.range-wrap { display: flex; align-items: center; gap: 16px; }
-.range-wrap input[type="range"] { flex: 1; accent-color: var(--accent); height: 6px; border-radius: 4px; }
-.range-out { background: var(--surface-card); border: 1px solid var(--border); padding: 4px 14px; border-radius: 10px; font-weight: 800; font-size: 0.95rem; }
-
-/* Toggle Switch */
-.switch-row {
-  display: flex; justify-content: space-between; align-items: center; padding: 14px 0;
-  border-top: 1px solid var(--border); margin-top: 8px;
-}
-.switch-row div span { display: block; font-weight: 700; font-size: 0.9rem; }
-.switch-row div small { color: var(--muted); font-size: 0.78rem; }
-
-.toggle-switch {
-  position: relative; display: inline-block; width: 50px; height: 28px; flex-shrink: 0;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 }
 .toggle-switch input { opacity: 0; width: 0; height: 0; }
 .slider {
@@ -427,16 +258,11 @@ body {
   transition: .25s ease; border-radius: 34px; border: 1px solid var(--border);
 }
 .slider:before {
-<<<<<<< HEAD
   position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px;
-=======
-  position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   background-color: white; transition: .25s ease; border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 input:checked + .slider { background-color: var(--accent); border-color: var(--accent); }
-<<<<<<< HEAD
 input:checked + .slider:before { transform: translateX(18px); }
 
 /* Režimi učenja */
@@ -454,39 +280,15 @@ input:checked + .slider:before { transform: translateX(18px); }
 /* Quiz Screen & Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
-=======
-input:checked + .slider:before { transform: translateX(22px); }
-
-/* Režimi učenja */
-.modes-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 16px; }
-.m-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-  padding: 18px 14px; text-align: center; cursor: pointer; transition: all 0.25s;
-  box-shadow: var(--shadow-sm);
-}
-.m-card:hover { border-color: var(--accent-light); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.m-card span { font-size: 1.8rem; display: block; margin-bottom: 6px; }
-.m-card div { font-size: 0.9rem; font-weight: 800; }
-.m-card small { font-size: 0.75rem; color: var(--muted); display: block; margin-top: 4px; font-weight: 500; }
-
-/* Quiz Screen & Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulseCorrect {
   0% { transform: scale(1); }
-<<<<<<< HEAD
   50% { transform: scale(1.01); }
-=======
-  50% { transform: scale(1.02); }
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   100% { transform: scale(1); }
 }
 @keyframes shakeWrong {
   0%, 100% { transform: translateX(0); }
-<<<<<<< HEAD
   20%, 60% { transform: translateX(-4px); }
   40%, 80% { transform: translateX(4px); }
 }
@@ -512,38 +314,12 @@ input:checked + .slider:before { transform: translateX(22px); }
   display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-radius: 12px;
   border: 1px solid var(--border); background: var(--surface-card); cursor: pointer;
   font-size: 0.88rem; font-weight: 600; transition: all 0.2s; color: var(--ink); width: 100%; text-align: left;
-=======
-  20%, 60% { transform: translateX(-6px); }
-  40%, 80% { transform: translateX(6px); }
-}
-
-.animate-fade { animation: fadeIn 0.3s ease forwards; }
-.anim-correct { animation: pulseCorrect 0.4s ease; }
-.anim-wrong { animation: shakeWrong 0.4s ease; }
-
-.q-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
-  padding: 32px; box-shadow: var(--shadow-lg); margin-top: 20px; position: relative;
-}
-.q-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.star-btn { background: transparent; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; color: var(--ink); opacity: 0.8; }
-.star-btn:hover { transform: scale(1.2); opacity: 1; }
-.star-btn.saved { color: #f59e0b; opacity: 1; }
-
-.q-text { font-size: 1.35rem; font-weight: 700; margin-bottom: 24px; line-height: 1.4; }
-.opts-list { display: grid; gap: 12px; }
-.opt-item {
-  display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 16px;
-  border: 1px solid var(--border); background: var(--surface-card); cursor: pointer;
-  font-size: 0.95rem; font-weight: 600; transition: all 0.2s; color: var(--ink); width: 100%; text-align: left;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 }
 .opt-item:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.08); }
 .opt-item.selected { border-color: var(--accent); background: rgba(59, 130, 246, 0.18); box-shadow: 0 0 0 1px var(--accent); }
 .opt-item.correct { border-color: var(--good); background: rgba(16, 185, 129, 0.15); }
 .opt-item.wrong { border-color: var(--bad); background: rgba(239, 68, 68, 0.15); }
 
-<<<<<<< HEAD
 /* Indikatori (krug ili kvadrat umjesto A B C D) */
 .opt-indicator {
   width: 18px; height: 18px; flex-shrink: 0; display: grid; place-items: center;
@@ -636,57 +412,6 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
     width: 100%;
     padding: 10px !important;
     font-size: 0.9rem !important;
-=======
-/* Results Screen */
-.res-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
-  padding: 36px; box-shadow: var(--shadow-lg); margin-top: 24px; text-align: center;
-}
-.res-score-circle {
-  width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--accent-light);
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  margin: 0 auto 20px; background: rgba(59, 130, 246, 0.1);
-}
-.res-score-circle span { font-size: 2.2rem; font-weight: 800; line-height: 1; }
-.res-score-circle small { font-size: 0.75rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
-
-.res-review-list { margin-top: 32px; text-align: left; display: grid; gap: 16px; }
-.res-review-item {
-  background: var(--surface-card); border: 1px solid var(--border); border-radius: 16px; padding: 20px;
-}
-.res-review-item.is-correct { border-left: 5px solid var(--good); }
-.res-review-item.is-wrong { border-left: 5px solid var(--bad); }
-
-/* Flashcards */
-.fc-wrap { perspective: 1000px; height: 340px; margin: 24px 0; cursor: pointer; }
-.fc-inner {
-  width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 24px; 
-  border: 1px solid var(--border); background: var(--surface); 
-  display: flex; align-items: center; justify-content: center; padding: 36px; text-align: center;
-  box-shadow: var(--shadow-lg);
-}
-.fc-inner.flipped { transform: rotateY(180deg); }
-.fc-front, .fc-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 28px; }
-.fc-back { transform: rotateY(180deg); background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.12)); border-radius: 24px; }
-
-/* Profile View Screen */
-.profile-view-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
-  padding: 36px; box-shadow: var(--shadow-lg); margin-top: 24px;
-}
-
-/* Footer */
-footer { margin-top: 60px; display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 24px; font-weight: 500; }
-
-@media (max-width: 768px) {
-  .q-card { padding: 20px; }
-  .opt-item { padding: 18px 16px; font-size: 1rem; }
-  .sticky-bottom-bar {
-    position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface);
-    padding: 16px; border-top: 1px solid var(--border); box-shadow: var(--shadow-lg);
-    z-index: 100; display: flex; gap: 12px;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   }
 }
 </style>
@@ -790,15 +515,12 @@ const SoundFX = {
   }
 };
 
-<<<<<<< HEAD
 // Funkcija za čišćenje zagrada iz pitanja
 function cleanQuestionText(text) {
   if (!text) return '';
   return text.replace(/\s*\((Više tačnih odgovora|Više tačnih)\)/gi, '').trim();
 }
 
-=======
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 const SUBJECTS = [
   {
     id: 'mpp',
@@ -1258,11 +980,7 @@ const QUESTIONS_DB = {
       id: 'q55',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
       q: 'Šta čini globalizaciju softverskog proizvoda? (Više tačnih)',
-<<<<<<< HEAD
       opts: ['Internacionalizacija (datum, brojevi, valuta, kontakt)', 'Lokalizacija (jezička i kulturološka prilagodba, CSS za svako pismo, DBCS)', 'Isključivo prevođenje teksta'],
-=======
-      opts: ['Internacionalizacija (datum, brojevi, valuta, kontakt)', 'Lokalizacija (jezička i kulturološka prilagodba, CSS za svako pismo, DBCS)', 'Isključivo prevo'],
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
       correct: [0, 1],
       expl: 'Internacionalizacija i lokalizacija.'
     },
@@ -1449,13 +1167,8 @@ const QUESTIONS_DB = {
       topic: 'SCRUM',
       q: 'Tko je odgovoran za samo provođenje Dnevnog Scruma (Daily Stand-up) i koliko on traje?',
       opts: ['Scrum Master; traje 30 minuta', 'Product Owner; traje 15 minuta', 'Developeri; traje unutar vremenskog okvira od 15 minuta', 'Business Owner; traje po potrebi'],
-<<<<<<< HEAD
       correct: [2],
       expl: 'Developeri provode sastanak unutar vremenskog okvira od 15 minuta.'
-=======
-      correct: [1],
-      expl: 'Product owneri vode sastanak, a vremenski okvir je 15 minuta.'
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
     },
     {
       id: 'q79',
@@ -2373,11 +2086,7 @@ const QUESTIONS_DB = {
       q: 'Šta spada u značaj modeliranja informacionih sistema? (Više tačnih)',
       opts: ['Bolje razumijevanje poslovnih procesa i jasna komunikacija tima', 'Planiranje i dizajn sistema', 'Smanjenje rizika', 'Podrška za implementaciju', 'Praćenje i evaluacija'],
       correct: [0, 1, 2, 3, 4],
-<<<<<<< HEAD
       expl: 'Svi navedeni dijelići predstavljaju značaj modeliranja.'
-=======
-      expl: 'Svi navedeni aspekti predstavljaju značaj modeliranja.'
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
     },
     {
       id: 'q193',
@@ -2735,17 +2444,10 @@ function renderHeader() {
         </div>
       </div>
       <div class="nav-actions">
-<<<<<<< HEAD
         <div class="streak-pill">🔥 ${state.stats.streak || 0}d</div>
         <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()">Svi predmeti</button>
         <button class="btn sm ghost" onclick="toggleSound()">${state.sound ? '🔊' : '🔇'}</button>
         <button class="btn sm ghost" onclick="toggleTheme()">${state.theme === 'dark' ? '☀' : '☾'}</button>
-=======
-        <div class="streak-pill">🔥 ${state.stats.streak || 0} dana</div>
-        <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()">Svi predmeti</button>
-        <button class="btn sm ghost" onclick="toggleSound()">${state.sound ? '🔊 Zvuk' : '🔇 Nečujno'}</button>
-        <button class="btn sm ghost" onclick="toggleTheme()">${state.theme === 'dark' ? '☀ Svijetla' : '☾ Tamna'}</button>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         <button class="btn sm ${isProfileActive ? 'nav-active' : ''}" onclick="goProfile()">👤 Profil</button>
       </div>
     </header>
@@ -2766,21 +2468,12 @@ function renderProfileDashboard() {
         <div class="profile-user-info">
           <div class="avatar-box">🎓</div>
           <div class="user-title">
-<<<<<<< HEAD
             <h2><input type="text" value="${state.stats.userName}" style="margin:0; padding:4px 8px; font-size:1.15rem; font-weight:800; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:8px; color:var(--ink); font-family:inherit; outline:none;" onchange="updateUserName(this.value)"></h2>
             <p>${state.stats.userRole} • FIT</p>
           </div>
         </div>
         <div>
           <span class="user-badge">Aktivan</span>
-=======
-            <h2><input type="text" value="${state.stats.userName}" style="margin:0; padding:6px 12px; font-size:1.25rem; font-weight:800; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:10px; color:var(--ink); font-family:inherit; outline:none;" onchange="updateUserName(this.value)"></h2>
-            <p>${state.stats.userRole} • Fakultet informacijskih tehnologija</p>
-          </div>
-        </div>
-        <div>
-          <span class="user-badge">Aktivan profil</span>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         </div>
       </div>
 
@@ -2797,30 +2490,18 @@ function renderProfileDashboard() {
         </div>
         <div class="stat-box">
           <span class="stat-icon">🎯</span>
-<<<<<<< HEAD
           <small>Tačnost</small>
-=======
-          <small>Prosječna tačnost</small>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
           <b>${accuracy}%</b>
         </div>
         <div class="stat-box">
           <span class="stat-icon">⚠️</span>
-<<<<<<< HEAD
           <small>Pogrešnih</small>
-=======
-          <small>Pogrešnih čeka</small>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
           <b>${state.wrongQuestions.length}</b>
         </div>
       </div>
 
       <div style="margin-top: 10px;">
-<<<<<<< HEAD
         <div class="eyebrow" style="margin-bottom: 8px;">Progres po lekcijama</div>
-=======
-        <div class="eyebrow" style="margin-bottom: 12px;">Progres po lekcijama</div>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         <div class="topic-progress-list">
           ${subj.topics.map(t => {
             const tData = topicStats[t] || { answered: 0, correct: 0 };
@@ -2892,7 +2573,6 @@ function renderSubjectDetail() {
   
   return `
     ${renderHeader()}
-<<<<<<< HEAD
     <div style="margin-bottom: 16px;">
       <div class="eyebrow">Mapa gradiva spremna</div>
       <h2 style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;">${subj.name}</h2>
@@ -2901,16 +2581,6 @@ function renderSubjectDetail() {
 
     <!-- Režimi učenja -->
     <div style="margin-bottom: 20px;">
-=======
-    <div style="margin-bottom: 24px;">
-      <div class="eyebrow">Mapa gradiva spremna</div>
-      <h2 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em;">${subj.name}</h2>
-      <p style="color: var(--muted); max-width: 68ch; margin-top: 6px; font-size: 0.95rem;">${subj.desc}</p>
-    </div>
-
-    <!-- Režimi učenja -->
-    <div style="margin-bottom: 28px;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
       <div class="eyebrow">Načini učenja</div>
       <div class="modes-row">
         <div class="m-card" onclick="startSpecialMode('weak')">
@@ -2942,22 +2612,14 @@ function renderSubjectDetail() {
             return `<button class="f-chip ${isSel ? 'active' : ''}" onclick="toggleTopic('${t}')">${t}</button>`;
           }).join('')}
         </div>
-<<<<<<< HEAD
         <p style="color: var(--muted); font-size: 0.78rem; margin-top: 12px;">Prazan izbor uključuje sve teme.</p>
-=======
-        <p style="color: var(--muted); font-size: 0.8rem; margin-top: 16px;">Prazan izbor uključuje sve teme.</p>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
       </div>
 
       <!-- Postavke kviza -->
       <div class="detail-panel">
         <h3>Postavke kviza</h3>
         
-<<<<<<< HEAD
         <div class="field-group" style="margin-top: 12px;">
-=======
-        <div class="field-group" style="margin-top: 14px;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
           <label>Broj pitanja</label>
           <div class="range-wrap">
             <input type="range" min="1" max="${Math.max(1, availCount)}" value="${Math.min(state.qCount, Math.max(1, availCount))}" oninput="updateQCountLive(this.value)" onchange="saveQCountState()">
@@ -3000,15 +2662,9 @@ function renderSubjectDetail() {
       </div>
     </div>
 
-<<<<<<< HEAD
     <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 16px 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
       <div style="font-weight: 700; font-size:0.9rem;" id="ready-q-count-text">Spremno za ${state.qCount} pitanja.</div>
       <button class="btn blue" style="padding: 10px 24px; font-size: 0.95rem; font-weight: 700;" onclick="startQuizSession()">Pokreni kviz</button>
-=======
-    <div style="margin-top: 28px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 20px 28px; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
-      <div style="font-weight: 700;" id="ready-q-count-text">Spremno za ${state.qCount} pitanja.</div>
-      <button class="btn blue" style="padding: 12px 32px; font-size: 1rem; font-weight: 700;" onclick="startQuizSession()">Pokreni kviz</button>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
     </div>
 
     <footer>
@@ -3023,7 +2679,6 @@ function renderQuiz() {
   const progressPct = Math.round(((quizSession.idx + 1) / quizSession.questions.length) * 100);
   const isSaved = state.savedQuestions.includes(q.id);
   const isMulti = q.correct.length > 1;
-<<<<<<< HEAD
   const cleanedQ = cleanQuestionText(q.q);
 
   return `
@@ -3037,39 +2692,17 @@ function renderQuiz() {
         </div>
       </div>
       <div style="width:100%; height:4px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
-=======
-
-  return `
-    ${renderHeader()}
-    <div style="margin-bottom: 20px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <button class="btn sm" onclick="goSubjectDetail()">Izlaz</button>
-        <div style="display:flex; gap:16px; align-items:center;">
-          ${state.timerEnabled ? `<div style="font-weight:800; font-family:var(--font-mono); color:var(--warn);">⏱️ <span id="quiz-timer-display">--:--</span></div>` : ''}
-          <div style="font-weight:700; color:var(--accent-light);">Pitanje ${quizSession.idx + 1} od ${quizSession.questions.length}</div>
-        </div>
-      </div>
-      <div style="width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         <div style="width:${progressPct}%; height:100%; background:var(--blue-gradient); transition:width 0.3s ease;"></div>
       </div>
     </div>
 
     <div class="q-card animate-fade" id="current-q-card">
       <div class="q-header-row">
-<<<<<<< HEAD
         <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:var(--accent-light);">${q.topic}</span>
         <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveQuestion('${q.id}')" title="Sačuvaj pitanje">${isSaved ? '★' : '☆'}</button>
       </div>
 
       <div class="q-text">${cleanedQ}</div>
-=======
-        <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--accent-light);">${q.topic} ${isMulti ? '• (Više tačnih odgovora)' : ''}</span>
-        <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveQuestion('${q.id}')" title="Sačuvaj pitanje">${isSaved ? '★' : '☆'}</button>
-      </div>
-
-      <div class="q-text">${q.q}</div>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 
       <div class="opts-list">
         ${q.opts.map((opt, i) => {
@@ -3081,7 +2714,6 @@ function renderQuiz() {
             if (q.correct.includes(i)) cls += ' correct';
             else if (isSelected) cls += ' wrong';
           }
-<<<<<<< HEAD
 
           const indicatorType = isMulti ? 'type-checkbox' : 'type-radio';
 
@@ -3091,38 +2723,22 @@ function renderQuiz() {
               <div class="opt-indicator ${indicatorType}"></div>
             </button>
           `;
-=======
-          return `<button class="${cls}" onclick="selectOpt(${i})"><b style="min-width:24px; color:var(--accent-light);">${String.fromCharCode(65+i)}.</b> <span>${opt}</span></button>`;
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         }).join('')}
       </div>
 
       ${quizSession.checked && q.expl ? `
-<<<<<<< HEAD
         <div id="expl-box-el" style="margin-top:14px; padding:12px 14px; background:rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius:12px; font-size:0.85rem; line-height:1.4;">
-=======
-        <div style="margin-top:24px; padding:16px 20px; background:rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius:16px; font-size:0.92rem; line-height:1.5;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
           💡 <b style="color:var(--accent-light);">Objašnjenje:</b> ${q.expl}
         </div>
       ` : ''}
     </div>
 
-<<<<<<< HEAD
     <div style="margin-top: 12px; display:flex; justify-content: flex-end;" class="sticky-bottom-bar" id="action-bar-el">
       ${isMulti && !quizSession.checked ? `
         <button class="btn primary action-btn-mobile" style="padding:10px 24px; font-weight:700;" onclick="checkAnswer()">Potvrdi odgovor</button>
       ` : ''}
       ${quizSession.checked ? `
         <button class="btn blue action-btn-mobile" style="padding:10px 24px; font-weight:700;" onclick="nextQuestion()">${isLast ? 'Završi i prikaži rezultate' : 'Sljedeće pitanje →'}</button>
-=======
-    <div style="margin-top: 24px; display:flex; justify-content: flex-end;" class="sticky-bottom-bar">
-      ${isMulti && !quizSession.checked ? `
-        <button class="btn primary" style="padding:12px 28px; font-weight:700;" onclick="checkAnswer()">Potvrdi odgovor</button>
-      ` : ''}
-      ${quizSession.checked ? `
-        <button class="btn blue" style="padding:12px 28px; font-weight:700;" onclick="nextQuestion()">${isLast ? 'Završi i prikaži rezultate' : 'Sljedeće pitanje →'}</button>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
       ` : ''}
     </div>
   `;
@@ -3149,18 +2765,13 @@ function renderResults() {
     ${renderHeader()}
     <div class="res-card animate-fade">
       <div class="eyebrow">Rezultati sesije</div>
-<<<<<<< HEAD
       <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 16px;">Kviz završen!</h2>
-=======
-      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 20px;">Kviz završen!</h2>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
       
       <div class="res-score-circle">
         <span>${pct}%</span>
         <small>${correctCount}/${total} tačno</small>
       </div>
 
-<<<<<<< HEAD
       <p style="font-weight:600; font-size:0.95rem; margin-bottom:20px;">${statusMsg}</p>
 
       <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -3177,45 +2788,19 @@ function renderResults() {
             <div style="font-weight:700; font-size:0.95rem; margin-bottom:8px;">${cleanQuestionText(item.q.q)}</div>
             
             <div style="font-size:0.85rem; margin-bottom:4px;">
-=======
-      <p style="font-weight:600; font-size:1.05rem; margin-bottom:24px;">${statusMsg}</p>
-
-      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <button class="btn blue" style="padding:12px 24px;" onclick="startQuizSession()">Ponovi kviz</button>
-        ${quizSession.userAnswers.some(a => !a.isCorrect) ? `<button class="btn primary" style="padding:12px 24px;" onclick="retryWrongInSession()">Ponovi netačna pitanja</button>` : ''}
-        <button class="btn" style="padding:12px 24px;" onclick="goSubjectDetail()">Nazad na predmet</button>
-      </div>
-
-      <div class="res-review-list">
-        <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:12px;">Detaljan pregled odgovora</h3>
-        ${quizSession.userAnswers.map((item, idx) => `
-          <div class="res-review-item ${item.isCorrect ? 'is-correct' : 'is-wrong'}">
-            <div style="font-size:0.8rem; font-weight:700; color:var(--muted); margin-bottom:6px;">Pitanje ${idx + 1}</div>
-            <div style="font-weight:700; font-size:1.05rem; margin-bottom:12px;">${item.q.q}</div>
-            
-            <div style="font-size:0.9rem; margin-bottom:6px;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
               <span style="color:var(--muted);">Vaš odgovor:</span> 
               <b style="color:${item.isCorrect ? 'var(--good)' : 'var(--bad)'}">${Array.isArray(item.selected) ? item.selected.map(s => item.q.opts[s]).join(', ') : item.q.opts[item.selected]}</b>
             </div>
 
             ${!item.isCorrect ? `
-<<<<<<< HEAD
               <div style="font-size:0.85rem; margin-bottom:4px;">
-=======
-              <div style="font-size:0.9rem; margin-bottom:6px;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
                 <span style="color:var(--muted);">Tačan odgovor:</span> 
                 <b style="color:var(--good);">${item.q.correct.map(c => item.q.opts[c]).join(', ')}</b>
               </div>
             ` : ''}
 
             ${item.q.expl ? `
-<<<<<<< HEAD
               <div style="font-size:0.8rem; color:var(--muted); margin-top:8px; background:rgba(0,0,0,0.15); padding:8px 12px; border-radius:8px;">
-=======
-              <div style="font-size:0.85rem; color:var(--muted); margin-top:10px; background:rgba(0,0,0,0.15); padding:10px 14px; border-radius:10px;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
                 💡 <b>Objašnjenje:</b> ${item.q.expl}
               </div>
             ` : ''}
@@ -3234,21 +2819,14 @@ function renderFlashcards() {
   const q = quizSession.questions[quizSession.idx];
   return `
     ${renderHeader()}
-<<<<<<< HEAD
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
       <button class="btn sm" onclick="goSubjectDetail()">Nazad na predmet</button>
       <div style="font-weight:700; font-size:0.85rem; color:var(--accent-light);">Kartica ${quizSession.idx + 1} / ${quizSession.questions.length}</div>
-=======
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-      <button class="btn sm" onclick="goSubjectDetail()">Nazad na predmet</button>
-      <div style="font-weight:700; color:var(--accent-light);">Kartica ${quizSession.idx + 1} / ${quizSession.questions.length}</div>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
     </div>
 
     <div class="fc-wrap" onclick="flipCard(this)">
       <div class="fc-inner">
         <div class="fc-front">
-<<<<<<< HEAD
           <div style="font-size:0.7rem; color:var(--accent-light); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:10px;">Pitanje</div>
           <h2 style="font-size:1.15rem; font-weight:700;">${cleanQuestionText(q.q)}</h2>
           <div style="margin-top:16px; font-size:0.75rem; color:var(--muted); font-weight:600;">Klikni da okreneš karticu 🔄</div>
@@ -3257,25 +2835,11 @@ function renderFlashcards() {
           <div style="font-size:0.7rem; color:var(--good); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:10px;">Tačan odgovor</div>
           <h3 style="font-size:1.05rem; font-weight:700;">${q.correct.map(c => q.opts[c]).join(', ')}</h3>
           <p style="margin-top:10px; font-size:0.82rem; color:var(--muted);">${q.expl || ''}</p>
-=======
-          <div style="font-size:0.75rem; color:var(--accent-light); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:14px;">Pitanje</div>
-          <h2 style="font-size:1.35rem; font-weight:700;">${q.q}</h2>
-          <div style="margin-top:24px; font-size:0.8rem; color:var(--muted); font-weight:600;">Klikni da okreneš karticu 🔄</div>
-        </div>
-        <div class="fc-back">
-          <div style="font-size:0.75rem; color:var(--good); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:14px;">Tačan odgovor</div>
-          <h3 style="font-size:1.2rem; font-weight:700;">${q.correct.map(c => q.opts[c]).join(', ')}</h3>
-          <p style="margin-top:14px; font-size:0.88rem; color:var(--muted);">${q.expl || ''}</p>
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         </div>
       </div>
     </div>
 
-<<<<<<< HEAD
     <div style="display:flex; gap:12px; justify-content:center;">
-=======
-    <div style="display:flex; gap:16px; justify-content:center;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
       <button class="btn" style="flex:1" onclick="flashcardFeedback(false)">❌ Ne znam</button>
       <button class="btn primary" style="flex:1" onclick="flashcardFeedback(true)">✅ Znam</button>
     </div>
@@ -3287,19 +2851,11 @@ function renderProfileView() {
     ${renderHeader()}
     <div class="profile-view-card animate-fade">
       <div class="eyebrow">Moj Profil & Postavke</div>
-<<<<<<< HEAD
       <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">Korisnički Profil</h2>
       
       ${renderProfileDashboard()}
 
       <div style="margin-top: 20px; display:flex; justify-content:flex-start; gap:10px; flex-wrap:wrap;">
-=======
-      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 24px;">Korisnički Profil</h2>
-      
-      ${renderProfileDashboard()}
-
-      <div style="margin-top: 24px; display:flex; justify-content:flex-start; gap:12px; flex-wrap:wrap;">
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
         <button class="btn blue" onclick="goHub()">Nazad na početnu</button>
         <button class="btn" onclick="resetStats()">Resetuj statistiku</button>
       </div>
@@ -3610,7 +3166,6 @@ window.checkAnswer = function() {
   saveActiveSession();
 
   render();
-<<<<<<< HEAD
 
   setTimeout(() => {
     const explBox = document.getElementById('expl-box-el') || document.getElementById('action-bar-el');
@@ -3618,8 +3173,6 @@ window.checkAnswer = function() {
       explBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, 50);
-=======
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 };
 
 window.nextQuestion = function() {
@@ -3630,10 +3183,7 @@ window.nextQuestion = function() {
     quizSession.checked = false;
     saveActiveSession();
     render();
-<<<<<<< HEAD
     window.scrollTo({ top: 0, behavior: 'smooth' });
-=======
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
   } else {
     finishQuizSession();
   }
@@ -3648,10 +3198,7 @@ function finishQuizSession() {
   SoundFX.playFinish();
   state.currentView = 'results';
   render();
-<<<<<<< HEAD
   window.scrollTo({ top: 0, behavior: 'smooth' });
-=======
->>>>>>> df4cfa2537554756747d28d3b77b546b09940770
 }
 
 function saveActiveSession() {
