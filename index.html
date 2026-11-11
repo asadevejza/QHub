@@ -1,0 +1,3245 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>QHub - Platforma za kvizove</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Canvas Confetti za proslavu rezultata -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+  --bg: #0b1329;
+  --surface: #152243;
+  --surface-card: #1c2b54;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-active: #3b82f6;
+  --ink: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
+  --blue-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+  --good: #10b981;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+  --glass: rgba(21, 34, 67, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-card: #f1f5f9;
+  --border: #e2e8f0;
+  --border-active: #2563eb;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
+  --blue-gradient: linear-gradient(135deg, #1d4ed8, #2563eb);
+  --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.45;
+  padding: 16px 12px 40px;
+  min-height: 100vh;
+  transition: background 0.25s ease, color 0.25s ease;
+  background-image: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 90%, rgba(37, 99, 235, 0.08) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+.wrap { max-width: 1060px; margin: 0 auto; }
+
+/* Header */
+.top-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  padding: 10px 16px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.logo-box {
+  width: 34px; height: 34px; 
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6); 
+  border-radius: 9px;
+  display: grid; place-items: center; color: #fff;
+  font-weight: 800; font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+.brand-sub { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.brand h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
+
+.nav-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 14px; border-radius: 10px; font-weight: 600; font-size: 0.82rem;
+  border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none; box-shadow: var(--shadow-sm);
+}
+.btn:hover { border-color: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn:active { transform: translateY(0); }
+.btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.btn.primary:hover { background: #1d4ed8; }
+.btn.blue { 
+  background: var(--blue-gradient); 
+  color: white; border-color: transparent; 
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+.btn.blue:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45); }
+.btn.sm { padding: 5px 10px; font-size: 0.78rem; border-radius: 8px; }
+.btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
+.btn.ghost:hover { background: rgba(255,255,255,0.05); }
+.btn.nav-active {
+  background: var(--blue-gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+/* Streak badge u headeru */
+.streak-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 4px 8px; border-radius: 14px; font-size: 0.75rem; font-weight: 700; color: var(--warn);
+}
+
+/* User Profile Dashboard Card */
+.profile-dash-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-card) 100%);
+  border: 1px solid var(--border); border-radius: 20px; padding: 20px;
+  margin-bottom: 24px; box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.profile-top {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border); padding-bottom: 14px;
+}
+.profile-user-info { display: flex; align-items: center; gap: 12px; }
+.avatar-box {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  display: grid; place-items: center; font-size: 1.2rem; color: #fff; font-weight: 800;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+.user-title h2 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+.user-title p { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+.user-badge {
+  padding: 4px 12px; border-radius: 16px; background: #10b981;
+  color: #0b1329; font-size: 0.75rem; font-weight: 800; border: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+}
+.user-badge::before {
+  content: "●"; font-size: 0.5rem; line-height: 0; color: #0b1329;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.stat-box {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 12px 14px; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
+  transition: transform 0.2s;
+}
+.stat-box:hover { transform: translateY(-2px); border-color: var(--accent-light); }
+.stat-box small { display: block; color: var(--muted); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-box b { font-size: 1.25rem; font-weight: 800; color: var(--ink); margin-top: 2px; }
+.stat-box .stat-icon { position: absolute; right: 10px; top: 10px; font-size: 1.1rem; opacity: 0.7; }
+
+/* Progress bars po lekcijama */
+.topic-progress-list { display: grid; gap: 8px; margin-top: 12px; }
+.tp-item { background: var(--surface-card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+.tp-info { display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 700; margin-bottom: 4px; }
+.tp-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+.tp-bar-fill { height: 100%; background: var(--blue-gradient); border-radius: 4px; transition: width 0.4s ease; }
+
+/* Hero Banner */
+.hero-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-card) 100%);
+  border: 1px solid var(--border); border-radius: 18px; padding: 24px;
+  margin-bottom: 20px; box-shadow: var(--shadow-lg);
+  position: relative; overflow: hidden;
+}
+.hero-card::before {
+  content: ""; position: absolute; top: -50px; right: -50px; width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 4px; }
+.hero-card h2 { font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 800; margin-bottom: 6px; line-height: 1.2; letter-spacing: -0.02em; }
+.hero-card p { color: var(--muted); max-width: 56ch; font-size: 0.88rem; }
+
+/* Main Hub Subjects List */
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.subject-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+  padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  box-shadow: var(--shadow-sm); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.subject-card:hover { 
+  border-color: var(--accent-light); 
+  transform: translateY(-2px); 
+  box-shadow: var(--shadow-lg);
+}
+.sc-top { display: flex; justify-content: space-between; align-items: center; }
+.chip-tag { 
+  padding: 3px 10px; border-radius: 14px; 
+  background: rgba(59, 130, 246, 0.12); color: var(--accent-light); 
+  font-size: 0.72rem; font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.subject-card h3 { font-size: 1.25rem; font-weight: 800; margin: 6px 0 2px; letter-spacing: -0.01em; }
+.subject-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.4; }
+
+/* Subject Detail Screen */
+.subject-detail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 768px) { .subject-detail-container { grid-template-columns: 1fr; } }
+
+.detail-panel {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+  padding: 20px; box-shadow: var(--shadow-sm);
+}
+.detail-panel h3 { font-size: 1.08rem; font-weight: 800; margin-bottom: 2px; }
+.detail-panel > p { color: var(--muted); font-size: 0.82rem; margin-bottom: 14px; }
+
+/* Focus Chips */
+.focus-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.f-chip {
+  padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-card);
+  font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; color: var(--ink);
+}
+.f-chip:hover { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.1); }
+.f-chip.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+
+/* Form Controls */
+.field-group { margin-bottom: 14px; }
+.field-group label { display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px; }
+.range-wrap { display: flex; align-items: center; gap: 12px; }
+.range-wrap input[type="range"] { flex: 1; accent-color: var(--accent); height: 5px; border-radius: 4px; }
+.range-out { background: var(--surface-card); border: 1px solid var(--border); padding: 2px 10px; border-radius: 6px; font-weight: 800; font-size: 0.85rem; }
+
+/* Toggle Switch */
+.switch-row {
+  display: flex; justify-content: space-between; align-items: center; padding: 10px 0;
+  border-top: 1px solid var(--border); margin-top: 4px;
+}
+.switch-row div span { display: block; font-weight: 700; font-size: 0.82rem; }
+.switch-row div small { color: var(--muted); font-size: 0.72rem; }
+
+.toggle-switch {
+  position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer; inset: 0; background-color: rgba(255,255,255,0.15);
+  transition: .25s ease; border-radius: 34px; border: 1px solid var(--border);
+}
+.slider:before {
+  position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px;
+  background-color: white; transition: .25s ease; border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+input:checked + .slider { background-color: var(--accent); border-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(18px); }
+
+/* Režimi učenja */
+.modes-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 10px; }
+.m-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.25s;
+  box-shadow: var(--shadow-sm);
+}
+.m-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.m-card span { font-size: 1.3rem; display: block; margin-bottom: 2px; }
+.m-card div { font-size: 0.82rem; font-weight: 800; }
+.m-card small { font-size: 0.68rem; color: var(--muted); display: block; margin-top: 2px; font-weight: 500; }
+
+/* Quiz Screen & Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseCorrect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+  100% { transform: scale(1); }
+}
+@keyframes shakeWrong {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-fade { animation: fadeIn 0.2s ease forwards; }
+.anim-correct { animation: pulseCorrect 0.35s ease; }
+.anim-wrong { animation: shakeWrong 0.35s ease; }
+
+.q-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+  padding: 20px; box-shadow: var(--shadow-lg); margin-top: 10px; position: relative;
+}
+.q-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.star-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; transition: transform 0.2s; color: var(--ink); opacity: 0.8; }
+.star-btn:hover { transform: scale(1.15); opacity: 1; }
+.star-btn.saved { color: #f59e0b; opacity: 1; }
+
+.q-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; line-height: 1.35; }
+.opts-list { display: grid; gap: 8px; }
+
+/* DUGMAD ODGOVORA SA RADIO / CHECKBOX INDIKATORIMA */
+.opt-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-radius: 12px;
+  border: 1px solid var(--border); background: var(--surface-card); cursor: pointer;
+  font-size: 0.88rem; font-weight: 600; transition: all 0.2s; color: var(--ink); width: 100%; text-align: left;
+}
+.opt-item:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.08); }
+.opt-item.selected { border-color: var(--accent); background: rgba(59, 130, 246, 0.18); box-shadow: 0 0 0 1px var(--accent); }
+.opt-item.correct { border-color: var(--good); background: rgba(16, 185, 129, 0.15); }
+.opt-item.wrong { border-color: var(--bad); background: rgba(239, 68, 68, 0.15); }
+
+/* Indikatori (krug ili kvadrat umjesto A B C D) */
+.opt-indicator {
+  width: 18px; height: 18px; flex-shrink: 0; display: grid; place-items: center;
+  border: 2px solid var(--muted); transition: all 0.2s; background: transparent;
+}
+/* Radio stil (jedan tačan odgovor) */
+.opt-indicator.type-radio { border-radius: 50%; }
+.opt-indicator.type-radio::after {
+  content: ""; width: 8px; height: 8px; border-radius: 50%; background: transparent; transition: background 0.2s;
+}
+.opt-item.selected .opt-indicator.type-radio { border-color: var(--accent-light); }
+.opt-item.selected .opt-indicator.type-radio::after { background: var(--accent-light); }
+
+/* Checkbox stil (više tačnih odgovora) */
+.opt-indicator.type-checkbox { border-radius: 5px; }
+.opt-indicator.type-checkbox::after {
+  content: "✓"; font-size: 11px; font-weight: 800; color: transparent; transition: color 0.2s; line-height: 1;
+}
+.opt-item.selected .opt-indicator.type-checkbox { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.2); }
+.opt-item.selected .opt-indicator.type-checkbox::after { color: var(--accent-light); }
+
+/* Korektne / Netačne indikacije */
+.opt-item.correct .opt-indicator { border-color: var(--good) !important; background: rgba(16, 185, 129, 0.2) !important; }
+.opt-item.correct .opt-indicator.type-radio::after { background: var(--good) !important; }
+.opt-item.correct .opt-indicator.type-checkbox::after { color: var(--good) !important; }
+
+.opt-item.wrong .opt-indicator { border-color: var(--bad) !important; background: rgba(239, 68, 68, 0.2) !important; }
+.opt-item.wrong .opt-indicator.type-radio::after { background: var(--bad) !important; }
+.opt-item.wrong .opt-indicator.type-checkbox::after { color: var(--bad) !important; content: "✕" !important; }
+
+/* Results Screen */
+.res-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+  padding: 24px; box-shadow: var(--shadow-lg); margin-top: 14px; text-align: center;
+}
+.res-score-circle {
+  width: 95px; height: 95px; border-radius: 50%; border: 4px solid var(--accent-light);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  margin: 0 auto 14px; background: rgba(59, 130, 246, 0.1);
+}
+.res-score-circle span { font-size: 1.75rem; font-weight: 800; line-height: 1; }
+.res-score-circle small { font-size: 0.65rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+
+.res-review-list { margin-top: 20px; text-align: left; display: grid; gap: 10px; }
+.res-review-item {
+  background: var(--surface-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px;
+}
+.res-review-item.is-correct { border-left: 4px solid var(--good); }
+.res-review-item.is-wrong { border-left: 4px solid var(--bad); }
+
+/* Flashcards */
+.fc-wrap { perspective: 1000px; height: 280px; margin: 16px 0; cursor: pointer; }
+.fc-inner {
+  width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 18px; 
+  border: 1px solid var(--border); background: var(--surface); 
+  display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+.fc-inner.flipped { transform: rotateY(180deg); }
+.fc-front, .fc-back { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 18px; }
+.fc-back { transform: rotateY(180deg); background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.12)); border-radius: 18px; }
+
+/* Profile View Screen */
+.profile-view-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+  padding: 24px; box-shadow: var(--shadow-lg); margin-top: 14px;
+}
+
+/* Footer */
+footer { margin-top: 32px; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px; font-weight: 500; }
+
+/* DODATNA STRUKTURNA OPTIMIZACIJA ZA MOBILNE EKRANE (BEZ SKROLOVANJA) */
+@media (max-width: 768px) {
+  body { padding: 6px 8px 20px; }
+  .top-header { padding: 6px 10px; margin-bottom: 8px; border-radius: 10px; }
+  .brand-sub { display: none; }
+  .brand h1 { font-size: 1rem; }
+  .logo-box { width: 28px; height: 28px; font-size: 0.8rem; border-radius: 6px; }
+  .nav-actions { gap: 3px; }
+  .btn.sm { padding: 3px 6px; font-size: 0.72rem; border-radius: 6px; }
+  .streak-pill { padding: 2px 6px; font-size: 0.7rem; }
+  
+  .q-card { padding: 12px 14px; margin-top: 6px; border-radius: 14px; }
+  .q-text { font-size: 0.98rem; margin-bottom: 10px; line-height: 1.3; }
+  .opts-list { gap: 6px; }
+  .opt-item { padding: 9px 12px; font-size: 0.84rem; border-radius: 8px; }
+  .sticky-bottom-bar { margin-top: 10px !important; }
+  .action-btn-mobile {
+    width: 100%;
+    padding: 10px !important;
+    font-size: 0.9rem !important;
+  }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="wrap" id="app"></div>
+
+<script>
+(function(){
+'use strict';
+const STORAGE_KEY_WRONG = 'qhub_mpp_wrong_q_v13';
+const STORAGE_KEY_STATS = 'qhub_mpp_stats_v13';
+const STORAGE_KEY_SETTINGS = 'qhub_mpp_settings_v13';
+const STORAGE_KEY_SAVED = 'qhub_mpp_saved_q_v13';
+const STORAGE_KEY_SESSION = 'qhub_mpp_active_session_v13';
+
+// Web Audio API sintesajzer zvučnih efekata
+const SoundFX = {
+  ctx: null,
+  enabled: true,
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+  playCorrect() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(523.25, now);
+    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.35);
+  },
+  playWrong() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.linearRampToValueAtTime(140, now + 0.25);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+  },
+  playFlip() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(300, now);
+    osc.frequency.exponentialRampToValueAtTime(600, now + 0.08);
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  },
+  playFinish() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      const now = this.ctx.currentTime + idx * 0.08;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.3);
+    });
+  }
+};
+
+// Funkcija za čišćenje zagrada iz pitanja
+function cleanQuestionText(text) {
+  if (!text) return '';
+  return text.replace(/\s*\((Više tačnih odgovora|Više tačnih)\)/gi, '').trim();
+}
+
+const SUBJECTS = [
+  {
+    id: 'mpp',
+    name: 'Modeliranje poslovnih procesa',
+    desc: 'Prvi parcijalni ispit (Kompletna baza pitanja po lekcijama)',
+    badge: 'Teoretska pitanja',
+    active: true,
+    topics: [
+      'Uvod u poslovne informacione sisteme', 
+      'Prikupljanje i analiza zahtjeva softvera', 
+      'SCRUM', 
+      'Tehnike prikupljanja činjenica', 
+      'Tradicionalne i agilne metode razvoja softvera ',
+      'Modeliranje Informacionog sistema'
+    ]
+  }
+];
+
+const QUESTIONS_DB = {
+  'mpp': [
+    // --- 1. Uvod u poslovne informacione sisteme ---
+    {
+      id: 'q1',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta karakterizira odnos informacionih sistema (IS) i ICT-a?',
+      opts: ['IS je samo drugi naziv za ICT', 'IS nije samo ICT, već ga karakterizira multidisciplinarnost između ICT-a i poslovanja', 'IS se bavi isključivo hardverom, a ICT softverom', 'ICT je širi pojam koji u potpunosti zamjenjuje poslovne procese'],
+      correct: [1],
+      expl: 'IS nije samo ICT, već ga karakterizira multidisciplinarnost između ICT-a i poslovanja.'
+    },
+    {
+      id: 'q2',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Kako glasi standardni ciklus procesiranja informacija koji slijedi informacijski sistem?',
+      opts: ['Output → Process → Input', 'Input (Data) → Process (uz Storage) → Output (Information)', 'Storage → Data → Information', 'Network → Hardware → People'],
+      correct: [1],
+      expl: 'Input (Data) → Process (uz Storage) → Output (Information).'
+    },
+    {
+      id: 'q3',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koja strukturna komponenta IS-a predstavlja sve što je van granica sistema, ali utiče na njegovo djelovanje?',
+      opts: ['Podsistemi', 'Sučelja', 'Okolina', 'Izlazi'],
+      correct: [2],
+      expl: 'Okolina predstavlja sve što je van granica sistema, ali utiče na njegovo djelovanje.'
+    },
+    {
+      id: 'q4',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta je podatak prema definiciji u prezentaciji?',
+      opts: ['Obrađena i organizirana obavijest u određenom kontekstu', 'Činjenica, odnosno istina iz stvarnog svijeta koja sama za sebe nema neko značenje', 'Iskustvo stečeno dugogodišnjim radom', 'Skup moralnih normi i pravila ponašanja'],
+      correct: [1],
+      expl: 'Činjenica, odnosno istina iz stvarnog svijeta koja sama za sebe nema neko značenje.'
+    },
+    {
+      id: 'q5',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koja vrsta informacionog sistema obezbjeđuje izvještaje neophodne za uspješan menadžment?',
+      opts: ['Transaction Processing System (TPS)', 'Management Information System (MIS)', 'Decision Support System (DSS)', 'Ekspertni sistem'],
+      correct: [1],
+      expl: 'Management Information System (MIS).'
+    },
+    {
+      id: 'q6',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koja grupa zainteresiranih strana (Stakeholders) prevodi poslovne zahtjeve i ograničenja korisnika u tehničko rješenje?',
+      opts: ['Vlasnici sistema (System owners)', 'Korisnici sistema (System users)', 'Dizajneri sistema (System designers)', 'Graditelji sistema (System builders)'],
+      correct: [2],
+      expl: 'Dizajneri sistema (System designers) prevode zahtjeve u tehnička rješenja.'
+    },
+    {
+      id: 'q7',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koja je prva faza u općenitoj strukturi procesa razvoja IS-a?',
+      opts: ['Održavanje', 'Definicija', 'Implantacija', 'Testiranje'],
+      correct: [1],
+      expl: 'Definicija je prva faza u općenitoj strukturi.'
+    },
+    {
+      id: 'q8',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta u SDLC modelu prototipiranja (Prototyping) slijedi nakon momenta u kojem prihvatimo prototip?',
+      opts: ['Ponovno pisanje specifikacije zahtjeva', 'Brzi dizajn', 'Razvoj specifičnog proizvoda', 'Odmah se prelazi na održavanje'],
+      correct: [2],
+      expl: 'Razvoj specifičnog proizvoda.'
+    },
+    {
+      id: 'q9',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Za koje sisteme se NE preporučuje Agile razvoj IS-a?',
+      opts: ['Za sisteme s kratkim ciklusima razvoja', 'Za sisteme kojima je kvalitet najvažniji prioritet te za kompleksne i visoko rizične sisteme (npr. real-time sisteme)', 'Za sisteme gdje korisnici žele mijenjati zahtjeve tokom razvoja', 'Za sisteme koji zahtijevaju kontinuiranu saradnju s naručiocem'],
+      correct: [1],
+      expl: 'Za kompleksne i visoko rizične sisteme gdje je kvalitet prioritet ne preporučuje se isključivo agilni pristup bez čvrste specifikacije.'
+    },
+    {
+      id: 'q10',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Kada se preporučuje naručiti proizvod po mjeri?',
+      opts: ['Kada želimo najnižu moguću cijenu putem podjele troškova', 'Za poslovanje koje nastoji održati ili postići prednost u odnosu na konkurenciju i zadovoljiti specifične potrebe', 'Kada nemamo nikakve specifične zahtjeve', 'Kada želimo odmah gotov proizvod bez čekanja na razvoj'],
+      correct: [1],
+      expl: 'Proizvod po mjeri osigurava prednost i originalnu realizaciju poslovnih procesa.'
+    },
+    {
+      id: 'q11',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koji je primjer open source MIS-a naveden u prezentaciji?',
+      opts: ['SAP', 'Microsoft Dynamics', 'Odoo', 'Oracle'],
+      correct: [2],
+      expl: 'Odoo.'
+    },
+    {
+      id: 'q12',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koja je uloga Information workers-a?',
+      opts: ['Isključivo finansiranje razvoja sistema', 'Radnici čiji posao uključuje prikupljanje, procesiranje, distribuciju i korištenje informacija', 'Samo fizičko održavanje serverske infrastrukture', 'Pisanje zakonskih regulativa'],
+      correct: [1],
+      expl: 'Radnici čiji posao uključuje prikupljanje, procesiranje, distribuciju i korištenje informacija.'
+    },
+    {
+      id: 'q13',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'U koje uloge vas može dovesti rastuća uloga IS-a u poslovanju? (Više tačnih)',
+      opts: ['Korisnik', 'Dio razvojnog tima', 'Evaluator', 'Administrativna i tehnička podrška', 'Isključivo vlasnik kapitala'],
+      correct: [0, 1, 2, 3],
+      expl: 'Možete biti korisnik, dio razvojnog tima, evaluator ili tehnička podrška.'
+    },
+    {
+      id: 'q14',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koje su osnovne komponente svakog sistema? (Više tačnih)',
+      opts: ['Fizički dijelovi sistema (računar, server, mrežna infrastruktura itd.)', 'Ulazni i izlazni objekti sistema', 'Upravljačke metode koje uključuju planiranje i organizaciju', 'Procesi pretvorbe ulaznih objekata u izlazne objekte (procesi)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedeno čini osnovne komponente sistema.'
+    },
+    {
+      id: 'q15',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koje su komponente računarski zasnovanih informacijskih sistema? (Više tačnih)',
+      opts: ['Ljudi (People)', 'Procesi i pravila (Procedures)', 'Skladišta podataka (Database)', 'IT komponente: Hardware + Software + telekomunikacijska mreža (Network)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Ljudi, procesi, baza podataka i IT komponente.'
+    },
+    {
+      id: 'q16',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta od navedenog spada u osnovnu taksonomiju informacionih sistema? (Više tačnih)',
+      opts: ['Transaction Processing System (TPS) i Management Information System (MIS)', 'Decision Support System (DSS)', 'Ekspertni sistem', 'Komunikacioni i kolaboracioni sistem', 'Sistem za automatizaciju uredskog poslovanja'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Sve navedene vrste spadaju u taksonomiju IS-a.'
+    },
+    {
+      id: 'q17',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta je potrebno "Sagledati, analizirati" u procesu planiranja razvoja IS-a? (Više tačnih)',
+      opts: ['Misiju organizacije', 'Procjenu posla', 'Strateški plan organizacije', 'Aktuelnu arhitekturu IT', 'Operacioni plan IS'],
+      correct: [0, 1, 2, 3],
+      expl: 'Analiziraju se misija, procjena posla, strateški plan i aktuelna IT arhitektura.'
+    },
+    {
+      id: 'q18',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta je potrebno "Kreirati" u procesu planiranja razvoja IS-a? (Više tačnih)',
+      opts: ['Strateški plan IS', 'Novu arhitekturu IT', 'Operacioni plan IS', 'Razvoj projekta IS', 'Misiju organizacije'],
+      correct: [0, 1, 2, 3],
+      expl: 'Kreiraju se strateški plan IS, nova arhitektura IT, operacioni plan i razvoj projekta.'
+    },
+    {
+      id: 'q19',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koji koraci pripadaju SDLC modelu vodopada (Waterfall)? (Više tačnih)',
+      opts: ['Specifikacija sistema i Analiza sistema', 'Dizajn sistema i Programiranje (kodifikacija)', 'Testiranje i Implantacija', 'Operacija i Održavanje', 'Brzi dizajn prototipa'],
+      correct: [0, 1, 2, 3],
+      expl: 'Model vodopada obuhvata specifikaciju/analizu, dizajn/kodiranje, testiranje/implantaciju te operaciju i održavanje.'
+    },
+    {
+      id: 'q20',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koje su prednosti Agile razvoja informacionog sistema? (Više tačnih)',
+      opts: ['Kontinuirana isporuka funkcionalnih inkremenata krajnjim korisnicima', 'Ciklusi razvoja su kratki', 'Kontinuirana saradnja krajnjih korisnika i narucioca proizvoda sa razvojnim timom', 'U toku razvoja korisnici mogu dodavati specifične funkcionalnosti ili mijenjati zahtjeve'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedeno su ključne prednosti agilnog razvoja.'
+    },
+    {
+      id: 'q21',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koje četiri opcije postoje kod odluke "Kupiti ili napraviti po mjeri IS"? (Više tačnih)',
+      opts: ['Kupiti gotov proizvod', 'Naručiti proizvod po mjeri', 'Kupiti gotov proizvod i prilagoditi ga konkretnoj organizaciji', 'Koristiti open source rješenje', 'Potpuno ukinuti informacioni sistem'],
+      correct: [0, 1, 2, 3],
+      expl: 'Opcije su kupovina gotovog, izrada po mjeri, kupovina i prilagođavanje, te open source.'
+    },
+    {
+      id: 'q22',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Koje su prednosti kupovine gotovog proizvoda? (Više tačnih)',
+      opts: ['Cijena (podjela troškova)', 'Vrijeme isporuke', 'Održavanje (već isprobano)', 'Dostupna iskustva (rizici su minimizirani)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Cijena, brzina isporuke, pouzdano održavanje i minimalni rizici.'
+    },
+    {
+      id: 'q23',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta karakterizira Open source rješenja? (Više tačnih)',
+      opts: ['Brojan razvojni tim koji je geografski razuđen', 'Može biti modificiran i prilagođen specifičnim potrebama korisnika', 'Uvijek je potpuno zabranjeno mijenjati izvorni kod'],
+      correct: [0, 1],
+      expl: 'Open source ima geografski razuđen tim i dozvoljava modifikaciju koda.'
+    },
+    {
+      id: 'q24',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Šta uključuje grupa internih korisnika sistema (System users)? (Više tačnih)',
+      opts: ['Službenike i tehničko/profesionalno osoblje', 'Supervizore, menadžere i izvršne menadžere', 'Udaljene i mobilne korisnike', 'Isključivo kupce koji posjećuju web stranicu'],
+      correct: [0, 1, 2],
+      expl: 'Interni korisnici uključuju službenike, supervizore/menadžere i udaljene/mobilne radnike.'
+    },
+    {
+      id: 'q25',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Doprinos IS-a ogleda se samo u ubrzanju starih procesa, ali ne i u mogućnosti realizacije novih poslovnih procesa.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Doprinos IS-a je i uvođenje novih načina i realizacija novih poslovnih procesa.'
+    },
+    {
+      id: 'q26',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Granica sistema određuje domet djelovanja sistema, dok su sučelja veze između okoline i sistema.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q27',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Iste podatke različite osobe uvijek interpretiraju na potpuno isti način, bez obzira na njihovo znanje.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Interpretacija zavisi od znanja i konteksta promatrača.'
+    },
+    {
+      id: 'q28',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Na piramidi znanja, analiza podataka daje informacije, a sinteza informacija daje znanje.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q29',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Knowledge workers su podskup radnika koji rade s informacijama, a čije su odgovornosti zasnovane na specijaliziranom znanju.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q30',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Vlasnici sistema (System owners) su obično odgovorni za pisanje programskog koda i dizajniranje baza podataka.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Vlasnici finansiraju i upravljaju projektom, dok kod pišu graditelji, a dizajniraju dizajneri.'
+    },
+    {
+      id: 'q31',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Graditelji sistema (System builders) grade informacione sisteme i njegove komponente na osnovu specifikacija koje su postavili dizajneri sistema.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q32',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Održavanje u procesu razvoja IS-a predstavlja zadaće koje se obavljaju poslije predaje projekta.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q33',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Spiralni model SDLC-a uključuje analizu rizika inicijalnih zahtjeva i analizu rizika na korisničkim reakcijama.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q34',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'Naručivanje proizvoda po mjeri može se realizirati putem vanjskih izvođača, u vlastitom IT odjelu ili putem zajedničkih timova.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q35',
+      topic: 'Uvod u poslovne informacione sisteme',
+      q: 'U sistemu u organizacijskom kontekstu, povratna veza ide od ulaza prema izlazu.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Povratna veza ide od izlaza prema ulazu.'
+    },
+
+    // --- 2. Prikupljanje i analiza zahtjeva softvera ---
+    {
+      id: 'q36',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta je softverski zahtjev prema svojoj osnovnoj definiciji?',
+      opts: ['Programski kod napisan u određenom programskom jeziku', 'Funkcionalnost sistema koja izvršava određeni zadatak iz realnoga svijeta', 'Ugovor između klijenta i direktora firme', 'Baza podataka koja pohranjuje korisničke podatke'],
+      correct: [1],
+      expl: 'Funkcionalnost sistema koja izvršava određeni zadatak iz realnoga svijeta.'
+    },
+    {
+      id: 'q37',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Ko je zadužen za definiranje korisničkih zahtjeva (USR)?',
+      opts: ['Isključivo testeri i tehnički pisci', 'Vlasnici sistema i krajnji korisnici', 'Samo softver developeri', 'Vanjski revizori'],
+      correct: [1],
+      expl: 'Vlasnici sistema i krajnji korisnici definiraju korisničke zahtjeve.'
+    },
+    {
+      id: 'q38',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Kako se nazivaju zahtjevi koji opisuju šta je potrebno organizaciji za prelaz iz aktuelnog stanja u novo stanje sa integriranim IS-om?',
+      opts: ['Funkcionalni zahtjevi', 'Zahtjevi domene', 'Tranzicijski zahtjevi', 'Sistemski zahtjevi'],
+      correct: [2],
+      expl: 'Tranzicijski zahtjevi.'
+    },
+    {
+      id: 'q39',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koji je ispravan format za pisanje User story-ja?',
+      opts: ['If , then , else', 'As a , I want so that', 'Who , What , When', 'Input , Process , Output'],
+      correct: [1],
+      expl: 'Format: "As a [korisnik], I want [funkcionalnost] so that [korist]".'
+    },
+    {
+      id: 'q40',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta u modelu kvalitete korisničkih priča INVEST označava slovo "E"?',
+      opts: ['Efficient (efikasan)', 'Estimable (procjenjiv)', 'Executable (izvršiv)', 'External (eksterni)'],
+      correct: [1],
+      expl: 'Estimable – priča mora biti procjenjiva od strane tima.'
+    },
+    {
+      id: 'q41',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta prikazuje WBS (Work Breakdown Structure)?',
+      opts: ['Isključivo budžet projekta po mjesecima', 'Projekt u cijelosti, jasno prikazujući međusobno neovisne dijelove tako što sistem dijeli na podsisteme i sve do nedjeljivih funkcionalnosti', 'Samo bazu podataka i njene relacije', 'Raspored godišnjih odmora razvojnog tima'],
+      correct: [1],
+      expl: 'WBS dijeli projekt hijerarhijski na podsisteme i radne pakete.'
+    },
+    {
+      id: 'q42',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koja je ključna razlika između zahtjeva u fazi iniciranja i zahtjeva u fazi održavanja?',
+      opts: ['U fazi održavanja nema nikakvih novih zahtjeva', 'U fazi iniciranja je moguće napraviti jasniji pregled i poredati zahtjeve po prioritetima, dok u fazi održavanja klijenti na dnevnoj bazi imaju različite zahtjeve', 'U fazi iniciranja zahtjevi su uvijek nebitni', 'U fazi održavanja zahtjeve pišu samo testeri'],
+      correct: [1],
+      expl: 'U iniciranju se postavlja prioritet i pregled, dok u održavanju stižu dnevni zahtjevi specifični za klijenta.'
+    },
+    {
+      id: 'q43',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Kako se u Scrumu mjeri brzina tima?',
+      opts: ['Brojem sati provedenih na sastancima', 'Jednostavnim sabiranjem poena za sve funkcionalnosti koje se završe u jednoj iteraciji', 'Brojem linija koda napisanih u jednom danu', 'Prema broju prijavljenih grešaka'],
+      correct: [1],
+      expl: 'Sabiranjem story poena završenih funkcionalnosti u iteraciji.'
+    },
+    {
+      id: 'q44',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta je glavni cilj faze definiranja zahtjeva?',
+      opts: ['Pisanje finalnog korisničkog uputstva', 'Razumijevanje problema i potreba naručitelja', 'Odabir programskog jezika i baze podataka', 'Izrada dizajna korisničkog sučelja'],
+      correct: [1],
+      expl: 'Razumijevanje problema i potreba naručitelja.'
+    },
+    {
+      id: 'q45',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koja je glavna karakteristika dobrog zahtjeva u pogledu ponašanja sistema?',
+      opts: ['Označava KAKO će se ponašanje ostvariti u kodu', 'Označava KAKVO ponašanje naručilac želi, bez izražavanja KAKO će se to ponašanje ostvariti', 'Fokusira se isključivo na rješenja i implementaciju', 'Sadrži samo tehničke detalje servera'],
+      correct: [1],
+      expl: 'Definiše ŠTA/KAKVO ponašanje se želi, a ne KAKO se implementira.'
+    },
+    {
+      id: 'q46',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta je burndown grafikon u Scrumu?',
+      opts: ['Grafikon koji prikazuje troškove marketinga', 'Alat za praćenje progresa tima tokom iteracije/projekta', 'Dijagram baze podataka', 'Prikaz organizacijske hijerarhije'],
+      correct: [1],
+      expl: 'Alat za praćenje preostalog posla tokom iteracije.'
+    },
+    {
+      id: 'q47',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koji model u okviru Requirements Model (RQM) dijagrama direktno komunicira s njim?',
+      opts: ['Samo XML Model', 'Enterprise Architecture Model, Business Process Model, Object Oriented Model, XML Model, Data Movement Model te konceptualni, logički i fizički modeli podataka', 'Isključivo Physical Data Model', 'Nijedan, RQM je potpuno izolovan model'],
+      correct: [1],
+      expl: 'Povezan je sa enterprise arhitekturom, procesnim modelima, objektno orijentisanim i modelima podataka.'
+    },
+    {
+      id: 'q48',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Ko spada u internu skupinu zainteresiranih strana (razvojni tim)? (Više tačnih)',
+      opts: ['Analitičari', 'Softver developeri', 'Testeri', 'Tehnički pisci', 'Naručioci i kupci'],
+      correct: [0, 1, 2, 3],
+      expl: 'Analitičari, developeri, testeri i tehnički pisci čine interni tim.'
+    },
+    {
+      id: 'q49',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Kako glasi osnovna klasifikacija zahtjeva? (Više tačnih)',
+      opts: ['Poslovni zahtjevi', 'Korisnički zahtjevi', 'Sistemski zahtjevi', 'Finansijski zahtjevi'],
+      correct: [0, 1, 2],
+      expl: 'Poslovni, korisnički i sistemski zahtjevi.'
+    },
+    {
+      id: 'q50',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta spada u nefunkcionalne zahtjeve (KAKO)? (Više tačnih)',
+      opts: ['Osnovne karakteristike, ograničenja ili atributi IS-a (atributi kvalitete)', 'Vremenska ograničenja', 'Ograničenja u razvojnom procesu i standardi', 'Prikaz funkcionalnosti koje sistem treba izvršiti'],
+      correct: [0, 1, 2],
+      expl: 'Nefunkcionalni zahtjevi obuhvataju atribute kvalitete, vremenska ograničenja i standarde.'
+    },
+    {
+      id: 'q51',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Od kojih dijelova se sastoji SRS (Software Requirement Specification) dokument? (Više tačnih)',
+      opts: ['Prijedlog (definicije, system overview, background)', 'Cjelokupni opis (pretpostavke, ograničenja, poslovna pravila, vizija proizvoda)', 'Specifični zahtjevi (atributi sistema, funkcionalni zahtjevi, zahtjevi sloja podataka)', 'Zapisnik sa Dnevnog Scruma'],
+      correct: [0, 1, 2],
+      expl: 'Prijedlog, cjelokupni opis i specifični zahtjevi.'
+    },
+    {
+      id: 'q52',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koji su kriteriji modela kvalitete korisničkih priča INVEST? (Više tačnih)',
+      opts: ['Independent i Negotiable', 'Valuable i Estimable', 'Small i Testable', 'Expensive i Static'],
+      correct: [0, 1, 2],
+      expl: 'Independent, Negotiable, Valuable, Estimable, Small, Testable.'
+    },
+    {
+      id: 'q53',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta su karakteristike Agile modela u poređenju s Waterfall modelom? (Više tačnih)',
+      opts: ['Fleksibilan na promjene (+)', 'Korisnički feedback (+)', 'Upravljan vrijednostima', 'Fiksiran opseg projekta (+)'],
+      correct: [0, 1, 2],
+      expl: 'Agile je fleksibilan, baziran na feedbacku i upravljan vrijednostima.'
+    },
+    {
+      id: 'q54',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koji elementi se ističu kod produktivne upotrebe zabavnih informacionih sistema (Gamification)? (Više tačnih)',
+      opts: ['„Majstorstvo“ i kompetentnost', 'Uživanje', 'Sljeđenje', 'Motiviranost'],
+      correct: [0, 1, 3],
+      expl: 'Majstorstvo, uživanje i motiviranost.'
+    },
+    {
+      id: 'q55',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Šta čini globalizaciju softverskog proizvoda? (Više tačnih)',
+      opts: ['Internacionalizacija (datum, brojevi, valuta, kontakt)', 'Lokalizacija (jezička i kulturološka prilagodba, CSS za svako pismo, DBCS)', 'Isključivo prevođenje teksta'],
+      correct: [0, 1],
+      expl: 'Internacionalizacija i lokalizacija.'
+    },
+    {
+      id: 'q56',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koje su tri karakteristike Big Data koncepta prikazane na dijagramu? (Više tačnih)',
+      opts: ['Volume', 'Variety', 'Velocity', 'Value'],
+      correct: [0, 1, 2],
+      expl: 'Volume, Variety i Velocity.'
+    },
+    {
+      id: 'q57',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koje četiri faze obuhvata inženjering zahtjeva? (Više tačnih)',
+      opts: ['Otkrivanje zahtjeva', 'Analiza zahtjeva', 'Validacija zahtjeva', 'Upravljanje zahtjevima', 'Brisanje zahtjeva'],
+      correct: [0, 1, 2, 3],
+      expl: 'Otkrivanje, analiza, validacija i upravljanje zahtjevima.'
+    },
+    {
+      id: 'q58',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koje su poteškoće pri iskazivanju zahtjeva? (Više tačnih)',
+      opts: ['Kupci teško „prevode“ svoje ciljeve u zahtjeve', 'Kvantitativna verifikacija nefunkcionalnih zahtjeva je skupa', 'Nefunkcionalni zahtjevi su često u konfliktu s funkcionalnim zahtjevima', 'Funkcionalni i nefunkcionalni zahtjevi se evidentiraju odvojeno pa ih je teško povezati'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedeno predstavlja poteškoće.'
+    },
+    {
+      id: 'q59',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Koji su oblici modela zahtjeva? (Više tačnih)',
+      opts: ['Dokument zahtjeva', 'Use case model', 'Matrica (zahtjev-objekt)', 'Alokacijska matrica (zahtjev-objekt-korisnik)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Svi navedeni oblici modela zahtjeva.'
+    },
+    {
+      id: 'q60',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Korisnički zahtjevi (USR) moraju biti napisani kao strogo tehnički dokument razumljiv isključivo programerima.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – USR mora biti razumljiv i korisnicima i razvojnom timu.'
+    },
+    {
+      id: 'q61',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'SRS dokument sadrži i korisničke i sistemske zahtjeve, koji mogu biti dio jednog ili dva odvojena dokumenta.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q62',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'User story ima jasno definirane kriterije prihvatljivosti.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q63',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'U primjeru zahtjeva za ConfigPOS Backoffice (promjena boja i umetanje loga u realnom vremenu), takav pristup ubrzava proces implementacije.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Takve vizuelne promjene u realnom vremenu zapravo usporavaju implementaciju, ali donose vrijednost.'
+    },
+    {
+      id: 'q64',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'GAP analiza u poslovanju omogućava komparaciju stvarnih performansi sa potencijalnim ili željenim performansama.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q65',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'U procesu globalizacije softvera nije potrebno odvajati funkcionalnosti sistema od sučelja.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Potrebno je jasno odvojiti funkcionalnosti od sučelja.'
+    },
+    {
+      id: 'q66',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Scrum ulazi u konkretne inžinjerske detalje izgradnje softvera, pa se nikada ne kombinira s disciplinama poput XP ili RUP.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Scrum ne ulazi u inženjerske detalje, pa se često kombinuje sa XP ili RUP.'
+    },
+    {
+      id: 'q67',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Loša specifikacija zahtjeva uzrokuje neuspjeh sistema.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q68',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Specifikacija zahtjeva u prirodnom jeziku ima nedostatke kao što su dvosmislenost, prevelika fleksibilnost i nedostatak modularizacije.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q69',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'U fazi validacije zahtjeva provjerava se da li specifikacija odgovara onom što korisnik želi u finalnom proizvodu.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q70',
+      topic: 'Prikupljanje i analiza zahtjeva softvera',
+      q: 'Komponente modela zahtjeva su: zahtjevi, korisnici, grupe i poslovna pravila.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+
+    // --- 3. SCRUM ---
+    {
+      id: 'q71',
+      topic: 'SCRUM',
+      q: 'Što je Scrum prema svojoj temeljnoj definiciji?',
+      opts: ['Metoda za pisanje čistog programskog koda', 'Programski okvir procesa za upravljanje kompleksnim razvojem', 'Tehnika za automatizirano testiranje softvera', 'Alat za izradu Ganttovih dijagrama'],
+      correct: [1],
+      expl: 'Programski okvir procesa za upravljanje kompleksnim razvojem.'
+    },
+    {
+      id: 'q72',
+      topic: 'SCRUM',
+      q: 'Koliko članova obično broji Scrum tim?',
+      opts: ['Od 2 do 4 člana', 'Od 5 do 9 članova', 'Od 10 do 15 članova', 'Više od 15 članova'],
+      correct: [1],
+      expl: 'Od 5 do 9 članova.'
+    },
+    {
+      id: 'q73',
+      topic: 'SCRUM',
+      q: 'Koliko najdulje može trajati jedan Sprint?',
+      opts: ['Jedan tjedan', 'Dva tjedna', 'Mjesec dana', 'Tri mjeseca'],
+      correct: [2],
+      expl: 'Mjesec dana.'
+    },
+    {
+      id: 'q74',
+      topic: 'SCRUM',
+      q: 'Što se događa ako su ciklusi (Sprintovi) duži od mjesec dana?',
+      opts: ['Tim dobiva više vremena za odmor', 'Princip povratnih ciklusa može se izgubiti, a sprint može postati previše složen i povećati rizik', 'Kvaliteta koda se automatski udvostručuje', 'Product Backlog postaje manji'],
+      correct: [1],
+      expl: 'Gubi se princip povratnih ciklusa i povećava se rizik i složenost.'
+    },
+    {
+      id: 'q75',
+      topic: 'SCRUM',
+      q: 'Kada počinje novi Sprint?',
+      opts: ['Nakon tjedan dana pauze', 'Odmah nakon završetka prethodnog sprinta', 'Prvog dana u sljedećem mjesecu', 'Tek kada Business Owner odobri budžet'],
+      correct: [1],
+      expl: 'Odmah nakon završetka prethodnog sprinta.'
+    },
+    {
+      id: 'q76',
+      topic: 'SCRUM',
+      q: 'Tko je u Scrum timu odgovoran za maksimiziranje vrijednosti proizvoda koja proizlazi iz rada tima?',
+      opts: ['Scrum Master', 'Product Owner', 'Developer', 'Business Analyst'],
+      correct: [1],
+      expl: 'Product Owner.'
+    },
+    {
+      id: 'q77',
+      topic: 'SCRUM',
+      q: 'Tko je odgovoran za uklanjanje prepreka (impediments) u timu?',
+      opts: ['Product Owner', 'Scrum Master', 'Krajnji korisnik', 'Domain Expert'],
+      correct: [1],
+      expl: 'Scrum Master.'
+    },
+    {
+      id: 'q78',
+      topic: 'SCRUM',
+      q: 'Tko je odgovoran za samo provođenje Dnevnog Scruma (Daily Stand-up) i koliko on traje?',
+      opts: ['Scrum Master; traje 30 minuta', 'Product Owner; traje 15 minuta', 'Developeri; traje unutar vremenskog okvira od 15 minuta', 'Business Owner; traje po potrebi'],
+      correct: [2],
+      expl: 'Developeri provode sastanak unutar vremenskog okvira od 15 minuta.'
+    },
+    {
+      id: 'q79',
+      topic: 'SCRUM',
+      q: 'Što je najvažniji ishod (Output) sastanka za Planiranje sprinta (Sprint Planning)?',
+      opts: ['Potpisan zapisnik sa sastanka', 'Da tim može opisati cilj sprinta', 'Gotov proizvod spreman za isporuku', 'Raspodjela godišnjih odmora'],
+      correct: [1],
+      expl: 'Da tim može opisati cilj sprinta.'
+    },
+    {
+      id: 'q80',
+      topic: 'SCRUM',
+      q: 'Kojim događajem završava Sprint i koliko on najdulje traje za jednomjesečni Sprint?',
+      opts: ['Planiranjem sprinta; najviše 8 sati', 'Dnevnim Scrumom; najviše 15 minuta', 'Retrospektivom Sprinta; najviše 3 sata', 'Pregledom sprinta; najviše 1 sat'],
+      correct: [2],
+      expl: 'Retrospektivom Sprinta; najviše 3 sata za jednomjesečni sprint.'
+    },
+    {
+      id: 'q81',
+      topic: 'SCRUM',
+      q: 'Koje se stavke nalaze na samom vrhu Product Backloga?',
+      opts: ['Najlakše stavke za brzu izradu', 'Najvažnije stavke kako bi tim znao što prvo uraditi i isporučiti', 'Najjeftinije stavke', 'Stavke poredane abecednim redom'],
+      correct: [1],
+      expl: 'Najvažnije stavke za brzu isporuku.'
+    },
+    {
+      id: 'q82',
+      topic: 'SCRUM',
+      q: 'Što u Scrum vrijednostima označava "Poštovanje" (Respect)?',
+      opts: ['Da tim uvijek bez pogovora sluša menadžment', 'Da članovi Scrum tima poštuju jedni druge kao sposobne i neovisne osobe', 'Da se sastanci održavaju isključivo u formalnom tonu', 'Da se kod ne smije mijenjati bez odobrenja klijenta'],
+      correct: [1],
+      expl: 'Da članovi poštuju jedni druge kao sposobne i neovisne osobe.'
+    },
+    {
+      id: 'q83',
+      topic: 'SCRUM',
+      q: 'Kako su organizirani Epici i Priče (Epics i Stories) u Product Backlogu?',
+      opts: ['Priče se dijele na veće inicijative koje se zovu Epici', 'Veće inicijative dijele se na Epike, svaki Epic sadrži pojedinačne korisničke priče (Stories), a više priča iz različitih Epika može se grupirati u jedno izdanje (Release)', 'Epici i Priče su potpuno odvojeni dokumenti', 'Svaki Sprint smije imati samo jedan Epic i jednu Priču'],
+      correct: [1],
+      expl: 'Veće inicijative su Epici koji sadrže priče, a grupiraju se u izdanja.'
+    },
+    {
+      id: 'q84',
+      topic: 'SCRUM',
+      q: 'Od čega se sastoji Scrum programski okvir? (Više tačnih)',
+      opts: ['Od Scrum timova i njihovih pridruženih uloga', 'Od događaja', 'Od artefakata', 'Od pravila', 'Od fiksnih godišnjih budžeta'],
+      correct: [0, 1, 2, 3],
+      expl: 'Timovi/uloge, događaji, artefakti i pravila.'
+    },
+    {
+      id: 'q85',
+      topic: 'SCRUM',
+      q: 'Koja su tri stupa Scruma? (Više tačnih)',
+      opts: ['Transparentnost (Transparency)', 'Efikasnost (Efficiency)', 'Inspekcija (Inspection)', 'Prilagodba (Adaptation)', 'Brzina (Velocity)'],
+      correct: [0, 2, 3],
+      expl: 'Transparentnost, inspekcija i prilagodba.'
+    },
+    {
+      id: 'q86',
+      topic: 'SCRUM',
+      q: 'Što od navedenog spada u pet ključnih vrijednosti Scruma? (Više tačnih)',
+      opts: ['Hrabrost (Courage)', 'Fokus (Focus)', 'Predanost (Commitment)', 'Poštovanje (Respect)', 'Otvorenost (Openness)', 'Fleksibilnost (Flexibility)'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Hrabrost, fokus, predanost, poštovanje i otvorenost.'
+    },
+    {
+      id: 'q87',
+      topic: 'SCRUM',
+      q: 'Od kojih se uloga sastoji Scrum tim? (Više tačnih)',
+      opts: ['Product Owner (vlasnik proizvoda)', 'Scrum Master', 'Developeri (razvojni tim)', 'Project Manager'],
+      correct: [0, 1, 2],
+      expl: 'Product Owner, Scrum Master i Developeri.'
+    },
+    {
+      id: 'q88',
+      topic: 'SCRUM',
+      q: 'Za koje je sve aktivnosti odgovoran Scrum tim? (Više tačnih)',
+      opts: ['Verifikaciju i održavanje', 'Rad i testiranje', 'Istraživanje i razvoj', 'Zapošljavanje novih direktora'],
+      correct: [0, 1, 2],
+      expl: 'Verifikacija, rad, testiranje, istraživanje i razvoj.'
+    },
+    {
+      id: 'q89',
+      topic: 'SCRUM',
+      q: 'Kome sve pomaže/koga podržava Scrum Master? (Više tačnih)',
+      opts: ['Pomaže Scrum timu', 'Pomaže Product Owneru', 'Podržava organizaciju', 'Pomaže isključivo vanjskim dobavljačima'],
+      correct: [0, 1, 2],
+      expl: 'Pomaže timu, Product Owneru i organizaciji.'
+    },
+    {
+      id: 'q90',
+      topic: 'SCRUM',
+      q: 'Koje uloge/stavovi (stances) pripadaju Scrum Masteru? (Više tačnih)',
+      opts: ['Servant Leader i Facilitator', 'Coach i Manager', 'Mentor i Teacher', 'Impediment Remover i Change Agent', 'Customer Representative'],
+      correct: [0, 1, 2, 3],
+      expl: 'Servant Leader, Facilitator, Coach, Mentor, Teacher, Impediment Remover, Change Agent.'
+    },
+    {
+      id: 'q91',
+      topic: 'SCRUM',
+      q: 'Koje uloge/stavovi (stances) pripadaju Product Owneru? (Više tačnih)',
+      opts: ['Visionary i Collaborator', 'Decision Maker i Customer Representative', 'Influencer i Experimenter', 'Impediment Remover'],
+      correct: [0, 1, 2],
+      expl: 'Visionary, Collaborator, Decision Maker, Customer Representative, Influencer, Experimenter.'
+    },
+    {
+      id: 'q92',
+      topic: 'SCRUM',
+      q: 'Za što je zadužen Product Owner vezano uz Product Backlog? (Više tačnih)',
+      opts: ['Razvijanje i eksplicitno komuniciranje cilja proizvoda', 'Stvaranje i jasno komuniciranje Product Backlog stavki', 'Definiranje Product Backloga', 'Osiguravanje da je Product Backlog transparentan, vidljiv i razumljiv', 'Pisanje koda za najvažnije stavke Backloga'],
+      correct: [0, 1, 2, 3],
+      expl: 'PO upravlja, kreira i transparentno komunicira Product Backlog i cilj.'
+    },
+    {
+      id: 'q93',
+      topic: 'SCRUM',
+      q: 'Za što su Developeri uvijek odgovorni? (Više tačnih)',
+      opts: ['Izrada plana za Sprint (Sprint Backlog)', 'Usađivanje kvalitete i procjena je li nešto završeno', 'Svakodnevno prilagođavanje plana prema cilju sprinta', 'Odgovornost i profesionalizam'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedeno je odgovornost developera.'
+    },
+    {
+      id: 'q94',
+      topic: 'SCRUM',
+      q: 'Koja pravila vrijede tijekom trajanja samog Sprinta? (Više tačnih)',
+      opts: ['Ne rade se nikakve promjene koje bi ugrozile cilj sprinta', 'Kvaliteta se ne smanjuje', 'Product Backlog se pročišćava prema potrebi', 'Opseg se može razjasniti i ponovno pregovarati s vlasnikom proizvoda', 'Cilj sprinta se mijenja svaki dan'],
+      correct: [0, 1, 2, 3],
+      expl: 'Cilj je stabilan, kvalitet se ne smanjuje, backlog se pročišćava, opseg se može pregovarati.'
+    },
+    {
+      id: 'q95',
+      topic: 'SCRUM',
+      q: 'Na koja tri pitanja odgovara Planiranje sprinta (Sprint Planning)? (Više tačnih)',
+      opts: ['Zašto je ovaj Sprint vrijedan?', 'Što se može učiniti ovim sprintom?', 'Kako će odabrani posao biti obavljen?', 'Koji me problemi blokiraju?'],
+      correct: [0, 1, 2],
+      expl: 'Zašto, šta i kako.'
+    },
+    {
+      id: 'q96',
+      topic: 'SCRUM',
+      q: 'Na koja tri pitanja sudionici odgovaraju na Dnevnom stand-upu (Daily Scrum)? (Više tačnih)',
+      opts: ['Na čemu sam radio jučer?', 'Na čemu danas radim?', 'Koji me problemi blokiraju?', 'Zašto je ovaj Sprint vrijedan?'],
+      correct: [0, 1, 2],
+      expl: 'Jučer, danas, blokade.'
+    },
+    {
+      id: 'q97',
+      topic: 'SCRUM',
+      q: 'O čemu tim raspravlja tijekom Retrospektive sprinta? (Više tačnih)',
+      opts: ['Ono što je dobro prošlo u sprintu', 'Što bi se moglo poboljšati', 'Što ćemo se obvezati poboljšati u sljedećem sprintu', 'Koliki će biti budžet za sljedeću godinu'],
+      correct: [0, 1, 2],
+      expl: 'Šta je bilo dobro, šta poboljšati i obaveze za sljedeći sprint.'
+    },
+    {
+      id: 'q98',
+      topic: 'SCRUM',
+      q: 'Scrum je metoda ili tehnika razvoja softvera, baš kao i ekstremno programiranje.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Scrum nije metoda, već programski okvir procesa.'
+    },
+    {
+      id: 'q99',
+      topic: 'SCRUM',
+      q: 'Rad na istoj lokaciji za članove Scrum tima je poželjan, ali nije nužan.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q100',
+      topic: 'SCRUM',
+      q: 'Rad u sprintovima održivim tempom poboljšava fokus i dosljednost Scrum tima.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q101',
+      topic: 'SCRUM',
+      q: 'Svatko ima vještine potrebne da bude Scrum Master.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Nema svatko vještine potrebne da bude Scrum Master. '
+    },
+    {
+      id: 'q102',
+      topic: 'SCRUM',
+      q: 'U Scrumu se pojam "Developer" ne odnosi nužno samo na programere softvera, već može uključivati i QA, Business Analyste, Arhitekte te rad na dizajnu, testiranju ili isporuci. ',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q103',
+      topic: 'SCRUM',
+      q: 'Razvojni tim (Developeri) u Scrumu samoorganizira svoj rad (Manages itself) i stvara gotove inkremente (Create Done Increments). ',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q104',
+      topic: 'SCRUM',
+      q: 'Sprint je Scrum događaj koji obuhvaća sve ostale Scrum događaje.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q105',
+      topic: 'SCRUM',
+      q: 'Sprint se može planirati i bez Product Ownera ako je razvojni tim dovoljno iskusan.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Sprint se ne može planirati bez Product Ownera.'
+    },
+    {
+      id: 'q106',
+      topic: 'SCRUM',
+      q: 'Dnevni Scrum je interni sastanak Scrum tima, a ako su drugi prisutni, Scrum Master osigurava da oni ne ometaju.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q107',
+      topic: 'SCRUM',
+      q: 'Na Dnevnom stand-upu sudionici u pravilu sudjeluju stojeći kako bi sastanak ostao kratak.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+
+    // --- 4. Tehnike prikupljanja činjenica ---
+    {
+      id: 'q108',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta je otkrivanje zahtjeva u kontekstu sistemske analize?',
+      opts: ['Proces pisanja programskog koda', 'Proces koji koriste sistemski analitičari za identificiranje i izolovanje sistemskih problema i korisničkih zahtjeva', 'Proces testiranja gotovog softvera', 'Proces izrade budžeta'],
+      correct: [1],
+      expl: 'Proces identifikacije i izolovanja problema i zahtjeva.'
+    },
+    {
+      id: 'q109',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Zašto je pogrešno odmah početi s intervjuisanjem korisnika?',
+      opts: ['Zato što korisnici ne poznaju sistem', 'Zato što su vrijeme i novac ograničeni, a ljudi imaju svakodnevne poslove koje moraju uraditi', 'Zato što je intervju najnekvalitetnija tehnika', 'Zato što je zakonom zabranjeno'],
+      correct: [1],
+      expl: 'Vrijeme i novac su ograničeni, a korisnici imaju svoje redovne poslove.'
+    },
+    {
+      id: 'q110',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Postoji li "savršena strategija" za prikupljanje činjenica?',
+      opts: ['Da, uvijek intervju', 'Da, upitnici i JRP', 'Ne postoji; postoji samo optimalna strategija za konkretnu situaciju', 'Da, pregled dokumentacije bez kontakta s ljudima'],
+      correct: [2],
+      expl: 'Ne postoji univerzalna savršena strategija, već optimalna za situaciju.'
+    },
+    {
+      id: 'q111',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koja se tehnika obično koristi kao PRVA tehnika pronalaženja činjenica?',
+      opts: ['Observacija', 'Intervju', 'Pregled postojeće dokumentacije', 'JRP radionica'],
+      correct: [2],
+      expl: 'Pregled postojeće dokumentacije.'
+    },
+    {
+      id: 'q112',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Kako glasi "Pravilo broj jedan" za izbor uzorka (sampliranje) dokumentacije?',
+      opts: ['Uvijek pregledaj najmanje 50%', 'Nikad ne pregledaj prazne formulare', 'Pregledaj samo dokumente iz tekućeg mjeseca', 'Traži od menadžera da izabere'],
+      correct: [1],
+      expl: 'Nikad ne pregledaj prazne formulare.'
+    },
+    {
+      id: 'q113',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Kolika je veličina uzorka potrebna ako želite biti 90% sigurni (faktor 1,645) da pregledani nalozi ne uključuju varijacije kojih nema van uzorka?',
+      opts: ['11 naloga', '68 naloga', '150 naloga', '385 naloga'],
+      correct: [1],
+      expl: '68 naloga.'
+    },
+    {
+      id: 'q114',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta je stratifikacija kod izbora uzorka?',
+      opts: ['Nasumično biranje dokumenata', 'Sistematično izabiranje po nekom pravilu ili formuli (npr. "svaki dan po dva prva")', 'Odbacivanje kompjuteriziranih dokumenata', 'Pregledanje isključivo praznih formulara'],
+      correct: [1],
+      expl: 'Sistematično izabiranje po pravilu ili formuli.'
+    },
+    {
+      id: 'q115',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Tko bi trebao vršiti observaciju i zašto?',
+      opts: ['Neiskusni analitičari da uče', 'Iskusniji analitičari; jednu grupu prati jedan analitičar jer se vremenom "familijarizira" i manje utiče na realnost', 'Menadžeri odjela', 'Vanjski revizori'],
+      correct: [1],
+      expl: 'Iskusniji analitičari, kako bi se smanjio uticaj na realnost.'
+    },
+    {
+      id: 'q116',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koliko analitičara je najbolje da vodi jedan intervju?',
+      opts: ['Uvijek jedan', 'Nikad jedan, najbolje dva, maksimalno tri', 'Najmanje pet', 'Nije važno'],
+      correct: [1],
+      expl: 'Najbolje dva, maksimalno tri.'
+    },
+    {
+      id: 'q117',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koliko maksimalno smije trajati jedan intervju?',
+      opts: ['30 minuta', '60 minuta', '90 minuta', '120 minuta'],
+      correct: [2],
+      expl: '90 minuta.'
+    },
+    {
+      id: 'q118',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta je interni upitnik kod pripreme intervjua?',
+      opts: ['Upitnik za sve zaposlenike', 'Skup predefinisanih i mogućih situacionih pitanja koji pomaže u vođenju i nikad se ne pokazuje sugovorniku', 'Zvanični dokument koji se potpisuje', 'Lista grešaka'],
+      correct: [1],
+      expl: 'Skup pitanja za vođenje intervjua koji se ne pokazuje sugovorniku.'
+    },
+    {
+      id: 'q119',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'U sklopu koje metode se koristi JRP (Joint Requirements Planning)?',
+      opts: ['Vodopadnog modela', 'Kao dio metode zvane grupni aplikativni razvoj (JAD – Joint Application Development)', 'Ekstremnog programiranja', 'Kao zamjena za testiranje'],
+      correct: [1],
+      expl: 'Kao dio metode JAD (Joint Application Development).'
+    },
+    {
+      id: 'q120',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koje su pet glavnih tehnika pronalaženja činjenica? (Više tačnih)',
+      opts: ['Pregled postojeće dokumentacije', 'Observacija', 'Upitnici', 'Intervju', 'JRP (Joint Requirements Planning)', 'Programiranje prototipa'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Dokumentacija, observacija, upitnici, intervju i JRP.'
+    },
+    {
+      id: 'q121',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta se pregleda u PRVOM prolazu pregleda dokumentacije? (Više tačnih)',
+      opts: ['Organizacijska šema (ili normativni akt)', 'Istorija projekta (problemi, dopisi, studije, zadatak)', 'Dnevni i sedmični izvještaji', 'Fakture i narudžbe'],
+      correct: [0, 1],
+      expl: 'Org. šema i istorija projekta.'
+    },
+    {
+      id: 'q122',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta se pregleda u DRUGOM prolazu pregleda dokumentacije? (Više tačnih)',
+      opts: ['Organizacijska misija i strategijski planovi', 'Formalni ciljevi organizacije', 'Uputstva i pravila poslovne politike', 'Opisi procedura rada i sistematizacija', 'Korisnička uputstva za softver'],
+      correct: [0, 1, 2, 3],
+      expl: 'Misija, ciljevi, poslovna politika i opisi procedura.'
+    },
+    {
+      id: 'q123',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta se pregleda u TREĆEM prolazu pregleda dokumentacije? (Više tačnih)',
+      opts: ['Transakcijski dokumenti (fakture, narudžbe, rješenja)', 'Manuelni i kompjuterizirani registri', 'Izvještaji (dnevni, sedmični, mjesečni, godišnji)', 'Organizacijska šema'],
+      correct: [0, 1, 2],
+      expl: 'Transakcijski dokumenti, registri i izvještaji.'
+    },
+    {
+      id: 'q124',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koje su prednosti observacije? (Više tačnih)',
+      opts: ['Daje vrlo pouzdane podatke', 'Omogućava analitičaru da vidi šta se dešava', 'Omogućava uočavanje činjenica koje korisnici nisu smatrali važnim', 'Relativno je jeftina tehnika'],
+      correct: [0, 1, 2, 3],
+      expl: 'Pouzdanost, uvid u realnost, uočavanje propuštenog i niska cijena.'
+    },
+    {
+      id: 'q125',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koji su nedostaci observacije? (Više tačnih)',
+      opts: ['Mijenjaš ono što observiraš (ljudi se osjećaju nekomforno)', 'Mali uzorak (situacija možda nije tipična)', 'Moguće nezgodno mjesto i vrijeme', 'Nezgodna reakcija posmatranih'],
+      correct: [0, 1, 2, 3],
+      expl: 'Svi navedeni nedostaci.'
+    },
+    {
+      id: 'q126',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'U kojim periodima treba vršiti observaciju? (Više tačnih)',
+      opts: ['Prvo u periodima normalnog odvijanja aktivnosti', 'Kasnije u kritičnim periodima ("špicama")', 'Eventualno i u relaksirajućim periodima', 'Isključivo vikendom'],
+      correct: [0, 1, 2],
+      expl: 'Normalni periodi, špice i relaksirajući periodi.'
+    },
+    {
+      id: 'q127',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koje su prednosti intervjua kao tehnike prikupljanja činjenica? (Više tačnih)',
+      opts: ['Motivacija sugovornika (daje više informacija)', 'Osjećaj punog učešća u projektu', 'Praćenje neverbalnih reakcija', 'Najjeftinija je tehnika'],
+      correct: [0, 1, 2],
+      expl: 'Motivacija, učešće i praćenje neverbalnih reakcija.'
+    },
+    {
+      id: 'q128',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koga je važno intervjuisati? (Više tačnih)',
+      opts: ['One koji imaju moć', 'One koji mogu davati prijedloge', 'One koji imaju veliko znanje', 'One koji su u početku ukazali na probleme'],
+      correct: [0, 1, 2, 3],
+      expl: 'Moć, prijedlozi, znanje i inicijatori problema.'
+    },
+    {
+      id: 'q129',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Koji su tipovi pitanja čija mješavina čini intervju? (Više tačnih)',
+      opts: ['Predefinisana pitanja', 'Situaciona pitanja', 'Test pitanja', 'Trik pitanja'],
+      correct: [0, 1, 2],
+      expl: 'Predefinisana, situaciona i test pitanja.'
+    },
+    {
+      id: 'q130',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta spada u nepoželjna pitanja tokom intervjua? (Više tačnih)',
+      opts: ['Prejako ili nedovoljno vođenje korisnika', 'Sugerisanje i isuviše detalja', 'Nejasno izražavanje i višestruka negacija', 'Podcjenjivanje sugovornika i preduga pitanja'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedeno spada u nepoželjna pitanja.'
+    },
+    {
+      id: 'q131',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Šta treba sadržavati zapisnik intervjua? (Više tačnih)',
+      opts: ['Imena, datum i vrijeme', 'Organizacijsku poziciju osobe i profil', 'Korištena predefinisana pitanja', 'Zapisnik razgovora i analizu otkrivenih činjenica'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene stavke.'
+    },
+    {
+      id: 'q132',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Zastarjela dokumentacija je potpuno nevažna i ne treba je uopće pregledati.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Daje osjećaj za evoluciju sistema, samo činjenice treba ažurirati.'
+    },
+    {
+      id: 'q133',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Prema "Pravilu broj dva" za izbor uzorka, moguće je sasvim sigurno odrediti da li je uzorak dovoljno velik.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Koriste se statističke metode jer se ne može sa sigurnošću znati bez njih.'
+    },
+    {
+      id: 'q134',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Observacija se obično koristi za validaciju podataka dobijenih drugim tehnikama.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q135',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Svaka observacija mora imati jasno definisan cilj; ako ga nemate, trebate revidirati kompletan plan.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q136',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Intervju je jeftina tehnika koja uopće ne ovisi od ličnih sposobnosti analitičara.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Intervju je skup (traži vrijeme) i ovisi o sposobnostima analitičara.'
+    },
+    {
+      id: 'q137',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Ugovaranje intervjua je najbolje raditi direktno i nikako kao naređenje.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q138',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Ako ne vodite zabilješke niti snimate intervju, nije potrebno da sa sobom imate olovku i papir.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Uvijek je potrebno imati olovku i papir.'
+    },
+    {
+      id: 'q139',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Ako sugovornik produži vrijeme trajanja intervjua, analitičar treba nervozno gledati na sat.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno.'
+    },
+    {
+      id: 'q140',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Za vođenje intervjua ne postoji strog šablon niti strukturiran pristup, već se mogu dati samo savjeti.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q141',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'Isti skup predefinisanih pitanja je veoma korisna alatka za upoređivanje izjava i postizanje konsenzusa.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q142',
+      topic: 'Tehnike prikupljanja činjenica',
+      q: 'U JRP radionici u središtu za stolovima u obliku slova U sjede korisnici i menadžeri, dok sa strane sjede IT profesionalci.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+
+    // --- 5. Tradicionalne i agilne metode razvoja softvera ---
+    {
+      id: 'q143',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Šta opisuje životni ciklus razvoja softvera (SDLC)?',
+      opts: ['Samo testiranje softvera', '„Životni vijek“ od nastanka potrebe, preko implementacije, održavanja, pa sve dok se ne prestane koristiti', 'Finansijske troškove hardvera', 'Ugovorne odnose'],
+      correct: [1],
+      expl: 'Životni vijek od nastanka potrebe do prestanka korištenja.'
+    },
+    {
+      id: 'q144',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koji je bio prvi procesni model uveden kao linearno-sekvencijalni model?',
+      opts: ['Spiralni model', 'Vodopadni model (Waterfall)', 'Inkrementalni model', 'Kanban'],
+      correct: [1],
+      expl: 'Vodopadni model (Waterfall).'
+    },
+    {
+      id: 'q145',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Šta je karakteristično za faze u vodopadnom modelu?',
+      opts: ['Faze se uvijek preklapaju', 'Jedna faza se u potpunosti završi prije započinjanja nove faze razvoja, bez preklapanja', 'Tim se stalno vraća na prvu fazu', 'Implementacija počinje prije dizajna'],
+      correct: [1],
+      expl: 'Faze se završavaju u potpunosti prije prelaska na novu bez preklapanja.'
+    },
+    {
+      id: 'q146',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Šta se u paralelnom pristupu razvoja softvera radi nakon što se napravi dizajn cjelokupnog proizvoda?',
+      opts: ['Projekt se odmah predaje kupcu', 'Projekt se dijeli na više podprojekata koji se realiziraju paralelno i potom integriraju', 'Prelazi se na analizu rizika', 'Piše se samo korisničko uputstvo'],
+      correct: [1],
+      expl: 'Dijeli se na podprojekte koji se paralelno realiziraju i integrišu.'
+    },
+    {
+      id: 'q147',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Kako je još poznat model inkrementalnog procesa?',
+      opts: ['Model brze eliminacije', 'Model sukcesivne verzije', 'Model fiksiranih zahtjeva', 'Model paralelnih podprojekata'],
+      correct: [1],
+      expl: 'Model sukcesivne verzije.'
+    },
+    {
+      id: 'q148',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Šta se radi na početku svake faze u spiralnom modelu i šta se dešava ako je rizik prevelik?',
+      opts: ['Radi se analiza rizika; ako je prevelik, projekat se prekida', 'Testira se kod', 'Bira se novi Scrum Master', 'Skraćuje se dokumentacija'],
+      correct: [0],
+      expl: 'Radi se analiza rizika; u slučaju prevelikog rizika, projekat se prekida.'
+    },
+    {
+      id: 'q149',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Šta je najčešći uzrok zabune ili problema u Scrum metodi prema navedenim nedostacima?',
+      opts: ['Previše sastanaka', 'Segmentacija projekta može dovesti do gubitka pojma o cjelini, a uloga programera možda nije dobro definirana', 'Potpuni izostanak planiranja', 'Zabrana komunikacije'],
+      correct: [1],
+      expl: 'Segmentacija projekta može dovesti do gubitka pojma o cjelini.'
+    },
+    {
+      id: 'q150',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Za kakve je procese Kanban metoda najbolja?',
+      opts: ['Za ogromne projekte s visokim rizicima', 'Za procese koji prolaze kroz male promjene i gdje je fokus na kapacitetu tima', 'Za projekte gdje je zabranjena vidljivost', 'Isključivo za godišnje planiranje'],
+      correct: [1],
+      expl: 'Za procese sa malim promjenama i fokusom na kapacitet.'
+    },
+    {
+      id: 'q151',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Na kojoj se ideji temelji metodologija Ekstremnog programiranja (XP)?',
+      opts: ['Na pisanju opširne dokumentacije', 'Na otkrivanju „najjednostavnije stvari koja će raditi“ bez stavljanja prevelike težine na dugoročni pogled', 'Na izbjegavanju testiranja', 'Na radu jednog programera'],
+      correct: [1],
+      expl: 'Na otkrivanju najjednostavnije stvari koja radi.'
+    },
+    {
+      id: 'q152',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koja je glavna svrha Lean metode razvoja softvera?',
+      opts: ['Dodavanje sastanaka', 'Uklanjanje svih aktivnosti koje ne donose konačnu vrijednost proizvodu', 'Povećanje obima dokumentacije', 'Zapošljavanje menadžera'],
+      correct: [1],
+      expl: 'Eliminacija otpada i aktivnosti koje ne donose vrijednost.'
+    },
+    {
+      id: 'q153',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Šta je ključni aspekt Crystal metodologije, s obzirom na to da se više usredotočuje na pojedince nego na alate?',
+      opts: ['Stroga hijerarhija', 'Komunikacija', 'Automatsko generiranje koda', 'Fiksni budžet'],
+      correct: [1],
+      expl: 'Komunikacija.'
+    },
+    {
+      id: 'q154',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koja varijanta Crystal metodologije je namijenjena za timove od 20 do 50 članova?',
+      opts: ['Crystal Clear', 'Crystal Yellow', 'Crystal Orange', 'Crystal Red'],
+      correct: [2],
+      expl: 'Crystal Orange.'
+    },
+    {
+      id: 'q155',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje varijante životnog ciklusa razvoja softvera (SDLC) su navedene? (Više tačnih)',
+      opts: ['Tradicionalni linearni „vodopadni“ (waterfall)', 'Paralelni model', 'Iterativni ili evolucijski model', 'Spiralni model', 'Agilne metode'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Sve navedene varijante.'
+    },
+    {
+      id: 'q156',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koji faktori pogoduju korištenju vodopadnog modela? (Više tačnih)',
+      opts: ['Zahtjevi su jasni i fiksni bez dvosmislenosti', 'Stabilnost definicije proizvoda i projekat nije dinamičan', 'Na raspolaganju su veliki resursi s odgovarajućom stručnošću', 'Projekt kratke duljine i dobar dokument'],
+      correct: [0, 1, 2, 3],
+      expl: 'Fiksni zahtjevi, stabilnost, resursi i kratka duljina.'
+    },
+    {
+      id: 'q157',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje su prednosti, a koji nedostaci paralelnog pristupa? (Više tačnih)',
+      opts: ['Prednost: znatno se smanjuje vrijeme razvoja', 'Prednost: manje su šanse za prepravke', 'Nedostatak: potrebno je više resursa', 'Nedostatak: ponekad je teško integrirati podprojekte'],
+      correct: [0, 2, 3],
+      expl: 'Manje vremena, više resursa i teža integracija.'
+    },
+    {
+      id: 'q158',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje su prednosti iterativnog (evolucijskog) pristupa? (Više tačnih)',
+      opts: ['Softver se proizvodi u ranim fazama životnog ciklusa', 'Korisnici u ranim fazama probaju rezultate', 'Pojednostavljeno testiranje', 'Nema nikakvih izmjena zahtjeva'],
+      correct: [0, 1, 2],
+      expl: 'Rana proizvodnja softvera, rani feedback i pojednostavljeno testiranje.'
+    },
+    {
+      id: 'q159',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje faze pripadaju spiralnom modelu? (Više tačnih)',
+      opts: ['Pregled – određivanje ciljeva, alternativa i ograničenja', 'Analiza rizika i procjena alternativa', 'Razvoj i verifikacija sljedećeg „proizvoda“', 'Planiranje sljedeće faze'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve četiri navedene faze spiralnog modela.'
+    },
+    {
+      id: 'q160',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koji su nedostaci spiralnog modela? (Više tačnih)',
+      opts: ['Može biti veoma skup model', 'Zahtijeva visok stepen ekspertize u analizi rizika', 'Nije dobar za male projekte', 'Softver se proizvodi tek na kraju'],
+      correct: [0, 1, 2],
+      expl: 'Skup, traži ekspertizu, loš za male projekte.'
+    },
+    {
+      id: 'q161',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje metode spadaju u agilne metode? (Više tačnih)',
+      opts: ['Scrum', 'Kanban', 'Extreme Programming (XP)', 'Lean Development', 'Crystal'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Sve navedene su agilne metode.'
+    },
+    {
+      id: 'q162',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje su prednosti Scrum metode? (Više tačnih)',
+      opts: ['Motivacija tima', 'Transparentnost', 'Definicija gotovog', 'Fokus na kvalitetu s manje pogrešaka', 'Dobro planiranje sprinta'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Sve navedene prednosti Scruma.'
+    },
+    {
+      id: 'q163',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje su prednosti Kanban metode? (Više tačnih)',
+      opts: ['Mogućnost pregleda svih zadataka', 'Moguće je ograničiti broj pokrenutih zadataka', 'Fokusira se na trajanje ciklusa i kontinuirane isporuke', 'Jednostavna za implementaciju izvan IT svijeta'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene prednosti Kanbana.'
+    },
+    {
+      id: 'q164',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koje vrijednosti naglašava Ekstremno programiranje (XP)? (Više tačnih)',
+      opts: ['Komunikacija i jednostavnost', 'Povratne informacije', 'Hrabrost i poštovanje', 'Zadovoljstvo korisnika'],
+      correct: [0, 1, 2, 3],
+      expl: 'Komunikacija, jednostavnost, povratne informacije, hrabrost, poštovanje i zadovoljstvo.'
+    },
+    {
+      id: 'q165',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koji su nedostaci Ekstremnog programiranja (XP)? (Više tačnih)',
+      opts: ['Ekstremna usredotočenost na kod može zanemariti dizajn', 'Geografska razuđenost tima može ometati okvir', 'Registar grešaka se ne održava uvijek', 'Softver se uopće ne testira'],
+      correct: [0, 1, 2],
+      expl: 'Fokus na kod nauštrb dizajna, razuđenost i ne održavanje registra grešaka.'
+    },
+    {
+      id: 'q166',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Koja načela spadaju u sedam osnovnih načela Lean metode? (Više tačnih)',
+      opts: ['Brisanje stvari koje nisu bitne (Eliminate Waste)', 'Razvoj kvalitete i stvaranje znanja', 'Brza isporuka i poštivanje tima', 'Optimizirati cjelinu i odgađanje odluka'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sih sedam načela lean-a obuhvata ove aspekte.'
+    },
+    {
+      id: 'q167',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'U vodopadnom modelu sasvim je uobičajeno stalno se vraćati na prethodne faze razvoja.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Vodopadni model je linearan i ne podrazumijeva vraćanje.'
+    },
+    {
+      id: 'q168',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Nedostatak vodopadnog modela je što dizajn mora biti u potpunosti završen prije početka implementacije.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q169',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Nedostaci iterativnog pristupa su izmjene zahtjeva i duže vrijeme razvoja.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q170',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Scrum se može uspješno koristiti isključivo u razvoju softverskih proizvoda, ali ne i u poslovnom kontekstu.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Može se koristiti i u poslovnom kontekstu.'
+    },
+    {
+      id: 'q171',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Kanban metoda se u praksi organizira na ploči podijeljenoj u stupce (npr. TO DO, DOING, DONE).',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q172',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Budući da u Kanbanu postoje strogo fiksirani vremenski okviri, nikada ne dolazi do kašnjenja.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Kanban nema strogo fiksirane vremenske okvire sprintova.'
+    },
+    {
+      id: 'q173',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Ekstremno programiranje (XP) potiče programere da prihvate promjene u zahtjevima korisnika, čak i kasnije.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q174',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'U Ekstremnom programiranju (XP) softver se testira od prvog dana i promiče se programiranje u paru.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q175',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Načelo „različite obveze“ (Defer Decision) u Lean metodi potiče tim da se previše fokusira na dugoročno planiranje.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Potiče odgađanje odluka dok se ne prikupe prave informacije.'
+    },
+    {
+      id: 'q176',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Crystal je teška metodologija koja zahtijeva ogromnu količinu formalne dokumentacije.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Crystal je lagana metodologija.'
+    },
+    {
+      id: 'q177',
+      topic: 'Tradicionalne i agilne metode razvoja softvera ',
+      q: 'Varijanta Crystal Clear namijenjena je manjim timovima do 8 članova, dok je Crystal Red za velike timove.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+
+    // --- 6. Modeliranje Informacionog sistema ---
+    {
+      id: 'q178',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koji je ispravan redoslijed četiri osnovne faze razvoja informacionog sistema?',
+      opts: ['Analiza → Planiranje → Podrška → Izrada', 'Planiranje → Analiza → Izrada → Podrška i unaprjeđivanje', 'Izrada → Analiza → Planiranje → Podrška', 'Planiranje → Izrada → Analiza → Podrška'],
+      correct: [1],
+      expl: 'Planiranje → Analiza → Izrada → Podrška i unaprjeđivanje.'
+    },
+    {
+      id: 'q179',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Kojim pristupom se modeliraju poslovni procesi koji za ulaz i izlaz imaju podatke?',
+      opts: ['Informacijskim inženjeringom', 'Strukturalnom analizom putem Dijagrama tokova podataka (DFD)', 'Dizajnom korisničkog sučelja (UX)', 'Fizičkim modeliranjem hardvera'],
+      correct: [1],
+      expl: 'Strukturalnom analizom putem Dijagrama tokova podataka (DFD).'
+    },
+    {
+      id: 'q180',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koja pitanja više naglašava faza analize sistema?',
+      opts: ['Tehnička i implementacijska pitanja', 'Poslovna pitanja', 'Pitanja odabira programskog jezika', 'Pitanja dizajna serverske infrastrukture'],
+      correct: [1],
+      expl: 'Poslovna pitanja.'
+    },
+    {
+      id: 'q181',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koji je najvažniji dijagram u strukturiranoj analizi (tradicionalnom pristupu)?',
+      opts: ['Dijagram klasa', 'Dijagram toka podataka (DFD)', 'Ganttov dijagram', 'Dijagram stanja'],
+      correct: [1],
+      expl: 'Dijagram toka podataka (DFD).'
+    },
+    {
+      id: 'q182',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Čemu u arhitekturi sistema odgovara komponenta "Proces" na DFD-u?',
+      opts: ['Sloju podataka', 'Korisničkom sučelju', 'Poslovnoj logici', 'Eksternom okruženju'],
+      correct: [2],
+      expl: 'Poslovnoj logici.'
+    },
+    {
+      id: 'q183',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Čemu u arhitekturi sistema odgovara komponenta "Skladište podataka" na DFD-u?',
+      opts: ['Sloju podataka', 'Poslovnoj logici', 'Korisničkom sučelju', 'Tokovima podataka'],
+      correct: [0],
+      expl: 'Sloju podataka.'
+    },
+    {
+      id: 'q184',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Kako se u DFD notaciji Unified Modeling Language (UML) prikazuje Eksterni entitet (External Entity)?',
+      opts: ['Pravougaonik', 'Elipsa', 'Simbolom čovječuljka (stick figure)', 'Zaobljenim pravougaonikom'],
+      correct: [2],
+      expl: 'Simbolom čovječuljka (stick figure).'
+    },
+    {
+      id: 'q185',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Šta je funkcionalna dekompozicija?',
+      opts: ['Spajanje više malih procesa u jedan veliki', 'Proces dijeljenja kompleksnog i obimnog procesa na jednostavnije i manje obimne procese u hijerarhijskoj strukturi', 'Uklanjanje nepotrebnih podataka', 'Testiranje gotovog softvera'],
+      correct: [1],
+      expl: 'Dijeljenje kompleksnog procesa na jednostavnije u hijerarhijskoj strukturi.'
+    },
+    {
+      id: 'q186',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Kako Dijagram konteksta predstavlja kompletan informacijski sistem?',
+      opts: ['Kao skup od najmanje deset procesa', 'Kao jedan proces fokusiran na interakciju IS-a sa eksternim entitetima (okruženjem)', 'Kao detaljnu šemu baze', 'Kao WBS stablo'],
+      correct: [1],
+      expl: 'Kao jedan proces fokusiran na interakciju sa okruženjem.'
+    },
+    {
+      id: 'q187',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Kome se, prema logičkom opisu poslovnog procesa reklamacije u on-line trgovini, prosljeđuje zahtjev za reklamaciju koji uputi kupac?',
+      opts: ['Samo dostavljačkoj službi', 'Korisničkoj službi, Prodavaču i skladištu podataka REKLAMACIJE', 'Isključivo sistemu za naplatu', 'Samo skladištu artikala'],
+      correct: [1],
+      expl: 'Korisničkoj službi, Prodavaču i skladištu podataka REKLAMACIJE.'
+    },
+    {
+      id: 'q188',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koja faza razvoja IS-a direktno prethodi fazi dizajna u kojoj se specificira novi poboljšani sistem?',
+      opts: ['Faza održavanja', 'Faza analize sistema', 'Faza kodiranja', 'Faza implantacije'],
+      correct: [1],
+      expl: 'Faza analize sistema.'
+    },
+    {
+      id: 'q189',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Kako je definiran "proces" u kontekstu strukturirane analize informacijskih sistema?',
+      opts: ['Kao fizički hardver', 'Kao rad kojeg sistem obavlja na temelju ulaznih podataka ili uvjeta', 'Kao ugovor potpisan s dobavljačem', 'Kao spisak zaposlenika'],
+      correct: [1],
+      expl: 'Kao rad kojeg sistem obavlja na temelju ulaznih podataka ili uvjeta.'
+    },
+    {
+      id: 'q190',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Šta sve utječe na informacijski sistem s aspekta potreba poslovanja? (Više tačnih)',
+      opts: ['Globalizacija', 'Digitalna ekonomija', 'Složenost poslovanja', 'Kvaliteta', 'Poslovni procesi'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Svi navedeni faktori utiču na IS.'
+    },
+    {
+      id: 'q191',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Šta sve utječe na informacijski sistem s aspekta tehnološkog razvoja? (Više tačnih)',
+      opts: ['Mrežne tehnologije – Internet', 'Servisi', 'Mobilne aplikacije', 'Kolaborativne tehnologije', 'Integrirani sustavi'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Sve navedene tehnologije utiču na razvoj IS.'
+    },
+    {
+      id: 'q192',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Šta spada u značaj modeliranja informacionih sistema? (Više tačnih)',
+      opts: ['Bolje razumijevanje poslovnih procesa i jasna komunikacija tima', 'Planiranje i dizajn sistema', 'Smanjenje rizika', 'Podrška za implementaciju', 'Praćenje i evaluacija'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Svi navedeni dijelići predstavljaju značaj modeliranja.'
+    },
+    {
+      id: 'q193',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Šta je potrebno modelirati tokom modeliranja IS-a? (Više tačnih)',
+      opts: ['Sloj podataka', 'Poslovne procese koji za ulaz/izlaz imaju podatke', 'Korisničko sučelje (UX)', 'Isključivo cijenu električne energije'],
+      correct: [0, 1, 2],
+      expl: 'Sloj podataka, poslovne procese sa podacima i korisničko sučelje.'
+    },
+    {
+      id: 'q194',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koje su osobine Dijagrama toka podataka (DFD)? (Više tačnih)',
+      opts: ['Koristi se za analizu zahtjeva i dizajn IS-a', 'Prikazuje vezu između IS i okruženja', 'Prikazuje vezu između procesa IS-a', 'Omogućava prikaz paralelnih i asinkronih procesa', 'Postepeno unapređuje model IS-a'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Sve navedene osobine karakterišu DFD.'
+    },
+    {
+      id: 'q195',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koje su četiri osnovne komponente DFD-a? (Više tačnih)',
+      opts: ['Proces', 'Eksterni entitet', 'Tok podataka', 'Skladište podataka', 'Klasa i objekt'],
+      correct: [0, 1, 2, 3],
+      expl: 'Proces, eksterni entitet, tok podataka i skladište podataka.'
+    },
+    {
+      id: 'q196',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koje notacije se mogu koristiti za izradu DFD-a? (Više tačnih)',
+      opts: ['Yourdon i/ili De Marco', 'Gane & Sarson', 'SSADM', 'Unified Modeling Language (UML)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve četiri navedene notacije.'
+    },
+    {
+      id: 'q197',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'S kojim ciljem se radi funkcionalna dekompozicija? (Više tačnih)',
+      opts: ['Jasnije razumijevanje kompleksnog sistema', 'Hijerarhijska struktura (od općeg ka detaljnim procesima)', 'Lakše otkrivanje grešaka i nedostataka', 'Podrška za modularni dizajn', 'Bolja dokumentacija'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Svi navedeni ciljevi funkcionalne dekompozicije.'
+    },
+    {
+      id: 'q198',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koji su eksterni entiteti navedeni u zadatku kreiranja dijagrama konteksta za on-line trgovinu? (Više tačnih)',
+      opts: ['Kupac', 'Prodavač', 'Sistem za naplatu', 'Skladište', 'Dostavljačka služba'],
+      correct: [0, 1, 2, 3, 4],
+      expl: 'Svi navedeni eksterni entiteti.'
+    },
+    {
+      id: 'q199',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Koji su glavni procesi identificirani u zadatku za on-line trgovinu? (Više tačnih)',
+      opts: ['Upravljanje korisnicima (registracija i prijava)', 'Pretraga proizvoda (recenzije, lista želja)', 'Korisnička služba (reklamacije, povrat)', 'Prodaja (korpa, kreiranje i plaćanje narudžbe) i Isporuka'],
+      correct: [0, 1, 2, 3],
+      expl: 'Svi navedeni glavni procesi.'
+    },
+    {
+      id: 'q200',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Kako se u DFD notacijama prikazuje "Skladište podataka" (Store)? (Više tačnih)',
+      opts: ['Dvije paralelne horizontalne linije (Yourdon + De Marco)', 'Pravougaonik otvoren s desne strane (Gane & Sarson i SSADM)', 'Pravougaonik s oznakom <<entity>> (Unified)', 'Krug'],
+      correct: [0, 1, 2],
+      expl: 'Paralelne linije, pravougaonik otvoren s desne strane i pravougaonik sa entity oznakom.'
+    },
+    {
+      id: 'q201',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Šta modeliranje omogućava u okviru "Praćenja i evaluacije"? (Više tačnih)',
+      opts: ['Praćenje performansi sistema', 'Evaluaciju uticaja sistema na poslovanje', 'Donošenje strateških odluka o daljem razvoju', 'Potpuno ukidanje testiranja'],
+      correct: [0, 1, 2],
+      expl: 'Performanse, uticaj na poslovanje i strateške odluke.'
+    },
+    {
+      id: 'q202',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Postoji jedna univerzalno prihvaćena definicija analize sistema koju koriste svi stručnjaci.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Ne postoji jedna univerzalno prihvaćena definicija.'
+    },
+    {
+      id: 'q203',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Modeli služe kao zajednička platforma za komunikaciju IT stručnjaka, menadžmenta i krajnjih korisnika.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q204',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Sloj podataka tokom modeliranja IS-a modelira se pristupom koji se naziva informacijski inženjering.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q205',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'DFD se radi isključivo na jednom nivou apstrakcije i jednom nivou detaljnosti.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – DFD se radi na više nivoa apstrakcije i detaljnosti.'
+    },
+    {
+      id: 'q206',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Eksterni entitet na DFD-u odgovara korisničkom sučelju u arhitekturi sistema.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q207',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'U Gane & Sarson notaciji za DFD, proces se prikazuje kao čisti krug.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Prikazuje se kao zaobljeni pravougaonik (krug je u Yourdon+De Marco).'
+    },
+    {
+      id: 'q208',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Funkcionalna dekompozicija pruža podršku za modularni dizajn jer se svaki podproces može razvijati i mijenjati nezavisno.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q209',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Dijagram konteksta detaljno prikazuje sva unutrašnja skladišta podataka i sve podprocese informacionog sistema.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Dijagram konteksta prikazuje IS kao jedan proces i ne prikazuje unutrašnja skladišta.'
+    },
+    {
+      id: 'q210',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'U procesu reklamacije na logičkom nivou, odgovor prodavača na zahtjev prosljeđuje se Korisničkoj službi i skladištu REKLAMACIJE.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q211',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Precizno modeliranje omogućava identifikaciju potencijalnih problema prije implementacije, čime se smanjuje rizik.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno.'
+    },
+    {
+      id: 'q212',
+      topic: 'Modeliranje Informacionog sistema',
+      q: 'Strukturirana analiza naglašava više skladišta podataka nego procesne komponente u ukupnom informacionom sistemu.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Strukturirana analiza naglašava procesne komponente.'
+    }
+  ]
+};
+
+let state = {
+  theme: 'dark',
+  sound: true,
+  currentView: 'hub',
+  selectedSubjId: 'mpp',
+  qCount: 10,
+  difficulty: 'sve',
+  shuffleQ: true,
+  shuffleA: true,
+  timerEnabled: true,
+  selectedTopics: [],
+  wrongQuestions: [],
+  savedQuestions: [],
+  stats: {
+    userName: 'Student FIT',
+    userRole: 'Redovan student',
+    totalQuizzes: 0,
+    totalAnswered: 0,
+    totalCorrect: 0,
+    streak: 0,
+    lastActiveDate: '',
+    topicStats: {}
+  }
+};
+
+let quizSession = null;
+
+function getFilteredQuestionsCount() {
+  const allQs = QUESTIONS_DB[state.selectedSubjId] || [];
+  let qList = allQs.slice();
+  if (state.selectedTopics.length > 0) {
+    qList = qList.filter(q => state.selectedTopics.includes(q.topic));
+  }
+  return qList.length;
+}
+
+function adjustQCountLimit() {
+  const avail = getFilteredQuestionsCount();
+  if (avail > 0) {
+    if (state.qCount > avail) state.qCount = avail;
+  } else {
+    state.qCount = 1;
+  }
+}
+
+function loadStorage() {
+  try {
+    const rawW = localStorage.getItem(STORAGE_KEY_WRONG);
+    if (rawW) state.wrongQuestions = JSON.parse(rawW);
+    const rawS = localStorage.getItem(STORAGE_KEY_STATS);
+    if (rawS) state.stats = Object.assign(state.stats, JSON.parse(rawS));
+    const rawSet = localStorage.getItem(STORAGE_KEY_SETTINGS);
+    if (rawSet) {
+      const parsed = JSON.parse(rawSet);
+      if (parsed.theme) state.theme = parsed.theme;
+      if (parsed.sound !== undefined) state.sound = parsed.sound;
+      if (parsed.qCount) state.qCount = Number(parsed.qCount);
+      if (parsed.shuffleQ !== undefined) state.shuffleQ = parsed.shuffleQ;
+      if (parsed.shuffleA !== undefined) state.shuffleA = parsed.shuffleA;
+      if (parsed.timerEnabled !== undefined) state.timerEnabled = parsed.timerEnabled;
+    }
+    const rawSaved = localStorage.getItem(STORAGE_KEY_SAVED);
+    if (rawSaved) state.savedQuestions = JSON.parse(rawSaved);
+    checkStreakOnLoad();
+  } catch(e){}
+}
+
+function saveStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY_WRONG, JSON.stringify(state.wrongQuestions));
+    localStorage.setItem(STORAGE_KEY_STATS, JSON.stringify(state.stats));
+    localStorage.setItem(STORAGE_KEY_SAVED, JSON.stringify(state.savedQuestions));
+    localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify({
+      theme: state.theme,
+      sound: state.sound,
+      qCount: state.qCount,
+      shuffleQ: state.shuffleQ,
+      shuffleA: state.shuffleA,
+      timerEnabled: state.timerEnabled
+    }));
+  } catch(e){}
+}
+
+function checkStreakOnLoad() {
+  const today = new Date().toDateString();
+  if (state.stats.lastActiveDate === today) return;
+  if (state.stats.lastActiveDate) {
+    const lastDate = new Date(state.stats.lastActiveDate);
+    const currentDate = new Date(today);
+    const diffDays = Math.ceil(Math.abs(currentDate - lastDate) / (1000 * 60 * 60 * 24));
+    if (diffDays > 2) {
+      state.stats.streak = 0;
+    }
+  }
+}
+
+function recordDailyActivity() {
+  const today = new Date().toDateString();
+  if (state.stats.lastActiveDate !== today) {
+    if (state.stats.lastActiveDate) {
+      const lastDate = new Date(state.stats.lastActiveDate);
+      const currentDate = new Date(today);
+      const diffDays = Math.round(Math.abs(currentDate - lastDate) / (1000 * 60 * 60 * 24));
+      if (diffDays === 1) {
+        state.stats.streak++;
+      } else if (diffDays > 1) {
+        state.stats.streak = 1;
+      }
+    } else {
+      state.stats.streak = 1;
+    }
+    state.stats.lastActiveDate = today;
+    saveStorage();
+  }
+}
+
+function checkActiveSessionOnLoad() {
+  try {
+    const rawSes = localStorage.getItem(STORAGE_KEY_SESSION);
+    if (rawSes) {
+      const ses = JSON.parse(rawSes);
+      if (ses && ses.questions && ses.idx < ses.questions.length) {
+        if (confirm('Pronađena je prekinuta sesija kviza. Da li želite nastaviti tamo gdje ste stali?')) {
+          quizSession = ses;
+          state.currentView = 'quiz';
+          startTimerInterval();
+          return true;
+        } else {
+          localStorage.removeItem(STORAGE_KEY_SESSION);
+        }
+      }
+    }
+  } catch(e){}
+  return false;
+}
+
+let timerInterval = null;
+function startTimerInterval() {
+  if (timerInterval) clearInterval(timerInterval);
+  if (!state.timerEnabled || !quizSession) return;
+  if (quizSession.timeLeft === undefined) {
+    quizSession.timeLeft = quizSession.questions.length * 30;
+  }
+  timerInterval = setInterval(() => {
+    if (quizSession && state.currentView === 'quiz') {
+      if (quizSession.timeLeft > 0) {
+        quizSession.timeLeft--;
+        const timerEl = document.getElementById('quiz-timer-display');
+        if (timerEl) {
+          const mins = Math.floor(quizSession.timeLeft / 60);
+          const secs = quizSession.timeLeft % 60;
+          timerEl.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        if (quizSession.timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert('Isteklo je vrijeme za kviz!');
+          finishQuizSession();
+        }
+      }
+    }
+  }, 1000);
+}
+
+function render() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  document.body.setAttribute('data-theme', state.theme);
+  SoundFX.enabled = state.sound;
+  const app = document.getElementById('app');
+  
+  if (state.currentView === 'hub') app.innerHTML = renderHub();
+  else if (state.currentView === 'subject') app.innerHTML = renderSubjectDetail();
+  else if (state.currentView === 'quiz') app.innerHTML = renderQuiz();
+  else if (state.currentView === 'results') app.innerHTML = renderResults();
+  else if (state.currentView === 'flashcards') app.innerHTML = renderFlashcards();
+  else if (state.currentView === 'profile') app.innerHTML = renderProfileView();
+
+  setupKeyboardShortcuts();
+}
+
+function renderHeader() {
+  const isProfileActive = state.currentView === 'profile';
+  const isHubActive = state.currentView === 'hub';
+
+  return `
+    <header class="top-header">
+      <div class="brand" onclick="goHub()">
+        <div class="logo-box">FIT</div>
+        <div>
+          <div class="brand-sub">Fakultet informacijskih tehnologija</div>
+          <h1>QHub</h1>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <div class="streak-pill">🔥 ${state.stats.streak || 0}d</div>
+        <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()">Svi predmeti</button>
+        <button class="btn sm ghost" onclick="toggleSound()">${state.sound ? '🔊' : '🔇'}</button>
+        <button class="btn sm ghost" onclick="toggleTheme()">${state.theme === 'dark' ? '☀' : '☾'}</button>
+        <button class="btn sm ${isProfileActive ? 'nav-active' : ''}" onclick="goProfile()">👤 Profil</button>
+      </div>
+    </header>
+  `;
+}
+
+function renderProfileDashboard() {
+  const accuracy = state.stats.totalAnswered > 0 
+    ? Math.round((state.stats.totalCorrect / state.stats.totalAnswered) * 100) 
+    : 0;
+
+  const subj = SUBJECTS[0];
+  const topicStats = state.stats.topicStats || {};
+
+  return `
+    <div class="profile-dash-card">
+      <div class="profile-top">
+        <div class="profile-user-info">
+          <div class="avatar-box">🎓</div>
+          <div class="user-title">
+            <h2><input type="text" value="${state.stats.userName}" style="margin:0; padding:4px 8px; font-size:1.15rem; font-weight:800; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:8px; color:var(--ink); font-family:inherit; outline:none;" onchange="updateUserName(this.value)"></h2>
+            <p>${state.stats.userRole} • FIT</p>
+          </div>
+        </div>
+        <div>
+          <span class="user-badge">Aktivan</span>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="stat-box">
+          <span class="stat-icon">📝</span>
+          <small>Riješeni kvizovi</small>
+          <b>${state.stats.totalQuizzes}</b>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">⚡</span>
+          <small>Ukupno pitanja</small>
+          <b>${state.stats.totalAnswered}</b>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">🎯</span>
+          <small>Tačnost</small>
+          <b>${accuracy}%</b>
+        </div>
+        <div class="stat-box">
+          <span class="stat-icon">⚠️</span>
+          <small>Pogrešnih</small>
+          <b>${state.wrongQuestions.length}</b>
+        </div>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <div class="eyebrow" style="margin-bottom: 8px;">Progres po lekcijama</div>
+        <div class="topic-progress-list">
+          ${subj.topics.map(t => {
+            const tData = topicStats[t] || { answered: 0, correct: 0 };
+            const tAcc = tData.answered > 0 ? Math.round((tData.correct / tData.answered) * 100) : 0;
+            return `
+              <div class="tp-item">
+                <div class="tp-info">
+                  <span>${t}</span>
+                  <span>${tAcc}% (${tData.correct}/${tData.answered})</span>
+                </div>
+                <div class="tp-bar-bg">
+                  <div class="tp-bar-fill" style="width: ${tAcc}%;"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderHub() {
+  return `
+    ${renderHeader()}
+
+    <section class="hero-card">
+      <div>
+        <div class="eyebrow">Kviz Hub</div>
+        <h2>Odaberi predmet i kreni s učenjem</h2>
+        <p>Spremni testovi sa 212 pitanja iz svih oblasti za prvi parcijalni ispit.</p>
+      </div>
+    </section>
+
+    <div class="hub-grid">
+      ${SUBJECTS.map(s => `
+        <div class="subject-card">
+          <div>
+            <div class="sc-top">
+              <span class="chip-tag">${s.badge}</span>
+            </div>
+            <h3>${s.name}</h3>
+            <p>${s.desc}</p>
+          </div>
+          <div>
+            ${s.active ? 
+              `<button class="btn primary" style="width:100%" onclick="openSubject('${s.id}')">Otvori kviz</button>` : 
+              `<button class="btn" style="width:100%" disabled>Uskoro dostupno</button>`
+            }
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <footer>
+      <div>© 2026 QHub</div>
+    </footer>
+  `;
+}
+
+function renderSubjectDetail() {
+  const subj = SUBJECTS.find(s => s.id === state.selectedSubjId);
+  const availCount = getFilteredQuestionsCount();
+  if (state.qCount > availCount && availCount > 0) {
+    state.qCount = availCount;
+  }
+  const wrongCount = state.wrongQuestions.length;
+  const savedCount = state.savedQuestions.length;
+  
+  return `
+    ${renderHeader()}
+    <div style="margin-bottom: 16px;">
+      <div class="eyebrow">Mapa gradiva spremna</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;">${subj.name}</h2>
+      <p style="color: var(--muted); max-width: 68ch; margin-top: 4px; font-size: 0.88rem;">${subj.desc}</p>
+    </div>
+
+    <!-- Režimi učenja -->
+    <div style="margin-bottom: 20px;">
+      <div class="eyebrow">Načini učenja</div>
+      <div class="modes-row">
+        <div class="m-card" onclick="startSpecialMode('weak')">
+          <span>🎯</span>
+          <div>Pogrešni odgovori</div>
+          <small>${wrongCount > 0 ? wrongCount + ' pogrešnih čeka' : 'Prazna lista'}</small>
+        </div>
+        <div class="m-card" onclick="startSpecialMode('saved')">
+          <span>⭐</span>
+          <div>Označena pitanja</div>
+          <small>${savedCount > 0 ? savedCount + ' sačuvanih' : 'Nema sačuvanih'}</small>
+        </div>
+        <div class="m-card" onclick="startSpecialMode('flashcards')">
+          <span>🗂️</span>
+          <div>Kartice</div>
+          <small>Brzi pregled</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="subject-detail-container">
+      <!-- Odaberi lekciju -->
+      <div class="detail-panel">
+        <h3>Odaberi lekciju</h3>
+        <p>Odaberite lekciju koju želite da vježbate</p>
+        <div class="focus-chips">
+          ${subj.topics.map(t => {
+            const isSel = state.selectedTopics.includes(t);
+            return `<button class="f-chip ${isSel ? 'active' : ''}" onclick="toggleTopic('${t}')">${t}</button>`;
+          }).join('')}
+        </div>
+        <p style="color: var(--muted); font-size: 0.78rem; margin-top: 12px;">Prazan izbor uključuje sve teme.</p>
+      </div>
+
+      <!-- Postavke kviza -->
+      <div class="detail-panel">
+        <h3>Postavke kviza</h3>
+        
+        <div class="field-group" style="margin-top: 12px;">
+          <label>Broj pitanja</label>
+          <div class="range-wrap">
+            <input type="range" min="1" max="${Math.max(1, availCount)}" value="${Math.min(state.qCount, Math.max(1, availCount))}" oninput="updateQCountLive(this.value)" onchange="saveQCountState()">
+            <span class="range-out" id="range-out-display">${state.qCount}</span>
+          </div>
+        </div>
+
+        <div class="switch-row">
+          <div>
+            <span>Tajmer po kvizu</span>
+            <small>Ograničenje vremena.</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" ${state.timerEnabled ? 'checked' : ''} onchange="toggleState('timerEnabled')">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div>
+            <span>Izmiješaj pitanja</span>
+            <small>Novi raspored svaku sesiju.</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" ${state.shuffleQ ? 'checked' : ''} onchange="toggleState('shuffleQ')">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="switch-row">
+          <div>
+            <span>Izmiješaj odgovore</span>
+            <small>Smanji obrazac pogodaka.</small>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" ${state.shuffleA ? 'checked' : ''} onchange="toggleState('shuffleA')">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 16px 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+      <div style="font-weight: 700; font-size:0.9rem;" id="ready-q-count-text">Spremno za ${state.qCount} pitanja.</div>
+      <button class="btn blue" style="padding: 10px 24px; font-size: 0.95rem; font-weight: 700;" onclick="startQuizSession()">Pokreni kviz</button>
+    </div>
+
+    <footer>
+      <div>© 2026 QHub</div>
+    </footer>
+  `;
+}
+
+function renderQuiz() {
+  const q = quizSession.questions[quizSession.idx];
+  const isLast = quizSession.idx === quizSession.questions.length - 1;
+  const progressPct = Math.round(((quizSession.idx + 1) / quizSession.questions.length) * 100);
+  const isSaved = state.savedQuestions.includes(q.id);
+  const isMulti = q.correct.length > 1;
+  const cleanedQ = cleanQuestionText(q.q);
+
+  return `
+    ${renderHeader()}
+    <div style="margin-bottom: 10px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <button class="btn sm" onclick="goSubjectDetail()">Izlaz</button>
+        <div style="display:flex; gap:12px; align-items:center;">
+          ${state.timerEnabled ? `<div style="font-weight:800; font-family:var(--font-mono); font-size:0.85rem; color:var(--warn);">⏱️ <span id="quiz-timer-display">--:--</span></div>` : ''}
+          <div style="font-weight:700; font-size:0.85rem; color:var(--accent-light);">Pitanje ${quizSession.idx + 1} od ${quizSession.questions.length}</div>
+        </div>
+      </div>
+      <div style="width:100%; height:4px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
+        <div style="width:${progressPct}%; height:100%; background:var(--blue-gradient); transition:width 0.3s ease;"></div>
+      </div>
+    </div>
+
+    <div class="q-card animate-fade" id="current-q-card">
+      <div class="q-header-row">
+        <span style="font-size:0.7rem; font-weight:800; text-transform:uppercase; color:var(--accent-light);">${q.topic}</span>
+        <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveQuestion('${q.id}')" title="Sačuvaj pitanje">${isSaved ? '★' : '☆'}</button>
+      </div>
+
+      <div class="q-text">${cleanedQ}</div>
+
+      <div class="opts-list">
+        ${q.opts.map((opt, i) => {
+          let cls = 'opt-item';
+          const isSelected = isMulti ? (quizSession.selectedArray && quizSession.selectedArray.includes(i)) : (quizSession.selected === i);
+          if (isSelected) cls += ' selected';
+          
+          if (quizSession.checked) {
+            if (q.correct.includes(i)) cls += ' correct';
+            else if (isSelected) cls += ' wrong';
+          }
+
+          const indicatorType = isMulti ? 'type-checkbox' : 'type-radio';
+
+          return `
+            <button class="${cls}" onclick="selectOpt(${i})">
+              <span>${opt}</span>
+              <div class="opt-indicator ${indicatorType}"></div>
+            </button>
+          `;
+        }).join('')}
+      </div>
+
+      ${quizSession.checked && q.expl ? `
+        <div id="expl-box-el" style="margin-top:14px; padding:12px 14px; background:rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius:12px; font-size:0.85rem; line-height:1.4;">
+          💡 <b style="color:var(--accent-light);">Objašnjenje:</b> ${q.expl}
+        </div>
+      ` : ''}
+    </div>
+
+    <div style="margin-top: 12px; display:flex; justify-content: flex-end;" class="sticky-bottom-bar" id="action-bar-el">
+      ${isMulti && !quizSession.checked ? `
+        <button class="btn primary action-btn-mobile" style="padding:10px 24px; font-weight:700;" onclick="checkAnswer()">Potvrdi odgovor</button>
+      ` : ''}
+      ${quizSession.checked ? `
+        <button class="btn blue action-btn-mobile" style="padding:10px 24px; font-weight:700;" onclick="nextQuestion()">${isLast ? 'Završi i prikaži rezultate' : 'Sljedeće pitanje →'}</button>
+      ` : ''}
+    </div>
+  `;
+}
+
+function renderResults() {
+  const total = quizSession.userAnswers.length;
+  const correctCount = quizSession.userAnswers.filter(a => a.isCorrect).length;
+  const pct = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+  if (pct >= 80) {
+    setTimeout(() => {
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+      }
+    }, 200);
+  }
+
+  let statusMsg = 'Odličan rezultat! Izvrsno poznavanje gradiva! 🎉';
+  if (pct < 50) statusMsg = 'Potrebno je još vježbe. Ponovite lekcije i pokušajte ponovo! 💪';
+  else if (pct < 80) statusMsg = 'Dobar rezultat! Još malo vježbe do savršenstva! 🎯';
+
+  return `
+    ${renderHeader()}
+    <div class="res-card animate-fade">
+      <div class="eyebrow">Rezultati sesije</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 16px;">Kviz završen!</h2>
+      
+      <div class="res-score-circle">
+        <span>${pct}%</span>
+        <small>${correctCount}/${total} tačno</small>
+      </div>
+
+      <p style="font-weight:600; font-size:0.95rem; margin-bottom:20px;">${statusMsg}</p>
+
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn blue" style="padding:10px 20px;" onclick="startQuizSession()">Ponovi kviz</button>
+        ${quizSession.userAnswers.some(a => !a.isCorrect) ? `<button class="btn primary" style="padding:10px 20px;" onclick="retryWrongInSession()">Ponovi netačna pitanja</button>` : ''}
+        <button class="btn" style="padding:10px 20px;" onclick="goSubjectDetail()">Nazad na predmet</button>
+      </div>
+
+      <div class="res-review-list">
+        <h3 style="font-size:1.1rem; font-weight:800; margin-bottom:10px;">Detaljan pregled odgovora</h3>
+        ${quizSession.userAnswers.map((item, idx) => `
+          <div class="res-review-item ${item.isCorrect ? 'is-correct' : 'is-wrong'}">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--muted); margin-bottom:4px;">Pitanje ${idx + 1}</div>
+            <div style="font-weight:700; font-size:0.95rem; margin-bottom:8px;">${cleanQuestionText(item.q.q)}</div>
+            
+            <div style="font-size:0.85rem; margin-bottom:4px;">
+              <span style="color:var(--muted);">Vaš odgovor:</span> 
+              <b style="color:${item.isCorrect ? 'var(--good)' : 'var(--bad)'}">${Array.isArray(item.selected) ? item.selected.map(s => item.q.opts[s]).join(', ') : item.q.opts[item.selected]}</b>
+            </div>
+
+            ${!item.isCorrect ? `
+              <div style="font-size:0.85rem; margin-bottom:4px;">
+                <span style="color:var(--muted);">Tačan odgovor:</span> 
+                <b style="color:var(--good);">${item.q.correct.map(c => item.q.opts[c]).join(', ')}</b>
+              </div>
+            ` : ''}
+
+            ${item.q.expl ? `
+              <div style="font-size:0.8rem; color:var(--muted); margin-top:8px; background:rgba(0,0,0,0.15); padding:8px 12px; border-radius:8px;">
+                💡 <b>Objašnjenje:</b> ${item.q.expl}
+              </div>
+            ` : ''}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <footer>
+      <div>© 2026 QHub</div>
+    </footer>
+  `;
+}
+
+function renderFlashcards() {
+  const q = quizSession.questions[quizSession.idx];
+  return `
+    ${renderHeader()}
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+      <button class="btn sm" onclick="goSubjectDetail()">Nazad na predmet</button>
+      <div style="font-weight:700; font-size:0.85rem; color:var(--accent-light);">Kartica ${quizSession.idx + 1} / ${quizSession.questions.length}</div>
+    </div>
+
+    <div class="fc-wrap" onclick="flipCard(this)">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div style="font-size:0.7rem; color:var(--accent-light); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:10px;">Pitanje</div>
+          <h2 style="font-size:1.15rem; font-weight:700;">${cleanQuestionText(q.q)}</h2>
+          <div style="margin-top:16px; font-size:0.75rem; color:var(--muted); font-weight:600;">Klikni da okreneš karticu 🔄</div>
+        </div>
+        <div class="fc-back">
+          <div style="font-size:0.7rem; color:var(--good); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:10px;">Tačan odgovor</div>
+          <h3 style="font-size:1.05rem; font-weight:700;">${q.correct.map(c => q.opts[c]).join(', ')}</h3>
+          <p style="margin-top:10px; font-size:0.82rem; color:var(--muted);">${q.expl || ''}</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:12px; justify-content:center;">
+      <button class="btn" style="flex:1" onclick="flashcardFeedback(false)">❌ Ne znam</button>
+      <button class="btn primary" style="flex:1" onclick="flashcardFeedback(true)">✅ Znam</button>
+    </div>
+  `;
+}
+
+function renderProfileView() {
+  return `
+    ${renderHeader()}
+    <div class="profile-view-card animate-fade">
+      <div class="eyebrow">Moj Profil & Postavke</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">Korisnički Profil</h2>
+      
+      ${renderProfileDashboard()}
+
+      <div style="margin-top: 20px; display:flex; justify-content:flex-start; gap:10px; flex-wrap:wrap;">
+        <button class="btn blue" onclick="goHub()">Nazad na početnu</button>
+        <button class="btn" onclick="resetStats()">Resetuj statistiku</button>
+      </div>
+    </div>
+  `;
+}
+
+window.goHub = function() { 
+  if (quizSession && state.currentView === 'quiz') {
+    if (!confirm('Imate aktivnu sesiju kviza. Da li ste sigurni da želite napustiti? Progres je sačuvan.')) return;
+  }
+  state.currentView = 'hub'; 
+  render(); 
+};
+
+window.goProfile = function() { 
+  state.currentView = 'profile'; 
+  render(); 
+};
+
+window.openSubject = function(id) { 
+  state.selectedSubjId = id; 
+  state.currentView = 'subject'; 
+  render(); 
+};
+
+window.goSubjectDetail = function() { 
+  if (timerInterval) clearInterval(timerInterval);
+  localStorage.removeItem(STORAGE_KEY_SESSION);
+  state.currentView = 'subject'; 
+  render(); 
+};
+
+window.toggleTheme = function() {
+  state.theme = (state.theme === 'dark') ? 'light' : 'dark';
+  saveStorage();
+  render();
+};
+
+window.toggleSound = function() {
+  state.sound = !state.sound;
+  saveStorage();
+  render();
+};
+
+window.toggleTopic = function(topic) {
+  const idx = state.selectedTopics.indexOf(topic);
+  if (idx > -1) state.selectedTopics.splice(idx, 1);
+  else state.selectedTopics.push(topic);
+  adjustQCountLimit();
+  render();
+};
+
+window.updateQCountLive = function(val) {
+  state.qCount = Number(val);
+  const disp = document.getElementById('range-out-display');
+  if (disp) disp.innerText = val;
+  const botDisp = document.getElementById('ready-q-count-text');
+  if (botDisp) botDisp.innerText = `Spremno za ${val} pitanja.`;
+};
+
+window.saveQCountState = function() {
+  saveStorage();
+};
+
+window.toggleState = function(key) {
+  state[key] = !state[key];
+  saveStorage();
+  render();
+};
+
+window.updateUserName = function(val) {
+  state.stats.userName = val;
+  saveStorage();
+};
+
+window.toggleSaveQuestion = function(qId) {
+  const idx = state.savedQuestions.indexOf(qId);
+  if (idx > -1) state.savedQuestions.splice(idx, 1);
+  else state.savedQuestions.push(qId);
+  saveStorage();
+  render();
+};
+
+window.flipCard = function(el) {
+  SoundFX.playFlip();
+  el.querySelector('.fc-inner').classList.toggle('flipped');
+};
+
+window.flashcardFeedback = function(known) {
+  const q = quizSession.questions[quizSession.idx];
+  if (!known) {
+    if (!state.wrongQuestions.includes(q.id)) {
+      state.wrongQuestions.push(q.id);
+    }
+  } else {
+    const wIdx = state.wrongQuestions.indexOf(q.id);
+    if (wIdx > -1) state.wrongQuestions.splice(wIdx, 1);
+  }
+  saveStorage();
+  navCard(1);
+};
+
+window.navCard = function(dir) {
+  SoundFX.playFlip();
+  quizSession.idx = (quizSession.idx + dir + quizSession.questions.length) % quizSession.questions.length;
+  render();
+};
+
+window.resetStats = function() {
+  if (confirm('Da li ste sigurni da želite resetovati vašu statistiku učenja?')) {
+    state.stats.totalQuizzes = 0;
+    state.stats.totalAnswered = 0;
+    state.stats.totalCorrect = 0;
+    state.stats.streak = 0;
+    state.stats.topicStats = {};
+    state.wrongQuestions = [];
+    state.savedQuestions = [];
+    saveStorage();
+    render();
+  }
+};
+
+window.startQuizSession = function() {
+  const allQs = QUESTIONS_DB[state.selectedSubjId] || [];
+  let qList = allQs.slice();
+  
+  if (state.selectedTopics.length > 0) {
+    qList = qList.filter(q => state.selectedTopics.includes(q.topic));
+  }
+  
+  if (!qList.length) return alert('Nema dostupnih pitanja za izabrane filtere!');
+  
+  if (state.shuffleQ) {
+    qList = qList.sort(() => Math.random() - 0.5);
+  }
+  
+  qList = qList.slice(0, state.qCount);
+
+  if (state.shuffleA) {
+    qList = qList.map(q => {
+      const cloned = JSON.parse(JSON.stringify(q));
+      const paired = cloned.opts.map((opt, origIdx) => ({ opt, origIdx }));
+      paired.sort(() => Math.random() - 0.5);
+      cloned.opts = paired.map(p => p.opt);
+      cloned.correct = cloned.correct.map(origIdx => paired.findIndex(p => p.origIdx === origIdx));
+      return cloned;
+    });
+  }
+
+  quizSession = { 
+    questions: qList, 
+    idx: 0, 
+    selected: null, 
+    selectedArray: [],
+    checked: false, 
+    userAnswers: [],
+    timeLeft: state.timerEnabled ? qList.length * 30 : null
+  };
+
+  state.currentView = 'quiz';
+  saveActiveSession();
+  startTimerInterval();
+  render();
+};
+
+window.retryWrongInSession = function() {
+  const wrongIds = quizSession.userAnswers.filter(a => !a.isCorrect).map(a => a.q.id);
+  const allQs = QUESTIONS_DB[state.selectedSubjId] || [];
+  let qList = allQs.filter(q => wrongIds.includes(q.id));
+
+  if (!qList.length) return alert('Nema netačnih pitanja za ponavljanje!');
+
+  quizSession = { 
+    questions: qList, 
+    idx: 0, 
+    selected: null, 
+    selectedArray: [],
+    checked: false, 
+    userAnswers: [],
+    timeLeft: state.timerEnabled ? qList.length * 30 : null
+  };
+  state.currentView = 'quiz';
+  saveActiveSession();
+  startTimerInterval();
+  render();
+};
+
+window.startSpecialMode = function(mode) {
+  const allQs = QUESTIONS_DB[state.selectedSubjId] || [];
+  
+  if (mode === 'weak') {
+    if (state.wrongQuestions.length === 0) {
+      return alert('Nemate zabilježenih pogrešnih pitanja! Prvo rješavajte kviz.');
+    }
+    const weakList = allQs.filter(q => state.wrongQuestions.includes(q.id));
+    if (!weakList.length) return alert('Sva pogrešna pitanja su izbrisana.');
+    
+    quizSession = { 
+      questions: weakList, 
+      idx: 0, 
+      selected: null, 
+      selectedArray: [],
+      checked: false, 
+      userAnswers: [],
+      timeLeft: state.timerEnabled ? weakList.length * 30 : null
+    };
+    state.currentView = 'quiz';
+    saveActiveSession();
+    startTimerInterval();
+  } else if (mode === 'saved') {
+    if (state.savedQuestions.length === 0) {
+      return alert('Nemate sačuvanih pitanja! Kliknite na zvjezdicu ⭐ tokom kviza.');
+    }
+    const savedList = allQs.filter(q => state.savedQuestions.includes(q.id));
+    if (!savedList.length) return alert('Nema sačuvanih pitanja.');
+
+    quizSession = { 
+      questions: savedList, 
+      idx: 0, 
+      selected: null, 
+      selectedArray: [],
+      checked: false, 
+      userAnswers: [],
+      timeLeft: state.timerEnabled ? savedList.length * 30 : null
+    };
+    state.currentView = 'quiz';
+    saveActiveSession();
+    startTimerInterval();
+  } else if (mode === 'flashcards') {
+    quizSession = { questions: allQs, idx: 0 };
+    state.currentView = 'flashcards';
+  }
+  render();
+};
+
+window.selectOpt = function(i) {
+  if (quizSession.checked) return;
+  const q = quizSession.questions[quizSession.idx];
+  const isMulti = q.correct.length > 1;
+
+  if (isMulti) {
+    if (!quizSession.selectedArray) quizSession.selectedArray = [];
+    const idx = quizSession.selectedArray.indexOf(i);
+    if (idx > -1) quizSession.selectedArray.splice(idx, 1);
+    else quizSession.selectedArray.push(i);
+    render();
+  } else {
+    quizSession.selected = i;
+    checkAnswer();
+  }
+};
+
+window.checkAnswer = function() {
+  const q = quizSession.questions[quizSession.idx];
+  const isMulti = q.correct.length > 1;
+
+  if (isMulti && (!quizSession.selectedArray || quizSession.selectedArray.length === 0)) return;
+  if (!isMulti && quizSession.selected === null) return;
+
+  quizSession.checked = true;
+  
+  let isCorrect = false;
+  let userSelection = null;
+
+  if (isMulti) {
+    userSelection = quizSession.selectedArray.slice();
+    const sortedUser = quizSession.selectedArray.slice().sort();
+    const sortedCorrect = q.correct.slice().sort();
+    isCorrect = JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect);
+  } else {
+    userSelection = quizSession.selected;
+    isCorrect = q.correct.includes(quizSession.selected);
+  }
+
+  const cardEl = document.getElementById('current-q-card');
+  if (cardEl) {
+    cardEl.classList.add(isCorrect ? 'anim-correct' : 'anim-wrong');
+  }
+
+  if (isCorrect) {
+    SoundFX.playCorrect();
+    const idx = state.wrongQuestions.indexOf(q.id);
+    if (idx > -1) state.wrongQuestions.splice(idx, 1);
+  } else {
+    SoundFX.playWrong();
+    if (!state.wrongQuestions.includes(q.id)) {
+      state.wrongQuestions.push(q.id);
+    }
+  }
+
+  quizSession.userAnswers.push({
+    q: q,
+    selected: userSelection,
+    isCorrect: isCorrect
+  });
+
+  state.stats.totalAnswered++;
+  if (isCorrect) state.stats.totalCorrect++;
+
+  if (!state.stats.topicStats) state.stats.topicStats = {};
+  if (!state.stats.topicStats[q.topic]) state.stats.topicStats[q.topic] = { answered: 0, correct: 0 };
+  state.stats.topicStats[q.topic].answered++;
+  if (isCorrect) state.stats.topicStats[q.topic].correct++;
+
+  recordDailyActivity();
+  saveStorage();
+  saveActiveSession();
+
+  render();
+
+  setTimeout(() => {
+    const explBox = document.getElementById('expl-box-el') || document.getElementById('action-bar-el');
+    if (explBox) {
+      explBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, 50);
+};
+
+window.nextQuestion = function() {
+  if (quizSession.idx < quizSession.questions.length - 1) {
+    quizSession.idx++; 
+    quizSession.selected = null; 
+    quizSession.selectedArray = [];
+    quizSession.checked = false;
+    saveActiveSession();
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    finishQuizSession();
+  }
+};
+
+function finishQuizSession() {
+  if (timerInterval) clearInterval(timerInterval);
+  localStorage.removeItem(STORAGE_KEY_SESSION);
+  state.stats.totalQuizzes++;
+  recordDailyActivity();
+  saveStorage();
+  SoundFX.playFinish();
+  state.currentView = 'results';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function saveActiveSession() {
+  try {
+    localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(quizSession));
+  } catch(e){}
+}
+
+function setupKeyboardShortcuts() {
+  window.onkeydown = function(e) {
+    if (state.currentView === 'quiz' && quizSession && !quizSession.checked) {
+      const q = quizSession.questions[quizSession.idx];
+      const key = e.key.toUpperCase();
+      let optIdx = -1;
+      if (key === '1' || key === 'A') optIdx = 0;
+      else if (key === '2' || key === 'B') optIdx = 1;
+      else if (key === '3' || key === 'C') optIdx = 2;
+      else if (key === '4' || key === 'D') optIdx = 3;
+
+      if (optIdx > -1 && optIdx < q.opts.length) {
+        selectOpt(optIdx);
+      }
+    } else if (state.currentView === 'quiz' && quizSession && quizSession.checked) {
+      if (e.key === 'Enter') {
+        nextQuestion();
+      }
+    } else if (state.currentView === 'flashcards') {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        const wrap = document.querySelector('.fc-wrap');
+        if (wrap) flipCard(wrap);
+      }
+    }
+  };
+}
+
+loadStorage();
+if (!checkActiveSessionOnLoad()) {
+  render();
+}
+})();
+</script>
+</body>
+</html>
