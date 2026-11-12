@@ -400,11 +400,23 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
   .q-text { font-size: 1.05rem; margin-bottom: 14px; line-height: 1.35; }
   .opts-list { gap: 8px; }
   .opt-item { padding: 12px 14px; font-size: 0.88rem; border-radius: 10px; }
-  .sticky-bottom-bar { margin-top: 12px !important; }
+  .sticky-bottom-bar { 
+    margin-top: 12px !important; 
+    display: flex !important;
+    gap: 8px !important;
+  }
+  .sticky-bottom-bar > div:empty {
+    display: none;
+  }
+  .sticky-bottom-bar > div {
+    flex: 1;
+    display: flex;
+  }
+
   .action-btn-mobile {
-    width: 100%;
-    padding: 12px !important;
-    font-size: 0.95rem !important;
+   width: 100%;
+    padding: 12px 8px !important;
+    font-size: 0.85rem !important;
   }
 }
 </style>
