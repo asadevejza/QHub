@@ -414,7 +414,7 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
   }
 
   .action-btn-mobile {
-   width: 100%;
+    width: 100%;
     padding: 12px 8px !important;
     font-size: 0.85rem !important;
   }
@@ -523,6 +523,15 @@ function cleanQuestionText(text) {
   if (!text) return '';
   return text.replace(/\s*\((Više tačnih odgovora|Više tačnih)\)/gi, '').trim();
 }
+
+const PRESENTATIONS_LIST = [
+  { title: "1. Uvod u poslovne informacione sisteme", file: "prezentacije/MPP_1UvodUPoslovneInformacioneSisteme.pdf" },
+  { title: "2. Prikupljanje i analiza zahtjeva softvera", file: "prezentacije/MPP_2PrikupljanjeIAnalizaZahtjevaSoftvera.pdf" },
+  { title: "3. SCRUM", file: "prezentacije/MPP_3SCRUM.pdf" },
+  { title: "4. Tehnike prikupljanja činjenica", file: "prezentacije/MPP_4TehnikePrikupljanjaCinjenica.pdf" },
+  { title: "5. Metode razvoja softvera", file: "prezentacije/MPP_5MetodeRazvojaSoftvera.pdf" },
+  { title: "6. Modeliranje informacionog sistema", file: "prezentacije/MPP_6ModeliranjeIS.pdf" }
+];
 
 const SUBJECTS = [
   {
@@ -977,7 +986,7 @@ const QUESTIONS_DB = {
       q: 'Koji elementi se ističu kod produktivne upotrebe zabavnih informacionih sistema (Gamification)?',
       opts: ['„Majstorstvo“ i kompetentnost', 'Uživanje', 'Sljeđenje', 'Motiviranost'],
       correct: [0, 1, 2, 3],
-      expl: 'Majstorstvo, uživanje i motiviranost.'
+      expl: 'Majstorstvo i kompetentnost, Uživanje, Sljeđenje i Motiviranost'
     },
     {
       id: 'q55',
@@ -1469,7 +1478,7 @@ const QUESTIONS_DB = {
       q: 'Tko bi trebao vršiti observaciju i zašto?',
       opts: ['Neiskusni analitičari da uče', 'Iskusniji analitičari; jednu grupu prati jedan analitičar jer se vremenom "familijarizira" i manje utiče na realnost', 'Menadžeri odjela', 'Vanjski revizori'],
       correct: [1],
-      expl: 'Iskusniji analitičari, kako bi se smanjio uticaj na realnost.'
+      expl: 'Iskusniji analitiari, kako bi se smanjio uticaj na realnost.'
     },
     {
       id: 'q116',
@@ -2425,6 +2434,7 @@ function render() {
   
   if (state.currentView === 'hub') app.innerHTML = renderHub();
   else if (state.currentView === 'subject') app.innerHTML = renderSubjectDetail();
+  else if (state.currentView === 'presentations') app.innerHTML = renderPresentations();
   else if (state.currentView === 'quiz') app.innerHTML = renderQuiz();
   else if (state.currentView === 'results') app.innerHTML = renderResults();
   else if (state.currentView === 'flashcards') app.innerHTML = renderFlashcards();
@@ -2586,6 +2596,11 @@ function renderSubjectDetail() {
     <div style="margin-bottom: 20px;">
       <div class="eyebrow">Načini učenja</div>
       <div class="modes-row">
+        <div class="m-card" onclick="openPresentations()">
+          <span>📊</span>
+          <div>Prezentacije</div>
+          <small>6 lekcija</small>
+        </div>
         <div class="m-card" onclick="startSpecialMode('weak')">
           <span>🎯</span>
           <div>Pogrešni odgovori</div>
@@ -2605,7 +2620,7 @@ function renderSubjectDetail() {
     </div>
 
     <div class="subject-detail-container">
-      <!-- Odaberi lekciju (VERTRIKALNI RASPRED JEDNO ISPOD DRUGOG) -->
+      <!-- Odaberi lekciju (VERTIKALNI RASPRED JEDNO ISPOD DRUGOG) -->
       <div class="detail-panel">
         <h3>Odaberi lekciju</h3>
         <p>Odaberite lekciju koju želite da vježbate</p>
@@ -2675,6 +2690,41 @@ function renderSubjectDetail() {
     </footer>
   `;
 }
+
+function renderPresentations() {
+  return `
+    ${renderHeader()}
+    <div class="q-card animate-fade" style="max-width: 800px; margin: 12px auto;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+        <button class="btn btn-izlaz" onclick="goSubjectDetail()">← Nazad na predmet</button>
+        <div></div>
+        <div></div>
+      </div>
+      
+      <!-- Centrirani dio za naslov i tekst -->
+      <div style="text-align: center; margin-bottom: 24px;">
+        <h2 style="color:var(--accent-light); font-size:1.4rem; font-weight:800; margin-bottom: 6px;">📊 Prezentacije</h2>
+        <p style="color:var(--muted); font-size:0.9rem;">Kliknite na dugme pored lekcije da otvorite odgovarajuću prezentaciju:</p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        ${PRESENTATIONS_LIST.map(p => `
+          <div class="opt-item" style="display:flex; justify-content:space-between; align-items:center; cursor:default; gap:12px; flex-wrap:wrap;">
+            <span style="font-weight:700; font-size:0.95rem;">${p.title}</span>
+            <a href="${p.file}" target="_blank" class="btn blue" style="padding:8px 16px; font-size:0.82rem; font-weight:700;">
+              Otvori lekciju
+            </a>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <footer>
+      <div>© 2026 QHub</div>
+    </footer>
+  `;
+}
+
 function renderQuiz() {
   const q = quizSession.questions[quizSession.idx];
   const isLast = quizSession.idx === quizSession.questions.length - 1;
@@ -2895,6 +2945,11 @@ window.openSubject = function(id) {
   state.selectedSubjId = id; 
   state.currentView = 'subject'; 
   render(); 
+};
+
+window.openPresentations = function() {
+  state.currentView = 'presentations';
+  render();
 };
 
 window.goSubjectDetail = function() { 
