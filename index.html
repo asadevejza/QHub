@@ -213,7 +213,7 @@ body {
 .detail-panel h3 { font-size: 1.08rem; font-weight: 800; margin-bottom: 2px; }
 .detail-panel > p { color: var(--muted); font-size: 0.82rem; margin-bottom: 14px; }
 
-/* Focus Chips - VERTIKALNI RASPRED (JEDNO ISPOD DRUGOG) */
+/* Focus Chips - VERTIKALNI RASPRED */
 .focus-chips { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
 .f-chip {
   padding: 11px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-card);
@@ -285,7 +285,6 @@ input:checked + .slider:before { transform: translateX(18px); }
 .anim-correct { animation: pulseCorrect 0.35s ease; }
 .anim-wrong { animation: shakeWrong 0.35s ease; }
 
-/* POVEĆAN PROZOR ZA PITANJA I ODGOVORE */
 .q-card {
   background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
   padding: 24px 22px; box-shadow: var(--shadow-lg); margin-top: 12px; position: relative;
@@ -298,7 +297,6 @@ input:checked + .slider:before { transform: translateX(18px); }
 .q-text { font-size: 1.18rem; font-weight: 700; margin-bottom: 18px; line-height: 1.4; }
 .opts-list { display: grid; gap: 10px; }
 
-/* DUGMAD ODGOVORA SA RADIO / CHECKBOX INDIKATORIMA (VEĆI RAZMAK I PADING) */
 .opt-item {
   display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 14px;
   border: 1px solid var(--border); background: var(--surface-card); cursor: pointer;
@@ -309,7 +307,6 @@ input:checked + .slider:before { transform: translateX(18px); }
 .opt-item.correct { border-color: var(--good); background: rgba(16, 185, 129, 0.15); }
 .opt-item.wrong { border-color: var(--bad); background: rgba(239, 68, 68, 0.15); }
 
-/* Indikatori */
 .opt-indicator {
   width: 20px; height: 20px; flex-shrink: 0; display: grid; place-items: center;
   border: 2px solid var(--muted); transition: all 0.2s; background: transparent;
@@ -389,7 +386,6 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
   .btn.sm { padding: 3px 6px; font-size: 0.72rem; border-radius: 6px; }
   .streak-pill { padding: 2px 6px; font-size: 0.7rem; }
   
-  /* POVEĆANO DUGME IZLAZ I ZAGLAVLJE U KVIZU */
   .btn-izlaz {
     padding: 8px 16px !important;
     font-size: 0.88rem !important;
@@ -400,6 +396,18 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
   .q-text { font-size: 1.05rem; margin-bottom: 14px; line-height: 1.35; }
   .opts-list { gap: 8px; }
   .opt-item { padding: 12px 14px; font-size: 0.88rem; border-radius: 10px; }
+  
+  /* POTPUNO SREĐENA MOBILNA RESPONSIVNOST ZA PREZENTACIJE */
+  .pres-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .pres-row .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
   .sticky-bottom-bar { 
     margin-top: 12px !important; 
     display: flex !important;
@@ -553,7 +561,6 @@ const SUBJECTS = [
 
 const QUESTIONS_DB = {
   'mpp': [
-    // --- 1. Uvod u poslovne informacione sisteme ---
     {
       id: 'q1',
       topic: 'Uvod u poslovne informacione sisteme',
@@ -834,8 +841,6 @@ const QUESTIONS_DB = {
       correct: [1],
       expl: 'Netačno – Povratna veza ide od izlaza prema ulazu.'
     },
-
-    // --- 2. Prikupljanje i analiza zahtjeva softvera ---
     {
       id: 'q36',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
@@ -986,7 +991,7 @@ const QUESTIONS_DB = {
       q: 'Koji elementi se ističu kod produktivne upotrebe zabavnih informacionih sistema (Gamification)?',
       opts: ['„Majstorstvo“ i kompetentnost', 'Uživanje', 'Sljeđenje', 'Motiviranost'],
       correct: [0, 1, 2, 3],
-      expl: 'Majstorstvo i kompetentnost, Uživanje, Sljeđenje i Motiviranost'
+      expl: 'Majstorstvo, uživanje i motiviranost.'
     },
     {
       id: 'q55',
@@ -1116,8 +1121,6 @@ const QUESTIONS_DB = {
       correct: [0],
       expl: 'Tačno.'
     },
-
-    // --- 3. SCRUM ---
     {
       id: 'q71',
       topic: 'SCRUM',
@@ -1193,7 +1196,7 @@ const QUESTIONS_DB = {
     {
       id: 'q80',
       topic: 'SCRUM',
-      q: 'Kojim događajem završava Sprint i koliko on najdulje traje za jednomjesečni Sprint?',
+      q: 'Kojim događajem završava Sprint i koliko on najduže traje za jednomjesečni Sprint?',
       opts: ['Planiranjem sprinta; najviše 8 sati', 'Dnevnim Scrumom; najviše 15 minuta', 'Retrospektivom Sprinta; najviše 3 sata', 'Pregledom sprinta; najviše 1 sat'],
       correct: [2],
       expl: 'Retrospektivom Sprinta; najviše 3 sata za jednomjesečni sprint.'
@@ -1414,8 +1417,6 @@ const QUESTIONS_DB = {
       correct: [0],
       expl: 'Tačno.'
     },
-
-    // --- 4. Tehnike prikupljanja činjenica ---
     {
       id: 'q108',
       topic: 'Tehnike prikupljanja činjenica',
@@ -1659,7 +1660,7 @@ const QUESTIONS_DB = {
     {
       id: 'q138',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Ako ne vodite zabilješke niti snimate intervju, nije potrebno da sa sobom imate olovku i papir.',
+      q: 'Ako ne vodite zabilješke niti snimati intervju, nije potrebno da sa sobom imate olovku i papir.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
       expl: 'Netačno – Čak i ako ne vodite zabilješke niti snimate intervju, potrebno je imati olovku i papir.'
@@ -1667,7 +1668,7 @@ const QUESTIONS_DB = {
     {
       id: 'q139',
       topic: 'Tehnike prikupljanja činjenica',
-      q: 'Ako sugovornik produži vrijeme trajanja intervjua, analitičar treba nervozno gledati na sat.',
+      q: 'Ako sagovornik produži vrijeme trajanja intervjua, analitičar treba nervozno gledati na sat.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
       expl: 'Netačno - Ako sugovornik produži vrijeme, ne treba gledati nervozno na sat'
@@ -1696,8 +1697,6 @@ const QUESTIONS_DB = {
       correct: [0],
       expl: 'Tačno.'
     },
-
-    // --- 5. Tradicionalne i agilne metode razvoja softvera ---
     {
       id: 'q143',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
@@ -1848,7 +1847,7 @@ const QUESTIONS_DB = {
       q: 'Koje metode spadaju u agilne metode?',
       opts: ['Scrum', 'Kanban', 'Extreme Programming (XP)', 'Lean Development', 'Crystal'],
       correct: [0, 1, 2, 3, 4],
-      expl: 'Sve navedene su agilne metode.'
+      expl: 'Sve navedene metode.'
     },
     {
       id: 'q162',
@@ -1978,8 +1977,6 @@ const QUESTIONS_DB = {
       correct: [0],
       expl: 'Tačno.'
     },
-
-    // --- 6. Modeliranje Informacionog sistema ---
     {
       id: 'q178',
       topic: 'Modeliranje Informacionog sistema',
@@ -2571,6 +2568,7 @@ function renderHub() {
 
     <footer>
       <div>© 2026 QHub</div>
+      <div>asadevejza.github.io</div>
     </footer>
   `;
 }
@@ -2599,7 +2597,7 @@ function renderSubjectDetail() {
         <div class="m-card" onclick="openPresentations()">
           <span>📊</span>
           <div>Prezentacije</div>
-          <small>6 lekcija</small>
+          <small>6 fajlova (.pdf)</small>
         </div>
         <div class="m-card" onclick="startSpecialMode('weak')">
           <span>🎯</span>
@@ -2620,7 +2618,6 @@ function renderSubjectDetail() {
     </div>
 
     <div class="subject-detail-container">
-      <!-- Odaberi lekciju (VERTIKALNI RASPRED JEDNO ISPOD DRUGOG) -->
       <div class="detail-panel">
         <h3>Odaberi lekciju</h3>
         <p>Odaberite lekciju koju želite da vježbate</p>
@@ -2633,7 +2630,6 @@ function renderSubjectDetail() {
         <p style="color: var(--muted); font-size: 0.78rem; margin-top: 12px;">Prazan izbor uključuje sve teme.</p>
       </div>
 
-      <!-- Postavke kviza -->
       <div class="detail-panel">
         <h3>Postavke kviza</h3>
         
@@ -2687,6 +2683,7 @@ function renderSubjectDetail() {
 
     <footer>
       <div>© 2026 QHub</div>
+      <div>asadevejza.github.io</div>
     </footer>
   `;
 }
@@ -2701,7 +2698,6 @@ function renderPresentations() {
         <div></div>
       </div>
       
-      <!-- Centrirani dio za naslov i tekst -->
       <div style="text-align: center; margin-bottom: 24px;">
         <h2 style="color:var(--accent-light); font-size:1.4rem; font-weight:800; margin-bottom: 6px;">📊 Prezentacije</h2>
         <p style="color:var(--muted); font-size:0.9rem;">Kliknite na dugme pored lekcije da otvorite odgovarajuću prezentaciju:</p>
@@ -2709,10 +2705,10 @@ function renderPresentations() {
 
       <div style="display:flex; flex-direction:column; gap:10px;">
         ${PRESENTATIONS_LIST.map(p => `
-          <div class="opt-item" style="display:flex; justify-content:space-between; align-items:center; cursor:default; gap:12px; flex-wrap:wrap;">
+          <div class="opt-item pres-row" style="display:flex; justify-content:space-between; align-items:center; cursor:default; gap:12px; flex-wrap:wrap;">
             <span style="font-weight:700; font-size:0.95rem;">${p.title}</span>
             <a href="${p.file}" target="_blank" class="btn blue" style="padding:8px 16px; font-size:0.82rem; font-weight:700;">
-              Otvori lekciju
+              Otvori prezentaciju
             </a>
           </div>
         `).join('')}
@@ -2721,6 +2717,7 @@ function renderPresentations() {
 
     <footer>
       <div>© 2026 QHub</div>
+      <div>asadevejza.github.io</div>
     </footer>
   `;
 }
@@ -2876,6 +2873,7 @@ function renderResults() {
 
     <footer>
       <div>© 2026 QHub</div>
+      <div>asadevejza.github.io</div>
     </footer>
   `;
 }
@@ -3167,7 +3165,6 @@ window.selectOpt = function(i) {
   const isMulti = q.correct.length > 1;
   const alreadyAnswered = quizSession.userAnswers[quizSession.idx];
 
-  // Ako je pitanje već odgovoreno (sačuvano), ne dozvoljavamo ponovno mijenjanje izbora
   if (alreadyAnswered) return;
 
   if (isMulti) {
