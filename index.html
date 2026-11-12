@@ -1705,7 +1705,7 @@ const QUESTIONS_DB = {
       id: 'q146',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Šta se u paralelnom pristupu razvoja softvera radi nakon što se napravi dizajn cjelokupnog proizvoda?',
-      opts: ['Projekt se odmah predaje kupcu', 'Projekt se dijeli na više podprojekata koji se realiziraju paralelno i potom integriraju', 'Prelazi se na analizu rizika', 'Piše se samo korisničko uputstvo'],
+      opts: ['Projekt se odmah predaje kupcu', 'Projekt se dijeli na više podprojekata koji se, ako nema međusobne ovisnosti, realiziraju paralelno i potom integriraju u cjelinu', 'Prelazi se na analizu rizika', 'Piše se samo korisničko uputstvo'],
       correct: [1],
       expl: 'Dijeli se na podprojekte koji se paralelno realiziraju i integrišu.'
     },
@@ -1785,7 +1785,7 @@ const QUESTIONS_DB = {
       id: 'q156',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Koji faktori pogoduju korištenju vodopadnog modela?',
-      opts: ['Zahtjevi su jasni i fiksni bez dvosmislenosti', 'Stabilnost definicije proizvoda i projekat nije dinamičan', 'Na raspolaganju su veliki resursi s odgovarajućom stručnošću', 'Projekt kratke duljine i dobar dokument'],
+      opts: ['U prijavi nema dvosmislenih zahtjeva i zahtjevi su jasni i fiksni', 'Stabilnost definicije proizvoda i projekat nije dinamičan', 'Na raspolaganju su veliki resursi s odgovarajućom stručnošću', 'Projekt kratke duljine i dobar dokument','Zahtjevi se mijenjaju na dnevnoj bazi'],
       correct: [0, 1, 2, 3],
       expl: 'Fiksni zahtjevi, stabilnost, resursi i kratka duljina.'
     },
@@ -1794,14 +1794,14 @@ const QUESTIONS_DB = {
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Koje su prednosti, a koji nedostaci paralelnog pristupa?',
       opts: ['Prednost: znatno se smanjuje vrijeme razvoja', 'Prednost: manje su šanse za prepravke', 'Nedostatak: potrebno je više resursa', 'Nedostatak: ponekad je teško integrirati podprojekte'],
-      correct: [0, 2, 3],
+      correct: [0, 1, 2, 3],
       expl: 'Manje vremena, više resursa i teža integracija.'
     },
     {
       id: 'q158',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Koje su prednosti iterativnog (evolucijskog) pristupa?',
-      opts: ['Softver se proizvodi u ranim fazama životnog ciklusa', 'Korisnici u ranim fazama probaju rezultate', 'Pojednostavljeno testiranje', 'Nema nikakvih izmjena zahtjeva'],
+      opts: ['Softver se proizvodi u ranim fazama životnog ciklusa', 'Korisnici u ranim fazama probaju rezultate', 'Pojednostavljeno testiranje', 'Nema nikakvih izmjena zahtjeva tokom cijelog projekta'],
       correct: [0, 1, 2],
       expl: 'Rana proizvodnja softvera, rani feedback i pojednostavljeno testiranje.'
     },
@@ -1816,7 +1816,7 @@ const QUESTIONS_DB = {
     {
       id: 'q160',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Koje su nedostaci spiralnog modela?',
+      q: 'Koji su nedostaci spiralnog modela?',
       opts: ['Može biti veoma skup model', 'Zahtijeva visok stepen ekspertize u analizi rizika', 'Nije dobar za male projekte', 'Softver se proizvodi tek na kraju'],
       correct: [0, 1, 2],
       expl: 'Skup, traži ekspertizu, loš za male projekte.'
@@ -1833,7 +1833,7 @@ const QUESTIONS_DB = {
       id: 'q162',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Koje su prednosti Scrum metode?',
-      opts: ['Motivacija tima', 'Transparentnost', 'Definicija gotovog', 'Fokus na kvalitetu s manje pogrešaka', 'Dobro planiranje sprinta'],
+      opts: [') Motivacija tima je dobra jer programeri žele ispuniti rok za svaki sprint', 'Transparentnost omogućava da projekt prate svi članovi tima ili organizacije', 'Za provjeru valjanosti zahtjeva koristi se jednostavna „definicija gotovog“ ', 'Usredotočenost na kvalitetu rezultira s manje pogrešaka', ') Dobro planiranje sprinta ima prioritet'],
       correct: [0, 1, 2, 3, 4],
       expl: 'Sve navedene prednosti Scruma.'
     },
@@ -1841,7 +1841,7 @@ const QUESTIONS_DB = {
       id: 'q163',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Koje su prednosti Kanban metode?',
-      opts: ['Mogućnost pregleda svih zadataka', 'Moguće je ograničiti broj pokrenutih zadataka', 'Fokusira se na trajanje ciklusa i kontinuirane isporuke', 'Jednostavna za implementaciju izvan IT svijeta'],
+      opts: ['Mogućnost pregleda svih zadataka u okviru jednog projekta', 'Moguće je ograničiti broj pokrenutih zadataka', 'Fokusira se na trajanje ciklusa i kontinuirane isporuke', 'Jedna od najjednostavnijih metodologija za implementaciju izvan „IT svijeta“'],
       correct: [0, 1, 2, 3],
       expl: 'Sve navedene prednosti Kanbana.'
     },
@@ -1857,7 +1857,7 @@ const QUESTIONS_DB = {
       id: 'q165',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
       q: 'Koji su nedostaci Ekstremnog programiranja (XP)?',
-      opts: ['Ekstremna usredotočenost na kod može zanemariti dizajn', 'Geografska razuđenost tima može ometati okvir', 'Registar grešaka se ne održava uvijek', 'Softver se uopće ne testira'],
+      opts: ['Ekstremna usredotočenost na kod može dovesti do manjeg pridavanja važnosti dizajnu ', 'Okvir možda neće raditi najbolje ako se svi članovi tima ne nalaze na istom geografskom području', 'Registar mogućih grešaka se ne održava uvijek, što može dovesti do sličnih grešaka u budućnosti', 'Softver se uopće ne testira do samog kraja projekta'],
       correct: [0, 1, 2],
       expl: 'Fokus na kod nauštrb dizajna, razuđenost i ne održavanje registra grešaka.'
     },
@@ -1875,7 +1875,7 @@ const QUESTIONS_DB = {
       q: 'U vodopadnom modelu sasvim je uobičajeno stalno se vraćati na prethodne faze razvoja.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – Vodopadni model je linearan i ne podrazumijeva vraćanje.'
+      expl: 'Netačno – U vodopadnom modelu nije uobičajeno vraćati se na prethodnu fazu.'
     },
     {
       id: 'q168',
@@ -1899,12 +1899,12 @@ const QUESTIONS_DB = {
       q: 'Scrum se može uspješno koristiti isključivo u razvoju softverskih proizvoda, ali ne i u poslovnom kontekstu.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – Može se koristiti i u poslovnom kontekstu.'
+      expl: 'Netačno – Obično se koristi u upravljanju razvojem softvera, ali se može uspješno koristiti i u poslovnom kontekstu.'
     },
     {
       id: 'q171',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Kanban metoda se u praksi organizira na ploči podijeljenoj u stupce (npr. TO DO, DOING, DONE).',
+      q: 'Kanban metoda se u praksi organizira na ploči podijeljenoj u stupce (npr. TO DO, DOING, DONE), gdje svaki novi zadatak dobija novu „karticu“.',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
@@ -1912,15 +1912,15 @@ const QUESTIONS_DB = {
     {
       id: 'q172',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Budući da u Kanbanu postoje strogo fiksirani vremenski okviri, nikada ne dolazi do kašnjenja.',
+      q: 'Budući da u Kanbanu postoje strogo fiksirani vremenski okviri za svaku fazu, nikada ne dolazi do problema sa kašnjenjem.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – Kanban nema strogo fiksirane vremenske okvire sprintova.'
+      expl: 'Netačno – U Kanbanu nema vremenskih okvira, pa se tim može suočiti s problemima poput kašnjenja u svakoj fazi.'
     },
     {
       id: 'q173',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Ekstremno programiranje (XP) potiče programere da prihvate promjene u zahtjevima korisnika, čak i kasnije.',
+      q: 'U Ekstremnom programiranju (XP) softver se testira od prvog dana i promiče se programiranje u paru (pair programming).',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
@@ -1936,10 +1936,10 @@ const QUESTIONS_DB = {
     {
       id: 'q175',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Načelo „različite obveze“ (Defer Decision) u Lean metodi potiče tim da se previše fokusira na dugoročno planiranje.',
+      q: 'Načelo „različite obveze“ (Defer Decision) u Lean metodi potiče tim da se previše fokusira na dugoročno planiranje prije razumijevanja zahtjeva poslovanja',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – Potiče odgađanje odluka dok se ne prikupe prave informacije.'
+      expl: 'Netačno – Ta tačka potiče tim da se ne fokusira previše na planiranje i predviđanje ideja bez potpunog prethodnog razumijevanja zahtjeva poslovanja.'
     },
     {
       id: 'q176',
@@ -1947,12 +1947,12 @@ const QUESTIONS_DB = {
       q: 'Crystal je teška metodologija koja zahtijeva ogromnu količinu formalne dokumentacije.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – Crystal je lagana metodologija.'
+      expl: 'Netačno – Crystal je lagana metodologija u smislu dokumentacije.'
     },
     {
       id: 'q177',
       topic: 'Tradicionalne i agilne metode razvoja softvera ',
-      q: 'Varijanta Crystal Clear namijenjena je manjim timovima do 8 članova, dok je Crystal Red za velike timove.',
+      q: 'Varijanta Crystal Clear namijenjena je manjim timovima do 8 članova, dok je Crystal Red za velike timove od 50 do 1000 ljudi',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
