@@ -931,7 +931,7 @@ const QUESTIONS_DB = {
       id: 'q50',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
       q: 'Šta spada u nefunkcionalne zahtjeve (KAKO)?',
-      opts: ['Osnovne karakteristike, ograničenja ili atributi IS-a (atributi kvalitete)', 'Vremenska ograničenja', 'Ograničenja u razvojnom procesu i standardi', 'Prikaz funkcionalnosti koje sistem treba izvršiti'],
+      opts: ['Osnovne karakteristike, ograničenja ili atributi IS-a (atributi kvalitete)', 'Vremenska ograničenja', 'Ograničenja u razvojnom procesu i standardi', 'Prikaz funkcionalnosti koje sistem treba izvršiti za redovne aktivnosti korisnika'],
       correct: [0, 1, 2],
       expl: 'Nefunkcionalni zahtjevi obuhvataju atribute kvalitete, vremenska ograničenja i standarde.'
     },
@@ -964,14 +964,14 @@ const QUESTIONS_DB = {
       topic: 'Prikupljanje i analiza zahtjeva softvera',
       q: 'Koji elementi se ističu kod produktivne upotrebe zabavnih informacionih sistema (Gamification)?',
       opts: ['„Majstorstvo“ i kompetentnost', 'Uživanje', 'Sljeđenje', 'Motiviranost'],
-      correct: [0, 1, 3],
+      correct: [0, 1, 2, 3],
       expl: 'Majstorstvo, uživanje i motiviranost.'
     },
     {
       id: 'q55',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
       q: 'Šta čini globalizaciju softverskog proizvoda?',
-      opts: ['Internacionalizacija (datum, brojevi, valuta, kontakt)', 'Lokalizacija (jezička i kulturološka prilagodba, CSS za svako pismo, DBCS)', 'Isključivo prevođenje teksta'],
+      opts: ['Internacionalizacija (datum, brojevi, valuta, kontakt)', 'Lokalizacija (jezička i kulturološka prilagodba, CSS za svako pismo, DBCS)', 'Isključivo prevođenje teksta pomoću automatskog prevodioca bez prilagodbe sučelja '],
       correct: [0, 1],
       expl: 'Internacionalizacija i lokalizacija.'
     },
@@ -1013,12 +1013,12 @@ const QUESTIONS_DB = {
       q: 'Korisnički zahtjevi (USR) moraju biti napisani kao strogo tehnički dokument razumljiv isključivo programerima.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – USR mora biti razumljiv i korisnicima i razvojnom timu.'
+      expl: 'Netačno – USR ne pretendira biti tehnički dokument; treba biti jednako razumljiv i krajnjim korisnicima i razvojnom timu.'
     },
     {
       id: 'q61',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'SRS dokument sadrži i korisničke i sistemske zahtjeve, koji mogu biti dio jednog ili dva odvojena dokumenta.',
+      q: 'SRS (Software Requirement Specification) dokument sadrži i korisničke i sistemske zahtjeve, koji mogu biti dio jednog ili dva odvojena dokumenta.',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
@@ -1042,7 +1042,7 @@ const QUESTIONS_DB = {
     {
       id: 'q64',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'GAP analiza u poslovanju omogućava komparaciju stvarnih performansi sa potencijalnim ili željenim performansama.',
+      q: 'GAP analiza u poslovanju omogućava komparaciju stvarnih performansi sa potencijalnim ili željenim performansama ("Where are we?" i "Where do we want to be?"). ',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
@@ -1058,10 +1058,10 @@ const QUESTIONS_DB = {
     {
       id: 'q66',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'Scrum ulazi u konkretne inžinjerske detalje izgradnje softvera, pa se nikada ne kombinuje s disciplinama poput XP ili RUP.',
+      q: 'Scrum ulazi u konkretne inžinjerske detalje izgradnje softvera, pa se nikada ne kombinira s disciplinama poput XP ili RUP.',
       opts: ['Tačno', 'Netačno'],
       correct: [1],
-      expl: 'Netačno – Scrum ne ulazi u inženjerske detalje, pa se često kombinuje sa XP ili RUP.'
+      expl: 'Netačno – Scrum ne ulazi u konkretne inžinjerske detalje, pa se obično kombinuje s disciplinama kao što su XP ili RUP. '
     },
     {
       id: 'q67',
@@ -1082,7 +1082,7 @@ const QUESTIONS_DB = {
     {
       id: 'q69',
       topic: 'Prikupljanje i analiza zahtjeva softvera',
-      q: 'U fazi validacije zahtjeva provjerava se da li specifikacija odgovara onom što korisnik želi u finalnom proizvodu.',
+      q: 'U fazi validacije zahtjeva provjerava se da li specifikacija odgovara onom što korisnik želi u finalnom proizvodu, uz moguć povrat u fazu prepoznavanja.',
       opts: ['Tačno', 'Netačno'],
       correct: [0],
       expl: 'Tačno.'
