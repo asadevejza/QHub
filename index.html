@@ -770,7 +770,9 @@ const PRESENTATIONS = {
   'is': [
     { title: "1. Uvod u informacijsku sigurnost", file: "prezentacije/IS_1UvodUInformacijskeSisteme.pdf" },
     { title: "2. Protokoli i sigurnost", file: "prezentacije/IS_2ProtokoliISigurnost.pdf" },
-    { title: "3. Kontrola pristupa i sigurnost", file: "prezentacije/IS_3KontrolaPristupaISigurnost.pdf" }
+    { title: "3. Kontrola pristupa i sigurnost", file: "prezentacije/IS_3KontrolaPristupaISigurnost.pdf" },
+    { title: "4. Kriptografija – prvi dio", file: "prezentacije/IS_4KriptografijaPrviDio.pdf" },
+    { title: "5. Kriptografija – drugi dio", file: "prezentacije/IS_5KriptografijaDrugiDio.pdf" }
   ]
 };
 
@@ -800,7 +802,8 @@ const SUBJECTS = [
       'Uvod u informacijsku sigurnost',
       'Protokoli i sigurnost',
       'Kontrola pristupa i sigurnost',
-      'Kriptografija – prvi dio'
+      'Kriptografija – prvi dio',
+      'Kriptografija – drugi dio'
     ]
   }
 ];
@@ -3336,6 +3339,214 @@ const QUESTIONS_DB = {
       opts: ['Pokazala je ključnu važnost matematike i logike u sigurnosti', 'Pokazala je značaj automatizacije i mašina u kriptoanalizi (uređaj „Bomba“)', 'Dokazala je da ni najjača enkripcija (sa preko 10²³ kombinacija) nije sigurna ako se ključevi loše koriste', 'Pokazala je da se poruke šifrirane Enigmom nisu mogle prenositi Morzeovim kodom'],
       correct: [0, 1, 2],
       expl: 'Poruke šifrirane Enigmom su se upravo prenosile Morzeovim kodom.'
+    },
+    {
+      id: 'is105',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Povežite 4 problema koje napadač može pokušati iskoristiti u mrežnoj komunikaciji sa odgovarajućim kriptografskim ciljevima (označite tačne tvrdnje):',
+      opts: ['Neko čita podatke → Povjerljivost', 'Neko mijenja podatke → Integritet', 'Lažni server (napadač se predstavlja kao server) → Autentifikacija', 'Ponovljena stara poruka → Freshness / Replay zaštita'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is106',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Kojim redoslijedom se odvija 5 faza uspostavljanja sigurne veze kombinacijom kriptografskih algoritama (npr. kod protokola TLS, SSH, VPN, WPA)?',
+      opts: ['Simetrična enkripcija → Integritet → Autentikacija → Derivacija ključeva → Dogovor ključa', 'Autentikacija → Dogovor ključa → Derivacija ključeva → Simetrična enkripcija → Integritet', 'Dogovor ključa → Simetrična enkripcija → Autentikacija → Integritet → Derivacija ključeva', 'Derivacija ključeva → Autentikacija → Integritet → Dogovor ključa → Simetrična enkripcija'],
+      correct: [1],
+      expl: 'Autentikacija → Dogovor ključa → Derivacija ključeva → Simetrična enkripcija → Integritet.'
+    },
+    {
+      id: 'is107',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koja je glavna razlika između protočnih (stream) i blokovskih (block) simetričnih enkripcijskih algoritama?',
+      opts: ['Protočni algoritmi obrađuju podatke bit po bit ili bajt po bajt koristeći pseudonasumični keystream koji se XOR-uje s plaintextom', 'Blokovski algoritmi obrađuju podatke po blokovima fiksne veličine (npr. 64 bita kod DES-a ili 128 bita kod AES-a)', 'Glavna prednost simetrične enkripcije je velika brzina, a glavni nedostatak problem sigurne distribucije (razmjene) ključeva', 'Simetrični algoritmi koriste javni ključ za šifriranje, a privatni ključ za dešifriranje'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Simetrični algoritmi koriste javni ključ za šifriranje, a privatni ključ za dešifriranje.'
+    },
+    {
+      id: 'is108',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Šta je tačno za protočne algoritme RC4 i ChaCha20?',
+      opts: ['RC4 (autor Ron Rivest, 1987.) je potpuno nesiguran, kompromitovan i povučen iz upotrebe', 'ChaCha20 je dominantan, siguran stream algoritam koji se danas koristi u TLS 1.3 i SSH protokolima', 'ChaCha20 radi izuzetno brzo čisto softverski (bez potrebe za hardverskim instrukcijama poput AES-NI), zbog čega je idealan za pametne satove, jeftinije mobitele i IoT uređaje', 'ChaCha20 radi isključivo na superračunarima i ne može raditi na mobilnim uređajima'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: ChaCha20 radi isključivo na superračunarima i ne može raditi na mobilnim uređajima.'
+    },
+    {
+      id: 'is109',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Od kojih elemenata se sastoji matrica 4×4 (ukupno 512 bita) u Key Stream Generatoru (KSG) algoritma ChaCha20?',
+      opts: ['Konstante (4 mjesta / 128 bita) – fiksni tekst "expand 32-byte k"', 'Tajni ključ (8 mjesta / 256 bita)', 'Brojač / Counter (1 mjesto / 32 bita) – kreće od 0 i povećava se za 1 za svaki sljedeći blok', 'Nonce (3 mjesta / 96 bita) – nasumični broj koji se koristi samo jednom (number used once)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is110',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koje tri operacije (skraćeno ARX) izvodi unutarnji mikser algoritma ChaCha20 i koliko se rundi taj proces ponavlja?',
+      opts: ['Addition (zbrajanje), Rotation (rotacija bitova) i XOR (ekskluzivna disjunkcija) kroz 20 rundi', 'Množenje matrica, faktorizacija prostih brojeva i Eulerova funkcija kroz 10 rundi', 'SubBytes, ShiftRows i MixColumns kroz 14 rundi', 'Samo sabiranje modulo 26 kroz 16 rundi'],
+      correct: [0],
+      expl: 'Addition (zbrajanje), Rotation (rotacija bitova) i XOR (ekskluzivna disjunkcija) kroz 20 rundi.'
+    },
+    {
+      id: 'is111',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koje tvrdnje tačno opisuju algoritam DES (Data Encryption Standard)?',
+      opts: ['Razvio ga je IBM ranih 1970-ih, a kao federalni standard u SAD-u uveden je 1977. godine', 'Obrađuje podatke u blokovima od 64 bita', 'Nominalna dužina ključa je 64 bita, ali se 8 bita koristi za provjeru parnosti, pa je stvarna efektivna dužina ključa 56 bita', 'Danas se smatra nesigurnim jer se 56-bitni ključ može probiti metodom brute-force za manje od jednog dana korištenjem moderne opreme'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is112',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Šta je karakteristično za Feistelovu mrežu (koju DES koristi kroz 16 rundi)?',
+      opts: ['Nije samostalni algoritam, već model konstrukcije blokovskih šifri', 'Blok teksta se dijeli na lijevu (L) i desnu (R) polovicu od po 32 bita koje se u rundama izmjenjuju i rotiraju', 'Isti algoritam/proces se koristi i za enkripciju i za dekripciju, s tim da se kod dekripcije podključevi primjenjuju obrnutim redoslijedom (Kₙ→K₀)', 'U svakoj rundi DES-a funkcija F vrši ekspanziju (32→48 bita), XOR s podključem, S-box supstituciju (48→32 bita) i P-box permutaciju'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is113',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Kako funkcioniše proces kreiranja podključeva („Key Scheduling“) u DES algoritmu?',
+      opts: ['Uklanjanjem 8 bita parnosti pomoću posebne tablice dobija se 56-bitni ključ koji se dijeli na dvije polovine C₀ i D₀ od po 28 bita', 'U svakoj rundi polovine C i D se ciklički pomjeraju ulijevo, a zatim se pomoću tablice permutacija i spajanja (PC-2) izvodi podključ od 48 bita', 'Podključ svake runde ima dužinu od 2048 bita', 'Trostruki DES (3DES) nastao je kao nadogradnja gdje se DES primjenjuje tri puta s različitim ključevima radi produženja sigurnosti'],
+      correct: [0, 1, 3],
+      expl: 'Netačna tvrdnja: Podključ svake runde ima dužinu od 2048 bita.'
+    },
+    {
+      id: 'is114',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koje tvrdnje su tačne za nastanak i parametre algoritma AES (Advanced Encryption Standard)?',
+      opts: ['Izabran je 2001. godine nakon javnog konkursa iz 1997. (od 15 prijava i 5 finalista: MARS, RC6, Rijndael, Serpent i Twofish)', 'Pobjednički algoritam je Rijndael, čiji su autori Joan Daemen i Vincent Rijmen', 'Obrađuje blokove fiksne veličine od 128 bita (16 bajtova)', 'Broj rundi zavisi od dužine ključa: 10 rundi za AES-128, 12 rundi za AES-192 i 14 rundi za AES-256'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is115',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Povežite četiri osnovne operacije u jednoj rundi AES algoritma sa njihovim funkcijama (označite tačne tvrdnje):',
+      opts: ['SubBytes – nelinearna zamjena svakog bajta prema unaprijed definisanoj S-box tablici (uvodi konfuziju)', 'ShiftRows – cikličko pomjeranje redova u matrici podataka radi miješanja bajtova', 'MixColumns – matematičko kombinovanje kolona kako bi se promjena proširila kroz cijeli blok (povećava difuziju; preskače se u posljednjoj rundi)', 'AddRoundKey – kombinovanje svakog bajta s dijelom tajnog ključa operacijom XOR'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is116',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Šta je tačno za Diffie–Hellman (DH) kriptografski protokol?',
+      opts: ['Objavili su ga Whitfield Diffie i Martin Hellman 1976. godine (uz doprinos Ralpha Merklea)', 'Omogućava dvjema stranama da preko nesigurnog kanala generišu zajednički tajni ključ bez njegovog direktnog slanja mrežom', 'Koristi se u protokolima i aplikacijama kao što su TLS/SSL (ECDH), VPN (IPSec), SSH, PGP/GPG, Signal, WhatsApp i IoT uređaji', 'Koristi se za direktno šifriranje velikih video datoteka od 10 GB'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Koristi se za direktno šifriranje velikih video datoteka od 10 GB.'
+    },
+    {
+      id: 'is117',
+      topic: 'Kriptografija – drugi dio',
+      q: 'U primjeru Diffie–Hellman razmjene ključeva iz lekcije, javni parametri su p=23 i g=5, Amirov tajni broj je a=6, a Damirov tajni broj b=15. Koje vrijednosti Amir i Damir razmjenjuju javno, a koliko iznosi njihov zajednički tajni ključ K?',
+      opts: ['Amir računa i šalje Damiru javnu vrijednost A=5⁶ mod 23 =8', 'Damir računa i šalje Amiru javnu vrijednost B=5¹⁵ mod 23 =19', 'Zajednički tajni ključ iznosi K=19⁶ mod 23 =8¹⁵ mod 23 =2', 'Napadač koji prisluškuje mrežu vidi p,g,A i B, ali ne zna tajne vrijednosti a i b'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is118',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koji sigurnosni problem ima osnovni Diffie–Hellman protokol (prikazan u prezentaciji na primjeru napadača „Fatima“) i kako se taj problem rješava?',
+      opts: ['Osnovni DH nema autentifikaciju, pa je ranjiv na napad čovjeka u sredini (Man-in-the-Middle / Woman-in-the-Middle)', 'Napadač u sredini može presresti javne vrijednosti i uspostaviti dva odvojena tajna ključa (jedan s Amirom, a drugi s Damirom)', 'Problem se rješava uvođenjem digitalnog potpisa i digitalnog certifikata radi potvrde identiteta', 'Problem se rješava slanjem privatnih ključeva u običnom tekstu putem e-maila'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Problem se rješava slanjem privatnih ključeva u običnom tekstu putem e-maila.'
+    },
+    {
+      id: 'is119',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Kako se kreira i verifikuje Digitalni potpis i šta on garantuje?',
+      opts: ['Digitalni potpis garantuje identitet potpisnika (autentičnost) i integritet poruke', 'Pošiljatelj provuče dokument kroz hash funkciju (npr. SHA-256) i dobijeni hash enkriptuje svojim PRIVATNIM ključem', 'Primatelj izračuna novi hash primljenog dokumenta, dekriptuje potpis pošiljateljevim JAVNIM ključem i uporedi ta dva hasha', 'Digitalni potpis se kreira tako što pošiljatelj šifrira dokument javnim ključem primatelja'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Digitalni potpis se kreira tako što pošiljatelj šifrira dokument javnim ključem primatelja.'
+    },
+    {
+      id: 'is120',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Šta sve sadrži Digitalni certifikat i ko ga izdaje?',
+      opts: ['Identitet ili naziv domene i javni ključ vlasnika', 'Period važenja certifikata', 'Izdavaoca i digitalni potpis izdavaoca (pouzdanog certifikacijskog autoriteta – Certificate Authority / CA)', 'Privatni ključ korisnika i njegovu lozinku za bankovni račun'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Privatni ključ korisnika i njegovu lozinku za bankovni račun.'
+    },
+    {
+      id: 'is121',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koje poruke se razmjenjuju u dva koraka uspostave veze kod TLS 1.3 Handshake protokola?',
+      opts: ['1. korak (Klijent → Server): ClientHello + Key Share (podržane kriptografske metode + javna polovica DH ključa)', '2. korak (Server → Klijent): ServerHello + Certificate + Signature + Key Share', 'Nakon razmjene oba učesnika izračunavaju Shared Secret, izvode Session Keys i aktiviraju AES sesiju', 'TLS 1.3 zahtijeva ukupno 12 koraka prije nego što se pošalje bilo kakav ključ'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: TLS 1.3 zahtijeva ukupno 12 koraka prije nego što se pošalje bilo kakav ključ.'
+    },
+    {
+      id: 'is122',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Na kojem matematičkom problemu počiva sigurnost RSA algoritma (Rivest, Shamir, Adleman, 1977.)?',
+      opts: ['Na teškoći faktorizacije velikih brojeva koji su proizvod dva ogromna prosta broja', 'Na cikličkom pomjeranju redova u matrici od 128 bita', 'Na rješavanju linearne jednačine s jednom nepoznatom', 'Na frekvencijskoj analizi samoglasnika'],
+      correct: [0],
+      expl: 'Na teškoći faktorizacije velikih brojeva koji su proizvod dva ogromna prosta broja.'
+    },
+    {
+      id: 'is123',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koje formule i uslovi vrijede prilikom generisanja ključeva, enkripcije i dekripcije u RSA algoritmu?',
+      opts: ['Modul se računa kao n=p×q, a Eulerova funkcija kao ϕ(n)=(p-1)(q-1)', 'Javni eksponent e mora zadovoljavati 1&lt;e&lt;ϕ(n) i biti relativno prost s ϕ(n) (najčešće se koristi e=65537)', 'Privatni eksponent d je multiplikativni inverz broja e modulo ϕ(n), odnosno (d×e) mod ϕ(n)=1', 'Enkripcija se vrši formulom C=Mᵉ mod n (javnim ključem (e,n)), a dekripcija formulom M=Cᵈ mod n (privatnim ključem (d,n))'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is124',
+      topic: 'Kriptografija – drugi dio',
+      q: 'U primjeru RSA algoritma gdje su odabrani prosti brojevi p=5 i q=11, te javni eksponent e=3, koliko iznose modul n, Eulerova funkcija ϕ(n), privatni eksponent d i šifrirana poruka C za otvorenu poruku M=9?',
+      opts: ['n=55, a ϕ(n)=40', 'Privatni eksponent iznosi d=27 (jer je 3×27=81≡1 (mod 40))', 'Šifrirana poruka iznosi C=9³ mod 55 =729 mod 55 =14', 'Dekripcijom M=14²⁷ mod 55 ponovo se dobija originalna poruka M=9'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is125',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Šta je tačno za asimetrični kriptografski algoritam ElGamal?',
+      opts: ['Izumio ga je Taher ElGamal 1985. godine na osnovu Diffie–Hellman razmjene ključeva, a sigurnost zasniva na problemu diskretnog logaritma', 'Javni ključ čini trojka (p,g,y) gdje je y=gˣ mod p , dok je privatni ključ tajni broj x', 'Šifrirana poruka (ciphertext) je par (a,b) gdje je a=gᵏ mod p i b=(yᵏ×M) mod p , zbog čega ElGamal udvostručuje veličinu šifrirane poruke', 'Primjenjuje se kod elektronskog glasanja (gdje omogućava zbrajanje šifriranih glasova) i u Bitcoin tehnologiji'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is126',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Kako funkcioniše Hibridna kriptografija na primjeru slanja velikog povjerljivog dokumenta (tajni.pdf) putem e-maila?',
+      opts: ['Asimetrična enkripcija nije efikasna za šifriranje velikih datoteka, pa se kombinuju simetrična i asimetrična kriptografija', 'Pošiljatelj šifrira sam dokument brzim simetričnim algoritmom (AES) pomoću jednokratnog sesijskog ključa K_session', 'Sesijski ključ K_session se zatim šifrira asimetričnim algoritmom (RSA) pomoću JAVNOG ključa primatelja', 'Primatelj svojim PRIVATNIM ključem (RSA) otključava K_session, a zatim njime u AES-u dešifrira dokument'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is127',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Zašto su generatori slučajnih brojeva kritični za sigurnost kriptografskih algoritama i u koje svrhe se koriste?',
+      opts: ['Koriste se za generisanje kriptografskih ključeva', 'Koriste se za generisanje inicijalizacijskih vektora (IV) i nonce vrijednosti', 'Koriste se za „soljenje lozinki“ (salt)', 'Ako su brojevi predvidivi ili napadač sazna seed, može rekonstruisati ključeve i kompromitovati cijeli algoritam'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is128',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Koja je razlika između PRNG i CSPRNG generatora brojeva?',
+      opts: ['PRNG je brz i reproducibilan na osnovu početne vrijednosti (seeda), ali je predvidiv ako se seed zna; CSPRNG je dizajniran tako da je u praksi nemoguće predvidjeti buduće vrijednosti čak i ako napadač sazna dio izlaza ili unutrašnje stanje', 'Obični PRNG (poput funkcije rand()) treba uvijek koristiti za generisanje bankovnih ključeva jer je najsigurniji', 'CSPRNG ne koristi nikakvu entropiju iz okruženja', 'PRNG i CSPRNG su dva naziva za identičnu funkciju'],
+      correct: [0],
+      expl: 'PRNG je brz i reproducibilan na osnovu početne vrijednosti (seeda), ali je predvidiv ako se seed zna; CSPRNG je dizajniran tako da je u praksi nemoguće predvidjeti buduće vrijednosti čak i ako napadač sazna dio izlaza ili unutrašnje stanje.'
+    },
+    {
+      id: 'is129',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Šta je entropija kod generatora slučajnih brojeva i iz kojih izvora je operativni sistem prikuplja?',
+      opts: ['Entropija je mjera nepredvidivosti („haosa“) koju OS skuplja u pool i koristi za seed-anje CSPRNG-a', 'Prikuplja se iz pokreta miša i vremenskih intervala hardverskih događaja', 'Prikuplja se iz audio/video šuma i specijaliziranih hardverskih generatora (HRNG / TRNG)', 'Prikuplja se isključivo iz imena i prezimena korisnika'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Prikuplja se isključivo iz imena i prezimena korisnika.'
+    },
+    {
+      id: 'is130',
+      topic: 'Kriptografija – drugi dio',
+      q: 'Povežite operativne sisteme i biblioteke sa njihovim sigurnim CSPRNG izvorima za generisanje slučajnih brojeva (označite tačne tvrdnje):',
+      opts: ['Linux: /dev/random (blokira pri nedostatku entropije) i /dev/urandom (ne blokira; siguran ako je kernel pravilno seed-an)', 'Windows: BCryptGenRandom / CryptGenRandom', 'Sigurne kriptografske biblioteke: libsodium i OpenSSL (RAND_bytes)', 'Standardna C funkcija rand() preporučuje se kao najsigurniji kriptografski izvor'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Standardna C funkcija rand() preporučuje se kao najsigurniji kriptografski izvor.'
     }
   ]
 };
