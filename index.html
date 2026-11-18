@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1329">
+<meta name="color-scheme" content="dark light">
+<meta name="format-detection" content="telephone=no">
 <title>QHub - Platforma za kvizove</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,19 +99,19 @@ body {
   cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none; box-shadow: var(--shadow-sm);
 }
-.btn:hover { border-color: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+@media (hover: hover) { .btn:hover { border-color: var(--accent-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); } }
 .btn:active { transform: translateY(0); }
 .btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
-.btn.primary:hover { background: #1d4ed8; }
+@media (hover: hover) { .btn.primary:hover { background: #1d4ed8; } }
 .btn.blue { 
   background: var(--blue-gradient); 
   color: white; border-color: transparent; 
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
 }
-.btn.blue:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45); }
+@media (hover: hover) { .btn.blue:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45); } }
 .btn.sm { padding: 6px 12px; font-size: 0.82rem; border-radius: 8px; }
 .btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
-.btn.ghost:hover { background: rgba(255,255,255,0.05); }
+@media (hover: hover) { .btn.ghost:hover { background: rgba(255,255,255,0.05); } }
 .btn.nav-active {
   background: var(--blue-gradient);
   color: white;
@@ -161,7 +164,7 @@ body {
   display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
   transition: transform 0.2s;
 }
-.stat-box:hover { transform: translateY(-2px); border-color: var(--accent-light); }
+@media (hover: hover) { .stat-box:hover { transform: translateY(-2px); border-color: var(--accent-light); } }
 .stat-box small { display: block; color: var(--muted); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 .stat-box b { font-size: 1.25rem; font-weight: 800; color: var(--ink); margin-top: 2px; }
 .stat-box .stat-icon { position: absolute; right: 10px; top: 10px; font-size: 1.1rem; opacity: 0.7; }
@@ -192,7 +195,7 @@ body {
   box-shadow: var(--shadow-sm); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
-.subject-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+@media (hover: hover) { .subject-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); } }
 .sc-top { display: flex; justify-content: space-between; align-items: center; }
 .chip-tag { 
   padding: 3px 10px; border-radius: 14px; 
@@ -219,7 +222,7 @@ body {
   padding: 11px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-card);
   font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: all 0.2s; color: var(--ink); text-align: left; width: 100%;
 }
-.f-chip:hover { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.1); }
+@media (hover: hover) { .f-chip:hover { border-color: var(--accent-light); background: rgba(59, 130, 246, 0.1); } }
 .f-chip.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
 
 /* Form Controls */
@@ -260,7 +263,7 @@ input:checked + .slider:before { transform: translateX(18px); }
   padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.25s;
   box-shadow: var(--shadow-sm);
 }
-.m-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+@media (hover: hover) { .m-card:hover { border-color: var(--accent-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); } }
 .m-card span { font-size: 1.3rem; display: block; margin-bottom: 2px; }
 .m-card div { font-size: 0.82rem; font-weight: 800; }
 .m-card small { font-size: 0.68rem; color: var(--muted); display: block; margin-top: 2px; font-weight: 500; }
@@ -291,7 +294,7 @@ input:checked + .slider:before { transform: translateX(18px); }
 }
 .q-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .star-btn { background: transparent; border: none; font-size: 1.3rem; cursor: pointer; transition: transform 0.2s; color: var(--ink); opacity: 0.8; }
-.star-btn:hover { transform: scale(1.15); opacity: 1; }
+@media (hover: hover) { .star-btn:hover { transform: scale(1.15); opacity: 1; } }
 .star-btn.saved { color: #f59e0b; opacity: 1; }
 
 .q-text { font-size: 1.18rem; font-weight: 700; margin-bottom: 18px; line-height: 1.4; }
@@ -302,7 +305,7 @@ input:checked + .slider:before { transform: translateX(18px); }
   border: 1px solid var(--border); background: var(--surface-card); cursor: pointer;
   font-size: 0.95rem; font-weight: 600; transition: all 0.2s; color: var(--ink); width: 100%; text-align: left;
 }
-.opt-item:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.08); }
+@media (hover: hover) { .opt-item:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.08); } }
 .opt-item.selected { border-color: var(--accent); background: rgba(59, 130, 246, 0.18); box-shadow: 0 0 0 1px var(--accent); }
 .opt-item.correct { border-color: var(--good); background: rgba(16, 185, 129, 0.15); }
 .opt-item.wrong { border-color: var(--bad); background: rgba(239, 68, 68, 0.15); }
@@ -426,6 +429,155 @@ footer { margin-top: 32px; display: flex; justify-content: space-between; font-s
     padding: 12px 8px !important;
     font-size: 0.85rem !important;
   }
+}
+
+/* ===== iPhone / Safari poboljšanja ===== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+* { -webkit-tap-highlight-color: transparent; }
+button, .btn, .m-card, .f-chip, .opt-item, .subject-card, .brand, .toggle-switch, .fc-wrap {
+  touch-action: manipulation; -webkit-touch-callout: none;
+  -webkit-user-select: none; user-select: none;
+}
+button { font-family: inherit; -webkit-appearance: none; appearance: none; }
+input[type="text"] { -webkit-appearance: none; appearance: none; }
+
+/* pozadina: iOS ne podržava background-attachment: fixed */
+body { background-attachment: scroll; background-image: none; min-height: 100vh; min-height: 100dvh; position: relative; }
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 90%, rgba(37, 99, 235, 0.08) 0%, transparent 40%);
+}
+
+.lbl-short { display: none; }
+
+/* točan/netačan odgovor bez dodatnog plavog okvira */
+.opt-item.correct, .opt-item.wrong { box-shadow: none; }
+
+/* pritisak prsta (umjesto hovera) */
+.btn:active, .m-card:active, .f-chip:active, .opt-item:active, .subject-card:active { transform: scale(0.98); opacity: 0.92; }
+.star-btn:active { transform: scale(0.9); }
+
+/* kartice: prefiks za stariji Safari, sadržaj se može skrolati ako je dug */
+.fc-front, .fc-back { -webkit-backface-visibility: hidden; backface-visibility: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; }
+.fc-front > :first-child, .fc-back > :first-child { margin-top: auto; }
+.fc-front > :last-child, .fc-back > :last-child { margin-bottom: auto; }
+.fc-answers { display: grid; gap: 8px; width: 100%; }
+.fc-ans { font-size: 1.02rem; font-weight: 700; line-height: 1.35; }
+.fc-answers.multi .fc-ans { text-align: left; font-size: 0.92rem; font-weight: 600; }
+.fc-answers:not(.multi) .fc-ans { text-align: center; }
+
+.range-wrap input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; height: 30px; margin: 0; --p: 50%; }
+.range-wrap input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px; border-radius: 4px;
+  background: linear-gradient(to right, var(--accent-light) var(--p), rgba(148, 163, 184, 0.35) var(--p));
+}
+.range-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%;
+  background: var(--accent-light); border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+.range-wrap input[type="range"]::-moz-range-track { height: 6px; border-radius: 4px; background: rgba(148, 163, 184, 0.35); }
+.range-wrap input[type="range"]::-moz-range-progress { height: 6px; border-radius: 4px; background: var(--accent-light); }
+.range-wrap input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--accent-light); border: 3px solid #fff; }
+
+.user-title { min-width: 0; }
+.profile-user-info { min-width: 0; max-width: 100%; }
+.user-name-input { width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
+.tp-info span:last-child { white-space: nowrap; margin-left: 10px; }
+
+@media (max-width: 768px) {
+  body {
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-bottom: max(28px, calc(env(safe-area-inset-bottom) + 20px));
+  }
+  /* zaglavlje */
+  .top-header { padding: 8px 10px; border-radius: 14px; margin-bottom: 12px; flex-wrap: nowrap; }
+  .nav-actions { flex-wrap: nowrap; gap: 6px; }
+  .btn.sm { min-height: 38px; padding: 6px 10px; font-size: 0.8rem; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+  .brand { min-width: 0; gap: 8px; }
+  .btn.sm.ghost { min-width: 38px; padding: 6px; font-size: 1rem; }
+  .lbl-full { display: none; }
+  .lbl-short { display: inline; }
+  .brand h1 { font-size: 1.05rem; }
+  .logo-box { width: 32px; height: 32px; border-radius: 8px; }
+
+  /* početna */
+  .hero-card { padding: 18px; border-radius: 16px; margin-bottom: 14px; }
+  .hero-card h2 { font-size: 1.45rem; }
+  .hero-card p { font-size: 0.9rem; }
+  .eyebrow { font-size: 0.72rem; }
+  .hub-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
+  .subject-card { padding: 16px; border-radius: 16px; gap: 14px; }
+  .subject-card .btn { min-height: 46px; font-size: 0.95rem; border-radius: 12px; }
+
+  /* predmet */
+  .modes-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .m-card { padding: 14px 8px; min-height: 92px; border-radius: 14px; }
+  .m-card div { font-size: 0.88rem; }
+  .m-card small { font-size: 0.76rem; }
+  .detail-panel { padding: 16px; border-radius: 16px; }
+  .subject-detail-container { gap: 12px; }
+  .f-chip { min-height: 48px; padding: 12px 14px; font-size: 0.92rem; border-radius: 12px; }
+  .field-group label { font-size: 0.88rem; }
+  .range-out { font-size: 0.95rem; padding: 4px 12px; }
+  .switch-row { min-height: 58px; }
+  .switch-row div span { font-size: 0.9rem; }
+  .switch-row div small { font-size: 0.78rem; }
+  .toggle-switch { width: 52px; height: 32px; }
+  .slider:before { height: 24px; width: 24px; left: 3px; bottom: 3px; }
+  input:checked + .slider:before { transform: translateX(20px); }
+
+  .start-bar {
+    position: -webkit-sticky; position: sticky; z-index: 20;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    padding: 12px 14px !important; gap: 10px;
+    background: var(--glass) !important;
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-color: var(--glass-border) !important;
+  }
+  .start-bar .btn { min-height: 46px; padding: 10px 20px !important; border-radius: 12px; }
+
+  /* kviz */
+  .btn-izlaz { min-height: 40px; padding: 6px 14px !important; }
+  .q-card { padding: 16px 14px; }
+  .q-text { font-size: 1.08rem; }
+  .opt-item { min-height: 54px; padding: 12px 14px; font-size: 0.94rem; line-height: 1.3; }
+  .opt-indicator { width: 22px; height: 22px; }
+  .star-btn { width: 44px; height: 44px; font-size: 1.5rem; margin: -10px -10px -10px 0; display: grid; place-items: center; }
+
+  .sticky-bottom-bar {
+    position: -webkit-sticky; position: sticky; bottom: 0; z-index: 20;
+    margin-left: -12px !important; margin-right: -12px !important;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--bg) 72%, transparent);
+  }
+  .action-btn-mobile {
+    min-height: 50px; width: 100%; padding: 10px 10px !important; font-size: 0.93rem !important;
+    border-radius: 12px; line-height: 1.2; text-align: center; white-space: normal;
+  }
+
+  /* rezultati / profil / kartice / prezentacije */
+  .res-card, .profile-view-card { padding: 16px; border-radius: 16px; }
+  .res-card > div[style*="flex-wrap"] .btn { flex: 1 1 100%; min-height: 46px; }
+  .res-review-item { padding: 12px; }
+  .profile-dash-card { padding: 14px; border-radius: 16px; gap: 12px; }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-box small { font-size: 0.7rem; }
+  .stat-box .stat-icon { top: auto; bottom: 10px; right: 12px; font-size: 1.05rem; }
+  .profile-view-card { padding: 14px; }
+  .tp-info { font-size: 0.82rem; }
+  .fc-wrap { height: min(72vh, 600px); height: min(72dvh, 600px); min-height: 280px; }
+  .fc-actions .btn { min-height: 50px; font-size: 0.95rem; border-radius: 12px; }
+  .pres-row .btn { min-height: 46px; }
+  footer { font-size: 0.8rem; }
+}
+
+@media (max-width: 359px) { .brand h1 { display: none; } }
+
+@media (max-height: 480px) and (orientation: landscape) {
+  .sticky-bottom-bar, .start-bar { position: static; background: none; margin-left: 0 !important; margin-right: 0 !important; }
 }
 </style>
 </head>
@@ -3051,6 +3203,11 @@ function render() {
   else if (state.currentView === 'flashcards') app.innerHTML = renderFlashcards();
   else if (state.currentView === 'profile') app.innerHTML = renderProfileView();
 
+  const tc = document.querySelector('meta[name="theme-color"]');
+  if (tc) tc.setAttribute('content', state.theme === 'dark' ? '#0b1329' : '#f8fafc');
+  const rg = document.querySelector('.range-wrap input[type="range"]');
+  if (rg) setRangeFill(rg);
+
   setupKeyboardShortcuts();
 }
 
@@ -3068,7 +3225,7 @@ function renderHeader() {
         </div>
       </div>
       <div class="nav-actions">
-        <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()">Svi predmeti</button>
+        <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()"><span class="lbl-full">Svi predmeti</span><span class="lbl-short">Predmeti</span></button>
         <button class="btn sm ghost" onclick="toggleSound()">${state.sound ? '🔊' : '🔇'}</button>
         <button class="btn sm ghost" onclick="toggleTheme()">${state.theme === 'dark' ? '☀' : '☾'}</button>
         <button class="btn sm ${isProfileActive ? 'nav-active' : ''}" onclick="goProfile()">👤 Profil</button>
@@ -3090,7 +3247,7 @@ function renderProfileDashboard() {
         <div class="profile-user-info">
           <div class="avatar-box">🎓</div>
           <div class="user-title">
-            <h2><input type="text" value="${state.stats.userName}" style="margin:0; padding:4px 8px; font-size:1.15rem; font-weight:800; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:8px; color:var(--ink); font-family:inherit; outline:none;" onchange="updateUserName(this.value)"></h2>
+            <h2><input class="user-name-input" type="text" value="${state.stats.userName}" style="margin:0; padding:4px 8px; font-size:1.15rem; font-weight:800; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:8px; color:var(--ink); font-family:inherit; outline:none;" onchange="updateUserName(this.value)"></h2>
             <p>${state.stats.userRole} • FIT</p>
           </div>
         </div>
@@ -3292,7 +3449,7 @@ function renderSubjectDetail() {
       </div>
     </div>
 
-    <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 16px 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+    <div class="start-bar" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); padding: 16px 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
       <div style="font-weight: 700; font-size:0.9rem;" id="ready-q-count-text">Spremno za ${state.qCount} pitanja.</div>
       <button class="btn blue" style="padding: 10px 24px; font-size: 0.95rem; font-weight: 700;" onclick="startQuizSession()">Pokreni kviz</button>
     </div>
@@ -3345,6 +3502,9 @@ function renderQuiz() {
   const isSaved = state.savedQuestions.includes(q.id);
   const isMulti = q.correct.length > 1;
   const cleanedQ = cleanQuestionText(q.q);
+  const qKey = quizSession.idx + ':' + q.id;
+  const animCls = (window.__qhubLastQ === qKey) ? '' : 'animate-fade';
+  window.__qhubLastQ = qKey;
 
   return `
     ${renderHeader()}
@@ -3352,7 +3512,7 @@ function renderQuiz() {
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
         <button class="btn btn-izlaz" onclick="goSubjectDetail()">← Izlaz</button>
         <div style="display:flex; gap:12px; align-items:center;">
-          ${state.timerEnabled ? `<div style="font-weight:800; font-family:var(--font-mono); font-size:0.9rem; color:var(--warn);">⏱️ <span id="quiz-timer-display">--:--</span></div>` : ''}
+          ${state.timerEnabled ? `<div style="font-weight:800; font-family:var(--font-mono); font-size:0.9rem; color:var(--warn);">⏱️ <span id="quiz-timer-display">${quizSession.timeLeft != null ? Math.floor(quizSession.timeLeft / 60) + ':' + String(quizSession.timeLeft % 60).padStart(2, '0') : '--:--'}</span></div>` : ''}
           <div style="font-weight:700; font-size:0.9rem; color:var(--accent-light);">Pitanje ${quizSession.idx + 1} od ${quizSession.questions.length}</div>
         </div>
       </div>
@@ -3361,7 +3521,7 @@ function renderQuiz() {
       </div>
     </div>
 
-    <div class="q-card animate-fade" id="current-q-card">
+    <div class="q-card ${animCls}" id="current-q-card">
       <div class="q-header-row">
         <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--accent-light);">${q.topic}</span>
         <button class="star-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveQuestion('${q.id}')" title="Sačuvaj pitanje">${isSaved ? '★' : '☆'}</button>
@@ -3403,11 +3563,9 @@ function renderQuiz() {
     </div>
 
     <div style="margin-top: 14px; display:flex; justify-content: space-between; align-items: center; gap: 10px;" class="sticky-bottom-bar" id="action-bar-el">
-      <div>
-        ${quizSession.idx > 0 ? `
+      ${quizSession.idx > 0 ? `<div>
           <button class="btn blue action-btn-mobile" style="padding:12px 28px; font-weight:700; font-size:0.95rem;" onclick="prevQuestion()">← Prethodno pitanje</button>
-        ` : ''}
-      </div>
+      </div>` : ''}
       <div>
         ${isMulti && !quizSession.userAnswers[quizSession.idx] && !quizSession.checked ? `
           <button class="btn primary action-btn-mobile" style="padding:12px 28px; font-weight:700; font-size:0.95rem;" onclick="checkAnswer()">Potvrdi odgovor</button>
@@ -3467,13 +3625,13 @@ function renderResults() {
             
             <div style="font-size:0.85rem; margin-bottom:4px;">
               <span style="color:var(--muted);">Vaš odgovor:</span> 
-              <b style="color:${item.isCorrect ? 'var(--good)' : 'var(--bad)'}">${Array.isArray(item.selected) ? item.selected.map(s => item.q.opts[s]).join(', ') : item.q.opts[item.selected]}</b>
+              <b style="color:${item.isCorrect ? 'var(--good)' : 'var(--bad)'}">${Array.isArray(item.selected) ? item.selected.map(s => item.q.opts[s]).join('<br>') : item.q.opts[item.selected]}</b>
             </div>
 
             ${!item.isCorrect ? `
               <div style="font-size:0.85rem; margin-bottom:4px;">
                 <span style="color:var(--muted);">Tačan odgovor:</span> 
-                <b style="color:var(--good);">${item.q.correct.map(c => item.q.opts[c]).join(', ')}</b>
+                <b style="color:var(--good);">${item.q.correct.map(c => item.q.opts[c]).join('<br>')}</b>
               </div>
             ` : ''}
 
@@ -3512,13 +3670,13 @@ function renderFlashcards() {
         </div>
         <div class="fc-back">
           <div style="font-size:0.7rem; color:var(--good); text-transform:uppercase; font-weight:800; letter-spacing:0.1em; margin-bottom:10px;">Tačan odgovor</div>
-          <h3 style="font-size:1.05rem; font-weight:700;">${q.correct.map(c => q.opts[c]).join(', ')}</h3>
+          <div class="fc-answers${q.correct.length > 1 ? ' multi' : ''}">${q.correct.map(c => `<div class="fc-ans">${q.correct.length > 1 ? '✓ ' : ''}${q.opts[c]}</div>`).join('')}</div>
           <p style="margin-top:10px; font-size:0.82rem; color:var(--muted);">${q.expl || ''}</p>
         </div>
       </div>
     </div>
 
-    <div style="display:flex; gap:12px; justify-content:center;">
+    <div class="fc-actions" style="display:flex; gap:12px; justify-content:center;">
       <button class="btn" style="flex:1" onclick="flashcardFeedback(false)">❌ Ne znam</button>
       <button class="btn primary" style="flex:1" onclick="flashcardFeedback(true)">✅ Znam</button>
     </div>
@@ -3595,10 +3753,18 @@ window.toggleTopic = function(topic) {
   render();
 };
 
+function setRangeFill(el) {
+  const min = Number(el.min) || 0, max = Number(el.max) || 1;
+  const p = max > min ? ((Number(el.value) - min) / (max - min)) * 100 : 100;
+  el.style.setProperty('--p', p + '%');
+}
+
 window.updateQCountLive = function(val) {
   state.qCount = Number(val);
   const disp = document.getElementById('range-out-display');
   if (disp) disp.innerText = val;
+  const rng = document.querySelector('.range-wrap input[type="range"]');
+  if (rng) setRangeFill(rng);
   const botDisp = document.getElementById('ready-q-count-text');
   if (botDisp) botDisp.innerText = `Spremno za ${val} pitanja.`;
 };
