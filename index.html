@@ -532,14 +532,21 @@ function cleanQuestionText(text) {
   return text.replace(/\s*\((Više tačnih odgovora|Više tačnih)\)/gi, '').trim();
 }
 
-const PRESENTATIONS_LIST = [
-  { title: "1. Uvod u poslovne informacione sisteme", file: "prezentacije/MPP_1UvodUPoslovneInformacioneSisteme.pdf" },
-  { title: "2. Prikupljanje i analiza zahtjeva softvera", file: "prezentacije/MPP_2PrikupljanjeIAnalizaZahtjevaSoftvera.pdf" },
-  { title: "3. SCRUM", file: "prezentacije/MPP_3SCRUM.pdf" },
-  { title: "4. Tehnike prikupljanja činjenica", file: "prezentacije/MPP_4TehnikePrikupljanjaCinjenica.pdf" },
-  { title: "5. Metode razvoja softvera", file: "prezentacije/MPP_5MetodeRazvojaSoftvera.pdf" },
-  { title: "6. Modeliranje informacionog sistema", file: "prezentacije/MPP_6ModeliranjeIS.pdf" }
-];
+const PRESENTATIONS = {
+  'mpp': [
+    { title: "1. Uvod u poslovne informacione sisteme", file: "prezentacije/MPP_1UvodUPoslovneInformacioneSisteme.pdf" },
+    { title: "2. Prikupljanje i analiza zahtjeva softvera", file: "prezentacije/MPP_2PrikupljanjeIAnalizaZahtjevaSoftvera.pdf" },
+    { title: "3. SCRUM", file: "prezentacije/MPP_3SCRUM.pdf" },
+    { title: "4. Tehnike prikupljanja činjenica", file: "prezentacije/MPP_4TehnikePrikupljanjaCinjenica.pdf" },
+    { title: "5. Metode razvoja softvera", file: "prezentacije/MPP_5MetodeRazvojaSoftvera.pdf" },
+    { title: "6. Modeliranje informacionog sistema", file: "prezentacije/MPP_6ModeliranjeIS.pdf" }
+  ],
+  'is': [
+    { title: "1. Uvod u informacijsku sigurnost", file: "prezentacije/IS_1UvodUInformacijskeSisteme.pdf" },
+    { title: "2. Protokoli i sigurnost", file: "prezentacije/IS_2ProtokoliISigurnost.pdf" },
+    { title: "3. Kontrola pristupa i sigurnost", file: "prezentacije/IS_3KontrolaPristupaISigurnost.pdf" }
+  ]
+};
 
 const SUBJECTS = [
   {
@@ -555,6 +562,18 @@ const SUBJECTS = [
       'Tehnike prikupljanja činjenica', 
       'Tradicionalne i agilne metode razvoja softvera ',
       'Modeliranje Informacionog sistema'
+    ]
+  },
+  {
+    id: 'is',
+    name: 'Informacijska sigurnost',
+    desc: 'Kompletna baza pitanja po lekcijama (Uvod, Protokoli, Kontrola pristupa)',
+    badge: 'Teoretska pitanja',
+    active: true,
+    topics: [
+      'Uvod u informacijsku sigurnost',
+      'Protokoli i sigurnost',
+      'Kontrola pristupa i sigurnost'
     ]
   }
 ];
@@ -2257,6 +2276,600 @@ const QUESTIONS_DB = {
       correct: [1],
       expl: 'Netačno – Strukturirana analiza naglašava procesne komponente u ukupnom informacionom sistemu.'
     }
+  ],
+  'is': [
+    {
+      id: 'is1',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta je sigurnost u kontekstu informacijsko-komunikacijskih tehnologija (IKT)?',
+      opts: ['Konačno stanje sistema nakon instalacije antivirusa i firewalla', 'Softverski proizvod koji garantuje 100% zaštitu podataka', 'Kontinuirani proces koji obuhvata mjere i aktivnosti za zaštitu ICT sistema i podataka od samog početka razvoja IS-a', 'Isključivo fizička zaštita serverskih soba'],
+      correct: [2],
+      expl: 'Sigurnost je proces koji prati razvoj informacionih sistema od samog početka, a ne proizvod ili završno stanje.'
+    },
+    {
+      id: 'is2',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koje dvije osnovne činjenice uvijek treba imati na umu kada govorimo o sigurnosti informacionih sistema?',
+      opts: ['Ne postoji 100% siguran sistem', 'Kupovina najskupljeg firewalla trajno rješava sigurnosne prijetnje', 'Sigurnost podrazumijeva niz mjera koje čine sistem sigurnim do određenog nivoa i koje se konstantno moraju unapređivati', 'Sigurnost se implementira tek u fazi održavanja informacionog sistema'],
+      correct: [0, 2],
+      expl: 'Netačna tvrdnja: Kupovina najskupljeg firewalla trajno rješava sigurnosne prijetnje; Sigurnost se implementira tek u fazi održavanja informacionog sistema.'
+    },
+    {
+      id: 'is3',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koji su najveći problemi sigurnosti navedeni u prezentaciji?',
+      opts: ['Samouvjerenost („Imamo siguran sistem“)', 'Korištenje open-source operativnih sistema', 'Neupućenost („Imamo firewall“)', 'Nedovoljno edukovani korisnici'],
+      correct: [0, 2, 3],
+      expl: 'Netačna tvrdnja: Korištenje open-source operativnih sistema.'
+    },
+    {
+      id: 'is4',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Računarska sigurnost (Computer Security) se primarno bavi:',
+      opts: ['Isključivo pisanjem pravilnika i sigurnosnih politika organizacije', 'Primjenom informacijskih i komunikacijskih tehnologija u cilju kontrolisanja malicioznih namjera i ponašanja', 'Procjenom finansijske vrijednosti intelektualnog vlasništva', 'Obukom menadžmenta za donošenje poslovnih odluka'],
+      correct: [1],
+      expl: 'Primjenom informacijskih i komunikacijskih tehnologija u cilju kontrolisanja malicioznih namjera i ponašanja.'
+    },
+    {
+      id: 'is5',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Pojam informacijske sigurnosti odnosi se isključivo na tehničke mjere zaštite pristupa informacijama (korisničko ime, lozinka, prava pristupa).',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Odnosi se i na definisanje sigurnosne politike, pravilnika i raznih procedura, s ciljem zaštite informacija kao glavnog resursa / asseta.'
+    },
+    {
+      id: 'is6',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta je osnovni cilj informacijske sigurnosti?',
+      opts: ['Potpuno ukidanje pristupa internetu svim zaposlenicima', 'Dizajnirati i implementirati sisteme otporne na maliciozne aktivnosti, ljudske greške i slučajne incidente primjenom skupa sigurnosnih kontrola, procesa i tehnologija', 'Zamijeniti sve ljudske faktore automatizovanim botovima', 'Osigurati da podaci budu javno dostupni svim korisnicima na mreži'],
+      correct: [1],
+      expl: 'Dizajnirati i implementirati sisteme otporne na maliciozne aktivnosti, ljudske greške i slučajne incidente primjenom skupa sigurnosnih kontrola, procesa i tehnologija.'
+    },
+    {
+      id: 'is7',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koje od navedenih kategorija spadaju u maliciozne aktivnosti koje prijete informacijskoj sigurnosti?',
+      opts: ['Prevare / Krađe', 'Špijunaža i sabotaža', 'Spam i vandalizam', 'Informatički rat (Cyber Warfare) i ilegalne aktivnosti'],
+      correct: [0, 1, 2, 3],
+      expl: 'Svih 7 navedenih kategorija pripada grupi malicioznih aktivnosti.'
+    },
+    {
+      id: 'is8',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koja je ključna razlika između prevare (Fraud) i krađe (Theft) u kontekstu informacijske sigurnosti?',
+      opts: ['Prevara se dešava isključivo fizički, a krađa isključivo putem e-maila', 'Kod prevare je cilj obmanuti žrtvu da dobrovoljno preda osjetljive informacije ili novac, dok krađa podrazumijeva neovlašteno uzimanje informacija ili imovine', 'Krađa koristi social engineering, dok prevara koristi isključivo DDoS napade', 'Nema nikakve razlike između ova dva pojma'],
+      correct: [1],
+      expl: 'Kod prevare je cilj obmanuti žrtvu da dobrovoljno preda osjetljive informacije ili novac, dok krađa podrazumijeva neovlašteno uzimanje informacija ili imovine.'
+    },
+    {
+      id: 'is9',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta od navedenog spada u primjere krađe (Theft) u digitalnom svijetu?',
+      opts: ['Krađa identiteta (kompromitovanjem e-maila, data breaches, smishing/SMS)', 'Krađa podataka (neovlašteno kopiranje osjetljivih podataka, USB baiting)', 'Romantične prijevare i lažne online investicije', 'Krađa intelektualnog vlasništva (neovlašteno kopiranje softvera, dizajna, patenata)'],
+      correct: [0, 1, 3],
+      expl: 'Opcija C spada u primjere prevare / Fraud.'
+    },
+    {
+      id: 'is10',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Kojim se tehnikama može provoditi špijunaža u informacijskoj sigurnosti?',
+      opts: ['Korištenjem špijunskog softvera (spyware)', 'Prisluškivanjem komunikacija (sniffing)', 'Socijalnim inženjeringom za dobivanje pristupa', 'Fizičkim upadom u sisteme'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is11',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Stuxnet crv (2010.) je najpoznatiji primjer cyber sabotaže koji je ciljao Siemensove industrijske kontrolne sisteme (SCADA) u iranskom nuklearnom postrojenju Natanz tako što je ubrzavao i usporavao centrifuge mimo normalnih parametara.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'is12',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koje tvrdnje tačno opisuju Spam?',
+      opts: ['Odnosi se na slanje velikog broja neželjenih, masovnih poruka bez pristanka primatelja', 'Šalje se isključivo putem e-pošte i nikada preko društvenih mreža ili chat aplikacija', 'Koristi se kao vektor za phishing napade, distribuciju malvera i širenje dezinformacija', 'Uvijek ima za cilj fizičko uništenje hardvera'],
+      correct: [0, 2],
+      expl: 'Šalje se najčešće putem e-pošte, ali i preko foruma, društvenih mreža i chat aplikacija.'
+    },
+    {
+      id: 'is13',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Povežite instance weba sa ilegalnim aktivnostima koje se na njima dešavaju (označite tačne tvrdnje):',
+      opts: ['Surface web – phishing web stranice, maliciozni oglasi, forumi i chat grupe', 'Deep web – zatvoreni poslovni forumi za industrijsku špijunažu ili curenje informacija, warez forumi sa ilegalnim softverom', 'Dark web – dio interneta koji koristi posebne pretraživače (Tor) i .onion linkove za anonimnu kupovinu ilegalnih stvari/usluga kriptovalutama', 'Dark web – javno indeksirane stranice kojima se pristupa putem standardnog Google pretraživača'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Dark web – javno indeksirane stranice kojima se pristupa putem standardnog Google pretraživača.'
+    },
+    {
+      id: 'is14',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Po čemu se vandalizam u informacijskoj sigurnosti najčešće razlikuje od sabotaže?',
+      opts: ['Vandalizam uvijek izvode strane države u sklopu vojnih operacija', 'Vandalizam se obično vrši bez jasnog materijalnog motiva, već iz čiste zle namjere, „zabave“, prosvjeda ili samopromocije (bragging)', 'Vandalizam se odnosi isključivo na fizičko razbijanje monitora', 'Sabotaža nikada ne uključuje brisanje podataka'],
+      correct: [1],
+      expl: 'Vandalizam se obično vrši bez jasnog materijalnog motiva, već iz čiste zle namjere, „zabave“, prosvjeda ili samopromocije (bragging)'
+    },
+    {
+      id: 'is15',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta je karakteristično za informatički rat (Cyber Warfare)?',
+      opts: ['IKT se koriste kao oružje za napad, odbranu ili sabotažu protiv druge države, organizacije ili kritične infrastrukture', 'Glavni i jedini cilj je sitna finansijska dobit pojedinca', 'Obično se povezuje s državnim akterima ili grupama koje djeluju u njihovo ime', 'Ciljevi su politički, vojni ili strateški'],
+      correct: [0, 2, 3],
+      expl: 'Netačna tvrdnja: Glavni i jedini cilj je sitna finansijska dobit pojedinca.'
+    },
+    {
+      id: 'is16',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta predstavlja skraćenica CIA (odnosno AIC) u informacijskoj sigurnosti?',
+      opts: ['Povjerljivost (Confidentiality), Integritet (Integrity), Dostupnost (Availability)', 'Kontrola (Control), Identifikacija (Identification), Autentifikacija (Authentication)', 'Kriptografija (Cryptography), Infrastruktura (Infrastructure), Analiza (Analysis)', 'Centralna obavještajna agencija'],
+      correct: [0],
+      expl: 'Povjerljivost (Confidentiality), Integritet (Integrity), Dostupnost (Availability)'
+    },
+    {
+      id: 'is17',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koji mehanizmi osiguravaju POVJERLJIVOST (Confidentiality) u informacijskoj sigurnosti?',
+      opts: ['Kriptografija / enkripcija (zaštita podataka ključem)', 'Nepovezanost (Unlinkability – onemogućavanje profilisanja korisnika, npr. putem GUID-a, Cookies)', 'Anonimnost / nemogućnost praćenja (koja uključuje nevidljivost i pseudonimnost)', 'Rollback baze podataka i UPS napajanje'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Rollback baze podataka i UPS napajanje.'
+    },
+    {
+      id: 'is18',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta predstavlja „Nevidljivost“ (Unobservability) kao dio anonimnosti u informacijskoj sigurnosti?',
+      opts: ['Korištenje korisničkog imena na forumu koje administrator može povezati sa stvarnom osobom', 'Skrivanje od potencijalnog napadača da se neka aktivnost uopće desila (npr. korištenje steganografije – skrivanje poruke u slici)', 'Gašenje monitora dok korisnik kuca lozinku', 'Kreiranje backup kopije na eksternom disku'],
+      correct: [1],
+      expl: 'Skrivanje od potencijalnog napadača da se neka aktivnost uopće desila (npr. korištenje steganografije – skrivanje poruke u slici)'
+    },
+    {
+      id: 'is19',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Pseudonimnost podrazumijeva da korisnik koristi lažni identitet (pseudonim), ali se taj identitet može povezati sa stvarnim identitetom ako se zna veza (npr. administrator foruma zna ko stoji iza korisničkog imena).',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'is20',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koji mehanizmi osiguravaju INTEGRITET u informacijskoj sigurnosti?',
+      opts: ['Hashing (verifikacija nepromijenjenosti i autentičnosti podataka)', 'Neporecivost (Non-repudiation – osigurava se upotrebom digitalnog potpisa)', 'Audit / Logiranje aktivnosti korisnika', 'Detekcija narušavanja sigurnosti (IDS) i Rollback na prethodno ispravno stanje'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is21',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Šta je tačno za Host-bazirane IDS (Intrusion Detection) sisteme?',
+      opts: ['Prate lokalne logove, sistemske fajlove i procese', 'Detektuju pokušaje neovlaštenog pristupa i izmjene datoteka', 'Mogu pomoći kod forenzičke analize, ali mogu dati i false positive upozorenja', 'Slijepo brišu sve datoteke na disku čim primijete mrežni promet'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Slijepo brišu sve datoteke na disku čim primijete mrežni promet.'
+    },
+    {
+      id: 'is22',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Kojim se mehanizmima osigurava DOSTUPNOST (Availability) u računarskoj sigurnosti?',
+      opts: ['Redundantnim serverima i mrežom (HA – High Availability)', 'Zaštitom od DoS/DDoS napada (Cloud, kolokacija servera)', 'UPS-om i rezervnim napajanjem', 'Redovnim održavanjem i patchiranjem (nadogradnjom) sistema'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is23',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'U računarskoj sigurnosti, enkripcija diska (npr. BitLocker), kontrola pristupa (ACL, RBAC) i 2FA autentifikacija direktno služe za osiguranje:',
+      opts: ['Povjerljivosti (Confidentiality)', 'Dostupnosti (Availability)', 'Neporecivosti (Non-repudiation)', 'Rollbacka'],
+      correct: [0],
+      expl: 'Povjerljivosti (Confidentiality)'
+    },
+    {
+      id: 'is24',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Koji napadi mogu kompromitovati sigurnost bankomata?',
+      opts: ['Skimming (postavljanje lažnih čitača kartica) i Shimming (ubacivanje tankog čitača u originalni čitač)', 'Black box napad (spajanje laptopom na kontroler i izdavanje naredbe za isplatu novca)', 'Malware napad (instalacija zlonamjernog softvera na bankomat)', 'Network hijacking (presretanje nezaštićene komunikacije i preuzimanje sesije)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is25',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Kako funkcioniše Cross-Site Scripting (XSS) napad na web stranici banke opisan u lekciji?',
+      opts: ['Napadač fizički ubacuje čitač kartica u tastaturu korisnika', 'Napadač ubacuje zlonamjerni JavaScript kod (npr. u komentare jer aplikacija ne filtrira HTML/JS kod), koji se izvršava kada drugi korisnik otvori stranicu', 'Napadač šalje SMS poruku sa lažnim brojem telefona banke', 'Napadač gasi napajanje bankovnog servera'],
+      correct: [1],
+      expl: 'Napadač ubacuje zlonamjerni JavaScript kod (npr. u komentare jer aplikacija ne filtrira HTML/JS kod), koji se izvršava kada drugi korisnik otvori stranicu.'
+    },
+    {
+      id: 'is26',
+      topic: 'Uvod u informacijsku sigurnost',
+      q: 'Napad u kojem napadač šalje lažni e-mail koji tjera korisnika na hitnu reakciju (npr. „Da li ste vi napravili ove transakcije u inostranstvu?“) i vodi ga na vjernu kopiju web stranice banke radi krađe PIN-a ili šifre naziva se:',
+      opts: ['Skimming', 'Black box napad', 'Phishing', 'Rollback'],
+      correct: [2],
+      expl: 'Phishing.'
+    },
+    {
+      id: 'is27',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta su sigurnosni protokoli i za šta su dizajnirani?',
+      opts: ['Niz koraka koji osiguravaju zaštitu resursa (asseta) informacijskih i računarskih sistema', 'Formaliziran skup pravila, procedura i konvencija koji reguliraju strukturiranu interakciju i komunikaciju između dva ili više entiteta', 'Dizajnirani su da osiguraju barem jedan, a često i kombinaciju fundamentalnih sigurnosnih ciljeva unutar CIA modela', 'Isključivo fizičke brave na serverskim ormarima'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Isključivo fizičke brave na serverskim ormarima.'
+    },
+    {
+      id: 'is28',
+      topic: 'Protokoli i sigurnost',
+      q: 'Zašto protokol Telnet danas nije preporučljiv u modernim mrežama i kojim protokolom je zamijenjen?',
+      opts: ['Komunikacija putem Telneta bazirana je na razmjeni poruka u plain text (čitljivom) formatu', 'Izložen je riziku od prisluškivanja mrežnog saobraćaja (sniffing), čime napadač lako čita korisničko ime i lozinku', 'Zamijenjen je protokolom SSH (gdje je sigurniji standard SSH v2 iz 2006. zamijenio ranjivi SSH v1 iz 1995. godine)', 'Telnet koristi previše jaku asimetričnu enkripciju koja usporava procesor'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Telnet koristi previše jaku asimetričnu enkripciju koja usporava procesor.'
+    },
+    {
+      id: 'is29',
+      topic: 'Protokoli i sigurnost',
+      q: 'Na primjeru sigurnosnog protokola podizanja novca sa bankomata (ATM), šta se dešava nakon trećeg neuspjelog unosa PIN-a i koji je ključni nedostatak ovog protokola?',
+      opts: ['Nakon 3. pogrešnog pokušaja bankomat zaključava karticu jer smatra da je narušena sigurnost', 'Bankomat odmah isplaćuje manji iznos novca i šalje SMS vlasniku', 'Ako je neko pronašao novčanik u kojem je pored kartice zapisan i PIN, sam ATM protokol neće zaštititi korisnika', 'Efikasnost prvog (ATM) protokola mora biti vezana za drugi protokol koji propisuje način sigurnog čuvanja PIN broja'],
+      correct: [0, 2, 3],
+      expl: 'Netačna tvrdnja: Bankomat odmah isplaćuje manji iznos novca i šalje SMS vlasniku.'
+    },
+    {
+      id: 'is30',
+      topic: 'Protokoli i sigurnost',
+      q: 'Na kojem principu je kubanski MiG avion (na strani Angole) prevario južnoafrički (SAAF) IFF (Identify Friend or Foe) protokol 1970-ih godina?',
+      opts: ['Pogodio je tajni ključ K metodom grube sile (brute-force) za 2 sekunde', 'Proslijedio je dobijeni izazov N svom radaru u Angoli, koji ga je poslao prijateljskom SAAF avionu Impala, a njegov šifrirani odgovor E(N,K) vratio nazad SAAF radaru', 'Isključio je napajanje južnoafričke radarske stanice putem DDoS napada', 'Koristio je steganografiju za skrivanje radarskog signala u slici'],
+      correct: [1],
+      expl: 'Ovaj princip prosljeđivanja izazova danas je osnova Man-in-the-Middle napada.'
+    },
+    {
+      id: 'is31',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje ključne karakteristike mora imati razvoj sigurnosnog protokola kako bi se osigurala njegova pouzdanost i efikasnost?',
+      opts: ['Jednostavnost i jasnost', 'Sveobuhvatnost (potpunost)', 'Efikasnost i robustnost', 'Skalabilnost'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene karakteristike iz lekcije su tačne.'
+    },
+    {
+      id: 'is32',
+      topic: 'Protokoli i sigurnost',
+      q: 'Kod WEP (Wired Equivalent Privacy) protokola, zašto je 24-bitni Inicijalizacijski vektor (IV) predstavljao sigurnosni problem?',
+      opts: ['Standard nije detaljno definisao kako se IV generiše, pa su ga neki vendori generisali inkrementalno počevši od 0, što ga je činilo lakim za pogađanje', '24-bitni IV je zahtijevao previše radne memorije za obradu', 'IV se slao isključivo putem poštanskog pisma', 'WEP uopće nije koristio nikakav tajni ključ'],
+      correct: [0],
+      expl: 'Primjer nedostatka karakteristike Jednostavnost i jasnost u dizajnu protokola.'
+    },
+    {
+      id: 'is33',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koja sigurnosna pitanja protokol mora riješiti u sklopu karakteristike SVEOBUHVATNOSTI (potpunosti), prema prezentaciji?',
+      opts: ['Šta ako napadač promijeni ponuđeni algoritam i kako se sprječava downgrade napad', 'Šta ako napadač vrati staru poruku iz prethodne sesije (replay napad) ili se ista poruka primi dva puta', 'Kako se poruke vežu za određenu sesiju', 'Šta ako nijedan ponuđeni algoritam nije prihvatljiv'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sva navedena pitanja sa slajda Razvoj protokola – sveobuhvatnost.'
+    },
+    {
+      id: 'is34',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koja karakteristika protokola podrazumijeva sposobnost da protokol „mirno“ reaguje na neočekivane događaje, greške, prekide mreže ili maliciozne pokušaje, uz mehanizme za detekciju grešaka, korekciju i oporavak od greške?',
+      opts: ['Skalabilnost', 'Efikasnost', 'Robustnost', 'Pseudonimnost'],
+      correct: [2],
+      expl: 'Robustnost.'
+    },
+    {
+      id: 'is35',
+      topic: 'Protokoli i sigurnost',
+      q: 'Efikasnost protokola (minimiziranje mrežnog prometa/bandwidtha, procesorske snage i radne memorije) posebno je važna za IoT uređaje sa ograničenim resursima.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'is36',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje su četiri ključne komponente sigurnosnih protokola?',
+      opts: ['Kontrola pristupa (Access Control)', 'Enkripcija (Encryption)', 'Upravljanje ključevima (Key Management)', 'Integritet sadržaja'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is37',
+      topic: 'Protokoli i sigurnost',
+      q: 'Povežite metode autentifikacije sa odgovarajućim primjerima (označite tačne tvrdnje):',
+      opts: ['Nešto što korisnik zna – lozinka (password), PIN, sigurnosna pitanja, passphrase', 'Nešto što korisnik ima – pametni telefon / MFA, token, smart card, USB ključevi, digitalni certifikati', 'Nešto što korisnik jeste – otisak prsta, face recognition, iris scan, voice recognition', 'Nešto što korisnik jeste – Access Control Lista (ACL)'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Nešto što korisnik jeste – Access Control Lista (ACL)'
+    },
+    {
+      id: 'is38',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje tvrdnje tačno opisuju mehanizme Autorizacije (DAC, MAC, RBAC, ABAC)?',
+      opts: ['DAC (Discretionary Access Control) – vlasnik resursa odlučuje ko ima pristup resursu, a u praksi se kombinuje sa ACL (Access Control Listama)', 'MAC (Mandatory Access Control) – pristupna prava definiše strogo centralizirano administrator ili OS na osnovu sigurnosnih nivoa korisnika i nivoa osjetljivosti resursa', 'RBAC (Role-Based Access Control) – korisnici se grupišu u uloge (role) na nivou organizacije (npr. grupa Studenti) kojima se dodjeljuju privilegije', 'ABAC (Attribute-Based Access Control) – odluku donosi u trenutku zahtjeva na osnovu kombinacije atributa subjekta, objekta, akcije i okruženja'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is39',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta je CAPTCHA i čemu služi?',
+      opts: ['Algoritam za simetričnu enkripciju tvrdog diska', 'Turingov test (Completely Automated Public Turing test to tell Computers and Humans Apart) koji prepoznaje da li zahtjev šalje čovjek ili mašina/bot', 'Protokol za prenos datoteka preko SSH tunela', 'Vrsta digitalnog certifikata kojeg izdaje CA'],
+      correct: [1],
+      expl: 'Turingov test (Completely Automated Public Turing test to tell Computers and Humans Apart) koji prepoznaje da li zahtjev šalje čovjek ili mašina/bot.'
+    },
+    {
+      id: 'is40',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje tvrdnje tačno opisuju SIMETRIČNU i ASIMETRIČNU enkripciju?',
+      opts: ['Simetrična enkripcija koristi isti tajni ključ za enkripciju i dekripciju, a njen glavni problem je sigurna distribucija ključeva (primjeri: AES, DES, RC4, Blowfish)', 'Asimetrična enkripcija koristi javni (public) ključ za enkripciju i tajni (private) ključ za dekripciju (primjeri: RSA, ECC, DSA)', 'Kod asimetrične enkripcije ne postoji problem distribucije ključeva jer je javni ključ svima dostupan, ali je izražen problem čuvanja tajnog ključa', 'Asimetrična enkripcija koristi jedan isti ključ koji mora biti javno objavljen na internetu'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Asimetrična enkripcija koristi jedan isti ključ koji mora biti javno objavljen na internetu.'
+    },
+    {
+      id: 'is41',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta je tačno za Steganografiju i LSB (Least Significant Bit) metodu?',
+      opts: ['Steganografija je metoda skrivanja poruke unutar druge datoteke (slike, videa, teksta) i ne koristi kriptografske ključeve', 'Primjena steganografije ne povećava veličinu datoteke jer se mijenjaju postojeći biti (najmanje značajni biti u RGB kanalima), a ne dodaju novi', 'U 24-bitnu RGB sliku dimenzija 800×600 piksela LSB metodom može se sakriti 180 KB podataka (480 000×3×1 bit/8)', 'Steganografija je sinonim za AES simetričnu enkripciju'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Steganografija je sinonim za AES simetričnu enkripciju.'
+    },
+    {
+      id: 'is42',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta podrazumijevaju faze „Rotacija ključeva“ i „Opoziv ključeva“ u procesu Upravljanja ključevima (Key Management)?',
+      opts: ['Rotacija ključeva (key rotation) podrazumijeva redovnu promjenu ključeva radi sigurnosti, što povlači dekripciju podataka starim ključem i enkripciju novim ključem', 'Opoziv ključeva (key revocation) provodi se kada se smatra da je ključ kompromitovan', 'Uništenje ključeva (key destruction) podrazumijeva prepisivanje memorijske lokacije gdje je ključ bio pohranjen', 'Distribucija ključeva se najčešće rješava putem Diffie-Hellman razmjene ili asimetrične enkripcije za slanje simetričnih ključeva'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is43',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje osobine podataka garantuje Integritet sadržaja i kako se verificira identitet sudionika u komunikaciji?',
+      opts: ['Integritet znači da su podaci tačni, potpuni, konzistentni, autentični i nepromijenjeni', 'Nepromijenjenost izvornog sadržaja provjerava se pomoću hash funkcija i digitalnog potpisa', 'Autentičnost sudionika u komunikaciji može se verificirati putem lozinki/PIN-ova, kriptografskih ključeva ili Certified Authority (CA – npr. Let\'s Encrypt, DigiCert, GlobalSign)', 'Poznati napadi vezani za probleme s integritetom su Man-in-the-Middle, ARP poisoning i session hijacking'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is44',
+      topic: 'Protokoli i sigurnost',
+      q: 'OSI model je protokol model sa 4 sloja, dok je TCP/IP deskriptivni model sa 7 slojeva.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – Obrnuto je: OSI je deskriptivni model sa 7 slojeva, dok je TCP/IP protokol model sa 4 sloja.'
+    },
+    {
+      id: 'is45',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta je tačno za uspostavu SSH konekcije i prenos datoteka putem TFTP, FTP i SFTP protokola?',
+      opts: ['Klijent inicira konekciju prema SSH serveru na port 22, provjerava javni ključ servera (TOFU – Trust On First Use ili preko CA), dogovara sesijski ključ i pohranjuje ključ servera u listu known_hosts', 'TFTP (Trivial File Transfer Protocol) nema podršku ni za autentifikaciju ni za enkripciju', 'FTP omogućava autentifikaciju korisnika, ali se i prijava i prenos datoteka odvijaju u nesigurnom clear text formatu', 'SFTP (Secure FTP) je u suštini prenos datoteka preko uspostavljene kriptovane SSH veze'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is46',
+      topic: 'Protokoli i sigurnost',
+      q: 'Kako funkcioniše uspostava sigurne sesije kod TLS/SSL protokola?',
+      opts: ['Server šalje klijentu svoj digitalni certifikat (koji sadrži javni ključ i naziv CA), a klijent kontaktira CA radi provjere validnosti certifikata', 'Klijent i server putem asimetrične kriptografije dogovaraju simetrični sesijski ključ, nakon čega se svi podaci prenose šifrirano tim simetričnim ključem', 'Na TLS/SSL se oslanjaju protokoli aplikacijskog sloja poput HTTPS, SMTPS, IMAPS, POP3S i FTPS', 'TLS/SSL prenosi sve podatke u nešifriranom plain text obliku radi veće brzine'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: TLS/SSL prenosi sve podatke u nešifriranom plain text obliku radi veće brzine.'
+    },
+    {
+      id: 'is47',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koja je razlika između PPTP i IPSec VPN protokola?',
+      opts: ['PPTP koristi GRE protokol za tuneliranje podataka putem interneta, a PPP protokol (sa PAP/CHAP) za autentifikaciju i prenos unutar tunela, te je danas uglavnom zamijenjen IPSec-om', 'IPSec je IETF otvoreni standard koji radi na 3. (mrežnom) sloju OSI modela i koristi dva zaglavlja: AH (Authentication Header) i ESP (Encapsulating Security Payload)', 'U IPSec-u, AH zaglavlje osigurava integritet i autentifikaciju (bez enkripcije), dok ESP zaglavlje osigurava povjerljivost (enkripciju), integritet i autentičnost', 'U 1. fazi uspostave IPSec tunela koristi se IKE (Internet Key Exchange) za razmjenu ključeva i definisanje SA (Security Association) parametara, dok se u 2. fazi uspostavlja tunel (Tunnel mode između dva rutera, a Transport mode između dva krajnja hosta)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is48',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje se aktuelne zloupotrebe mobilnog bankarstva navode u dopunskom dijelu prezentacije (iz 1. lekcije)?',
+      opts: ['NFC/RFID skimming (direct tap – bežični prijenos podataka na vrlo kratkoj udaljenosti do oko 4 cm)', 'Relay attack (prijenosni / relay napad)', 'Black box napad fizičkim spajanjem laptopa na SIM karticu', 'Disaster Recovery plan'],
+      correct: [0, 1],
+      expl: 'Disaster Recovery plan pripada strategijama za osiguranje Dostupnosti / Availability sistema.'
+    },
+    {
+      id: 'is49',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta uključuje strategija osiguranja Dostupnosti (Availability) u informacijskoj sigurnosti?',
+      opts: ['Redundantne servere i kolokaciju servera', 'Backup kopije podataka', 'Planove za oporavak u slučajevima kvara sistema (Disaster Recovery plan)', 'Steganografiju i skrivanje poruka u slikama'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Steganografiju i skrivanje poruka u slikama.'
+    },
+    {
+      id: 'is50',
+      topic: 'Protokoli i sigurnost',
+      q: 'Organizacije u praksi često testiraju svoju otpornost na DDoS (Distributed Denial of Service) napade kako bi osigurale da njihovi servisi ostanu funkcionalni čak i pod pritiskom.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'is51',
+      topic: 'Protokoli i sigurnost',
+      q: 'Koje su aktuelne zloupotrebe mobilnog bankarstva navedene u prezentaciji?',
+      opts: ['NFC/RFID skimming (direct tap)', 'Relay attack (prijenosni / relay napad)', 'ARP poisoning preko kućnog rutera', 'USB baiting na bankomatu'],
+      correct: [0, 1],
+      expl: 'Netačna tvrdnja: ARP poisoning preko kućnog rutera; USB baiting na bankomatu.'
+    },
+    {
+      id: 'is52',
+      topic: 'Protokoli i sigurnost',
+      q: 'Šta označava skraćenica NFC i na kojoj udaljenosti funkcioniše bežični prijenos podataka kod ove tehnologije?',
+      opts: ['Network File Control – na udaljenosti do 100 metara', 'Near Field Communication – bežični prijenos podataka na vrlo kratkoj udaljenosti (do oko 4 cm)', 'National Firewall Center – isključivo putem optičkog kabla', 'Near Frequency Connection – na udaljenosti do 10 metara'],
+      correct: [1],
+      expl: 'Near Field Communication – bežični prijenos podataka na vrlo kratkoj udaljenosti (do oko 4 cm)'
+    },
+    {
+      id: 'is53',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Od koje dvije komponente se sastoji Kontrola pristupa i koja je njihova uloga?',
+      opts: ['Autentifikacija – prva faza koja provjerava identitet korisnika, servera ili servisa radi odluke o pristupu sistemu', 'Autorizacija – faza koja slijedi nakon uspješne autentifikacije i određuje šta entitet smije raditi na sistemu i kojim resursima pristupiti', 'Auditing – logiranje onoga što korisnik radi na sistemu, korisno za troubleshooting i digitalnu forenziku', 'Steganografija – skrivanje korisničkog imena u audio datoteci'],
+      correct: [0, 1],
+      expl: 'Auditing je mehanizam praćenja aktivnosti često povezan sa autorizacijom, dok samu kontrolu pristupa čine autentifikacija i autorizacija.'
+    },
+    {
+      id: 'is54',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Povežite kategorije faktora autentifikacije sa odgovarajućim primjerima (označite tačne tvrdnje):',
+      opts: ['„Ono što mi znamo“ – lozinka (password), odgovor na tajno pitanje', '„Ono što mi imamo“ – smartcard, token, mobitel sa MFA aplikacijom (Microsoft/Google Authenticator)', '„Ono što mi jesmo“ – otisak prsta, skeniranje oka, glasa i lica', '„Ono što mi imamo“ – PIN i datum rođenja'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: „Ono što mi imamo“ – PIN i datum rođenja.'
+    },
+    {
+      id: 'is55',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Zašto sistemi pri kreiranju novog korisničkog naloga sa automatski generisanom lozinkom po defaultu uključuju opciju „Require this user to change their password when they first sign in“?',
+      opts: ['Zato što sistem ne zna generisati lozinku dužu od 4 karaktera', 'Zato što u trenutku slanja kredencijala lozinku zna i administrator sistema, pa nakon promjene pri prvom logiranju lozinku zna isključivo korisnik', 'Zato što lozinka ističe nakon 5 sekundi', 'Zato što Windows ne dozvoljava specijalne karaktere u lozinkama'],
+      correct: [1],
+      expl: 'Zato što u trenutku slanja kredencijala lozinku zna i administrator sistema, pa nakon promjene pri prvom logiranju lozinku zna isključivo korisnik.'
+    },
+    {
+      id: 'is56',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Povežite preporučene dužine lozinki sa njihovim kategorijama prema lekciji (označite tačne tvrdnje):',
+      opts: ['Minimalna dužina – 8 karaktera (danas se smatra nedovoljnom dužinom)', 'Sigurna lozinka – 12 do 16 karaktera', 'Jaka lozinka – 16+ karaktera (preporuka za administrativne naloge, servere i sisteme)', 'Passphrase – 20+ karaktera (fraza od više riječi, npr. citat iz filma umjesto poznatih poslovica)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is57',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koliko je približno vremena potrebno za pogađanje lozinke od 8 ASCII karaktera (256⁸ kombinacija) metodom grube sile (brute-force) pri brzini od 100T pokušaja u sekundi?',
+      opts: ['Nekoliko sekundi', 'Oko 6 godina', 'Milijarde godina', 'Stotine hiljada godina'],
+      correct: [1],
+      expl: 'Oko 6 godina.'
+    },
+    {
+      id: 'is58',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Šta je tačno za rječnički napad (Dictionary Attack) i alate koji se koriste?',
+      opts: ['Koristi datoteku (password list, npr. jwt.secrets.list) sa velikim brojem čestih kombinacija lozinki za zadato korisničko ime', 'Kada su lozinke na sistemu pohranjene u hash formatu, alati pretvaraju lozinke iz liste u hashove i porede ih sa pohranjenim hashovima', 'Najčešće korišteni alati su Hydra, Medusa, Ncrack, John the Ripper i Hashcat', 'Posebna opasnost postoji ako servisi zadrže defaultne postavke poput Admin / Admin ili root / toor'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is59',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koji uređaji spadaju u kategoriju autentifikacije „ono što mi imamo“?',
+      opts: ['Smart Cards (npr. kartica za otključavanje ulaza na fakultet)', 'Token uređaji (generišu jednokratne kodove) i pametni satovi', 'USB ključevi sa pohranjenim ključem', 'Mobilni telefon (2FA putem SMS koda ili autentifikator aplikacija)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is60',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Šta od navedenog spada u BIHEVIORALNE metode biometrijske autentifikacije?',
+      opts: ['Način (tempo) kucanja na tastaturi', 'Način korištenja telefona', 'Otisak prsta i šarenica oka (Iris)', 'Skeniranje krvnih sudova mrežnjače (Retina)'],
+      correct: [0, 1],
+      expl: 'Otisak prsta, Iris i Retina spadaju u fizičke biometrijske karakteristike.'
+    },
+    {
+      id: 'is61',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koji su glavni nedostaci biometrijske autentifikacije navedeni u lekciji?',
+      opts: ['Ako biometrijski podatak bude kompromitovan, ne može se promijeniti (npr. otisak prsta)', 'Potrebna je specijalna oprema (skeneri i sl.)', 'Problem privatnosti i nemogućnost primjene na svakog korisnika (npr. prepoznavanje glasa kod nijeme osobe)', 'Korisnik mora pamtiti kompleksne kombinacije od 20 znakova'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Korisnik mora pamtiti kompleksne kombinacije od 20 znakova.'
+    },
+    {
+      id: 'is62',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koja je razlika između biometrijske Autentifikacije i biometrijske Identifikacije?',
+      opts: ['Autentifikacija se koristi kada jedan korisnik pristupa resursu (npr. ličnom laptopu) i zahtijeva kooperativnost (saradnju) subjekta', 'Identifikacija se implementira na nivou enterprisea (baza podataka svih korisnika) i koristi se kada korisnik ne sarađuje sa sistemom (npr. kamere na aerodromima i u kockarnicama)', 'Kod identifikacije probleme mogu izazvati sam subjekt (spuštanje glave, kačket) i okruženje (slaba osvijetljenost, zadimljene prostorije)', 'Identifikacija ne koristi nikakvu bazu podataka'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Identifikacija ne koristi nikakvu bazu podataka.'
+    },
+    {
+      id: 'is63',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Šta označavaju greške FAR i FRR u biometriji?',
+      opts: ['FAR (False Acceptance Rate) – stopa pogrešnog prihvatanja, kada sistem pogrešno pusti neovlaštenu osobu (npr. blizanca Amira umjesto ovlaštenog Samira)', 'FRR (False Rejection Rate) – stopa pogrešnog odbijanja, kada sistem pogrešno uskrati pristup ovlaštenom korisniku (npr. zbog promjene glasa usljed prehlade)', 'Niska stopa FAR-a je ključna za sigurnost sistema', 'FAR označava brzinu rada mrežnog kabla'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: FAR označava brzinu rada mrežnog kabla.'
+    },
+    {
+      id: 'is64',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Povežite biometrijske identifikatore (Otisak prsta, Iris oka, Retina oka) sa njihovim karakteristikama (označite tačne tvrdnje):',
+      opts: ['Otisak prsta ima oko 40 identifikacijskih tačaka (minucija) i može se lažirati pomoću 3D navlake od želatine, lateksa ili silikona', 'Iris (šarenica oka) ima oko 240 identifikacijskih tačaka, koristi kameru sa blagim infracrvenim osvjetljenjem i može se skenirati sa određene udaljenosti', 'Retina oka koristi jedinstvenu mrežu krvnih žila unutar oka, zahtijeva prislanjanje oka na skener i gotovo ju je nemoguće izmanipulisati', 'Otisak prsta i šarenica oka mijenjaju svoj obrazac svakih 5 godina'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Otisak prsta i šarenica oka mijenjaju svoj obrazac svakih 5 godina.'
+    },
+    {
+      id: 'is65',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koja je razlika između Matrice prava pristupa (Access Control Matrix) i Liste kontrole pristupa (ACL)?',
+      opts: ['Matrica daje konceptualno jasnu i potpunu predstavu pristupnih prava, ali je u realnim sistemima prevelika i neefikasna (koristi se kod formalne provjere politike i modeliranja)', 'ACL je vezan direktno za objekat i lako pokazuje ko ima pristup pojedinom objektu (koristi se kod fajl sistema i mrežnih uređaja)', 'Nedostatak ACL-a je što je teže prikazati sva prava jednog korisnika na cijelom sistemu', 'U matrici privilegije R, W, E, D označavaju Read, Write, Execute i Delete'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is66',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Kako Unix/Linux i macOS sistemi implementiraju kontrolu pristupa?',
+      opts: ['Unix/Linux koristi kombinaciju DAC-a, RBAC-a (putem grupa kao što su wheel ili sudo) i ACL-a', 'U Unix/Linux DAC modelu dozvole (r, w, x) se dijele na tri kategorije: User (vlasnik), Group (grupa) i Other (ostali)', 'Dozvola rwxr-xr-- znači da vlasnik može čitati, pisati i izvršavati, grupa čitati i izvršavati, a ostali samo čitati', 'Apple macOS koristi grupu admin čiji članovi putem sudo komande mogu privremeno preuzeti root privilegije'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is67',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Šta je tačno za mehanizme kontrole pristupa na Windows sistemima?',
+      opts: ['Prilikom uspješne autentifikacije Windows korisniku dodjeljuje security access token koji sadrži SID korisnika i SID-ove svih grupa kojima pripada', 'Svaki objekat ima pridruženu DACL (Discretionary ACL) listu sastavljenu od ACE (Access Control Entry) unosa', 'Ako prvi ACE unos u DACL-u glasi „Access denied“ za određenog korisnika, pristup objektu se odmah odbija', 'Definisanje kontrole pristupa preko Local Group Policy Editora i Local Security Policy smatra se „drugim nivoom“ kontrole nakon ACL-a'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is68',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Na koji način se širio Slammer crv 2003. godine na bazama podataka?',
+      opts: ['Iskoristio je stack-overflow ranjivost na Microsoft SQL Serveru 2000 (Resolution Servis na UDP portu 1434)', 'Koristio je modificirani UDP paket jer UDP ne prolazi kroz 3-way handshake niti autentifikaciju', 'Manipulacijom memorijskim bufferom (stack overflow) izvršavao je shell code i slao poplave paketa na nasumične IP adrese', 'Širio se isključivo putem USB stickova bez mrežne konekcije'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Širio se isključivo putem USB stickova bez mrežne konekcije.'
+    },
+    {
+      id: 'is69',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'U web preglednicima (browserima), kod se izvršava u izolovanom virtualnom okruženju koje se naziva sandbox kako bi se spriječila eventualna šteta prema operativnom sistemu ili podacima, a glavno pravilo kontrole pristupa nalaže da skripte mogu komunicirati samo sa IP adresom sa koje su dobijene.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'is70',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Povežite brzinu pogađanja lozinke (brute-force metoda za lozinku od 8 ASCII karaktera, tj. 256⁸ kombinacija) sa potrebnim vremenom za njeno probijanje (označite tačne tvrdnje):',
+      opts: ['1K pokušaja/sec → milijarde godina', '1M pokušaja/sec → stotine hiljada godina', '1B pokušaja/sec → hiljade godina', '1T pokušaja/sec → desetine godina (a 100T pokušaja/sec → oko 6 godina)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is71',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koja su pravila i preporuke navedena za strukturu sigurne lozinke i kreiranje Passphrase-a?',
+      opts: ['Treba sadržavati specijalne karaktere (%/$!." i sl.), velika i mala slova te broj', 'Ne smije sadržavati ime, prezime korisnika i slične lične podatke (JMB, datum rođenja, ime kućnog ljubimca, brend vozila)', 'Za passphrase (20+ karaktera) ne treba koristiti poznate poslovice jer su lake za pogoditi, već npr. neku rečenicu/frazu iz filma', 'U datoteci jwt.secrets.list (sa slike u lekciji) nalazi se tačno 103.979 mogućih lozinki'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is72',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Šta je tačno za primjer Matrice prava pristupa (Access Control Matrix) iz lekcije?',
+      opts: ['Korisnik_A (Administrator) ima privilegije R, W, D nad Datotekom_1 i Datotekom_2, te R, E nad Servisom za statistiku i E nad Reporting servisom', 'Korisnik_B (User) nema nikakva prava nad Datotekom_1, ima samo Read (R) privilegiju nad Datotekom_2 i nema prava nad servisima', 'Reporting Servis može čitati (R) Datoteku_1, pokrenuti (E) Servis za statistiku i pisati (W) po Datoteci_2, ali ne može sam sebe pokrenuti', 'Matrica prava pristupa se u realnim sistemima (npr. bankama sa hiljadama uposlenih) rijetko koristi jer bi bila prevelika i neefikasna'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is73',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Koji je tačan redoslijed informacija u standardnom ispisu komande ls -l kod Unix/Linux DAC modela (prikazanom na Slici 1 u lekciji)?',
+      opts: ['Veličina fajla → ime fajla → datum kreiranja → dozvole', 'Oznaka datoteke ili direktorija → owner privilegije → grupne privilegije → other user privilegije → link count → owner → owner group', 'IP adresa korisnika → SID grupe → ACE unos → naziv servisa', 'Passphrase → hash vrijednost → port broj'],
+      correct: [1],
+      expl: 'Oznaka datoteke ili direktorija → owner privilegije → grupne privilegije → other user privilegije → link count → owner → owner group.'
+    },
+    {
+      id: 'is74',
+      topic: 'Kontrola pristupa i sigurnost',
+      q: 'Zašto su korisnici u praksi često izloženi infekciji sistema putem web preglednika (browsera) uprkos tome što se kod izvršava u sandboxu?',
+      opts: ['Pogrešno programirana web stranica može dovesti do eskalacije privilegija i drugih problema', 'Potencijalni bugovi na nivou samog browsera mogu napadaču omogućiti pokretanje preuzetog zlonamjernog koda', 'Korisnici često bivaju prevareni reklamama, bannerima ili e-mailovima sa „ekskluzivnim ponudama“ te posjete kompromitovane web lokacije', 'Sandbox u browseru služi za brisanje kompletnog operativnog sistema pri svakom otvaranju nove kartice'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Sandbox u browseru služi za brisanje kompletnog operativnog sistema pri svakom otvaranju nove kartice.'
+    }
   ]
 };
 
@@ -2384,6 +2997,7 @@ function checkActiveSessionOnLoad() {
       if (ses && ses.questions && ses.idx < ses.questions.length) {
         if (confirm('Pronađena je prekinuta sesija kviza. Da li želite nastaviti tamo gdje ste stali?')) {
           quizSession = ses;
+          if (ses.subjId && QUESTIONS_DB[ses.subjId]) state.selectedSubjId = ses.subjId;
           state.currentView = 'quiz';
           startTimerInterval();
           return true;
@@ -2454,7 +3068,6 @@ function renderHeader() {
         </div>
       </div>
       <div class="nav-actions">
-        <div class="streak-pill">🔥 ${state.stats.streak || 0}d</div>
         <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()">Svi predmeti</button>
         <button class="btn sm ghost" onclick="toggleSound()">${state.sound ? '🔊' : '🔇'}</button>
         <button class="btn sm ghost" onclick="toggleTheme()">${state.theme === 'dark' ? '☀' : '☾'}</button>
@@ -2469,7 +3082,6 @@ function renderProfileDashboard() {
     ? Math.round((state.stats.totalCorrect / state.stats.totalAnswered) * 100) 
     : 0;
 
-  const subj = SUBJECTS[0];
   const topicStats = state.stats.topicStats || {};
 
   return `
@@ -2512,6 +3124,8 @@ function renderProfileDashboard() {
 
       <div style="margin-top: 10px;">
         <div class="eyebrow" style="margin-bottom: 8px;">Progres po lekcijama</div>
+        ${SUBJECTS.map(subj => `
+        <div style="font-weight:800; font-size:0.85rem; margin: 12px 0 6px; color: var(--accent-light);">${subj.name}</div>
         <div class="topic-progress-list">
           ${subj.topics.map(t => {
             const tData = topicStats[t] || { answered: 0, correct: 0 };
@@ -2529,6 +3143,7 @@ function renderProfileDashboard() {
             `;
           }).join('')}
         </div>
+        `).join('')}
       </div>
     </div>
   `;
@@ -2542,7 +3157,7 @@ function renderHub() {
       <div>
         <div class="eyebrow">Kviz Hub</div>
         <h2>Odaberi predmet i kreni s učenjem</h2>
-        <p>Spremni testovi sa 212 pitanja iz svih oblasti za prvi parcijalni ispit.</p>
+        <p>Spremni testovi sa ${Object.values(QUESTIONS_DB).reduce((n, a) => n + a.length, 0)} pitanja iz svih oblasti za parcijalne ispite.</p>
       </div>
     </section>
 
@@ -2579,8 +3194,9 @@ function renderSubjectDetail() {
   if (state.qCount > availCount && availCount > 0) {
     state.qCount = availCount;
   }
-  const wrongCount = state.wrongQuestions.length;
-  const savedCount = state.savedQuestions.length;
+  const subjQs = QUESTIONS_DB[state.selectedSubjId] || [];
+  const wrongCount = subjQs.filter(q => state.wrongQuestions.includes(q.id)).length;
+  const savedCount = subjQs.filter(q => state.savedQuestions.includes(q.id)).length;
   
   return `
     ${renderHeader()}
@@ -2597,7 +3213,7 @@ function renderSubjectDetail() {
         <div class="m-card" onclick="openPresentations()">
           <span>📊</span>
           <div>Prezentacije</div>
-          <small>6 fajlova (.pdf)</small>
+          <small>${(PRESENTATIONS[state.selectedSubjId] || []).length} fajlova (.pdf)</small>
         </div>
         <div class="m-card" onclick="startSpecialMode('weak')">
           <span>🎯</span>
@@ -2704,7 +3320,7 @@ function renderPresentations() {
       </div>
 
       <div style="display:flex; flex-direction:column; gap:10px;">
-        ${PRESENTATIONS_LIST.map(p => `
+        ${(PRESENTATIONS[state.selectedSubjId] || []).map(p => `
           <div class="opt-item pres-row" style="display:flex; justify-content:space-between; align-items:center; cursor:default; gap:12px; flex-wrap:wrap;">
             <span style="font-weight:700; font-size:0.95rem;">${p.title}</span>
             <a href="${p.file}" target="_blank" class="btn blue" style="padding:8px 16px; font-size:0.82rem; font-weight:700;">
@@ -2941,6 +3557,8 @@ window.goProfile = function() {
 
 window.openSubject = function(id) { 
   state.selectedSubjId = id; 
+  state.selectedTopics = [];
+  adjustQCountLimit();
   state.currentView = 'subject'; 
   render(); 
 };
@@ -3116,7 +3734,7 @@ window.startSpecialMode = function(mode) {
   const allQs = QUESTIONS_DB[state.selectedSubjId] || [];
   
   if (mode === 'weak') {
-    if (state.wrongQuestions.length === 0) {
+    if (!allQs.some(q => state.wrongQuestions.includes(q.id))) {
       return alert('Nemate zabilježenih pogrešnih pitanja! Prvo rješavajte kviz.');
     }
     const weakList = allQs.filter(q => state.wrongQuestions.includes(q.id));
@@ -3135,7 +3753,7 @@ window.startSpecialMode = function(mode) {
     saveActiveSession();
     startTimerInterval();
   } else if (mode === 'saved') {
-    if (state.savedQuestions.length === 0) {
+    if (!allQs.some(q => state.savedQuestions.includes(q.id))) {
       return alert('Nemate sačuvanih pitanja! Kliknite na zvjezdicu ⭐ tokom kviza.');
     }
     const savedList = allQs.filter(q => state.savedQuestions.includes(q.id));
@@ -3299,6 +3917,7 @@ function finishQuizSession() {
 
 function saveActiveSession() {
   try {
+    quizSession.subjId = state.selectedSubjId;
     localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(quizSession));
   } catch(e){}
 }
