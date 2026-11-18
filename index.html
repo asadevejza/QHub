@@ -579,6 +579,80 @@ body::before {
 @media (max-height: 480px) and (orientation: landscape) {
   .sticky-bottom-bar, .start-bar { position: static; background: none; margin-left: 0 !important; margin-right: 0 !important; }
 }
+
+/* ===== Korisnički profil ===== */
+.pf { max-width: 760px; margin: 4px auto 0; display: grid; gap: 14px; }
+.pf-top { display: flex; align-items: center; }
+.pf-hero {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: 16px;
+  padding: 22px 20px; border-radius: 22px; border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+  background: radial-gradient(120% 140% at 0% 0%, rgba(59, 130, 246, 0.38) 0%, rgba(59, 130, 246, 0) 60%), var(--surface);
+}
+.pf-avatar {
+  width: 68px; height: 68px; border-radius: 20px; flex-shrink: 0; display: grid; place-items: center; font-size: 2rem;
+  background: var(--blue-gradient); box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
+}
+.pf-id { min-width: 0; flex: 1; }
+.pf-name-wrap { position: relative; }
+.pf-name {
+  width: 100%; box-sizing: border-box; min-width: 0; padding: 4px 30px 4px 0; margin: 0;
+  background: transparent; border: none; border-bottom: 1px dashed var(--border); border-radius: 0; outline: none;
+  color: var(--ink); font-family: inherit; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em;
+}
+.pf-name:focus { border-bottom: 1px solid var(--accent-light); }
+.pf-edit { position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; opacity: 0.55; pointer-events: none; }
+.pf-role { margin-top: 6px; color: var(--muted); font-size: 0.85rem; font-weight: 600; }
+
+.pf-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.pf-stat {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 14px;
+  display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-sm);
+}
+.pf-ico { width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center; font-size: 1.05rem; flex-shrink: 0; }
+.pf-ico.blue { background: rgba(59, 130, 246, 0.18); }
+.pf-ico.amber { background: rgba(245, 158, 11, 0.18); }
+.pf-ico.green { background: rgba(16, 185, 129, 0.18); }
+.pf-ico.red { background: rgba(239, 68, 68, 0.18); }
+.pf-val { font-size: 1.7rem; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.pf-lbl { font-size: 0.72rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+
+.pf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px; box-shadow: var(--shadow-sm); }
+.pf-card h3 { font-size: 1.02rem; font-weight: 800; margin-bottom: 6px; }
+.pf-section-title { margin: 6px 2px -4px; }
+
+.pf-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--border); }
+.pf-row:first-of-type { border-top: none; }
+.pf-row-l { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.pf-row-l b { display: block; font-size: 0.95rem; font-weight: 700; }
+.pf-row-l small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 1px; }
+
+.pf-subj-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.pf-subj-head h3 { margin: 0; }
+.pf-pill { padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 800; white-space: nowrap; background: rgba(148, 163, 184, 0.16); color: var(--muted); }
+.pf-pill.good { background: rgba(16, 185, 129, 0.16); color: var(--good); }
+.pf-pill.mid { background: rgba(245, 158, 11, 0.16); color: var(--warn); }
+.pf-pill.low { background: rgba(239, 68, 68, 0.16); color: var(--bad); }
+
+.pf-topics { display: grid; gap: 14px; }
+.pf-topic-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.pf-topic-name { font-size: 0.9rem; font-weight: 700; min-width: 0; }
+.pf-topic-val { font-size: 0.9rem; font-weight: 800; white-space: nowrap; color: var(--muted); }
+.pf-topic-val small { font-size: 0.74rem; font-weight: 600; color: var(--muted); }
+.pf-topic-val.good { color: var(--good); } .pf-topic-val.mid { color: var(--warn); } .pf-topic-val.low { color: var(--bad); }
+.pf-bar { width: 100%; height: 8px; border-radius: 6px; background: rgba(148, 163, 184, 0.18); overflow: hidden; }
+.pf-bar-fill { height: 100%; border-radius: 6px; background: var(--accent-light); transition: width 0.4s ease; }
+.pf-bar-fill.good { background: var(--good); } .pf-bar-fill.mid { background: var(--warn); } .pf-bar-fill.low { background: var(--bad); }
+
+.pf-danger-card p { color: var(--muted); font-size: 0.82rem; margin-bottom: 12px; }
+.pf-danger { width: 100%; min-height: 46px; color: var(--bad); border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08); }
+
+@media (max-width: 768px) {
+  .pf-stats { grid-template-columns: repeat(2, 1fr); }
+  .pf-hero { padding: 18px 16px; gap: 14px; border-radius: 20px; }
+  .pf-avatar { width: 60px; height: 60px; font-size: 1.8rem; border-radius: 18px; }
+  .pf-name { font-size: 1.25rem; }
+  .pf-danger-card .btn { min-height: 48px; }
+}
 </style>
 </head>
 <body data-theme="dark">
@@ -725,7 +799,8 @@ const SUBJECTS = [
     topics: [
       'Uvod u informacijsku sigurnost',
       'Protokoli i sigurnost',
-      'Kontrola pristupa i sigurnost'
+      'Kontrola pristupa i sigurnost',
+      'Kriptografija – prvi dio'
     ]
   }
 ];
@@ -3021,6 +3096,246 @@ const QUESTIONS_DB = {
       opts: ['Pogrešno programirana web stranica može dovesti do eskalacije privilegija i drugih problema', 'Potencijalni bugovi na nivou samog browsera mogu napadaču omogućiti pokretanje preuzetog zlonamjernog koda', 'Korisnici često bivaju prevareni reklamama, bannerima ili e-mailovima sa „ekskluzivnim ponudama“ te posjete kompromitovane web lokacije', 'Sandbox u browseru služi za brisanje kompletnog operativnog sistema pri svakom otvaranju nove kartice'],
       correct: [0, 1, 2],
       expl: 'Netačna tvrdnja: Sandbox u browseru služi za brisanje kompletnog operativnog sistema pri svakom otvaranju nove kartice.'
+    },
+    {
+      id: 'is75',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je kriptologija i od koje dvije discipline se sastoji?',
+      opts: ['Kriptologija je nauka koja se bavi šifriranjem i zaštitom informacija, a korijen riječi potiče od grčke riječi kryptos (skriven, tajni, privatan)', 'Kriptografija je naučna disciplina koja se bavi razvojem matematičkih metoda i algoritama za zaštitu podataka s ciljem obezbjeđenja povjerljivosti, integriteta, autentičnosti i neporecivosti', 'Kriptoanaliza je naučna disciplina koja se bavi analizom i probijanjem kriptografskih sistema (pretvaranjem kriptovanog sadržaja u izvornu formu bez saglasnosti onoga ko je izvršio kriptovanje)', 'Kriptoanalizu koriste isključivo maliciozni hakeri i nikada je ne koristi policija ili obavještajne službe'],
+      correct: [0, 1, 2],
+      expl: 'Kriptoanalizu koristi i policija za dešifriranje presretnute komunikacije kriminalnih grupa.'
+    },
+    {
+      id: 'is76',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koje tvrdnje tačno opisuju pojmove Šifra (Cipher), Keyspace i Kriptosistem?',
+      opts: ['Cipher je algoritam ili skup pravila koji pretvara čitljiv tekst (plaintext) u nečitljiv oblik (ciphertext) i obratno pomoću ključa', 'Ključ veličine 512 bita daje prostor mogućih ključeva (keyspace) od 2⁵¹² kombinacija', 'Kriptosistem je konkretan model zaštite podataka koji uključuje plaintext, ciphertext, moguće ključeve, enkripcijsku i dekripcijsku funkciju', 'Povećanjem veličine ključa (npr. sa 128 na 256 ili 512 bita) smanjuje se sigurnost sistema'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Povećanjem veličine ključa (npr. sa 128 na 256 ili 512 bita) smanjuje se sigurnost sistema.'
+    },
+    {
+      id: 'is77',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je tačno za asimetrični kriptosistem?',
+      opts: ['Koristi isti tajni ključ za enkripciju i dekripciju', 'Sistem prvo generiše tajni ključ (private key), iz njega matematički izvodi javni ključ (public key), dok je obrnut postupak nemoguć', 'Javni ključ služi za dekripciju, a tajni ključ za enkripciju', 'Oba ključa moraju biti javno objavljena na internetu'],
+      correct: [1],
+      expl: 'Sistem prvo generiše tajni ključ (private key), iz njega matematički izvodi javni ključ (public key), dok je obrnut postupak nemoguć.'
+    },
+    {
+      id: 'is78',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta glasi Kerckhoffsov princip (iz rada „La Cryptographie Militaire“, 1883.)?',
+      opts: ['Algoritam za enkripciju mora biti strogo čuvana tajna, dok ključ može biti javan', 'Sigurnost kriptosistema treba da zavisi od tajnosti ključa, a ne od tajnosti algoritma', 'Svaka šifra mora koristiti isključivo drveni štap određenog prečnika', 'Algoritam treba mijenjati nakon svake poslane riječi'],
+      correct: [1],
+      expl: 'Kada je algoritam javno dostupan, stručna javnost može testirati njegove ranjivosti i robusnost.'
+    },
+    {
+      id: 'is79',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je tačno za šifru transpozicije i drevnu spartansku Skitalu (svitak)?',
+      opts: ['Transpozicija je metoda enkripcije kod koje se mjesta slova u poruci međusobno premještaju (za riječ od 3 slova ABC postoji 3!=6 permutacija)', 'Skitala (svitak) je transpozicijska šifra korištena u drevnoj Sparti u 5. vijeku p.n.e. gdje se traka obavijala oko štapa određenog oblika/prečnika (ključ)', 'Skitala pruža izuzetno jaku modernu zaštitu koju je nemoguće probiti metodom pokušaja', 'Kod Skytale, poruka „SUTRA ISPIT ZNANJA“ namotana na štap daje odmotani ciphertext „SIZUSNTPARINJATA“'],
+      correct: [0, 1, 3],
+      expl: 'Skitala predstavlja veoma lošu zaštitu jer se prečnik štapa lako pogodi metodom pokušaja.'
+    },
+    {
+      id: 'is80',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Zašto je Cezarova šifra jednostavna za probiti i kako se može unaprijediti?',
+      opts: ['Ima mali prostor mogućih ključeva (samo 32 moguća ključa za naš alfabet)', 'Podložna je frekvencijskoj analizi (lako se prepoznaju slova koja se češće pojavljuju u jeziku, npr. samoglasnici A, E, I, O u bosanskom jeziku)', 'Transformacija je linearna (konstantan pomak bez izmiješanosti slova)', 'Unapređenje se postiže ako ključ bude proizvoljna zamjena (permutacija) slova alfabeta, što za 26 slova daje 26!>2⁸⁸ mogućih ključeva'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is81',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koje tvrdnje tačno opisuju transpoziciju pomoću matrice, transpoziciju kolona ključnom riječi i dvostruku transpoziciju?',
+      opts: ['Ako poruci nedostaje slova da popuni matricu određene dimenzije, ubacuje se znak za popunu poput X', 'Kod transpozicije kolona ključnom riječi (npr. ključna riječ OSAM gdje je O=3,S=4,A=1,M=2), ključ čine ključna riječ i dimenzija matrice', 'Kod dvostruke transpozicije koriste se dvije matrice i dvostruka permutacija (redova i kolona)', 'Za poruku „PROZORNOCASMORAPASTI“ (matrica 7×3, permutacije (2,4,1,0,3,6,5) i (2,0,1)) dobija se ciphertext od 21 slova: CNOAORRZOOPRMASXTISPA'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is82',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je tačno za Playfair šifru?',
+      opts: ['Izumio ju je Charles Wheatstone 1854. godine, a nazvana je po Lordu Playfairu koji ju je promovirao', 'Koristi matricu 5×5 (za engleski alfabet gdje se slovo J izostavlja ili mijenja sa I), a poruka se dijeli na parove slova (digrame)', 'Ako se u paru ponavljaju ista slova, ubacuje se slovo za popunu (npr. LL postaje LX)', 'Ako su slova u istom redu mijenjaju se slovom desno, ako su u istoj koloni mijenjaju se slovom ispod, a ako formiraju kvadrat mijenjaju se slovom iz istog reda ali druge kolone'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is83',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Ko je 1929. godine došao na ideju primjene matematičkih linearnih jednačina nad velikim alfabetom kao preteče savremenih blok šifri?',
+      opts: ['Auguste Kerckhoffs', 'Lester Hill', 'Arthur Scherbius', 'Marian Rejewski'],
+      correct: [1],
+      expl: 'Lester Hill.'
+    },
+    {
+      id: 'is84',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je karakteristično za Vigenèreovu šifru?',
+      opts: ['U pitanju je polialfabetska šifra kod koje se ključna riječ ponavlja dok se ne dostigne dužina otvorenog teksta', 'Različita slova otvorenog teksta mogu se mapirati na isto slovo šifrata (npr. u primjeru sa ključem UVID i porukom ANALIZIRAJMO, oba slova N i A mapiraju se na I)', 'Koristi drveni štap omotan kožnom trakom', 'Koristi isključivo binarnu operaciju XOR'],
+      correct: [0, 1],
+      expl: 'Netačna tvrdnja: Koristi drveni štap omotan kožnom trakom; Koristi isključivo binarnu operaciju XOR.'
+    },
+    {
+      id: 'is85',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koje tvrdnje tačno opisuju One-Time Pad (OTP) enkripciju i historijski Projekat Venona?',
+      opts: ['OTP je matematički neprobojna metoda ako je ključ potpuno nasumičan (random), iste dužine kao poruka i koristi se samo jednom', 'Binarna transformacija OTP-a zasniva se na logičkoj operaciji XOR: enkripcija je Cᵢ=Pᵢ⊕Kᵢ, a dekripcija Pᵢ=Cᵢ⊕Kᵢ', 'Glavna slabost OTP-a je sigurna razmjena i skladištenje velikih ključeva', 'U Projektu Venona, američka vojska je dekriptovala hiljade sovjetskih špijunskih poruka jer su Sovjeti napravili grešku i počeli ponavljati ključeve'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is86',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je tačno za šifrovanje putem knjige kodova i „Zimmerov telegram“?',
+      opts: ['Knjiga kodova sastoji se od dvije liste: pojmova i kodova (obično nizova brojeva) koji zamjenjuju te pojmove', 'Zimmerov telegram (1917.) poslao je njemački ministar vanjskih poslova Meksiku pozivajući ih na savezništvo protiv SAD-a', 'Telegram je presrela britanska obavještajna služba (Soba 40) i dešifrovala ga nakon što su zaplijenili njemačke kodne knjige', 'Danas neki sistemi rijetko koriste sličan koncept pod nazivom Electronic Codebook (ECB)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is87',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koje je pojmove i principe uveo Claude Shannon („otac digitalnog doba“)?',
+      opts: ['Uveo je pojam bit kao osnovnu jedinicu informacije, pojam entropije (mjere nesigurnosti) i kapacitet komunikacijskog kanala', 'Dokazao je da sistem ima savršenu tajnost ako vrijedi P(poruka∣ciphertext)=P(poruka)', 'Difuzija – raspoređuje informacije poruke kroz cijeli ciphertext tako da promjena jednog slova poruke utiče na više dijelova ciphertexta', 'Konfuzija – komplikuje vezu između ključa i ciphertexta tako da napadač ne može lako otkriti ključ'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is88',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koje tvrdnje tačno opisuju mašinu ENIGMA i razbijanje njene šifre?',
+      opts: ['Izumio ju je Arthur Scherbius 1918. godine u Njemačkoj kao elektromehaničku mašinu sa rotirajućim diskovima (rotorima), tastaturom, lampboardom i plugboardom', 'Kombinacijom rotora i njihovih početnih vrijednosti moglo se generisati preko 10²³ mogućih ključeva', 'Kod Enigme prvi su razbili poljski kriptoanalitičari na čelu sa Marianom Rejewskim 1930-ih i razvili mašinu nazvanu „Bomba“', 'Britanci su na imanju „Stanica X“ okupili tim stručnjaka gdje je Alan Turing sa kolegama unaprijedio „Bombu“ i omogućio čitanje njemačkih poruka'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is89',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Sedamdesetih (70-ih) godina 20. vijeka pojavljuju se moderni matematički algoritmi kao što su DES i RSA, kriptografija korištenjem javnih ključeva te prve stručne konferencije posvećene kriptografiji.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'is90',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Povežite osnovne pojmove iz uvoda u kriptologiju sa njihovim tačnim značenjem (označite tačne tvrdnje):',
+      opts: ['Kriptologija je nauka koja obuhvata i kriptografiju i kriptoanalizu', 'Riječ kriptologija potiče od grčke riječi kryptos (κρυπτός), što znači „skriven“, „tajni“ ili „privatan“', 'Plaintext je čitljiv tekst prije šifriranja, dok je ciphertext nečitljivi šifrirani tekst koji nastaje primjenom ciphera i ključa', 'Cilj kriptografije je isključivo smanjenje veličine datoteke na disku'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Cilj kriptografije je isključivo smanjenje veličine datoteke na disku.'
+    },
+    {
+      id: 'is91',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koja je ključna razlika između simetričnog i asimetričnog kriptosistema u pogledu generisanja i upotrebe ključeva?',
+      opts: ['Simetrični kriptosistem koristi isti tajni ključ za enkripciju i dekripciju', 'Kod asimetričnog kriptosistema sistem prvo generiše tajni ključ (private key), iz njega matematički izvodi javni ključ (public key), dok je obrnut postupak nemoguć', 'Kod asimetričnog kriptosistema javni ključ se koristi za dekriptovanje, a tajni za kriptovanje', 'Veličina ključa u kriptosistemima može biti 128, 256, 512, 1024 bita pa čak i veći'],
+      correct: [0, 1, 3],
+      expl: 'Netačna tvrdnja: Kod asimetričnog kriptosistema javni ključ se koristi za dekriptovanje, a tajni za kriptovanje.'
+    },
+    {
+      id: 'is92',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Zašto se prema Kerckhoffsovom principu algoritmi ne drže u tajnosti u modernoj kriptografiji?',
+      opts: ['Iskustvo je pokazalo da tajnost algoritma nikada nije dugo trajala', 'Kada je algoritam javno dostupan, svi stručnjaci mogu učestvovati u testiranju njegovih ranjivosti i robusnosti', 'Čak i kada se otkrije propust u javnom algoritmu, postojeći podaci nisu kompromitovani jer je sigurnost bazirana na tajnosti ključa', 'Zato što zakoni zabranjuju bilo kakvo korištenje tajnih ključeva'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Zato što zakoni zabranjuju bilo kakvo korištenje tajnih ključeva.'
+    },
+    {
+      id: 'is93',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koji je ključ kod antičke spartanske šifre Skitala (svitak) i kako se ona razbija?',
+      opts: ['Ključ je oblik (prečnik) drvenog štapa oko kojeg se obavija traka, a može se lako odgonetnuti metodom pokušaja', 'Ključ je 512-bitni binarni broj generisan pomoću kvantnog računara', 'Ključ je matrica dimenzija 5×5 u kojoj se izostavlja slovo J', 'Ključ je operacija ekskluzivnog OR (XOR)'],
+      correct: [0],
+      expl: 'Ključ je oblik (prečnik) drvenog štapa oko kojeg se obavija traka, a može se lako odgonetnuti metodom pokušaja.'
+    },
+    {
+      id: 'is94',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Kako glasi šifrirani tekst (ciphertext) za poruku "GORAN" ako se koristi Cezarova šifra sa ključem k=3 (prema primjeru u lekciji)?',
+      opts: ['JRUDQ', 'JSTDP', 'GORAN', 'SASUJP'],
+      correct: [0, 1],
+      expl: 'Napomena za ispit: U tekstu lekcije je na jednom mjestu naveden rezultat JSTDP, dok je slovo-po-slovo pomakom za +3 u engleskoj abecedi prikazano G→J,O→R,R→U,A→D,N→Q, odnosno JRUDQ — obrati pažnju na oba zapisa iz teksta!'
+    },
+    {
+      id: 'is95',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Zašto je Cezarovu šifru moguće lako probiti frekvencijskom analizom?',
+      opts: ['Zato što se određena slova u svakom jeziku pojavljuju znatno češće od drugih (npr. samoglasnici A, E, I, O u bosanskom jeziku), a pomak slova je konstantan (linearan)', 'Zato što se za svako slovo u poruci generiše novi nasumični ključ', 'Zato što koristi rotirajuće elektromehaničke diskove', 'Zato što se tekst dijeli na digrame'],
+      correct: [0],
+      expl: 'Zato što se određena slova u svakom jeziku pojavljuju znatno češće od drugih (npr. samoglasnici A, E, I, O u bosanskom jeziku), a pomak slova je konstantan (linearan)'
+    },
+    {
+      id: 'is96',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Kako glasi ciphertext ako poruku "SUTRAJEISPIT" šifriramo običnom matricom dimenzija 3×4 (bez ključne riječi), a kako ako primijenimo transpoziciju kolona ključnom riječi "OSAM" (O=3,S=4,A=1,M=2)?',
+      opts: ['Običnom matricom 3×4 dobija se ciphertext: SASUJPTEIRIT', 'Transpozicijom kolona ključnom riječi OSAM dobija se ciphertext: TEIRITSASUJP', 'Kod transpozicije ključnom riječi, ključ čine i ključna riječ i dimenzija matrice', 'Oba postupka daju identičan rezultat LBUPMLDA'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Oba postupka daju identičan rezultat LBUPMLDA.'
+    },
+    {
+      id: 'is97',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Šta je tačno za primjer dvostruke transpozicije iz lekcije (poruka "PROZORNOCASMORAPASTI", matrica 7×3)?',
+      opts: ['Koriste se dvije matrice i dvostruka permutacija: redova (2,4,1,0,3,6,5) i kolona (2,0,1)', 'Nedostajuće polje u matrici od 21 karaktera popunjava se znakom X', 'Rezultujući ciphertext glasi CNOAORRZOOPRMASXTISPA', 'Broj mogućih permutacija je 3!×7!=30 240 kombinacija'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is98',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Kako se poruka "SASTANAK" dijeli i šifrira pomoću Playfair šifre sa ključnom riječi "KRIPTAMO" (prema primjeru u lekciji)?',
+      opts: ['Poruka se dijeli na parove slova (digrame): SA ST AN AK', 'Prvi slog SA postaje LB, drugi slog ST postaje UP (primjenom pravila pravougaonika/kvadrata)', 'Treći slog AN postaje ML (pravilo kvadrata), a četvrti slog AK postaje DA (pravilo iste kolone)', 'Konačni ciphertext glasi LBUPMLDA'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is99',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koja je razlika između monoalfabetske i polialfabetske supstitucije (na primjeru Vigenèreove šifre)?',
+      opts: ['Kod polialfabetske šifre (Vigenère) ključna riječ se ponavlja do dužine poruke, pa se različita slova otvorenog teksta mogu mapirati na isto slovo šifrata (npr. i N i A se mapiraju na I)', 'Kod Vigenèreove šifre koristi se isključivo matrica dimenzija 7×3', 'Vigenèreova šifra ne koristi nikakav ključ', 'Vigenèreova šifra je vrsta binarne steganografije'],
+      correct: [0],
+      expl: 'Kod polialfabetske šifre (Vigenère) ključna riječ se ponavlja do dužine poruke, pa se različita slova otvorenog teksta mogu mapirati na isto slovo šifrata (npr. i N i A se mapiraju na I)'
+    },
+    {
+      id: 'is100',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koja je osnovna osobina logičke operacije XOR (⊕) na kojoj počiva binarna One-Time Pad (OTP) enkripcija i dekripcija?',
+      opts: ['(A⊕B)⊕B=A', 'A⊕A=1', '0⊕0=1', '1⊕0=0'],
+      correct: [0],
+      expl: 'Enkripcija: Cᵢ=Pᵢ⊕Kᵢ; Dekripcija: Pᵢ=Cᵢ⊕Kᵢ.'
+    },
+    {
+      id: 'is101',
+      topic: 'Kriptografija – prvi dio',
+      q: 'U binarnom primjeru One-Time Pad enkripcije za riječ "NAPAD" sa ključem "GTMCE", kako se dobija prvi broj cipherteksta (9) za prvo slovo N (ASCII 78 = 01001110) i slovo ključa G (ASCII 71 = 01000111)?',
+      opts: ['Operacijom XOR: 01001110 ⊕ 01000111 = 00001001 (decimalno 9)', 'Sabiranjem ASCII vrijednosti: 78+71=149', 'Oduzimanjem ASCII vrijednosti: 78-71=7', 'Množenjem binarnih brojeva'],
+      correct: [0],
+      expl: 'Cijeli ciphertext za NAPAD glasi: 9 21 29 2 1.'
+    },
+    {
+      id: 'is102',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koji su uvjeti potrebni da bi sistem prema Claudeu Shannonu imao „savršenu tajnost“ (P(poruka∣ciphertext)=P(poruka))?',
+      opts: ['Šifrovani tekst ne smije davati nikakvu informaciju o originalnoj poruci', 'Ključ mora biti potpuno nasumičan (random)', 'Ključ mora biti jednake dužine kao i sama poruka', 'Ključ se nikada ne smije ponoviti (koristi se samo jednom)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Jedini poznati sistem koji ovo postiže je One-Time Pad – OTP.'
+    },
+    {
+      id: 'is103',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Povežite Shannonove pojmove iz teorije informacija i kriptografije sa njihovim definicijama (označite tačne tvrdnje):',
+      opts: ['Entropija – mjera nesigurnosti, odnosno količine informacije u poruci', 'Kapacitet kanala – maksimalna brzina prenosa informacija kroz komunikacijski kanal bez greške', 'Difuzija – raspoređuje informacije poruke kroz cijeli ciphertext (promjena jednog slova poruke utiče na više dijelova ciphertexta)', 'Konfuzija – komplikuje vezu između ključa i ciphertexta tako da napadač ne može lako otkriti ključ'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'is104',
+      topic: 'Kriptografija – prvi dio',
+      q: 'Koje pouke za modernu kriptografiju je donijelo razbijanje njemačke mašine ENIGMA tokom II svjetskog rata (od strane Mariana Rejewskog i Alana Turinga na „Stanici X“)?',
+      opts: ['Pokazala je ključnu važnost matematike i logike u sigurnosti', 'Pokazala je značaj automatizacije i mašina u kriptoanalizi (uređaj „Bomba“)', 'Dokazala je da ni najjača enkripcija (sa preko 10²³ kombinacija) nije sigurna ako se ključevi loše koriste', 'Pokazala je da se poruke šifrirane Enigmom nisu mogle prenositi Morzeovim kodom'],
+      correct: [0, 1, 2],
+      expl: 'Poruke šifrirane Enigmom su se upravo prenosile Morzeovim kodom.'
     }
   ]
 };
@@ -3213,7 +3528,6 @@ function render() {
 
 function renderHeader() {
   const isProfileActive = state.currentView === 'profile';
-  const isHubActive = state.currentView === 'hub';
 
   return `
     <header class="top-header">
@@ -3225,85 +3539,46 @@ function renderHeader() {
         </div>
       </div>
       <div class="nav-actions">
-        <button class="btn sm ${isHubActive ? 'nav-active' : ''}" onclick="goHub()"><span class="lbl-full">Svi predmeti</span><span class="lbl-short">Predmeti</span></button>
-        <button class="btn sm ghost" onclick="toggleSound()">${state.sound ? '🔊' : '🔇'}</button>
-        <button class="btn sm ghost" onclick="toggleTheme()">${state.theme === 'dark' ? '☀' : '☾'}</button>
         <button class="btn sm ${isProfileActive ? 'nav-active' : ''}" onclick="goProfile()">👤 Profil</button>
       </div>
     </header>
   `;
 }
 
-function renderProfileDashboard() {
-  const accuracy = state.stats.totalAnswered > 0 
-    ? Math.round((state.stats.totalCorrect / state.stats.totalAnswered) * 100) 
-    : 0;
+function accClass(answered, pct) {
+  if (!answered) return 'none';
+  return pct >= 80 ? 'good' : pct >= 50 ? 'mid' : 'low';
+}
 
+function renderProfileSubjects() {
   const topicStats = state.stats.topicStats || {};
-
-  return `
-    <div class="profile-dash-card">
-      <div class="profile-top">
-        <div class="profile-user-info">
-          <div class="avatar-box">🎓</div>
-          <div class="user-title">
-            <h2><input class="user-name-input" type="text" value="${state.stats.userName}" style="margin:0; padding:4px 8px; font-size:1.15rem; font-weight:800; background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:8px; color:var(--ink); font-family:inherit; outline:none;" onchange="updateUserName(this.value)"></h2>
-            <p>${state.stats.userRole} • FIT</p>
+  return SUBJECTS.map(subj => {
+    let ans = 0, cor = 0;
+    const rows = subj.topics.map(t => {
+      const d = topicStats[t] || { answered: 0, correct: 0 };
+      ans += d.answered; cor += d.correct;
+      const pct = d.answered > 0 ? Math.round((d.correct / d.answered) * 100) : 0;
+      const cls = accClass(d.answered, pct);
+      return `
+        <div class="pf-topic">
+          <div class="pf-topic-top">
+            <span class="pf-topic-name">${t.trim()}</span>
+            <span class="pf-topic-val ${cls}">${d.answered ? pct + '%' : '—'}<small>${d.answered ? ' · ' + d.correct + '/' + d.answered : ''}</small></span>
           </div>
+          <div class="pf-bar"><div class="pf-bar-fill ${cls}" style="width:${pct}%"></div></div>
+        </div>`;
+    }).join('');
+    const sp = ans > 0 ? Math.round((cor / ans) * 100) : 0;
+    const sc = accClass(ans, sp);
+    return `
+      <div class="pf-card">
+        <div class="pf-subj-head">
+          <h3>📚 ${subj.name}</h3>
+          <span class="pf-pill ${sc}">${ans ? sp + '% tačno' : 'Nema odgovora'}</span>
         </div>
-        <div>
-          <span class="user-badge">Aktivan</span>
-        </div>
-      </div>
-
-      <div class="dash-grid">
-        <div class="stat-box">
-          <span class="stat-icon">📝</span>
-          <small>Riješeni kvizovi</small>
-          <b>${state.stats.totalQuizzes}</b>
-        </div>
-        <div class="stat-box">
-          <span class="stat-icon">⚡</span>
-          <small>Ukupno pitanja</small>
-          <b>${state.stats.totalAnswered}</b>
-        </div>
-        <div class="stat-box">
-          <span class="stat-icon">🎯</span>
-          <small>Tačnost</small>
-          <b>${accuracy}%</b>
-        </div>
-        <div class="stat-box">
-          <span class="stat-icon">⚠️</span>
-          <small>Pogrešnih</small>
-          <b>${state.wrongQuestions.length}</b>
-        </div>
-      </div>
-
-      <div style="margin-top: 10px;">
-        <div class="eyebrow" style="margin-bottom: 8px;">Progres po lekcijama</div>
-        ${SUBJECTS.map(subj => `
-        <div style="font-weight:800; font-size:0.85rem; margin: 12px 0 6px; color: var(--accent-light);">${subj.name}</div>
-        <div class="topic-progress-list">
-          ${subj.topics.map(t => {
-            const tData = topicStats[t] || { answered: 0, correct: 0 };
-            const tAcc = tData.answered > 0 ? Math.round((tData.correct / tData.answered) * 100) : 0;
-            return `
-              <div class="tp-item">
-                <div class="tp-info">
-                  <span>${t}</span>
-                  <span>${tAcc}% (${tData.correct}/${tData.answered})</span>
-                </div>
-                <div class="tp-bar-bg">
-                  <div class="tp-bar-fill" style="width: ${tAcc}%;"></div>
-                </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
+        <div class="pf-topics">${rows}</div>
+      </div>`;
+  }).join('');
 }
 
 function renderHub() {
@@ -3684,19 +3959,90 @@ function renderFlashcards() {
 }
 
 function renderProfileView() {
+  const st = state.stats;
+  const accuracy = st.totalAnswered > 0 ? Math.round((st.totalCorrect / st.totalAnswered) * 100) : 0;
+  const accCls = accClass(st.totalAnswered, accuracy);
+
   return `
     ${renderHeader()}
-    <div class="profile-view-card animate-fade">
-      <div class="eyebrow">Moj Profil & Postavke</div>
-      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">Korisnički Profil</h2>
-      
-      ${renderProfileDashboard()}
-
-      <div style="margin-top: 20px; display:flex; justify-content:flex-start; gap:10px; flex-wrap:wrap;">
-        <button class="btn blue" onclick="goHub()">Nazad na početnu</button>
-        <button class="btn" onclick="resetStats()">Resetuj statistiku</button>
+    <div class="pf animate-fade">
+      <div class="pf-top">
+        <button class="btn sm" onclick="goHub()">← Početna</button>
       </div>
+
+      <section class="pf-hero">
+        <div class="pf-avatar">🎓</div>
+        <div class="pf-id">
+          <div class="pf-name-wrap">
+            <input class="pf-name" type="text" maxlength="28" value="${st.userName}" aria-label="Ime korisnika" onchange="updateUserName(this.value)">
+            <span class="pf-edit">✏️</span>
+          </div>
+          <div class="pf-role">${st.userRole} • FIT</div>
+        </div>
+      </section>
+
+      <section class="pf-stats">
+        <div class="pf-stat">
+          <div class="pf-ico blue">📝</div>
+          <div class="pf-val">${st.totalQuizzes}</div>
+          <div class="pf-lbl">Riješeni kvizovi</div>
+        </div>
+        <div class="pf-stat">
+          <div class="pf-ico amber">⚡</div>
+          <div class="pf-val">${st.totalAnswered}</div>
+          <div class="pf-lbl">Ukupno pitanja</div>
+        </div>
+        <div class="pf-stat">
+          <div class="pf-ico green">🎯</div>
+          <div class="pf-val">${accuracy}%</div>
+          <div class="pf-lbl">Tačnost</div>
+          <div class="pf-bar"><div class="pf-bar-fill ${accCls}" style="width:${accuracy}%"></div></div>
+        </div>
+        <div class="pf-stat">
+          <div class="pf-ico red">⚠️</div>
+          <div class="pf-val">${state.wrongQuestions.length}</div>
+          <div class="pf-lbl">Pogrešnih</div>
+        </div>
+      </section>
+
+      <section class="pf-card">
+        <h3>⚙️ Postavke</h3>
+        <div class="pf-row">
+          <div class="pf-row-l">
+            <div class="pf-ico blue">${state.sound ? '🔊' : '🔇'}</div>
+            <div><b>Zvuk</b><small>Zvučni efekti u kvizu</small></div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" ${state.sound ? 'checked' : ''} onchange="toggleSound()">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="pf-row">
+          <div class="pf-row-l">
+            <div class="pf-ico blue">${state.theme === 'dark' ? '🌙' : '☀️'}</div>
+            <div><b>Tamni mod</b><small>${state.theme === 'dark' ? 'Tamna tema je uključena' : 'Svijetla tema je uključena'}</small></div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" ${state.theme === 'dark' ? 'checked' : ''} onchange="toggleTheme()">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <div class="eyebrow pf-section-title">Progres po lekcijama</div>
+      ${renderProfileSubjects()}
+
+      <section class="pf-card pf-danger-card">
+        <h3>🗑️ Podaci</h3>
+        <p>Briše statistiku, pogrešna i označena pitanja na ovom uređaju.</p>
+        <button class="btn pf-danger" onclick="resetStats()">Resetuj statistiku</button>
+      </section>
     </div>
+
+    <footer>
+      <div>© 2026 QHub</div>
+      <div>asadevejza</div>
+    </footer>
   `;
 }
 
@@ -3780,7 +4126,7 @@ window.toggleState = function(key) {
 };
 
 window.updateUserName = function(val) {
-  state.stats.userName = val;
+  state.stats.userName = (val || '').trim() || 'Student FIT';
   saveStorage();
 };
 
