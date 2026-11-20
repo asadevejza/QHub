@@ -773,6 +773,14 @@ const PRESENTATIONS = {
     { title: "3. Kontrola pristupa i sigurnost", file: "prezentacije/IS_3KontrolaPristupaISigurnost.pdf" },
     { title: "4. Kriptografija – prvi dio", file: "prezentacije/IS_4KriptografijaPrviDio.pdf" },
     { title: "5. Kriptografija – drugi dio", file: "prezentacije/IS_5KriptografijaDrugiDio.pdf" }
+  ],
+  'rs1': [
+    { title: "1. Uvod u softverski inženjering", file: "prezentacije/RS1_1UvodUSoftverskiInzenjering.pdf" },
+    { title: "2. Agilne metode razvoja softvera", file: "prezentacije/RS1_2AgilneMetodeRazvojaSoftvera.pdf" },
+    { title: "3. Agilne metode – SCRUM, Product Backlog i User Stories", file: "prezentacije/RS1_3AgilneMetodeSoftveraSCRUMProductBacklogIUserStories.pdf" },
+    { title: "4. Agilne metode – Planiranje sprinta", file: "prezentacije/RS1_4AgilneMetodeRazvojaSoftveraPlaniranjeSprinta.pdf" },
+    { title: "5. Izvršenje sprinta, analiza rezultata i retrospektiva", file: "prezentacije/RS1_5IzvrsenjeSprintaAnalizaRezultataIRetrospektivaSprinta.pdf" },
+    { title: "6. Ekstremno programiranje (XP)", file: "prezentacije/RS1_6EkstremnoProgramiranje.pdf" }
   ]
 };
 
@@ -804,6 +812,21 @@ const SUBJECTS = [
       'Kontrola pristupa i sigurnost',
       'Kriptografija – prvi dio',
       'Kriptografija – drugi dio'
+    ]
+  },
+  {
+    id: 'rs1',
+    name: 'Razvoj softvera 1',
+    desc: 'Kompletna baza pitanja po lekcijama',
+    badge: 'Teoretska pitanja',
+    active: true,
+    topics: [
+      'Uvod u softverski inženjering',
+      'Agilne metode razvoja softvera',
+      'SCRUM – Product Backlog i User Stories',
+      'Planiranje sprinta',
+      'Izvršenje sprinta i retrospektiva',
+      'Ekstremno programiranje (XP)'
     ]
   }
 ];
@@ -3547,6 +3570,752 @@ const QUESTIONS_DB = {
       opts: ['Linux: /dev/random (blokira pri nedostatku entropije) i /dev/urandom (ne blokira; siguran ako je kernel pravilno seed-an)', 'Windows: BCryptGenRandom / CryptGenRandom', 'Sigurne kriptografske biblioteke: libsodium i OpenSSL (RAND_bytes)', 'Standardna C funkcija rand() preporučuje se kao najsigurniji kriptografski izvor'],
       correct: [0, 1, 2],
       expl: 'Netačna tvrdnja: Standardna C funkcija rand() preporučuje se kao najsigurniji kriptografski izvor.'
+    }
+  ],
+  'rs1': [
+    {
+      id: 'rs1',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Prema grafikonu veličine softverskih sistema u prezentaciji (izraženo u milionima linija koda – LoC), koji od navedenih sistema ima približno 100 miliona linija koda?',
+      opts: ['Google Chrome', 'Windows 11', 'Autonomno vozilo', 'MySQL'],
+      correct: [2],
+      expl: 'Google Chrome ima ~6,7 miliona, MySQL 12 miliona, Windows 11 60 miliona, a Google ukupno 2.000 miliona LoC.'
+    },
+    {
+      id: 'rs2',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji pojmovi su u lekciji direktno povezani sa LLM (Large Language Model) sistemima poput ChatGPT-a?',
+      opts: ['Neuronske mreže', 'Znanje i relacije', 'Dimenzionalnost', 'Isključivo model vodopada'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Isključivo model vodopada.'
+    },
+    {
+      id: 'rs3',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Veliki broj linija programskog koda (LoC) je jedino i dovoljno mjerilo kvaliteta i funkcionalnosti nekog softvera.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [1],
+      expl: 'Netačno – tvrdnja nije ispravna.'
+    },
+    {
+      id: 'rs4',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Povežite osnovne pojmove Program, Aplikacija i Softver sa njihovim tačnim definicijama (označite tačne tvrdnje):',
+      opts: ['Program – set (niz) instrukcija', 'Aplikacija – jedan ili više međusobno povezanih programa', 'Softver – sve komponente koje sačinjavaju ili opisuju softver (programske instrukcije, strukture podataka i dokumentacija)', 'Softver – isključivo fizičke hardverske komponente računara'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Softver – isključivo fizičke hardverske komponente računara.'
+    },
+    {
+      id: 'rs5',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koje tri ključne osobine osigurava inženjering kroz primjenu naučnih principa i metoda u razvoju upotrebljivih struktura i komponenti?',
+      opts: ['Predvidivost', 'Ponovljivost', 'Ponovna iskoristivost', 'Potpuna improvizacija bez planiranja'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Potpuna improvizacija bez planiranja.'
+    },
+    {
+      id: 'rs6',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koje pojave su obilježile „Softversku krizu“ sredinom 1960-ih godina i dovele do potrebe za softverskim inženjerstvom?',
+      opts: ['Kašnjenja u isporuci softvera', 'Isporučeni softver je imao mnogo grešaka u radu', 'Isporučeni softver nije ispunjavao postavljene zahtjeve', 'Softver je bilo jako teško nadograđivati i održavati'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs7',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koja od navedenih tvrdnji tačno opisuje odnos računarske nauke i softverskog inženjerstva prema prezentaciji?',
+      opts: ['Računarska nauka osigurava teorijsku osnovu, dok je softverski inženjering primijenjena računarska nauka', 'Softverski inženjering je isključivo teorijska disciplina bez primjene u praksi', 'Računarska nauka se bavi isključivo ekonomskim aspektima prodaje softvera', 'Između računarske nauke i softverskog inženjerstva ne postoji nikakva povezanost'],
+      correct: [0],
+      expl: 'Računarska nauka osigurava teorijsku osnovu, dok je softverski inženjering primijenjena računarska nauka.'
+    },
+    {
+      id: 'rs8',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Povežite definicije Softverskog inženjeringa sa njihovim autorima / izvorima iz prezentacije (označite tačne tvrdnje):',
+      opts: ['Pagel (1994) – bavi se ekonomskim aspektima razvoja softvera visokog kvaliteta', 'Sommerville (1992) – inženjerska disciplina koja se bavi praktičnim problemima razvoja velikih softverskih sistema', 'IEEE SI rječnik (1990) – primjena sistematskih, disciplinovanih i mjerljivih pristupa razvoju, rukovanju i održavanju softvera', 'Kehoe (1995) – proces koji olakšava specificiranje, projektovanje, implementaciju i testiranje softvera za skup iznijetih zahtjeva, na najbrži i najprofitabilniji mogući način'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs9',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Šta je tačno za primjere (ne)uspješnosti u razvoju i nadogradnji softvera navedene u lekciji?',
+      opts: ['Projekat Poreske uprave SAD-a koštao je 94 miliona dolara više u odnosu na planirane troškove', 'Medicinski uređaj Rendgen Therac-25 je zbog softverske greške uzrokovao smrt više osoba', 'Zbog greške u obračunu cijene impulsa u Deutsche Telekomu nastalo je stotine miliona maraka gubitka', 'Zbog 90 minuta nedostupnosti prilikom nadogradnje, Amazon.com je zabilježio smanjenje prihoda za 2,8 miliona dolara'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs10',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Greške otkrivene tokom faze analize su, u zavisnosti od konteksta, ponekad i do 10 puta jeftinije od onih otkrivenih nakon isporuke softvera.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'rs11',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koje aktivnosti spadaju u SDLC (Software Development Life Cycle) — fazni razvoj softvera prema prezentaciji?',
+      opts: ['Komunikacija, Planiranje i Modeliranje', 'Analiza zahtjeva, Dizajn i Razvoj / Programiranje', 'Testiranje i Isporuka', 'Upravljanje projektom, Tehnička evaluacija, Osiguranje kvaliteta, Evaluacija napretka i Upravljanje rizicima'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs12',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koja tvrdnja tačno opisuje mjesto programiranja unutar cijelog Softverskog inženjeringa?',
+      opts: ['Programiranje čini 95% svih aktivnosti softverskog inženjeringa', 'Programiranje je relativno mala komponenta softverskog inženjeringa (uz upravljanje projektima, specifikaciju, testiranje, korisničku dokumentaciju i dr.)', 'Programiranje u potpunosti zamjenjuje potrebu za specifikacijom i testiranjem', 'Softverski inženjering ne uključuje pisanje koda'],
+      correct: [1],
+      expl: 'Programiranje je relativno mala komponenta softverskog inženjeringa (uz upravljanje projektima, specifikaciju, testiranje, korisničku dokumentaciju i dr.)'
+    },
+    {
+      id: 'rs13',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Kojim redoslijedom idu četiri koraka efikasnijeg rješavanja problema u softverskom inženjeringu?',
+      opts: ['Izvršenje plana → Evaluacija rezultata → Razumijevanje problema → Definisanje plana', 'Razumijevanje problema (potrebe naručioca) → Definisanje plana → Izvršenje plana → Evaluacija rezultata', 'Definisanje plana → Razumijevanje problema → Evaluacija rezultata → Izvršenje plana', 'Evaluacija rezultata → Izvršenje plana → Definisanje plana → Razumijevanje problema'],
+      correct: [1],
+      expl: 'Razumijevanje problema (potrebe naručioca) → Definisanje plana → Izvršenje plana → Evaluacija rezultata.'
+    },
+    {
+      id: 'rs14',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Šta je tačno za procese Analize i Sinteze prilikom upravljanja kompleksnošću problema?',
+      opts: ['Analiza (dekompozicija / Divide and conquer) predstavlja razlaganje velikog kompleksnog problema na manje potprobleme', 'Sinteza je proces spajanja pojedinačnih rješenja potproblema u kompletno, jedinstveno rješenje', 'Analiza i sinteza se u softverskom inženjeringu koriste samo kod malih programa od 10 linija koda', 'Dekompozicija pomaže da se kompleksan problem lakše razumije i riješi'],
+      correct: [0, 1, 3],
+      expl: 'Netačna tvrdnja: Analiza i sinteza se u softverskom inženjeringu koriste samo kod malih programa od 10 linija koda.'
+    },
+    {
+      id: 'rs15',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Povežite pojmove Metoda, Alat, Procedura i Paradigma sa njihovim definicijama (označite tačne tvrdnje):',
+      opts: ['Metoda (tehnika) – formalni postupak za postizanje nekog rezultata', 'Alat – instrument (automatizovan sistem) koji omogućava da se određena aktivnost obavi na kvalitetniji način', 'Procedura – kombinacija alata i metoda koji u međusobnom skladu proizvode dati proizvod', 'Paradigma – pristup ili filozofija razvoja softvera'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs16',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji od navedenih procesnih modela pripadaju grupi PRESKRIPTIVNIH modela?',
+      opts: ['Model vodopada (Waterfall)', 'Inkrementalni model', 'Spiralni model', 'Scrum i Kanban'],
+      correct: [0, 1, 2],
+      expl: 'Scrum, Kanban, Extreme Programming i Crystal pripadaju agilnim modelima.'
+    },
+    {
+      id: 'rs17',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji je tačan redoslijed faza u Modelu vodopada (Waterfall)?',
+      opts: ['Analiza zahtjeva → Projektovanje sistema → Projektovanje programa → Programiranje → Testiranje sistema → Isporuka → Održavanje', 'Programiranje → Analiza zahtjeva → Testiranje sistema → Projektovanje sistema → Isporuka → Održavanje → Projektovanje programa', 'Projektovanje programa → Projektovanje sistema → Analiza zahtjeva → Programiranje → Isporuka → Testiranje sistema → Održavanje', 'Analiza zahtjeva → Programiranje → Testiranje sistema → Projektovanje sistema → Projektovanje programa → Održavanje → Isporuka'],
+      correct: [0],
+      expl: 'Analiza zahtjeva → Projektovanje sistema → Projektovanje programa → Programiranje → Testiranje sistema → Isporuka → Održavanje.'
+    },
+    {
+      id: 'rs18',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji su osnovni koncepti agilnih metoda razvoja softvera navedeni u prezentaciji?',
+      opts: ['Interakcija i kolaboracija sa korisnikom', 'Softver prije detaljne dokumentacije', 'Prilagođavanje umjesto krute administracije', 'Stroga zabrana bilo kakve komunikacije s korisnikom do samog kraja projekta'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Stroga zabrana bilo kakve komunikacije s korisnikom do samog kraja projekta.'
+    },
+    {
+      id: 'rs19',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Poznata izreka iz prezentacije „The sooner you start to code, the longer the program will take...“ upozorava da preskakanje analize, razumijevanja problema i projektovanja radi brzog početka kodiranja u konačnici produžava vrijeme izrade softvera.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'rs20',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koja se ključna pitanja postavljaju za razvijeni softver čak i onda kada on „radi“?',
+      opts: ['Da li ispunjava potrebe naručioca?', 'Da li je stabilan?', 'Da li je razumljiv?', 'Kakve su mogućnosti održavanja i nadogradnje?'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs21',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Kroz koje tri dimenzije se posmatra kvalitet softvera prema prezentaciji?',
+      opts: ['Kvalitet proizvoda (ispunjenje zahtjeva, stabilnost, arhitektura, organizacija koda i mogućnost proširenja)', 'Kvalitet postupka izrade (procesa)', 'Kvalitet proizvoda u kontekstu poslovnog okruženja za koje je namijenjen (npr. povrat investicije)', 'Isključivo boja korisničkog interfejsa'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Isključivo boja korisničkog interfejsa.'
+    },
+    {
+      id: 'rs22',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Povežite faktore kvaliteta softvera sa pripadajućim kriterijima (metrikama) iz tabele u lekciji (označite tačne tvrdnje):',
+      opts: ['Ispravnost – Mogućnost praćenja, Potpunost, Konzistentnost', 'Pouzdanost – Tačnost, Tolerancija grešaka', 'Efikasnost – Efikasnost izvršavanja, Efikasnost čuvanja', 'Cjelovitost – Kontrola pristupa, Praćenje pristupa'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs23',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Povežite faktore kvaliteta Iskoristivost, Održavanje i Testiranje sa njihovim metrikama iz prezentacije (označite tačne tvrdnje):',
+      opts: ['Iskoristivost – Operabilnost, Obuka, Komunikativnost', 'Održavanje – Jednostavnost, Konciznost', 'Testiranje – Instrumentacija', 'Fleksibilnost, Ponovna iskoristivost, Interoperabilnost i Proširivost – Samoopisivost'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs24',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji su glavni akteri u razvoju softvera navedeni u prezentaciji?',
+      opts: ['Klijent i Korisnik', 'Analitičar i Projektant', 'Programer i Tester', 'Instruktor'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs25',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji je tačan redoslijed 9 faza razvoja softvera prikazanih na dijagramu u lekciji?',
+      opts: ['Analiza i definisanje zahtjeva → Projektovanje sistema → Projektovanje programa → Implementacija programa → Testiranje jedinica → Integrativno testiranje → Testiranje sistema → Isporuka sistema → Održavanje', 'Analiza i definisanje zahtjeva → Implementacija programa → Testiranje sistema → Testiranje jedinica → Integrativno testiranje → Projektovanje sistema → Projektovanje programa → Isporuka sistema → Održavanje', 'Projektovanje sistema → Analiza i definisanje zahtjeva → Programiranje → Integrativno testiranje → Testiranje jedinica → Testiranje sistema → Održavanje → Isporuka sistema', 'Analiza i definisanje zahtjeva → Projektovanje programa → Projektovanje sistema → Implementacija programa → Testiranje sistema → Integrativno testiranje → Testiranje jedinica → Isporuka sistema → Održavanje'],
+      correct: [0],
+      expl: 'Analiza i definisanje zahtjeva → Projektovanje sistema → Projektovanje programa → Implementacija programa → Testiranje jedinica → Integrativno testiranje → Testiranje sistema → Isporuka sistema → Održavanje.'
+    },
+    {
+      id: 'rs26',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Kako se definiše pojam „Sistem“ u sistemskom pristupu softverskom inženjeringu?',
+      opts: ['Skup entiteta (objekata), aktivnosti, njihovih međusobnih odnosa i granica sistema', 'Isključivo baza podataka bez korisničkog interfejsa i poslovnih procesa', 'Skup nepovezanih pojedinačnih skripti bez jasnih granica', 'Samo hardverska serverska infrastruktura kompanije'],
+      correct: [0],
+      expl: 'Skup entiteta (objekata), aktivnosti, njihovih međusobnih odnosa i granica sistema.'
+    },
+    {
+      id: 'rs27',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Na primjeru informacionog sistema fakulteta iz lekcije, šta spada u ENTITETE, a šta u AKTIVNOSTI sistema?',
+      opts: ['Entiteti: Student, Predmet, Profesor, Plan i program', 'Aktivnosti: Upis godine, Prijava ispita, Zahtjev za potvrdu', 'Entiteti: Upis godine i Prijava ispita', 'Aktivnosti: Student i Profesor'],
+      correct: [0, 1],
+      expl: 'Netačna tvrdnja: Entiteti: Upis godine i Prijava ispita; Aktivnosti: Student i Profesor.'
+    },
+    {
+      id: 'rs28',
+      topic: 'Uvod u softverski inženjering',
+      q: 'Koji pojmovi sačinjavaju disciplinu Softverskog inženjeringa prema prezentaciji?',
+      opts: ['Apstrakcija i Metoda analize i dizajna (standardi koji osiguravaju timski rad)', 'Prototip korisničkog interfejsa (često identifikuje nejasnoće) i Arhitektura softvera (dekompozicija)', 'Softverski procesi (veličina projekta i kontekst primjene) i Ponovna iskoristivost', 'Mjerenja (uspjeh i kvalitet) i Alati i integrisana okruženja'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs29',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koji je tačan redoslijed faza u Modelu vodopada (Waterfall) prikazan u prezentaciji?',
+      opts: ['Analiza zahtjeva → Projektovanje sistema → Projektovanje programa → Programiranje → Testiranje sistema → Isporuka → Održavanje', 'Analiza zahtjeva → Programiranje → Projektovanje sistema → Projektovanje programa → Testiranje sistema → Isporuka → Održavanje', 'Projektovanje sistema → Analiza zahtjeva → Projektovanje programa → Programiranje → Isporuka → Testiranje sistema → Održavanje', 'Analiza zahtjeva → Projektovanje programa → Projektovanje sistema → Testiranje sistema → Programiranje → Isporuka → Održavanje'],
+      correct: [0],
+      expl: 'Analiza zahtjeva → Projektovanje sistema → Projektovanje programa → Programiranje → Testiranje sistema → Isporuka → Održavanje.'
+    },
+    {
+      id: 'rs30',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koji su glavni nedostaci plan-driven razvoja (modela vodopada) navedeni u lekciji?',
+      opts: ['Nesigurnost u stvarne potrebe korisnika', 'Česte promjene korisničkih zahtjeva i black box razvojno okruženje', 'Formiranje stavova tek nakon faze testiranja', 'Neizvjesnost povrata uloženih sredstava (ROI)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs31',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'U kojim situacijama je plan-driven razvoj (model vodopada) i dalje pogodan za primjenu?',
+      opts: ['Kada korisnik posjeduje jasno definisane zahtjeve', 'Kada korisnik garantuje da se procesi neće mijenjati', 'Kada korisnik posjeduje jasne prioritete', 'Kada se korisnički zahtjevi mijenjaju iz dana u dan i niko ne zna šta je konačni cilj'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Kada se korisnički zahtjevi mijenjaju iz dana u dan i niko ne zna šta je konačni cilj.'
+    },
+    {
+      id: 'rs32',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Na kojem osnovnom principu je zasnovana agilna metodologija i koje metodologije spadaju pod njen kišobran prema prezentaciji?',
+      opts: ['Zasnovana je na principu kontinuirane isporuke manjih ali funkcionalnih dijelova softvera', 'Pod agilne metodologije spadaju SCRUM, Ekstremno programiranje (XP), Crystal, Kanban, Lean, FDD, ASD i DSDM', 'Zasnovana je na isporuci cijelog softvera isključivo jednom na samom kraju višegodišnjeg projekta', 'Agilna metodologija obuhvata isključivo model vodopada'],
+      correct: [0, 1],
+      expl: 'Netačna tvrdnja: Zasnovana je na isporuci cijelog softvera isključivo jednom na samom kraju višegodišnjeg projekta; Agilna metodologija obuhvata isključivo model vodopada.'
+    },
+    {
+      id: 'rs33',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koje četiri vrijednosti Agilnog manifesta (agilemanifesto.org) stavljaju fokus na ljude, radni softver i fleksibilnost ispred krutih procedura?',
+      opts: ['Interakcija (pojedinci i interakcije) ispred procesa i alata', 'Funkcionalna aplikacija ispred detaljne dokumentacije', 'Kolaboracija (saradnja s korisnikom) ispred preciznih ugovora', 'Reakcija na promjene ispred praćenja detaljnog plana'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs34',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Kako prezentacija ilustruje razliku između Modela vodopada i Agilnih metoda na primjeru zadatka „pronaći iglu u plastu sijena“?',
+      opts: ['Model vodopada detaljno planira svaki korak potrage (način odlaganja, vlažnost zraka, poziciju sunca), dok agilne metode odmah kreću u potragu', 'Agilne metode mjesecima mjere vlažnost zraka i poziciju sunca prije početka rada, dok model vodopada odmah kreće u potragu', 'Oba pristupa zabranjuju bilo kakvo traženje igle', 'Model vodopada ne koristi nikakvo planiranje'],
+      correct: [0],
+      expl: 'Model vodopada detaljno planira svaki korak potrage (način odlaganja, vlažnost zraka, poziciju sunca), dok agilne metode odmah kreću u potragu.'
+    },
+    {
+      id: 'rs35',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Kako se definiše pojam „agilnost“ u kontekstu razvoja softvera prema prezentaciji?',
+      opts: ['Brzina i jednostavnost u kretanju', 'Mudrost i efikasnost u djelovanju', 'Odgovor na pitanje „kako planirati nepredvidivo?“', 'Značajan filozofski preokret u razvoju softvera, pored praktičnih i procesnih pomaka'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs36',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'SCRUM ne predstavlja konkretan proces ili tehniku, već okvir (framework) za upravljanje razvojem složenih softverskih proizvoda unutar kojeg se oni primjenjuju.',
+      opts: ['Tačno', 'Netačno'],
+      correct: [0],
+      expl: 'Tačno – tvrdnja je ispravna.'
+    },
+    {
+      id: 'rs37',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Na kojem skupu elemenata se bazira SCRUM prema prezentaciji?',
+      opts: ['Prakse: uloge, aktivnosti, artifakti i pravila', 'Principi: transparentnost (Definition of Done), nadgledanje i prilagođavanje', 'Vrijednosti: fokus, hrabrost, otvorenost, posvećenost (i poštovanje)', 'Isključivo detaljna tehnička specifikacija od 500 stranica napisana prije prve linije koda'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Isključivo detaljna tehnička specifikacija od 500 stranica napisana prije prve linije koda.'
+    },
+    {
+      id: 'rs38',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koje tvrdnje tačno opisuju osnovne karakteristike SCRUM-a?',
+      opts: ['Više je usmjeren prema upravljanju, a manje prema projektovanju', 'Tim se zajednički kreće naprijed (SCRUM)', 'Iteracije se realizuju kroz sprintove', 'U SCRUM-u ne postoje iteracije niti sprintovi'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: U SCRUM-u ne postoje iteracije niti sprintovi.'
+    },
+    {
+      id: 'rs39',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koje tri uloge čine SCRUM tim?',
+      opts: ['Product Owner, Scrum Master i Razvojni tim', 'Project Manager, Sistem arhitekta i Sistem administrator', 'Klijent, Pravni savjetnik i Marketing menadžer', 'Analitičar, Dizajner baze i Helpdesk operater'],
+      correct: [0],
+      expl: 'Product Owner, Scrum Master i Razvojni tim.'
+    },
+    {
+      id: 'rs40',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koja su zaduženja i osobine Product Ownera u SCRUM timu?',
+      opts: ['Osoba koja ima jasnu viziju proizvoda', 'Odgovoran za razvoj softverskog proizvoda i uvećanje njegove vrijednosti', 'Definiše listu i prioritet funkcionalnosti koje će biti implementirane (Product backlog je jedno od primarnih zaduženja)', 'Aktivan član Scrum tima, stalno dostupan za pojašnjenja'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs41',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Da li je Scrum Master isto što i tradicionalni Project Manager i koja su njegova stvarna zaduženja?',
+      opts: ['Nije klasični Project Manager — on osigurava poštivanje pravila i pozitivnih praksi Scruma', 'Pojašnjava značaj i aktivnosti Scruma svim učesnicima projekta', 'Rješava probleme i poteškoće sa kojima se susreću članovi razvojnog tima i zaštitnički djeluje prema vanjskim pojavama koje mogu smanjiti produktivnost tima', 'Pomaže Product Owneru tokom upravljanja Product backlogom'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs42',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koje karakteristike opisuju Razvojni tim u SCRUM-u prema prezentaciji?',
+      opts: ['Obično je sastavljen od 3–7 članova', 'Ima raznolik sastav (starost, spol, interesi i sl.) u cilju osiguranja dizajna, implementacije, testiranja i isporuke softverskog proizvoda', 'Odlikuje ga samoorganizovanost i širok spektar znanja', 'Sastoji se od najmanje 50 članova kojima zadatke svakodnevno dodjeljuje Scrum Master'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Sastoji se od najmanje 50 članova kojima zadatke svakodnevno dodjeljuje Scrum Master.'
+    },
+    {
+      id: 'rs43',
+      topic: 'Agilne metode razvoja softvera',
+      q: 'Koje aktivnosti i artifakti čine životni ciklus SCRUM sprinta prikazan na dijagramu u prezentaciji?',
+      opts: ['Backlog proizvoda (Product Backlog) i Prečišćavanje (Grooming)', 'Planiranje sprinta (Sprint Planning) i Backlog sprinta (Sprint Backlog)', 'Izvršenje sprinta uz Dnevne sastanke (Daily Scrum) i stvaranje Potencijalno isporučivog inkrementa proizvoda (PSPI)', 'Analiza rezultata sprinta (Sprint Review) i Retrospektiva sprinta (Sprint Retrospective)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs44',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Šta je tačno za Product Backlog (backlog proizvoda) u SCRUM-u?',
+      opts: ['Predstavlja jedini izvor zahtjeva i sadrži kratki opis funkcionalnosti koje je potrebno implementirati, doraditi ili ispraviti', 'Funkcionalnosti sa većim prioritetom sadrže veći broj detalja i smještene su bliže vrhu', 'Sadržajno je jako dinamičan, odnosno podložan stalnim promjenama (dodavanje, mijenjanje prioriteta, uklanjanje stavki)', 'U vlasništvu je Scrum Mastera i ne smije se mijenjati od početka do kraja projekta'],
+      correct: [0, 1, 2],
+      expl: 'Product Backlog je u vlasništvu Product Ownera.'
+    },
+    {
+      id: 'rs45',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Kako se naziva aktivnost u okviru koje se vrši procjena stavki backloga proizvoda kako bi se osigurala njegova adekvatnost i prioritetiziranost?',
+      opts: ['Grooming (Prečišćavanje)', 'Daily Standup', 'Sprint Retrospective', 'Code Refactoring'],
+      correct: [0],
+      expl: 'Grooming (Prečišćavanje)'
+    },
+    {
+      id: 'rs46',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Koji je standardni obrazac za pisanje korisničke priče (User Story) prikazan u prezentaciji?',
+      opts: ['As a , I want , So that (uz Acceptance criteria)', 'If , Then , Else', 'Given , When , Then', 'Who , What , When'],
+      correct: [0],
+      expl: 'As a , I want , So that (uz Acceptance criteria)'
+    },
+    {
+      id: 'rs47',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Kako se definiše pojam „Epic“ u kontekstu korisničkih priča?',
+      opts: ['Funkcionalnost koja se sastoji od većeg broja korisničkih priča, te za implementaciju često zahtijeva nekoliko sprintova', 'Najmanji jednodnevni programerski zadatak unutar jednog sprinta', 'Greška (bug) otkrivena u produkciji nakon isporuke softvera', 'Dnevni sastanak razvojnog tima u trajanju od 15 minuta'],
+      correct: [0],
+      expl: 'Funkcionalnost koja se sastoji od većeg broja korisničkih priča, te za implementaciju često zahtijeva nekoliko sprintova.'
+    },
+    {
+      id: 'rs48',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Koje uloge i koristi imaju User Stories (korisničke priče) u upravljanju projektom prema prezentaciji?',
+      opts: ['Predstavljaju alat upravljanja projektom koji daje korisničku perspektivu', 'Služe kao sigurnosni mehanizam za zajedničko razumijevanje i reduciranje rizika', 'Podstiču timski rad i iterativni razvoj', 'Definišu kriterije prihvatljivosti (Acceptance criteria)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs49',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Koji je tačan logički tok definisanja Acceptance criteria (kriterija prihvatljivosti) prikazan na primjeru preuzimanja materijala sa DLWMS-a?',
+      opts: ['Ulaz/Akcija → Proces → Izlaz/Rezultat', 'Izlaz/Rezultat → Ulaz/Akcija → Proces', 'Proces → Izlaz/Rezultat → Ulaz/Akcija', 'Isključivo baza podataka bez korisničke akcije'],
+      correct: [0],
+      expl: 'Ulaz/Akcija → Proces → Izlaz/Rezultat.'
+    },
+    {
+      id: 'rs50',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Povežite slova akronima INVEST za kvalitetne korisničke priče sa njihovim tačnim značenjem (označite tačne tvrdnje):',
+      opts: ['Independent – korisnička priča nije zavisna od ostalih u kontekstu razvoja i isporučivosti', 'Negotiable – svi zahtjevi moraju biti podvrgnuti diskusiji i biti podložni promjenama', 'Value – implementacijom svake korisničke priče treba se osigurati nova poslovna vrijednost', 'Estimable – obim korisničke priče mora biti prepoznatljiv'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs51',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Šta predstavljaju posljednja dva slova (S i T) u akronimu INVEST kod pisanja korisničkih priča?',
+      opts: ['Small – korisnička priča bi se trebala implementirati u kraćem vremenskom periodu', 'Testable – dostupnost scenarija (acceptance criteria) koji će potvrditi ispunjenost postavljenih zahtjeva', 'Static – korisnička priča se nikada ne smije mijenjati ni testirati', 'Sequential – svaka priča mora čekati završetak cijelog projekta da bi se testirala'],
+      correct: [0, 1],
+      expl: 'Netačna tvrdnja: Static – korisnička priča se nikada ne smije mijenjati ni testirati; Sequential – svaka priča mora čekati završetak cijelog projekta da bi se testirala.'
+    },
+    {
+      id: 'rs52',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Prema kojim kriterijima se vrši procjena korisničke priče (User Story) prema prezentaciji?',
+      opts: ['Količini posla i kompleksnosti', 'Poslovnoj vrijednosti i rizicima', 'Međuzavisnosti i tehničkim detaljima', 'Isključivo po broju stranica korisničkog uputstva'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Isključivo po broju stranica korisničkog uputstva.'
+    },
+    {
+      id: 'rs53',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Koja se poznata timska tehnika koristi za procjenu korisničkih priča, razjašnjavanje nejasnoća i usaglašavanje prihvatljivog broja bodova?',
+      opts: ['Planning poker', 'Waterfall planiranje', 'Black-box revizija', 'Monte Carlo simulacija'],
+      correct: [0],
+      expl: 'Planning poker.'
+    },
+    {
+      id: 'rs54',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Prema hijerarhiji artifakata u Azure DevOpsu (dev.azure.com) prikazanoj u lekciji, koji je tačan redoslijed razlaganja od najvišeg nivoa (Portfolio backlog) prema najnižem nivou?',
+      opts: ['Epic → Feature → User Story → Task', 'Task → User Story → Feature → Epic', 'Feature → Epic → Task → User Story', 'User Story → Epic → Task → Feature'],
+      correct: [0],
+      expl: 'Epic → Feature → User Story → Task.'
+    },
+    {
+      id: 'rs55',
+      topic: 'SCRUM – Product Backlog i User Stories',
+      q: 'Povežite artifakte iz Azure DevOps tabele sa njihovim okvirnim trajanjem navedenim u prezentaciji (označite tačne tvrdnje):',
+      opts: ['Epic – 1 do 6 mjeseci', 'Feature – 1 do 6 sedmica', 'User story – 2 sedmice', 'Task – 1 dan'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs56',
+      topic: 'Planiranje sprinta',
+      q: 'Koja aktivnost predstavlja prvu aktivnost svakog sprinta u SCRUM-u?',
+      opts: ['Planiranje sprinta (Sprint Planning)', 'Retrospektiva sprinta', 'Analiza rezultata sprinta', 'Isporuka finalnog proizvoda'],
+      correct: [0],
+      expl: 'Planiranje sprinta (Sprint Planning)'
+    },
+    {
+      id: 'rs57',
+      topic: 'Planiranje sprinta',
+      q: 'Koji su ulazni elementi u aktivnost Planiranja sprinta prema dijagramu iz prezentacije?',
+      opts: ['Backlog proizvoda (Product Backlog)', 'DoD / DoR (Definition of Done / Definition of Ready)', 'Kapacitet tima', 'Retrospektiva'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs58',
+      topic: 'Planiranje sprinta',
+      q: 'Šta su direktni izlazi (rezultati) sastanka Planiranja sprinta?',
+      opts: ['Sprint backlog i Ciljevi sprinta', 'Isključivo izvještaj o godišnjim odmorima', 'Finalna korisnička dokumentacija cijelog sistema', 'Ugovor o održavanju nakon isporuke'],
+      correct: [0],
+      expl: 'Sprint backlog i Ciljevi sprinta.'
+    },
+    {
+      id: 'rs59',
+      topic: 'Planiranje sprinta',
+      q: 'Prema formuli iz prezentacije (Trajanje (h) = 2 × BSS, gdje je BSS broj sedmica sprinta), koliko sati traje sastanak planiranja za sprint koji traje 3 sedmice?',
+      opts: ['6 sati', '3 sata', '2 sata', '12 sati'],
+      correct: [0],
+      expl: '6 sati.'
+    },
+    {
+      id: 'rs60',
+      topic: 'Planiranje sprinta',
+      q: 'Koji elementi ulaze u Definition of Done (DoD) prema prezentaciji?',
+      opts: ['Stilovi kodiranja', 'Testing procedure (procedure testiranja)', 'Staging', 'Potvrda kriterija prihvatljivosti'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs61',
+      topic: 'Planiranje sprinta',
+      q: 'Koji su faktori i aktivnosti uključeni u procjenu kapaciteta tima za sprint?',
+      opts: ['Dostupnost članova tima (%) — uzimajući u obzir godišnji odmor, praznike i slobodne dane', 'Dodatne aktivnosti sprinta — sastanci, planiranje sprinta i retrospektiva', 'Fokusiranost članova tima', 'Prosječna vrijednost bodova korisničkih priča posljednjih sprintova'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs62',
+      topic: 'Planiranje sprinta',
+      q: 'Prema primjeru izračuna kapaciteta u prezentaciji, ako član tima ima 60% dostupnosti (72 h), 12 h dodatnih aktivnosti i 85% fokusiranosti, koliki je njegov neto kapacitet za sprint?',
+      opts: ['51 h', '72 h', '92 h', '60 h'],
+      correct: [0],
+      expl: '51 h.'
+    },
+    {
+      id: 'rs63',
+      topic: 'Planiranje sprinta',
+      q: 'Koja formula iz lekcije se koristi za procjenu očekivane efikasnosti narednog sprinta (efikasnost_n) na osnovu prethodnog sprinta (efikasnost_p i kapacitet_p) i kapaciteta narednog sprinta (kapacitet_n)?',
+      opts: ['efikasnost_n = (efikasnost_p / kapacitet_p) × kapacitet_n', 'efikasnost_n = (kapacitet_p / efikasnost_p) + kapacitet_n', 'efikasnost_n = efikasnost_p × kapacitet_p × kapacitet_n', 'efikasnost_n = kapacitet_n - kapacitet_p'],
+      correct: [0],
+      expl: 'efikasnost_n = (efikasnost_p / kapacitet_p) × kapacitet_n.'
+    },
+    {
+      id: 'rs64',
+      topic: 'Planiranje sprinta',
+      q: 'Koje su obaveze Product Ownera PRIJE I TOKOM planiranja sprinta?',
+      opts: ['Grooming i definisanje cilja sprinta', 'Određivanje prioriteta', 'Pojašnjavanje detalja zahtjeva', 'Razlaganje korisničkih priča na tehničke taskove i pisanje koda'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Razlaganje korisničkih priča na tehničke taskove i pisanje koda.'
+    },
+    {
+      id: 'rs65',
+      topic: 'Planiranje sprinta',
+      q: 'Koje su obaveze Scrum Mastera PRIJE I TOKOM planiranja sprinta?',
+      opts: ['Osiguravanje prisustva svih aktera', 'Praćenje kapaciteta tima', 'Monitoring backloga', 'Određivanje poslovnih prioriteta proizvoda umjesto Product Ownera'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Određivanje poslovnih prioriteta proizvoda umjesto Product Ownera.'
+    },
+    {
+      id: 'rs66',
+      topic: 'Planiranje sprinta',
+      q: 'Koje su obaveze Razvojnog tima PRIJE I TOKOM planiranja sprinta?',
+      opts: ['Razumijevanje cilja i pojedinih zahtjeva', 'Procjena individualnih kapaciteta', 'Traženje dodatnih pojašnjenja vezanih za domenu ili implementacijske detalje', 'Preuzimanje obaveze izvršenja (commitment)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs67',
+      topic: 'Planiranje sprinta',
+      q: 'Povežite uloge u Scrum timu sa njihovim aktivnostima NAKON planiranja sprinta (označite tačne tvrdnje):',
+      opts: ['Product Owner – validacija ciljeva u odnosu na preuzete obaveze i generisanje izvještaja sa planiranja sprinta', 'Scrum Master – organizacija pregleda sprinta', 'Razvojni tim – definisanje zadataka i koordinacija sa drugim timovima ili članovima tima', 'Product Owner – pisanje jediničnih testova i konfiguracija baze podataka'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Product Owner – pisanje jediničnih testova i konfiguracija baze podataka.'
+    },
+    {
+      id: 'rs68',
+      topic: 'Planiranje sprinta',
+      q: 'Šta sve obuhvata rezultat planiranja sprinta prikazan na završnom slajdu lekcije?',
+      opts: ['Sprint backlog (preuzimanje korisničke priče te identifikacija i procjena aktivnosti poput analize, dizajna baze, UI dizajna, jediničnog testiranja i analize koda)', 'Izračunavanje kapaciteta', 'Ciljevi sprinta (npr. podrška plaćanja školarine na rate i povezivanje sa CIPS bazom podataka)', 'Izvještaj o rezultatima planiranja sprinta'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs69',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Koje tvrdnje tačno opisuju Dnevne sastanke (Daily Standup Meetings) tokom izvršenja sprinta?',
+      opts: ['Održavaju se svaka 24 sata, na istom mjestu i u isto vrijeme (najčešće ujutro) i traju najduže 15 minuta', 'U vlasništvu su razvojnog tima (Sync) i nisu namijenjeni šefovima za kontrolu opterećenja i predanosti članova', 'Ako se javi potreba za dužom diskusijom, planira se novi sastanak samo sa zainteresovanim stranama', 'Moraju trajati najmanje 2 sata i obavezno im prisustvuju svi eksterni klijenti'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Moraju trajati najmanje 2 sata i obavezno im prisustvuju svi eksterni klijenti.'
+    },
+    {
+      id: 'rs70',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Koja tri tradicionalna pitanja postavlja svaki član tima tokom dnevnog sastanka?',
+      opts: ['Na čemu je radio jučer, šta će raditi danas i da li postoje neki problemi u radu', 'Kolika mu je plata, kada ide na godišnji odmor i ko je kriv za greške', 'Koje su dugoročne marketinške strategije, budžet kompanije i cijena dionica', 'Koliko linija koda je napisao, koliko je sati spavao i koliko dokumentacije je odštampao'],
+      correct: [0],
+      expl: 'Na čemu je radio jučer, šta će raditi danas i da li postoje neki problemi u radu.'
+    },
+    {
+      id: 'rs71',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Šta treba izbjegavati tokom dnevnog sastanka prema prezentaciji?',
+      opts: ['Stalne promjene u vremenu i lokaciji održavanja', 'Nepotrebne diskusije i raspravu o detaljima zahtjeva', 'Prisustvo osoba koje nisu članovi tima i korištenje uređaja koji nisu neophodni za sastanak', 'Nepripremljenost'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs72',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Prema posljednjoj verziji Scrum Guide-a navedenoj u lekciji, na šta je stavljen glavni fokus dnevnog sastanka (uz zadržavanje okvira od 15 minuta)?',
+      opts: ['Provjeriti napredak od posljednjeg sastanka prema Cilju sprinta', 'Dogovoriti akcijski plan za naredna 24 sata', 'Uočiti prepreke i dogovoriti naredne korake', 'Strogo čitanje unaprijed napisanih izvještaja bez prilagođavanja plana rada'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Strogo čitanje unaprijed napisanih izvještaja bez prilagođavanja plana rada.'
+    },
+    {
+      id: 'rs73',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Šta predstavlja Burn-down dijagram u izvršenju sprinta i na šta mogu ukazivati odstupanja od idealne linije?',
+      opts: ['Vizualnu reprezentaciju preostalih aktivnosti (sati i taskova) koje tim treba realizovati u konkretnom sprintu', 'Odstupanja mogu ukazivati na prijavljene nedostatke u implementiranim taskovima ili neplanirano odsustvo članova tima', 'Završetak (burn down) mnogo prije planiranog roka', 'Odnos između procijenjenih sati i bodova korisničke priče'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs74',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Šta označava skraćenica PSPI na kraju svakog sprinta?',
+      opts: ['Potencijalno isporučivi inkrement proizvoda (Potentially Shippable Product Increment) – set implementiranih funkcionalnosti koje su prošle adekvatne testove', 'Početni specifikacijski plan implementacije prije analize zahtjeva', 'Privatni serverski protokol za integraciju baze podataka', 'Programski standard za pisanje jediničnih testova'],
+      correct: [0],
+      expl: 'Potencijalno isporučivi inkrement proizvoda (Potentially Shippable Product Increment) – set implementiranih funkcionalnosti koje su prošle adekvatne testove.'
+    },
+    {
+      id: 'rs75',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Šta je tačno za Analizu rezultata sprinta (Sprint Review)?',
+      opts: ['Obično se organizuje posljednji dan sprinta, a trajanje u satima jednako je broju sedmica sprinta', 'Može uključivati neformalnu demo prezentaciju rezultata koja ne zahtijeva dugotrajne pripreme', 'Procjene urađenog vrše se na osnovu ciljeva definisanih tokom planiranja sprinta', 'Zainteresovane strane se informišu najmanje dan prije sastanka'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs76',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Koje aktivnosti spadaju u Analizu rezultata sprinta prema prezentaciji?',
+      opts: ['Definisanje sadržaja analize i informisanje zainteresovanih strana', 'Demonstracija rezultata i diskusija o ciljevima narednog sprinta', 'Identifikacija novih elemenata backloga proizvoda', 'Grooming (Refinement)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs77',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Koja je glavna svrha Retrospektive sprinta i ko joj prisustvuje prema prezentaciji?',
+      opts: ['Cilj je kontinuirano unapređenje kroz analizu načina rada i prepoznavanje aktivnosti koje tim treba početi, prestati i nastaviti raditi', 'Prisustvuje kompletan razvojni tim i Product Owner', 'Prisustvo Scrum Mastera i članova drugih timova je opcionalno, dok prisustvo naručilaca nije uobičajeno', 'Retrospektivi obavezno prisustvuju svi krajnji kupci i naručioci kako bi ocjenjivali rad pojedinačnih programera'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Retrospektivi obavezno prisustvuju svi krajnji kupci i naručioci kako bi ocjenjivali rad pojedinačnih programera.'
+    },
+    {
+      id: 'rs78',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Koliko obično traje Retrospektiva sprinta i koji faktori utiču na njenu dužinu trajanja?',
+      opts: ['Obično traje 1 – 2 sata', 'Veličina tima i iskustvo članova', 'Broj identificiranih problema', 'Učešće eksternih članova'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs79',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Kojim redoslijedom se provode koraci Retrospektive sprinta navedeni u prezentaciji?',
+      opts: ['Prikupljanje prijedloga i ideja → Dodavanje prijedloga na ploču → Grupisanje prijedloga → Donošenje odluke (glasanje) → Kreiranje akcijskih planova (evidentiranje, praćenje statusa, osiguranje implementacije)', 'Kreiranje akcijskih planova → Glasanje → Prikupljanje prijedloga i ideja → Grupisanje prijedloga', 'Donošenje odluke (glasanje) → Dodavanje prijedloga na ploču → Prikupljanje prijedloga i ideja → Kreiranje akcijskih planova', 'Grupisanje prijedloga → Kreiranje akcijskih planova → Prikupljanje prijedloga i ideja → Glasanje'],
+      correct: [0],
+      expl: 'Prikupljanje prijedloga i ideja → Dodavanje prijedloga na ploču → Grupisanje prijedloga → Donošenje odluke (glasanje) → Kreiranje akcijskih planova (evidentiranje, praćenje statusa, osiguranje implementacije)'
+    },
+    {
+      id: 'rs80',
+      topic: 'Izvršenje sprinta i retrospektiva',
+      q: 'Povežite tehnike Retrospektive sprinta sa njihovim kategorijama prikazanim na dijagramima u lekciji (označite tačne tvrdnje):',
+      opts: ['Starfish (Morska zvijezda) – MORE, LESS, START, STOP, KEEP', 'Sailboat (Jedrilica) – GOAL/VISION, WIND (helping team), ANCHOR (delaying team), ROCK/RISKS', 'Simple – START, STOP, CONTINUE, AHA!', 'Waterfall – Analiza, Projektovanje, Programiranje, Održavanje'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Waterfall – Analiza, Projektovanje, Programiranje, Održavanje.'
+    },
+    {
+      id: 'rs81',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Ko je krajem 1990-ih predložio Ekstremno programiranje (XP) i na koje ključne inženjerske prakse ova metoda stavlja naglasak?',
+      opts: ['Kent Beck – naglasak je na testiranju, refaktorisanju i programiranju u paru', 'Ken Schwaber – naglasak je na opsežnoj dokumentaciji i vodopadnom modelu', 'Linus Torvalds – naglasak je isključivo na administraciji operativnih sistema', 'Barry Boehm – naglasak je na spiralnom upravljanju rizicima bez testiranja'],
+      correct: [0],
+      expl: 'Kent Beck – naglasak je na testiranju, refaktorisanju i programiranju u paru.'
+    },
+    {
+      id: 'rs82',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koje tvrdnje tačno opisuju razlike između SCRUM-a i XP-a?',
+      opts: ['Trajanje iteracija u SCRUM-u je 2–4 sedmice, dok je u XP-u 1–2 sedmice', 'SCRUM prihvata promjene samo ako ne ugrožavaju cilj sprinta, dok XP prihvata promjene ako implementacija zahtjeva nije počela', 'XP ima izraženiji inženjerski pristup, dok SCRUM ne propisuje inženjerske prakse', 'SCRUM zabranjuje prisustvo Product Ownera, dok XP zabranjuje komunikaciju sa klijentom'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: SCRUM zabranjuje prisustvo Product Ownera, dok XP zabranjuje komunikaciju sa klijentom.'
+    },
+    {
+      id: 'rs83',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koje su temeljne vrijednosti Ekstremnog programiranja (XP)?',
+      opts: ['Komunikacija i jednostavnost', 'Brze povratne informacije', 'Hrabrost i poštovanje', 'Birokratija i stroga hijerarhija bez povratnih informacija'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Birokratija i stroga hijerarhija bez povratnih informacija.'
+    },
+    {
+      id: 'rs84',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koji principi spadaju u praktične principe Ekstremnog programiranja (XP)?',
+      opts: ['Kontinuirana integracija, igra planiranja i male (česte) verzije softvera', 'Metafore, jednostavan dizajn, održiv tempo rada i individualne zabilješke', 'Stalno prisustvo klijenta, članovi tima na istoj lokaciji i programiranje u paru', 'Kolektivna svojina nad kodom, standardi kodiranja, refaktorisanje i stalno testiranje (TDD i AT)'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs85',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Kojim redoslijedom se odvija TDD (Test-Driven Development) ciklus za svaku malu funkcionalnost u XP-u?',
+      opts: ['Crveno (napisati test koji pada) → Zeleno (minimalan kod da test prođe) → Refaktorisanje (poboljšati kod uz pokretanje svih testova)', 'Zeleno (napisati kompletan kod) → Refaktorisanje → Crveno (obrisati sve testove)', 'Refaktorisanje → Crveno → Isporučiti klijentu bez testiranja', 'Zeleno → Crveno → Dizajn baze podataka'],
+      correct: [0],
+      expl: 'Crveno (napisati test koji pada) → Zeleno (minimalan kod da test prođe) → Refaktorisanje (poboljšati kod uz pokretanje svih testova)'
+    },
+    {
+      id: 'rs86',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'U kojim slučajevima Ekstremno programiranje (XP) NIJE pogodno za primjenu?',
+      opts: ['Nedostupnost klijenta', 'Statičnost zahtjeva', 'Veliki ili geografski distribuirani razvojni timovi', 'Kada se zahtjevi često mijenjaju i klijent je stalno prisutan uz mali tim na jednoj lokaciji'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Kada se zahtjevi često mijenjaju i klijent je stalno prisutan uz mali tim na jednoj lokaciji.'
+    },
+    {
+      id: 'rs87',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koje su glavne prednosti, a koji nedostaci Ekstremnog programiranja (XP)?',
+      opts: ['Prednosti: brze povratne informacije, česte isporuke, visok kvalitet koda i prilagodljivost promjenama zahtjeva', 'Nedostaci: zahtijeva stalno prisustvo i angažman klijenta, zahtijeva disciplinu i iskustvo tima, manje dokumentacije i teže primjenjiv na velike timove', 'Prednosti: potpuni izostanak potrebe za testiranjem i rad u izolovanim kancelarijama bez komunikacije', 'Nedostaci: nemogućnost promjene koda nakon prve sedmice razvoja'],
+      correct: [0, 1],
+      expl: 'Netačna tvrdnja: Prednosti: potpuni izostanak potrebe za testiranjem i rad u izolovanim kancelarijama bez komunikacije; Nedostaci: nemogućnost promjene koda nakon prve sedmice razvoja.'
+    },
+    {
+      id: 'rs88',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Povežite uloge u XP timu sa njihovim osnovnim odgovornostima (označite tačne tvrdnje):',
+      opts: ['Direktor – odgovara za uspješnost projekta, okuplja tim, osigurava opremu/prostor i predstavlja interfejs prema spoljašnjim entitetima', 'Klijent – definiše prioritete, kreira korisničke priče (piše ih isključivo klijent), definiše kriterije prihvatljivosti i označava funkcionalnosti/module kompletiranim', 'XP trener – prati poštivanje XP principa i praksi, predvodi tim i uparuje članove tima', 'Poslovni trener – osigurava interese klijenta u razvojnom timu, podržava kreiranje korisničkih priča i testova prihvatljivosti'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs89',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koje su osnovne uloge Programera, Sistemskog inženjera, Analitičara i Testera u XP timu?',
+      opts: ['Programer – procjenjuje korisničke priče, dijeli ih na manje zadatke, kreira Unit testove, refaktoriše kod i komunicira s klijentom', 'Sistemski inženjer – detaljno poznaje domenu za koju je softver namijenjen', 'Analitičar – prikuplja informacije i mjeri aktivnosti tima, kreira izvještaje, procjenjuje mogućnosti tima i prati realno stanje projekta', 'Tester – osigurava adekvatno testiranje za svaku priču, podržava kreiranje testova prihvatljivosti, izvršava testove i izvještava o statusu'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
+    },
+    {
+      id: 'rs90',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koje faze obuhvata praktična primjena Ekstremnog programiranja (XP) prikazana na primjeru sistema za KCUS?',
+      opts: ['Okupljanje tima i organizacija prostora → Definisanje verzija softvera (Faza istraživanja i Igra planiranja) → Planiranje iteracija → Iteracije → Isporuka i interakcija', 'Analiza zahtjeva → Potpisivanje ugovora bez izmjena → Kodiranje 2 godine bez testiranja → Jednokratna isporuka', 'Planiranje iteracija → Okupljanje tima → Brisanje korisničkih priča → Isporuka', 'Faza istraživanja → Zatvaranje projekta → Okupljanje tima → Igra planiranja'],
+      correct: [0],
+      expl: 'Okupljanje tima i organizacija prostora → Definisanje verzija softvera (Faza istraživanja i Igra planiranja) → Planiranje iteracija → Iteracije → Isporuka i interakcija.'
+    },
+    {
+      id: 'rs91',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Šta je tačno za Fazu 2 (Definisanje verzija softvera) u XP-u?',
+      opts: ['Verzija predstavlja implementiranu kolekciju korisničkih priča, a nova verzija je dostupna svakih 30 do 180 dana', 'Faza istraživanja obuhvata analizu, dizajn i modeliranje zahtjeva visokog nivoa kroz korisničke priče usklađene sa INVEST kriterijima', 'Igra planiranja koristi korisničke priče za definisanje prioriteta, odabir priča i određivanje vremenskih okvira za pojedine verzije softvera', 'Korisničke priče u XP-u piše isključivo sistemski inženjer bez učešća klijenta'],
+      correct: [0, 1, 2],
+      expl: 'Netačna tvrdnja: Korisničke priče u XP-u piše isključivo sistemski inženjer bez učešća klijenta.'
+    },
+    {
+      id: 'rs92',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Prema formulama iz Faze 3 (Planiranje iteracija), ako tim ima 8 programera, faktor opterećenja je 4, dužina iteracije 10 radnih dana, a u verziji ima 6 iteracija, koliko iznose brzina iteracije tima i ukupan broj funkcionalnosti verzije?',
+      opts: ['Brzina iteracije tima = 20; Funkcionalnosti verzije = 120', 'Brzina iteracije tima = 32; Funkcionalnosti verzije = 192', 'Brzina iteracije tima = 10; Funkcionalnosti verzije = 60', 'Brzina iteracije tima = 2; Funkcionalnosti verzije = 12'],
+      correct: [0],
+      expl: 'Brzina iteracije tima = 20; Funkcionalnosti verzije = 120.'
+    },
+    {
+      id: 'rs93',
+      topic: 'Ekstremno programiranje (XP)',
+      q: 'Koje aktivnosti su karakteristične za Fazu 4 (Iteracije) u XP-u?',
+      opts: ['Česti i kratki sastanci dizajna (&lt; 60 min) te jutarnji brzi sastanci (15–20 min)', 'Programiranje u paru odmah nakon sastanka uz česte izmjene', 'Ciklus rada: check out → kreiranje testova → kodiranje dovoljno za provjeru testa → check in → zatvaranje zadatka (ticket)', 'Pokretanje testova prihvatljivosti (tester i klijent) uvijek prilikom integracije'],
+      correct: [0, 1, 2, 3],
+      expl: 'Sve navedene tvrdnje su tačne.'
     }
   ]
 };
